@@ -37,6 +37,7 @@ public class AppConfig implements WebMvcConfigurer{
 		configurer.setDefinitions(
 			 new String[] {
 					 "/WEB-INF/tiles-def/main.xml",
+					 "/WEB-INF/tiles-def/admin.xml",
 					 "/WEB-INF/tiles-def/YSC.xml",
 					 "/WEB-INF/tiles-def/PIH.xml",
 					 "/WEB-INF/tiles-def/SSH.xml",
