@@ -1,1 +1,18 @@
 @charset "UTF-8";
+
+/*----------------------
+faq 메인 좌측 메뉴 레이아웃
+------------------------*/
+#faq_nav{
+	float:left;
+	width:25%;
+	min-height:530px;
+}
+#page_body{
+	width:75%;
+	float:left;
+}
+.page_clear{
+	clear:both;
+}
+
