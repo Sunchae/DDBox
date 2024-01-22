@@ -36,6 +36,13 @@ public class MainController {
 		
 		return "admin";//타일스 설정명
 	}
+	@RequestMapping("/movie/main")
+	public String movie(Model model) {
+		
+		log.debug("<<관리자 메인 실행>>");
+		
+		return "movieMain";//타일스 설정명
+	}
 }
 
 

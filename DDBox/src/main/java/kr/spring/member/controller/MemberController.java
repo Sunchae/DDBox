@@ -140,13 +140,30 @@ public class MemberController {
 		session.invalidate();
 		//자동로그인 처리 시작
 		
+		
+		
 		//자동로그인 처리 끝
 		
 		return "redirect:/main/main";
 	}
 	
-	
-	
+	/*==============================
+	 * 마이페이지
+	 *==============================*/
+	@RequestMapping("/member/myPage")
+	public String process(HttpSession session, Model model) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		log.debug("<<mem_num>> : " + user.getMem_num());
+		
+		//회원정보
+		MemberVO member = memberService.selectMember(user.getMem_num());
+		
+		log.debug("<<회원 상세 정보>> : " + member);
+		
+		model.addAttribute("member",member);
+		
+		return "myPage";
+	}
 	
 	
 	
