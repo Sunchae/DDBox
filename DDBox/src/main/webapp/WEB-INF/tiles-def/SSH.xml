@@ -10,6 +10,33 @@
     	<put-attribute name="body"
     	               value="/WEB-INF/views/member/memberRegister.jsp"/>                                           
     </definition>
+    
+    <definition name="faqMain" template="/WEB-INF/views/template/layout_faq.jsp">
+    	<put-attribute name="title" value="문의 게시판"/>
+    	<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/faq/faqView.jsp"/>
+    	<put-attribute name="nav" value="/WEB-INF/views/template/faq_nav.jsp"/>
+    	<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
+    	<!-- menu를 넣었는데 기존 페이지에 menu가 안들어가있어서 안나옴 근데 이걸 그 페이지에 넣으면 공통 메뉴에도 나올텐데 음... -->
+    </definition>
+    
+    <!-- 자주묻는 질문 -->
+    <definition name="faq_question" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/faq_question.jsp"/>                                           
+    </definition>
+    
+    <definition name="question_write" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/question_write.jsp"/>                                           
+    </definition>
+    
+    
+    <!-- 공지/뉴스 -->
+    <definition name="news" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/faq_news.jsp"/>                                           
+    </definition>
+    
+    
+    
 </tiles-definitions>
 
 
