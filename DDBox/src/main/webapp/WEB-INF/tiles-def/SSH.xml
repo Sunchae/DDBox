@@ -10,6 +10,14 @@
     	<put-attribute name="body"
     	               value="/WEB-INF/views/member/memberRegister.jsp"/>                                           
     </definition>
+    
+    <definition name="faqList" extends="main">
+    	<put-attribute name="title" value="문의 게시판"/>
+    	<put-attribute name="body" value="/WEB-INF/views/faq/faq_main.jsp"/>
+    </definition>
+    
+    
+    
 </tiles-definitions>
 
 
