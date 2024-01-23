@@ -12,7 +12,7 @@ import kr.spring.reserve.vo.TicketVO;
 public class ReserveController {
 	
 	@Autowired
-	private ReserveService ticketService;
+	private ReserveService reserveService;
 	
 	//자바빈 초기화
 	@ModelAttribute
