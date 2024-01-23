@@ -3,43 +3,42 @@ package kr.spring.question.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.spring.question.dao.QuestionMapper;
 import kr.spring.question.vo.QuestionVO;
 
 @Service
 @Transactional
 public class QuestionServiceImpl implements QuestionService{
+	@Autowired
+	QuestionMapper questionMapper;
 
 	@Override
 	public List<QuestionVO> selectList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		return questionMapper.selectList(map);
 	}
 
 	@Override
 	public int selectRowCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		return questionMapper.selectRowCount(map);
 	}
 
 	@Override
 	public void insertQuestion(QuestionVO question) {
-		// TODO Auto-generated method stub
-		
+		questionMapper.insertQuestion(question);
 	}
 
 	@Override
 	public QuestionVO selectQuestion(int board_num) {
-		// TODO Auto-generated method stub
-		return null;
+		return questionMapper.selectQuestion(board_num);
 	}
 
 	@Override
 	public void updateHit(int board_hit) {
-		// TODO Auto-generated method stub
-		
+		questionMapper.updateHit(board_hit);
 	}
 
 	@Override

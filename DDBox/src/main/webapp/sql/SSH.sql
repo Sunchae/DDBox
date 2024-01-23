@@ -41,13 +41,15 @@ create sequence rental_seq;
 
 --질문 통합 관리 게시판 (**생성 완)
 create table question_board(
+ mem_num number not null, --추가
  board_num number not null,
  board_category number not null,
  board_title varchar2(90) not null,
  board_content clob not null,
  board_regdate date default sysdate not null,
  board_hit number(8) default 0 not null,
- constraint question_board_pk primary key (board_num)
+ constraint question_board_pk primary key (board_num),
+ constraint question_board_fk foreign key (mem_num) references member (mem_num)
 );
 
 create sequence question_seq;
@@ -56,13 +58,15 @@ create sequence question_seq;
 
 --공지 테이블 (**생성 완)
 create table notice(
+ mem_num number not null, --추가
  news_num number not null,
  news_category number not null,
  news_title varchar2(90) not null,
  news_content clob not null,
  news_regdate date default sysdate not null,
  news_hit number(8) default 0 not null,
- constraint notice_pk primary key (news_num)
+ constraint notice_pk primary key (news_num),
+ constraint notice_fk foreign key (mem_num) references member (mem_num)
 );
 
 create sequence news_seq;
@@ -70,10 +74,12 @@ create sequence news_seq;
 
 --VIP/VVIP 질문 게시판 (**생성 완)
 create table vip_faq(
+ mem_num number not null, --추가
  vip_num number not null,
  vip_title varchar2(90) not null,
  vip_content clob not null,
- constraint vip_pk primary key (vip_num)
+ constraint vip_pk primary key (vip_num),
+ constraint vip_fk foreign key (mem_num) references member (mem_num)
 );
 
 create sequence vip_seq;
