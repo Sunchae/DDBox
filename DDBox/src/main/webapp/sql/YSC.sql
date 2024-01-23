@@ -65,3 +65,27 @@ create table movie(
 --MOVIE_DETAIL
 
 --MOVIE_FAV
+create table movie_fav(
+	movie_num number not null,
+	mem_num number not null,
+	constraint movie_fav_fk1 foreign key (movie_num) references movie (movie_number),
+	constraint movie_fav_fk2 foreign key (mem_num) references member (mem_num)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

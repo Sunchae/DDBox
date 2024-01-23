@@ -20,7 +20,7 @@
 				</ul>
 				<ul class="navbar-nav">
 					<c:if test="${empty user }">
-						<li class="nav-item"><a href="${pageContext.request.contextPath}/member/login">로그인</a></li>
+						<li class="nav-item"><a href="${pageContext.request.contextPath}/member/login" class="nav-link">로그인</a></li>
 						<li class="nav-item"><a href="${pageContext.request.contextPath}/member/registerUser" class="nav-link">회원가입</a></li>
 					</c:if>
 					<c:if test="${!empty user }">
@@ -59,7 +59,7 @@
 					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/movie/main">영화</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">예매</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">극장</a></li>
-					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/main/main" style="font-family: 'Alfa Slab One'; font-weight: 400;">DD BOX</a></li>
+					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/main/main" ><img id="DDBoxLogo" src="${pageContext.request.contextPath}/images/DDBox.png"></a></li>
 					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/event/main">이벤트</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">스토어</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">혜택</a></li>
