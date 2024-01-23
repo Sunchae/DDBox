@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.event.dao.EventMapper">
+	<!-- 이벤트 글 등록 -->
+	<insert id="insertEvent" parameterType="Event_listVO">
+		INSERT INTO event_list(
+			event_num,
+			event_title,
+			event_content,
+			event_type,
+			event_photo1,
+			evnet_photo2,
+			evnet_start,
+			event_end,
+			event_status,
+			event_point,
+			mem_num,
+			scr_num)
+		VALUES(
+			eventlist_seq.nextval,
+			#{event_tilte},
+			#{event_content},
+			#{event_type},
+			#{event_photo1},
+			#{event_photo2},
+			#{event_start},
+			#{event_end},
+			#{event_status},
+			#{event_point},
+			#{mem_num},
+			#{scr_num})
+	</insert>
+	
 	<!-- 이벤트글 전체 목록/검색 목록 -->
 	<select id="selectList" parameterType="map" resultType="Event_listVO">
 		SELECT *
@@ -24,6 +54,7 @@
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
 	</select>
+	
 </mapper>
  
 

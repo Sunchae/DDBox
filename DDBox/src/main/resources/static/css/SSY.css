@@ -1,1 +1,40 @@
 @charset "UTF-8";
+.side-bar{
+	background-color: #fff;
+}
+.side-bar ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex; /* ul을 가로로 나열하는 flex 컨테이너로 설정 */
+	background-color: #fff;
+}
+.tit-util {
+  margin-top: 70px;
+  box-sizing: border-box;
+  letter-spacing: 0;
+  line-height: 1.5;
+  font-size: 15px;
+  color: #444;
+  font-weight: 400;
+  display: flex; /* 부모 요소를 flex 컨테이너로 설정 */
+  justify-content: space-between; /* 자식 요소 사이의 여백을 최대화 */
+  margin-right: 0; /* 오른쪽 여백 제거 */
+}
+
+h3.tit {
+  margin: 0;
+  padding: 0 0 16px 0;
+  font-size: 1.6em;
+  font-weight: 400;
+  color: #503396;
+  line-height: 1.1;
+}
+
+.tit-util .more-btn {
+  margin-left: auto; /* 버튼을 오른쪽으로 이동시킴 */
+}
+
+a {
+  background-color: transparent;
+}

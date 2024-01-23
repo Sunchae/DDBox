@@ -29,7 +29,7 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public void insertEvent(Event_listVO event) {
-		// TODO Auto-generated method stub
+		eventMapper.insertEvent(event);
 		
 	}
 

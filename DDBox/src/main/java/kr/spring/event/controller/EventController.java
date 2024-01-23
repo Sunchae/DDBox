@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,17 +24,70 @@ public class EventController {
 	private EventService eventService;
 	
 	/*========================
-	 * 이벤트 글 목록
+	 * 이벤트 글등록
 	 *========================*/
-	@RequestMapping("/event/main")
-	public ModelAndView process(@RequestParam(value="pageNum",defaultValue="1") int currentPage,String keyfield,String keyword) {
-		Map<String,Object> map = new HashMap<String,Object>();
-		
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("eventMain");
-		
-		return mav;
+	//자바빈(VO)초기화
+	@ModelAttribute
+	public Event_listVO initCommand() {
+		return new Event_listVO();
+	}
+	//등록 폼 호출
+	@GetMapping("/event/write")
+	public String form() {
+		return "eventWrite";//tiles설정명
 	}
 	
+	//전송된 데이터 처리
+	
+	
+	
+	/*========================
+	 * 이벤트 main
+	 *========================*/
+	@RequestMapping("/event/main")
+	public String process() {
+		return "eventMain";
+	}
+	/*========================
+	 * 이벤트 special
+	 *========================*/
+	@RequestMapping("/event/special")
+	public String specialpro() {
+		return "event_special";
+	}
+	/*========================
+	 * 이벤트 entry
+	 *========================*/
+	@RequestMapping("/event/entry")
+	public String entrypro() {
+		return "event_entry";
+	}
+	/*========================
+	 * 이벤트 membership
+	 *========================*/
+	@RequestMapping("/event/membership")
+	public String membershippro() {
+		return "event_membership";
+	}
+	/*========================
+	 * 이벤트 theater
+	 *========================*/
+	@RequestMapping("/event/theater")
+	public String theaterpro() {
+		return "event_theater";
+	}
+	/*========================
+	 * 이벤트 discount
+	 *========================*/
+	@RequestMapping("/event/discount")
+	public String discountpro() {
+		return "event_discount";
+	}
+	/*========================
+	 * 이벤트 roulette
+	 *========================*/
+	@RequestMapping("/event/roulette")
+	public String roulettepro() {
+		return "event_roulette";
+	}
 }

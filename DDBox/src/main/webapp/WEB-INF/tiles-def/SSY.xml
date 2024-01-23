@@ -5,14 +5,50 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-	<!-- myPage -->
-     <definition name="eventMain" template="/WEB-INF/views/template/nav_event.jsp">
-    	<put-attribute name="nav" value="/WEB-INF/views/template/nav_mypage.jsp"/>
+	<definition name="SSY" extends="main">
+    	<put-attribute name="title" value="회원가입"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/memberRegister.jsp"/>                                           
     </definition>
-    <definition name="eventMain" extends="main">
-    	<put-attribute name="title" value="EVENT LIST"/>
+    <definition name="eventMain" template="/WEB-INF/views/template/layout_event.jsp">
+    	<put-attribute name="title" value="이벤트 매인"/>
+    	<put-attribute name="header" value="/WEB-INF/views/template/DDBox_navbar.jsp"/>
+    	<put-attribute name="nav" value="/WEB-INF/views/template/event_nav.jsp"/>
     	<put-attribute name="body" value="/WEB-INF/views/event/eventMain.jsp"/>
+    	<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
     </definition>
+    <!-- 글쓰기 -->
+    <definition name="eventWrite" extends="eventMain">
+    	<put-attribute name="title" value="글쓰기"/>
+    	<!-- <put-attribute name="css" value="/WEB-INF/views/event/eventCSS.jsp"/> -->
+    	<put-attribute name="body" value="/WEB-INF/views/event/eventWrite.jsp"/>
+    </definition>
+    
+    <!-- event specail -->
+    <definition name="event_special" extends="eventMain">
+    	<put-attribute name="body" value="/WEB-INF/views/event/event_special.jsp"/>                                           
+    </definition>
+    <!-- event entry -->
+    <definition name="event_entry" extends="eventMain">
+    	<put-attribute name="body" value="/WEB-INF/views/event/event_entry.jsp"/>                                           
+    </definition>
+    <!-- event membership -->
+    <definition name="event_membership" extends="eventMain">
+    	<put-attribute name="body" value="/WEB-INF/views/event/event_membership.jsp"/>                                           
+    </definition>
+    <!-- event theater -->
+    <definition name="event_theater" extends="eventMain">
+    	<put-attribute name="body" value="/WEB-INF/views/event/event_theater.jsp"/>                                           
+    </definition>
+    <!-- event discount -->
+    <definition name="event_discount" extends="eventMain">
+    	<put-attribute name="body" value="/WEB-INF/views/event/event_discount.jsp"/>                                           
+    </definition>
+    <!-- event roulette -->
+    <definition name="event_roulette" extends="eventMain">
+    	<put-attribute name="body" value="/WEB-INF/views/event/event_roulette.jsp"/>                                           
+    </definition>
+    
 </tiles-definitions>
 
 
