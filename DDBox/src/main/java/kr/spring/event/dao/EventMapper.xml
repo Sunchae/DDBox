@@ -18,7 +18,7 @@
 			scr_num)
 		VALUES(
 			eventlist_seq.nextval,
-			#{event_tilte},
+			#{event_title},
 			#{event_content},
 			#{event_type},
 			#{event_photo1},

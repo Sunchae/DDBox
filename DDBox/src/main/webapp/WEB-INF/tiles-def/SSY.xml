@@ -20,7 +20,6 @@
     <!-- 글쓰기 -->
     <definition name="eventWrite" extends="eventMain">
     	<put-attribute name="title" value="글쓰기"/>
-    	<!-- <put-attribute name="css" value="/WEB-INF/views/event/eventCSS.jsp"/> -->
     	<put-attribute name="body" value="/WEB-INF/views/event/eventWrite.jsp"/>
     </definition>
     

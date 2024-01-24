@@ -4,16 +4,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.event.service.EventService;
 import kr.spring.event.vo.Event_listVO;
+import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,7 +46,28 @@ public class EventController {
 	}
 	
 	//전송된 데이터 처리
-	
+	@PostMapping("/event/write")
+	public String submit(@Valid Event_listVO event_listVO,BindingResult result,
+			 HttpSession session, HttpServletRequest request, Model model) {
+		
+		//유효성 체크
+		if(result.hasErrors()) {
+			return form();
+		}
+		
+		//회원번호
+		MemberVO vo = (MemberVO)session.getAttribute("user");
+		event_listVO.setMem_num(vo.getMem_num());
+		
+		//글쓰기
+		eventService.insertEvent(event_listVO);
+		
+		//view에 표시할 메시지
+		model.addAttribute("message", "글 작성이 완료되었습니다.");
+		model.addAttribute("url", request.getContextPath() + "/event/main");		
+		
+		return "event/resultAlert";
+	}
 	
 	
 	/*========================
