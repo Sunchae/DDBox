@@ -3,9 +3,12 @@ package kr.spring.reserve.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.spring.movie.vo.MovieVO;
+import kr.spring.reserve.dao.ReserveMapper;
 import kr.spring.reserve.vo.ScreenVO;
 import kr.spring.reserve.vo.ShowVO;
 import kr.spring.reserve.vo.TicketVO;
@@ -13,25 +16,16 @@ import kr.spring.reserve.vo.TicketVO;
 @Service
 @Transactional
 public class ReserveServiceImpl implements ReserveService{
+	@Autowired
+	private ReserveMapper reserveMapper;
 
 	@Override
-	public List<TicketVO> selectShowList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ScreenVO> selectScreenList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ShowVO> selectTimeList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<MovieVO> selectMovieList(Map<String, Object> map) {
+		
+		return reserveMapper.selectMovieList(map);
 	}
 
 	
-
+	
+	
 }

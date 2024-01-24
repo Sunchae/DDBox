@@ -2,15 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.reserve.dao.ReserveMapper">
 	<!-- 영화 목록 -->
-	<select id="selectShowList" parameterType="map" resultType="ShowVO">
-		
+	<select id="selectMovieList" parameterType="map" resultType="MovieVO">
+		SELECT
+			movie_title,movie_gradeNm,movie_poster
+		FROM 
+			movie
+		WHERE 
+			movie_status=1
+		<!-- ORDER BY movie_title DESC -->
 	</select>
 	
 	
 	<!-- 극장 목록 -->
-	<select id="selectScreenList" parameterType="map" resultType="ScreenVO">
+	<!-- <select id="selectScreenList" parameterType="map" resultType="ScreenVO">
 		SELECT scr_num, scr_name, scr_do, scr_si FROM screen JOIN show USING(shw_num) WHERE shw_num=#{shw_num}
-	</select>
+	</select> -->
 	
 	
 	<!-- 시간 목록 -->

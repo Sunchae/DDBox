@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.spring.member.vo.MemberVO;
+import kr.spring.movie.vo.MovieVO;
 import kr.spring.reserve.vo.ScreenVO;
 import kr.spring.reserve.vo.ShowVO;
 import kr.spring.reserve.vo.TicketVO;
@@ -18,11 +19,12 @@ public interface ReserveMapper {
 	 ====================*/
 	//예매 영화 정보
 	//영화 정보 목록처리
-	/*
-	 * public List<MovieVO> selectMovieList(Map<String,Object> map); //영화 선택 -> ajax
-	 * 처리 public MovieVO selectMovie(Map<String, Object> map); //선택 영화 출력 public
-	 * MovieVO selectMovie(int movie_num);
-	 */
+	  public List<MovieVO> selectMovieList(Map<String,Object> map); 
+	  //영화 선택 -> ajax 처리 
+	  public MovieVO selectMovie(Map<String, Object> map); 
+	  //선택 영화 출력 
+	  public MovieVO selectMovieDetail(int movie_num);
+	 
 	
 	
 	/*====================
@@ -40,7 +42,7 @@ public interface ReserveMapper {
 	public int selectMovieSI(Map<String,Object> map);
 	
 	//선택 극장 정보 출력
-	public ScreenVO selectScreen(int scr_num);
+	public ScreenVO selectScreenDetail(int scr_num);
 	
 	/*====================
 	 * 	 	 예매 시간
@@ -56,7 +58,7 @@ public interface ReserveMapper {
 	public int selectTime(Map<String,Object> map);
 	
 	//예매 정보 출력
-	public ShowVO selectShow(int shw_num);
+	public ShowVO selectShowDetail(int shw_num);
 	
 	
 	//상영정보 넣기
