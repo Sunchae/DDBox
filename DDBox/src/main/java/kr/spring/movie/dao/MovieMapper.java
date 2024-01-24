@@ -14,8 +14,9 @@ public interface MovieMapper {
 	//영화 좋아요 삭제
 	//영화 좋아요 개수
 	public int selectFavCount(int movie_num);
-	
-	
+	public void insertFav(MovieFavVO fav);
+	public void deleteFav(MovieFavVO fav);
+	public void deleteFavByMovieNum(int Movie_num);
 	//====영화 상세정보====
 	//영화 상세 정보들 호출
 	
