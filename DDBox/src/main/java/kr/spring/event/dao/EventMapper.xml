@@ -9,27 +9,28 @@
 			event_content,
 			event_type,
 			event_photo1,
-			evnet_photo2,
-			evnet_start,
+			event_photo2,
+			event_start,
 			event_end,
-			event_status,
-			event_point,
-			mem_num,
-			scr_num)
+			mem_num)
 		VALUES(
 			eventlist_seq.nextval,
 			#{event_title},
 			#{event_content},
 			#{event_type},
-			#{event_photo1},
-			#{event_photo2},
+			#{event_photo1,jdbcType=VARCHAR},
+			#{event_photo2,jdbcType=VARCHAR},
 			#{event_start},
 			#{event_end},
-			#{event_status},
-			#{event_point},
-			#{mem_num},
-			#{scr_num})
+			#{mem_num})
 	</insert>
+	
+	<!-- 게시판 글의 총개수/검색 개수 -->
+	<select id="selectRowCount" parameterType="map" resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM event_list JOIN member USING(mem_num)
+	</select>
 	
 	<!-- 이벤트글 전체 목록/검색 목록 -->
 	<select id="selectList" parameterType="map" resultType="Event_listVO">

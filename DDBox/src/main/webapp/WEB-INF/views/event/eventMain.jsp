@@ -3,41 +3,55 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 내용 시작 -->
 <div id="page-main">
-		<form action="main" id="event_form" method="get">
-			<div class="tit-util">
-				<h3 class="tit">SPECIAL</h3>
-				<div class="more-btn">
-					<input type="button" value="글쓰기" onclick="location.href='write'"> 
-						<a href="${pageContext.request.contextPath}/event/special">더보기</a>
-				</div>
+	<form action="main" id="event_form" method="get">
+		<div class="tit-util">
+			<h3 class="tit">SPECIAL</h3>
+			<div class="more-btn">
+				<c:if test="${!empty user && user.mem_auth == 9}">
+				<input type="button" value="글쓰기" onclick="location.href='write'"> 
+				</c:if>
+				<a href="${pageContext.request.contextPath}/event/special">더보기</a>
 			</div>
-		</form>
-		<div class="event-list">
-			<ul>
-				<li><a>
-						<p class="img">
-							<img>
-						</p>
-						<p class="tit">이벤트 1</p>
-						<p class="date">날짜</p>
-				</a></li>
-				<li><a>
-						<p class="img">
-							<img>
-						</p>
-						<p class="tit">이벤트 1</p>
-						<p class="date">날짜</p>
-				</a></li>
-				<li><a>
-						<p class="img">
-							<img>
-						</p>
-						<p class="tit">이벤트 1</p>
-						<p class="date">날짜</p>
-				</a></li>
-			</ul>
 		</div>
-	
-
+	</form>
+	<c:forEach var="list" items="${list}">
+	<div class="event-list">
+		<ul>
+			<li>
+				<a href="detail?event_num=${list.event_num}">
+					<p class="img">
+						<img src="${pageContext.request.contextPath}/upload/${list.event_photo1}" class="list-img">
+					</p>
+					<p class="tit">${list.event_title}</p>
+					<p class="date">${list.event_start}~${list.event_end}</p>
+				</a>
+			</li>
+		</ul>
+	</div>
+	</c:forEach>
+	<div class="tit-util">
+		<h3 class="tit">응모권 이벤트</h3>
+		<div class="more-btn">
+			<a href="${pageContext.request.contextPath}/event/entry">더보기</a>
+		</div>
+	</div>
+	<div class="tit-util">
+		<h3 class="tit">멤버쉽/CLUB</h3>
+		<div class="more-btn">
+			<a href="${pageContext.request.contextPath}/event/membership">더보기</a>
+		</div>
+	</div>
+	<div class="tit-util">
+		<h3 class="tit">극장별</h3>
+		<div class="more-btn">
+			<a href="${pageContext.request.contextPath}/event/theater">더보기</a>
+		</div>
+	</div>
+	<div class="tit-util">
+		<h3 class="tit">제휴/할인</h3>
+		<div class="more-btn">
+			<a href="${pageContext.request.contextPath}/event/discount">더보기</a>
+		</div>
+	</div>
 </div>
 <!-- 내용 끝 -->

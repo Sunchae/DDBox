@@ -1,5 +1,6 @@
 package kr.spring.event.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.spring.event.service.EventService;
 import kr.spring.event.vo.Event_listVO;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.util.FileUtil;
 import kr.spring.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -48,8 +50,8 @@ public class EventController {
 	//전송된 데이터 처리
 	@PostMapping("/event/write")
 	public String submit(@Valid Event_listVO event_listVO,BindingResult result,
-			 HttpSession session, HttpServletRequest request, Model model) {
-		
+			 HttpSession session, HttpServletRequest request, Model model) throws IllegalStateException, IOException {
+		log.debug("<<게시판 글 저장>> : " + event_listVO);
 		//유효성 체크
 		if(result.hasErrors()) {
 			return form();
@@ -58,6 +60,9 @@ public class EventController {
 		//회원번호
 		MemberVO vo = (MemberVO)session.getAttribute("user");
 		event_listVO.setMem_num(vo.getMem_num());
+		
+		event_listVO.setEvent_photo1(FileUtil.createFile(request, event_listVO.getUpload1()));
+		event_listVO.setEvent_photo2(FileUtil.createFile(request, event_listVO.getUpload2()));
 		
 		//글쓰기
 		eventService.insertEvent(event_listVO);
@@ -74,8 +79,33 @@ public class EventController {
 	 * 이벤트 main
 	 *========================*/
 	@RequestMapping("/event/main")
-	public String process() {
-		return "eventMain";
+	public ModelAndView process(@RequestParam(value="pageNum",defaultValue="1") int currentPage,@RequestParam(value="order",defaultValue="1") int order ,String keyfield,String keyword) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		
+		//전체 /검색 레코드수
+		int count = eventService.selectRowCount(map);
+		log.debug("<<count>> : " + count);
+		
+		PageUtil page = new PageUtil(keyfield,keyword,currentPage,count,20,10,"list","&order="+order);
+		
+		List<Event_listVO> list = null;
+		if(count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = eventService.selectList(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("eventMain");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
 	}
 	/*========================
 	 * 이벤트 special
