@@ -22,6 +22,15 @@
 			#{mem_num})
 	</insert>
 	
+
+	<!-- 글 개수 -->
+	<select id="selectRowCount" parameterType="map" resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM store JOIN member USING(mem_num)
+	</select>
+	
+	
 	<!-- Store 글 목록-->
 	<select id="selectList" parameterType="map" resultType="storeVO">
 		SELECT

@@ -57,7 +57,7 @@
 			<div class="collapse navbar-collapse justify-content-center" id="navbarNav">
 				<ul class="navbar-nav ">
 					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/movie/main">영화</a></li>
-					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/reserve/reserveMain">예매</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">예매</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">극장</a></li>
 					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/main/main" ><img id="DDBoxLogo" src="${pageContext.request.contextPath}/images/DDBox.png"></a></li>
 					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/event/main">이벤트</a></li>
@@ -68,7 +68,12 @@
 			<div class="collapse navbar-collapse justify-content-end">
 				<ul class="navbar-nav util-list">
 					<li class="nav-item"><a class="nav-link" href="#"><img src="${pageContext.request.contextPath}/images/nav/ico-schedule.png"></a></li>
+					<c:if test="${user.mem_auth == 1}">
 					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/member/myPage"><img src="${pageContext.request.contextPath}/images/nav/ico-mymega.png"></a></li>
+					</c:if>
+					<c:if test="${user.mem_auth == 9}">
+					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/member/AdminPage"><img src="${pageContext.request.contextPath}/images/nav/ico-mymega.png"></a></li>
+					</c:if>
 				</ul>
 			</div>
 		</nav>

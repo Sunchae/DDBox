@@ -10,6 +10,14 @@
     	<put-attribute name="title" value="스토어"/>
     	<put-attribute name="body" value="/WEB-INF/views/store/storeMain.jsp"/>                                           
     </definition>
+    <definition name="storeWrite" extends="main">
+    	<put-attribute name="title" value="글쓰기"/>
+    	<put-attribute name="body" value="/WEB-INF/views/store/storeWrite.jsp"/>                                           
+    </definition>
+    <definition name="storeTicketList" extends="main">
+    	<put-attribute name="title" value="디디티켓"/>
+    	<put-attribute name="body" value="/WEB-INF/views/store/storeTicketList.jsp"/>                                           
+    </definition>
     
     
 </tiles-definitions>

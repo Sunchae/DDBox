@@ -10,7 +10,7 @@ import kr.spring.store.vo.StoreVO;
 @Mapper
 public interface StoreMapper {
 	public List<StoreVO> selectList(Map<String, Object> map);		//xml
-	public int selectRowCount(Map<String, Object> map);
+	public int selectRowCount(Map<String, Object> map);				//xml
 	public void insertStore(StoreVO store);							//xml
 	public StoreVO selectStoreVO(int Store_num);
 	public void updateStore(StoreVO store);

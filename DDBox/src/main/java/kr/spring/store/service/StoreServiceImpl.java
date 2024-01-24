@@ -18,12 +18,12 @@ public class StoreServiceImpl implements StoreService{
 
 	@Override
 	public List<StoreVO> selectList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		return storeMapper.selectList(map);
 	}
 
 	@Override
 	public void insertStore(StoreVO store) {
+		storeMapper.insertStore(store);
 	}
 
 	@Override
@@ -46,8 +46,7 @@ public class StoreServiceImpl implements StoreService{
 
 	@Override
 	public int selectRowCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		return storeMapper.selectRowCount(map);
 	}
 
 	@Override
