@@ -61,7 +61,7 @@
 					<li class="nav-item"><a class="nav-link" href="#">극장</a></li>
 					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/main/main" ><img id="DDBoxLogo" src="${pageContext.request.contextPath}/images/DDBox.png"></a></li>
 					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/event/main">이벤트</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">스토어</a></li>
+					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/store/main">스토어</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">혜택</a></li>
 				</ul>
 			</div>

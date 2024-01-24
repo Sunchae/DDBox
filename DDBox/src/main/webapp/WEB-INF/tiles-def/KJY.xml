@@ -6,15 +6,11 @@
 
 <tiles-definitions>
     
-    <definition name="storeList" extends="main">
-    	<put-attribute name="title" value="스토어 메인"/>
-    	<put-attribute name="body" value="/WEB-INF/views/store/storeList.jsp"/>                                           
+    <definition name="storeMain" extends="main">
+    	<put-attribute name="title" value="스토어"/>
+    	<put-attribute name="body" value="/WEB-INF/views/store/storeMain.jsp"/>                                           
     </definition>
     
     
 </tiles-definitions>
-
-
-
-
 

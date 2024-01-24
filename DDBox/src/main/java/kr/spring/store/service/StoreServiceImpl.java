@@ -4,10 +4,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.store.dao.StoreMapper;
 import kr.spring.store.vo.StoreVO;
 
+@Service
+@Transactional
 public class StoreServiceImpl implements StoreService{
 	@Autowired
 	private StoreMapper storeMapper;
@@ -20,7 +24,6 @@ public class StoreServiceImpl implements StoreService{
 
 	@Override
 	public void insertStore(StoreVO store) {
-		storeMapper.insertStore(store);
 	}
 
 	@Override
@@ -37,6 +40,18 @@ public class StoreServiceImpl implements StoreService{
 
 	@Override
 	public void deleteStore(int store_num) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int selectRowCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void deleteFile(int store_num) {
 		// TODO Auto-generated method stub
 		
 	}

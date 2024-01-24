@@ -22,10 +22,13 @@
 			#{mem_num})
 	</insert>
 	
-	<!-- Store 메인화면 글 목록-->
+	<!-- Store 글 목록-->
 	<select id="selectList" parameterType="map" resultType="storeVO">
 		SELECT
 			*
+		FROM (SELECT
+				a.*,
+				rownum rnum
 			FROM (SELECT
 					store_num,
 					store_title,
@@ -34,9 +37,11 @@
 					store_photo,
 					store_name
 				FROM store
-				JOIN member USING(mem_num))
+				JOIN member USING(mem_num))a)
+		<![CDATA[
+		WEHRE rnum >= #{start} AND rnum <=#{end}
+		]]>
 	</select>
-	
 	
 	<!-- Store 글 상세 -->
 	<!-- Store 글 수정 -->
