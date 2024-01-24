@@ -23,6 +23,7 @@ import kr.spring.member.vo.MemberVO;
 import kr.spring.question.service.QuestionService;
 import kr.spring.question.vo.QuestionVO;
 import kr.spring.util.PageUtil;
+import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -116,7 +117,7 @@ public class QuestionController {
 		model.addAttribute("message", "글 작성이 완료되었습니다.");
 		model.addAttribute("url", request.getContextPath()+"/faq/question");
 		
-		return "faq/resultAlert";
+		return "common/resultAlert";
 	}
 	
 	
@@ -125,7 +126,7 @@ public class QuestionController {
 	/*==========================
 	 * 게시판 글상세 
 	 *==========================*/
-	@RequestMapping("/question/detail")
+	@RequestMapping("/faq/detail")
 	public ModelAndView process(@RequestParam int board_num) {
 		log.debug("<<게시판 글 상세 board_num>> : " + board_num);
 		
@@ -134,12 +135,59 @@ public class QuestionController {
 		
 		QuestionVO question = questionService.selectQuestion(board_num);
 		
-		
-		//제목에 태그 허용x <<--- 왜 StringUtil이 안되지 일단 킵
+		question.setBoard_title(StringUtil.useNoHtml(question.getBoard_title()));
 		
 		return new ModelAndView("question_detail", "question", question);//tiles설정명,속성명,속성값
 	}
 	
+
+
+	/*==========================
+	 * 게시판 글 수정
+	 *==========================*/
+	//수정폼 호출
+	@GetMapping("/faq/update")
+	public String formUpdate(@RequestParam int board_num, Model model) {
+		QuestionVO questionVO = questionService.selectQuestion(board_num);
+		
+		model.addAttribute("questionVO", questionVO);
+		
+		return "question_update";
+	}
+	
+	//수정 데이터 처리
+	@PostMapping("/faq/update")
+	public String submitUpdate(@Valid QuestionVO questionVO, BindingResult result,
+							   HttpServletRequest request, Model model) {
+		log.debug("<<글 수정>> : " + questionVO);
+		
+		if(result.hasErrors()) {
+			return "question_update";
+		}
+		
+		QuestionVO db_board = questionService.selectQuestion(questionVO.getBoard_num());
+		
+		questionService.updateQuestion(questionVO);
+		
+		model.addAttribute("message", "수정 완료되었습니다.");
+		model.addAttribute("url", request.getContextPath()+"/faq/detail?board_num="+questionVO.getBoard_num());
+		
+		return "common/resultAlert";
+	}
+	
+	
+	/*==========================
+	 * 게시판 글 삭제
+	 *==========================*/
+	@RequestMapping("/faq/delete")
+	public String submitDelete(@RequestParam int board_num, HttpServletRequest request) {
+		log.debug("<<질문글 삭제 board_num>> : " + board_num);
+		
+		QuestionVO db_board = questionService.selectQuestion(board_num);
+		questionService.deleteQuestion(board_num);
+		
+		return "redirect:/faq/question";
+	}
 	
 	
 	

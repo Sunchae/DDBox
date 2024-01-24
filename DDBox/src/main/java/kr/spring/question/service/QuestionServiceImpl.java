@@ -43,14 +43,12 @@ public class QuestionServiceImpl implements QuestionService{
 
 	@Override
 	public void updateQuestion(QuestionVO question) {
-		// TODO Auto-generated method stub
-		
+		questionMapper.updateQuestion(question);
 	}
 
 	@Override
 	public void deleteQuestion(int board_num) {
-		// TODO Auto-generated method stub
-		
+		questionMapper.deleteQuestion(board_num);
 	}
 
 }

@@ -6,13 +6,11 @@
 	<h2>자주묻는 질문</h2>
 	
 	<!-- 검색 기능 -->
-	<form action="list" id="search_form" method="get">
+	<form action="question" id="search_form" method="get">
 		<ul class="search">
 			<li>
 				<select name="keyfield" id="keyfield">
-					<option value="1" <c:if test="${param.keyfield==1}">selected</c:if>>제목</option>
-					<option value="2" <c:if test="${param.keyfield==2}">selected</c:if>>내용</option>
-					<option value="3" <c:if test="${param.keyfield==3}">selected</c:if>>제목내용</option>
+					<option value="1" <c:if test="${param.keyfield==1}">selected</c:if>>제목+내용</option>
 				</select>
 			</li>
 			<li>
@@ -80,7 +78,7 @@ $(function(){
 	
 	//정렬 선택
 	$('#order').change(function(){
-		location.href='list?keyfield='+$('#keyfield').val()+'&keyword='+$('#keyword').val()+'&order='+$('#order').val();
+		location.href='question?keyfield='+$('#keyfield').val()+'&keyword='+$('#keyword').val()+'&order='+$('#order').val();
 	});
 });
 </script>

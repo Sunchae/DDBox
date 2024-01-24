@@ -4,8 +4,9 @@
 <!-- 내용 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <div class="page-main">
-	<h2>글 쓰기</h2>
-	<form:form action="write" modelAttribute="questionVO" id="register_form">
+	<h2>글 수정</h2>
+	<form:form action="update" modelAttribute="questionVO" id="update_form">
+	<form:hidden path="board_num"/>
 	<form:errors element="div" cssClass="error-color"/>
 	<ul>
 		<li>
@@ -32,9 +33,9 @@
 			<form:errors path="board_content" cssClass="error-color"/>
 		</li>
 	</ul>
-	<div>
-		<form:button>작성</form:button>
-		<input type="button" value="취소" onclick="location.href='${pageContext.request.contextPath}/faq/question'">
+	<div class="align-center">
+		<form:button>수정</form:button>
+		<input type="button" value="취소" onclick="location.href='detail?board_num=${questionVO.board_num}'">
 	</div>
 	</form:form>
 </div>

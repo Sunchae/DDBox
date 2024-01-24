@@ -20,10 +20,10 @@
 	<!-- 검색기능(sql문) -->
 	<sql id="boardSearch">
 		<where>
-			<if test="keyword!=null and keyword!=''">
-				<if test="keyfield==1">
-				board_title LIKE '%' || #{keyword} || '%' OR
-				board_content LIKE '%' || #{keyword} || '%'
+			<if test="keyword != null and keyword != ''">
+				<if test="keyfield == 1">
+					board_title LIKE '%' || #{keyword} || '%' OR
+					board_content LIKE '%' || #{keyword} || '%'
 				</if>
 			</if>
 		</where>
@@ -38,7 +38,7 @@
 		<if test="order == 2">
 			ORDER BY board_hit DESC
 		</if>
-		<if test="order == 2">
+		<if test="order == 3">
 			ORDER BY board_regdate DESC
 		</if>
 	</sql>
@@ -56,21 +56,21 @@
 	<!-- 자주묻는질문 전체 목록/ 검색 목록 -->
 	<select id="selectList" parameterType="map" resultType="questionVO">
 		SELECT
-			*
+		  *
 		FROM (SELECT
-					a.*,
-					rownum rnum
-				FROM (SELECT
-						board_num,
-						board_category,
-						<![CDATA[
-						REPLACE(REPLACE(board_title,'<','&lt;'),'>','&gt;') board_title,
-						]]>
-						board_hit
-					  FROM question_board JOIN member
-					  USING (mem_num)
-					  <include refid="boardSearch"></include>
-					  <include refid="boardOrder"></include>)a)
+				a.*,
+				rownum rnum
+			  FROM (SELECT
+					  board_num,
+					  board_category,
+					  <![CDATA[
+					  REPLACE(REPLACE(board_title,'<','&lt;'),'>','&gt;') board_title,
+					  ]]>
+					  board_hit
+				    FROM question_board 
+				    JOIN member USING(mem_num)
+					<include refid="boardSearch"></include>
+					<include refid="boardOrder"></include>)a)
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
@@ -86,6 +86,14 @@
 		WHERE board_num=#{board_num}
 	</select>
 	
+	<!-- 자주묻는질문 글수정 -->
+	<update id="updateQuestion" parameterType="questionVO">
+		UPDATE question_board SET
+			board_title=#{board_title},
+			board_category=#{board_category},
+			board_content=#{board_content}
+		WHERE board_num=#{board_num}
+	</update>
 	
 	
 </mapper>

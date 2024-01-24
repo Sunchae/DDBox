@@ -89,7 +89,7 @@ create sequence vip_seq;
 --실시간 채팅방 테이블 (**생성 완)
 create table faq_chatroom(
  chatroom_num number primary key,
- chatting_num number references question_board (board_num) not null,
+ -- chatting_num number references question_board (board_num) not null,  <<<<<< 이 컬럼 삭제
  user_num number references member (mem_num) not null,
  admin_num number references member (mem_num) not null
 );
