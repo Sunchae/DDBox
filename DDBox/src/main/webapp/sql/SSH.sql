@@ -57,7 +57,7 @@ create sequence question_seq;
 
 
 --공지 테이블 (**생성 완)
-create table notice(
+create table news(
  mem_num number not null, --추가
  news_num number not null,
  news_category number not null,

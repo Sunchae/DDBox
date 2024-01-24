@@ -31,7 +31,7 @@
 				};
 			</script>
 		</c:if>
-		<input type="button" value="목록" onclick="location.href='question'">
+		<input type="button" value="목록" onclick="location.href='${pageContext.request.contextPath}/faq/question'">
 		</div>
 		<hr size="1" width="100%">
 	</div>

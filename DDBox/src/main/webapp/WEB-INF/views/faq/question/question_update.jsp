@@ -35,7 +35,7 @@
 	</ul>
 	<div class="align-center">
 		<form:button>수정</form:button>
-		<input type="button" value="취소" onclick="location.href='detail?board_num=${questionVO.board_num}'">
+		<input type="button" value="취소" onclick="location.href='${pageContext.request.contextPath}/faq/question/detail?board_num=${questionVO.board_num}'">
 	</div>
 	</form:form>
 </div>

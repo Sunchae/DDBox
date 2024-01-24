@@ -20,32 +20,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.member.vo.MemberVO;
-import kr.spring.question.service.QuestionService;
-import kr.spring.question.vo.QuestionVO;
+import kr.spring.question.service.NewsService;
+import kr.spring.question.vo.NewsVO;
 import kr.spring.util.PageUtil;
 import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Controller
-public class QuestionController {
+@Slf4j
+public class NewsController {
 	@Autowired
-	private QuestionService questionService;
+	private NewsService newsService;
 	
 	/*==========================
-	 * 메인페이지 
+	 * 공지/뉴스 글 목록
 	 *==========================*/
-	@RequestMapping("/faq/main")
-	public String process() {
-		return "faqMain";
-	}
-	
-	
-	
-	/*==========================
-	 * 자주묻는 질문 글 목록
-	 *==========================*/
-	@RequestMapping("/faq/question")
+	@RequestMapping("/faq/news")
 	public ModelAndView questionprocess(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
 										@RequestParam(value="order",defaultValue="1") int order,
 										String keyfield, String keyword) {
@@ -55,51 +45,52 @@ public class QuestionController {
 		map.put("keyword", keyword);
 		
 		//전체,검색 레코드 수
-		int count = questionService.selectRowCount(map);
+		int count = newsService.selectRowCount(map);
 		log.debug("<<글목록 count>> : " + count);
 		
 		//페이지처리
 		PageUtil page = new PageUtil(keyfield, keyword, currentPage, count, 20, 10, "list","&order="+order);
 		
-		List<QuestionVO> list = null;
+		List<NewsVO> list = null;
 		
 		if(count > 0) {
-			map.put("order", order);
-			map.put("start", page.getStartRow());
-			map.put("end", page.getEndRow());
-			
-			list = questionService.selectList(map);
+		map.put("order", order);
+		map.put("start", page.getStartRow());
+		map.put("end", page.getEndRow());
+		
+		list = newsService.selectList(map);
 		}
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("faq_question");
+		mav.setViewName("news");
 		mav.addObject("count", count);
 		mav.addObject("list", list);
 		mav.addObject("page", page.getPage());
 		
 		return mav;
-	}
+		}
 	
+
 	/*==========================
-	 * 자주묻는 질문 글 등록
+	 * 공지/뉴스 글 등록
 	 *==========================*/
 	//자바빈(VO) 초기화
 	@ModelAttribute
-	public QuestionVO initCommand() {
-		return new QuestionVO();
-	}
+	public NewsVO initCommand() {
+		return new NewsVO();
+	}	
 	
 	//등록 폼 호출
-	@GetMapping("/faq/question/write")
+	@GetMapping("/faq/news/write")
 	public String form() {
-		return "question_write";
+		return "news_write";
 	}
 	
 	//글 등록
-	@PostMapping("/faq/question/write")
-	public String submit(@Valid QuestionVO questionVO, BindingResult result,
+	@PostMapping("/faq/news/write")
+	public String submit(@Valid NewsVO newsVO, BindingResult result,
 						 HttpSession session, HttpServletRequest request, Model model) {
-		log.debug("<<자주묻는 질문 글 작성 확인>> : " + questionVO);
+		log.debug("<<공지/뉴스 작성 확인>> : " + newsVO);
 		
 		//유효성 체크 
 		if(result.hasErrors()) {
@@ -108,14 +99,14 @@ public class QuestionController {
 		
 		//회원번호
 		MemberVO vo = (MemberVO)session.getAttribute("user");
-		questionVO.setMem_num(vo.getMem_num());
+		newsVO.setMem_num(vo.getMem_num());
 		
 		//글쓰기
-		questionService.insertQuestion(questionVO);
+		newsService.insertNews(newsVO);
 		
 		//view에 표시할 메시지
 		model.addAttribute("message", "글 작성이 완료되었습니다.");
-		model.addAttribute("url", request.getContextPath()+"/faq/question");
+		model.addAttribute("url", request.getContextPath()+"/faq/news");
 		
 		return "common/resultAlert";
 	}
@@ -124,49 +115,48 @@ public class QuestionController {
 	
 	
 	/*==========================
-	 * 게시판 글상세 
+	 * 글상세 
 	 *==========================*/
-	@RequestMapping("/faq/question/detail")
-	public ModelAndView process(@RequestParam int board_num) {
-		log.debug("<<게시판 글 상세 board_num>> : " + board_num);
+	@RequestMapping("/faq/news/detail")
+	public ModelAndView process(@RequestParam int news_num) {
+		log.debug("<<공지 글 상세 news_num>> : " + news_num);
 		
-		//해당 글 조회수 +
-		questionService.updateHit(board_num);
-		QuestionVO question = questionService.selectQuestion(board_num);
-		question.setBoard_title(StringUtil.useNoHtml(question.getBoard_title()));
+		//해당 글 조회수
+		newsService.updateHit(news_num);
+		NewsVO news = newsService.selectNews(news_num);
+		news.setNews_title(StringUtil.useNoHtml(news.getNews_title()));
 		
-		return new ModelAndView("question_detail", "question", question);//tiles설정명,속성명,속성값
+		return new ModelAndView("news_detail", "news", news);//tiles설정명,속성명,속성값
 	}
 	
-
-
+	
 	/*==========================
 	 * 게시판 글 수정
 	 *==========================*/
 	//수정폼 호출
-	@GetMapping("/faq/question/update")
-	public String formUpdate(@RequestParam int board_num, Model model) {
-		QuestionVO questionVO = questionService.selectQuestion(board_num);
+	@GetMapping("/faq/news/update")
+	public String formUpdate(@RequestParam int news_num, Model model) {
+		NewsVO newsVO = newsService.selectNews(news_num);
 		
-		model.addAttribute("questionVO", questionVO);
+		model.addAttribute("newsVO", newsVO);
 		
-		return "question_update";
+		return "news_update";
 	}
 	
 	//수정 데이터 처리
-	@PostMapping("/faq/question/update")
-	public String submitUpdate(@Valid QuestionVO questionVO, BindingResult result,
+	@PostMapping("/faq/news/update")
+	public String submitUpdate(@Valid NewsVO newsVO, BindingResult result,
 							   HttpServletRequest request, Model model) {
-		log.debug("<<글 수정>> : " + questionVO);
+		log.debug("<<글 수정>> : " + newsVO);
 		
 		if(result.hasErrors()) {
-			return "question_update";
+			return "news_update";
 		}
 		
-		questionService.updateQuestion(questionVO);
+		newsService.updateNews(newsVO);
 		
 		model.addAttribute("message", "수정 완료되었습니다.");
-		model.addAttribute("url", request.getContextPath()+"/faq/question/detail?board_num="+questionVO.getBoard_num());
+		model.addAttribute("url", request.getContextPath()+"/faq/news/detail?news_num="+newsVO.getNews_num());
 		
 		return "common/resultAlert";
 	}
@@ -175,13 +165,13 @@ public class QuestionController {
 	/*==========================
 	 * 게시판 글 삭제
 	 *==========================*/
-	@RequestMapping("/faq/question/delete")
-	public String submitDelete(@RequestParam int board_num, HttpServletRequest request) {
-		log.debug("<<질문글 삭제 board_num>> : " + board_num);
+	@RequestMapping("/faq/news/delete")
+	public String submitDelete(@RequestParam int news_num, HttpServletRequest request) {
+		log.debug("<<질문글 삭제 news_num>> : " + news_num);
 		
-		questionService.deleteQuestion(board_num);
+		newsService.deleteNews(news_num);
 		
-		return "redirect:/faq/question";
+		return "redirect:/faq/news";
 	}
 	
 	

@@ -25,19 +25,19 @@
     
     <!-- 자주묻는 질문 -->
     <definition name="faq_question" extends="faqMain">
-    	<put-attribute name="body" value="/WEB-INF/views/faq/faq_question.jsp"/>                                           
+    	<put-attribute name="body" value="/WEB-INF/views/faq/question/question.jsp"/>                                           
     </definition>
     <!-- 자주묻는 질문 글쓰기 -->
     <definition name="question_write" extends="faqMain">
-    	<put-attribute name="body" value="/WEB-INF/views/faq/question_write.jsp"/>                                           
+    	<put-attribute name="body" value="/WEB-INF/views/faq/question/question_write.jsp"/>                                           
     </definition>
     <!-- 자주묻는 질문 상세보기 -->
     <definition name="question_detail" extends="faqMain">
-    	<put-attribute name="body" value="/WEB-INF/views/faq/question_detail.jsp"/>                                           
+    	<put-attribute name="body" value="/WEB-INF/views/faq/question/question_detail.jsp"/>                                           
     </definition>
     <!-- 자주묻는 질문 수정 -->
     <definition name="question_update" extends="faqMain">
-    	<put-attribute name="body" value="/WEB-INF/views/faq/question_update.jsp"/>                                           
+    	<put-attribute name="body" value="/WEB-INF/views/faq/question/question_update.jsp"/>                                           
     </definition>
     
     
@@ -45,9 +45,31 @@
     
     <!-- 공지/뉴스 -->
     <definition name="news" extends="faqMain">
-    	<put-attribute name="body" value="/WEB-INF/views/faq/faq_news.jsp"/>                                           
+    	<put-attribute name="body" value="/WEB-INF/views/faq/news/news.jsp"/>                                           
+    </definition>
+    <!-- 글작성 -->
+    <definition name="news_write" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/news/news_write.jsp"/>                                           
+    </definition>    
+    <!-- 상세 -->
+    <definition name="news_detail" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/news/news_detail.jsp"/>                                           
+    </definition> 
+    <!-- 수정 -->
+    <definition name="news_update" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/news/news_update.jsp"/>                                           
     </definition>
     
+    
+    
+    <!-- vip -->
+    <definition name="vip" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/vip/vip.jsp"/>                                           
+    </definition>
+    <!-- 글작성 -->
+    <definition name="vip_write" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/vip/vip_write.jsp"/>                                           
+    </definition> 
     
     
 </tiles-definitions>
