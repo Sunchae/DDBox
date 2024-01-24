@@ -52,4 +52,9 @@ public class MovieServiceImpl implements MovieService{
 		
 	}
 
+	@Override
+	public MovieVO selectMovie(int movie_num) {
+		return movieMapper.selectMovie(movie_num);
+	}
+
 }

@@ -10,6 +10,7 @@ public interface MovieService {
 	//영화 리스트 뽑기
 		public List<MovieVO> selectList(Map<String, Object> map);
 		
+		public MovieVO selectMovie(int movie_num);
 		//영화 좋아요 삽입 
 		public MovieFavVO selectFav(MovieFavVO fav);
 		//영화 좋아요 삭제
