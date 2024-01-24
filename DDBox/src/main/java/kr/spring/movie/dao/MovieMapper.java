@@ -1,13 +1,19 @@
 package kr.spring.movie.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import kr.spring.movie.vo.MovieFavVO;
+import kr.spring.movie.vo.MovieVO;
 
 @Mapper
 public interface MovieMapper {
-	//영화 박스오피스 리스트 뽑기
-	
+	//영화 리스트 뽑기
+	@Select("SELECT movie_title,movie_gradeNm,movie_poster FROM movie ORDER BY movie_title ASC")
+	public List<MovieVO> selectList(Map<String, Object> map);
 	
 	//영화 좋아요 삽입 
 	public MovieFavVO selectFav(MovieFavVO fav);
