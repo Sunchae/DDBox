@@ -68,7 +68,7 @@
 			<div class="collapse navbar-collapse justify-content-end">
 				<ul class="navbar-nav util-list">
 					<li class="nav-item"><a class="nav-link" href="#"><img src="${pageContext.request.contextPath}/images/nav/ico-schedule.png"></a></li>
-					<c:if test="${user.mem_auth == 1}">
+					<c:if test="${user.mem_auth != 9}">
 					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/member/myPage"><img src="${pageContext.request.contextPath}/images/nav/ico-mymega.png"></a></li>
 					</c:if>
 					<c:if test="${user.mem_auth == 9}">
