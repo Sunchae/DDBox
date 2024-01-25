@@ -57,7 +57,7 @@
 			<div class="collapse navbar-collapse justify-content-center" id="navbarNav">
 				<ul class="navbar-nav ">
 					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/movie/main">영화</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">예매</a></li>
+					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/reserve/reserveMain">예매</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">극장</a></li>
 					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/main/main" ><img id="DDBoxLogo" src="${pageContext.request.contextPath}/images/DDBox.png"></a></li>
 					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/event/main">이벤트</a></li>
