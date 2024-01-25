@@ -14,10 +14,13 @@ public class MovieVO {
 	private String movie_director;
 	private Date movie_opendate;
 	private int movie_gradeNm;
+	private String movie_poster;
 	private String movie_img1;
 	private String movie_img2;
 	private String movie_img3;
+	
 	private String movie_plot;
 	private int movie_runtime;
 	private int movie_status;
+	
 }
