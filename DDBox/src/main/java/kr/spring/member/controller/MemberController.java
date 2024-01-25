@@ -109,7 +109,7 @@ public class MemberController {
 				log.debug("<<mem_autoid>> : " + member.getMem_autoid());
 				
 				if(member.getMem_auth()==9) {//관리자는 관리자 메인으로 이동
-					return "redirect:/main/admin";
+					return "redirect:/member/AdminPageMain";
 				}else {//일반 사용자는 사용자 메인으로 이동
 					return "redirect:/main/main";
 				}

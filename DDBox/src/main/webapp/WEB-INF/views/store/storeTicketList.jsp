@@ -5,11 +5,11 @@
 <div class="page-main">
 	<h2>디디티켓</h2>
 		<div class="align-right">
-			<c:if test="${!empty user && mem_auth ==9}"> 		<%-- 관리자 로그인 되어있을 때 만 보임 --%>
+			<c:if test="${user.mem_auth ==9}"> 		<%-- 관리자 로그인 되어있을 때 만 보임 --%>
 			<input type="button" value="글쓰기" onclick="location.href='write'">
 			</c:if>
 		</div>
-	<table class="striped-table">
+	<table>
 		<tr>
 			<th>번호</th>
 			<th width="400">제목</th>

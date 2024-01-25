@@ -7,7 +7,7 @@
 <tiles-definitions>
     <definition name="admin" 
            template="/WEB-INF/views/template/layout_mypage.jsp">
-    	<put-attribute name="title" value="AdminPage"/>
+    	<put-attribute name="title" value="AdminPageMain"/>
     	<put-attribute name="header"
     	               value="/WEB-INF/views/template/DDBox_navbar.jsp"/>
     	<put-attribute name="nav"

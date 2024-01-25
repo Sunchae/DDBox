@@ -17,7 +17,7 @@ public class MainController {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		//관리자로 로그인하면 관리자 메인으로 이동 처리
 		if(user!=null && user.getMem_auth() == 9) {
-			return "redirect:/main/admin";
+			return "redirect:/member/AdminPageMain";
 		}
 		return "redirect:/main/main";
 	}
@@ -29,7 +29,7 @@ public class MainController {
 		
 		return "main";//타일스 설정명
 	}
-	@RequestMapping("/main/admin")
+	@RequestMapping("/member/AdminPageMain")
 	public String admin(Model model) {
 		
 		log.debug("<<관리자 메인 실행>>");
