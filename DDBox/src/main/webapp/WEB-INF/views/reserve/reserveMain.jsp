@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>예매</title>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<h3>빠른 예매</h3>
@@ -22,7 +23,7 @@
 				<div class="col-body">
 					<c:forEach var="reserve" items="${list}">
 						<ul>
-							<li class="align-center">${reserve.movie_title}</li>
+							<li id="movie_choice" data-id="${reserve.movie_poster}">${reserve.movie_title}</li>
 						</ul>
 					</c:forEach>
 					
@@ -36,17 +37,6 @@
 			</div>
 		</div>
 		</div>
-		<!-- <script type="text/javascript">
-			$(document).on('click','.movie_title_list', function(){
-				let movie_title = $(this).attr('movie_title');
-				let movie_poster = $(this).parent().find('img');
-				
-				let inputUI = '<p id="select_movie">';
-					inputUI += '<img src="${movie.movie_poster}">';
-					inputUI += ${movie.movie_title};
-					inputUI += '</p>';
-			});
-		</script> -->
 		<!-- li 클릭시 영화 제목+포스터 출력& 해당 영화가 상영되고 있는 극장 -->
 		
 		<!------------------------------ 극장 ------------------------------>
