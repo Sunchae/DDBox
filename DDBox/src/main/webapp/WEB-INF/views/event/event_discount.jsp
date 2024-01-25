@@ -1,35 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!-- 내용 시작 -->
-<div id="event-list-wrap">
-	<div class="inner-wrap">
+<div id="page-main">
+	<form action="main" id="event_form" method="get">
+		<div class="tit-util">
+			<h3 class="tit">제휴/할인</h3>
+		</div>
+		<c:forEach var="list" items="${list}">
+		<c:if test="${list.event_type == 5}">
 		<div class="event-list">
-			<input type="hidden" id="totCount" name="totCount">
 			<ul>
-				<li>
-					<a>
-						<p class="img"><img></p>
-						<p class="tit">제휴할인이벤트 1</p>
-						<p class="date">날짜</p>
-					</a>
-				</li>
-				<li>
-					<a>
-						<p class="img"><img></p>
-						<p class="tit">스페셜이벤트 1</p>
-						<p class="date">날짜</p>
-					</a>
-				</li>
-				<li>
-					<a>
-						<p class="img"><img></p>
-						<p class="tit">스페셜이벤트 1</p>
-						<p class="date">날짜</p>
+				<li class="list-card">
+					<a href="detail?event_num=${list.event_num}">
+						<p class="img">
+							<img src="${pageContext.request.contextPath}/upload/${list.event_photo1}" class="list-img">
+						</p>
+						<p class="tit">${list.event_title}</p>
+						<p class="date">${list.event_start}~${list.event_end}</p>
 					</a>
 				</li>
 			</ul>
 		</div>
-	</div>
+	</c:if>
+	</c:forEach>
+	</form>
 </div>
 <!-- 내용 끝 -->

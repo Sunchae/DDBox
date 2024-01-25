@@ -23,6 +23,12 @@
     	<put-attribute name="body" value="/WEB-INF/views/event/eventWrite.jsp"/>
     </definition>
     
+    <!-- 글상세 -->
+    <definition name="eventView" extends="eventMain">
+    	<put-attribute name="title" value="글상세"/>
+    	<put-attribute name="body" value="/WEB-INF/views/event/eventView.jsp"/>
+    </definition>
+    
     <!-- event specail -->
     <definition name="event_special" extends="eventMain">
     	<put-attribute name="body" value="/WEB-INF/views/event/event_special.jsp"/>                                           

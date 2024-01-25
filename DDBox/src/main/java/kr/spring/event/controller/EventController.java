@@ -25,6 +25,7 @@ import kr.spring.event.vo.Event_listVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.FileUtil;
 import kr.spring.util.PageUtil;
+import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -74,6 +75,20 @@ public class EventController {
 		return "event/resultAlert";
 	}
 	
+	/*========================
+	 * 이벤트 글상세
+	 *========================*/
+	@RequestMapping("/event/detail")
+	public ModelAndView process(@RequestParam int event_num) {
+		log.debug("<<게시판 글 상세 event_num>> : " + event_num);
+		
+		Event_listVO event_list = eventService.selectEvent(event_num);
+		
+		//제목에 태그를 허용하지 않음
+		event_list.setEvent_title(StringUtil.useNoHtml(event_list.getEvent_title()));
+								//타일스 설정명,속성명	,속성값
+		return new ModelAndView("eventView","event_list",event_list);
+	}
 	
 	/*========================
 	 * 이벤트 main
@@ -111,36 +126,161 @@ public class EventController {
 	 * 이벤트 special
 	 *========================*/
 	@RequestMapping("/event/special")
-	public String specialpro() {
-		return "event_special";
+	public ModelAndView specialpro(@RequestParam(value="pageNum",defaultValue="1") int currentPage,@RequestParam(value="order",defaultValue="1") int order ,String keyfield,String keyword) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		
+		//전체 /검색 레코드수
+		int count = eventService.selectRowCount(map);
+		log.debug("<<count>> : " + count);
+		
+		PageUtil page = new PageUtil(keyfield,keyword,currentPage,count,20,10,"list","&order="+order);
+		
+		List<Event_listVO> list = null;
+		if(count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = eventService.selectList(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("event_special");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
 	}
 	/*========================
 	 * 이벤트 entry
 	 *========================*/
 	@RequestMapping("/event/entry")
-	public String entrypro() {
-		return "event_entry";
+	public ModelAndView entrypro(@RequestParam(value="pageNum",defaultValue="1") int currentPage,@RequestParam(value="order",defaultValue="1") int order ,String keyfield,String keyword) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		
+		//전체 /검색 레코드수
+		int count = eventService.selectRowCount(map);
+		log.debug("<<count>> : " + count);
+		
+		PageUtil page = new PageUtil(keyfield,keyword,currentPage,count,20,10,"list","&order="+order);
+		
+		List<Event_listVO> list = null;
+		if(count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = eventService.selectList(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("event_entry");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
 	}
 	/*========================
 	 * 이벤트 membership
 	 *========================*/
 	@RequestMapping("/event/membership")
-	public String membershippro() {
-		return "event_membership";
+	public ModelAndView membershippro(@RequestParam(value="pageNum",defaultValue="1") int currentPage,@RequestParam(value="order",defaultValue="1") int order ,String keyfield,String keyword) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		
+		//전체 /검색 레코드수
+		int count = eventService.selectRowCount(map);
+		log.debug("<<count>> : " + count);
+		
+		PageUtil page = new PageUtil(keyfield,keyword,currentPage,count,20,10,"list","&order="+order);
+		
+		List<Event_listVO> list = null;
+		if(count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = eventService.selectList(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("event_membership");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
 	}
 	/*========================
 	 * 이벤트 theater
 	 *========================*/
 	@RequestMapping("/event/theater")
-	public String theaterpro() {
-		return "event_theater";
+	public ModelAndView theaterpro(@RequestParam(value="pageNum",defaultValue="1") int currentPage,@RequestParam(value="order",defaultValue="1") int order ,String keyfield,String keyword) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		
+		//전체 /검색 레코드수
+		int count = eventService.selectRowCount(map);
+		log.debug("<<count>> : " + count);
+		
+		PageUtil page = new PageUtil(keyfield,keyword,currentPage,count,20,10,"list","&order="+order);
+		
+		List<Event_listVO> list = null;
+		if(count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = eventService.selectList(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("event_theater");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
 	}
 	/*========================
 	 * 이벤트 discount
 	 *========================*/
 	@RequestMapping("/event/discount")
-	public String discountpro() {
-		return "event_discount";
+	public ModelAndView discountpro(@RequestParam(value="pageNum",defaultValue="1") int currentPage,@RequestParam(value="order",defaultValue="1") int order ,String keyfield,String keyword) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		
+		//전체 /검색 레코드수
+		int count = eventService.selectRowCount(map);
+		log.debug("<<count>> : " + count);
+		
+		PageUtil page = new PageUtil(keyfield,keyword,currentPage,count,20,10,"list","&order="+order);
+		
+		List<Event_listVO> list = null;
+		if(count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = eventService.selectList(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("event_discount");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
 	}
 	/*========================
 	 * 이벤트 roulette

@@ -46,7 +46,9 @@
 					REPLACE(REPLACE(event_title,'<','&lt;'),'>','&gt;') event_title,
 					]]>
 					event_start,
-					event_end
+					event_end,
+					event_type,
+					event_photo1
 				FROM event_list
 				ORDER BY event_num DESC
 			)a
@@ -56,6 +58,14 @@
 		]]>
 	</select>
 	
+	<!-- 글 상세 -->
+	<select id="selectEvent" parameterType="integer">
+		SELECT
+			*
+		FROM event_list
+		JOIN member USING(mem_num)
+		WHERE event_num=#{event_num}
+	</select>
 </mapper>
  
 

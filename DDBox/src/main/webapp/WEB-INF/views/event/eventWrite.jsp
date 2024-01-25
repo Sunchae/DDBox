@@ -23,15 +23,14 @@
 				<form:errors path="event_content" cssClass="error-color"/>
 			</li>
 			<li>
-				<form:label path="event_type">이벤트 타입</form:label>
+			    <form:label path="event_type">이벤트 타입</form:label>
 				<select id="event_type" name="event_type" class="type-select">
  					<option value="0" <c:if test="${event_type==0}">selected</c:if>>룰렛</option>
  			 		<option value="1" <c:if test="${event_type==1}">selected</c:if>>스페셜 이벤트</option>
 		  			<option value="2" <c:if test="${event_type==2}">selected</c:if>>응모권 이벤트</option>
 		  			<option value="3" <c:if test="${event_type==3}">selected</c:if>>멤버쉽</option>
-		  			<option value="4" <c:if test="${event_type==4}">selected</c:if>>아트하우스</option>
-		  			<option value="5" <c:if test="${event_type==5}">selected</c:if>>공연이벤트</option>
-		  			<option value="6" <c:if test="${event_type==6}">selected</c:if>>PUB이벤트</option>
+		  			<option value="5" <c:if test="${event_type==4}">selected</c:if>>극장별</option>
+		  			<option value="6" <c:if test="${event_type==5}">selected</c:if>>제휴/할인</option>
 				</select>
 			</li>
 			

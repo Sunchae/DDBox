@@ -13,45 +13,115 @@
 				<a href="${pageContext.request.contextPath}/event/special">더보기</a>
 			</div>
 		</div>
+		<c:forEach var="list" items="${list}">
+		<c:if test="${list.event_type == 1}">
+		<div class="event-list">
+			<ul>
+				<li class="list-card">
+					<a href="detail?event_num=${list.event_num}">
+						<p class="img">
+							<img src="${pageContext.request.contextPath}/upload/${list.event_photo1}" class="list-img">
+						</p>
+						<p class="tit">${list.event_title}</p>
+						<p class="date">${list.event_start}~${list.event_end}</p>
+					</a>
+				</li>
+			</ul>
+		</div>
+		</c:if>
+		</c:forEach>
+		<div class="tit-util">
+			<h3 class="tit">응모권 이벤트</h3>
+			<div class="more-btn">
+				<a href="${pageContext.request.contextPath}/event/entry">더보기</a>
+			</div>
+		</div>
+		<c:forEach var="list" items="${list}">
+		<c:if test="${list.event_type == 2}">
+		<div class="event-list">
+			<ul>
+				<li>
+					<a href="detail?event_num=${list.event_num}">
+						<p class="img">
+							<img src="${pageContext.request.contextPath}/upload/${list.event_photo1}" class="list-img">
+						</p>
+						<p class="tit">${list.event_title}</p>
+						<p class="date">${list.event_start}~${list.event_end}</p>
+					</a>
+				</li>
+			</ul>
+		</div>
+		</c:if>
+		</c:forEach>
+		<div class="tit-util">
+			<h3 class="tit">멤버쉽/CLUB</h3>
+			<div class="more-btn">
+				<a href="${pageContext.request.contextPath}/event/membership">더보기</a>
+			</div>
+		</div>
+		<c:forEach var="list" items="${list}">
+		<c:if test="${list.event_type == 3}">
+		<div class="event-list">
+			<ul>
+				<li class="list-card">
+					<a href="detail?event_num=${list.event_num}">
+						<p class="img">
+							<img src="${pageContext.request.contextPath}/upload/${list.event_photo1}" class="list-img">
+						</p>
+						<p class="tit">${list.event_title}</p>
+						<p class="date">${list.event_start}~${list.event_end}</p>
+					</a>
+				</li>
+			</ul>
+		</div>
+		</c:if>
+		</c:forEach>
+		<div class="tit-util">
+			<h3 class="tit">극장별</h3>
+			<div class="more-btn">
+				<a href="${pageContext.request.contextPath}/event/theater">더보기</a>
+			</div>
+		</div>
+		<c:forEach var="list" items="${list}">
+		<c:if test="${list.event_type == 4}">
+		<div class="event-list">
+			<ul>
+				<li class="list-card">
+					<a href="detail?event_num=${list.event_num}">
+						<p class="img">
+							<img src="${pageContext.request.contextPath}/upload/${list.event_photo1}" class="list-img">
+						</p>
+						<p class="tit">${list.event_title}</p>
+						<p class="date">${list.event_start}~${list.event_end}</p>
+					</a>
+				</li>
+			</ul>
+		</div>
+		</c:if>
+		</c:forEach>
+		<div class="tit-util">
+			<h3 class="tit">제휴/할인</h3>
+			<div class="more-btn">
+				<a href="${pageContext.request.contextPath}/event/discount">더보기</a>
+			</div>
+		</div>
+		<c:forEach var="list" items="${list}">
+		<c:if test="${list.event_type == 5}">
+		<div class="event-list">
+			<ul>
+				<li class="list-card">
+					<a href="detail?event_num=${list.event_num}">
+						<p class="img">
+							<img src="${pageContext.request.contextPath}/upload/${list.event_photo1}" class="list-img">
+						</p>
+						<p class="tit">${list.event_title}</p>
+						<p class="date">${list.event_start}~${list.event_end}</p>
+					</a>
+				</li>
+			</ul>
+		</div>
+		</c:if>
+		</c:forEach>
 	</form>
-	<c:forEach var="list" items="${list}">
-	<div class="event-list">
-		<ul>
-			<li>
-				<a href="detail?event_num=${list.event_num}">
-					<p class="img">
-						<img src="${pageContext.request.contextPath}/upload/${list.event_photo1}" class="list-img">
-					</p>
-					<p class="tit">${list.event_title}</p>
-					<p class="date">${list.event_start}~${list.event_end}</p>
-				</a>
-			</li>
-		</ul>
-	</div>
-	</c:forEach>
-	<div class="tit-util">
-		<h3 class="tit">응모권 이벤트</h3>
-		<div class="more-btn">
-			<a href="${pageContext.request.contextPath}/event/entry">더보기</a>
-		</div>
-	</div>
-	<div class="tit-util">
-		<h3 class="tit">멤버쉽/CLUB</h3>
-		<div class="more-btn">
-			<a href="${pageContext.request.contextPath}/event/membership">더보기</a>
-		</div>
-	</div>
-	<div class="tit-util">
-		<h3 class="tit">극장별</h3>
-		<div class="more-btn">
-			<a href="${pageContext.request.contextPath}/event/theater">더보기</a>
-		</div>
-	</div>
-	<div class="tit-util">
-		<h3 class="tit">제휴/할인</h3>
-		<div class="more-btn">
-			<a href="${pageContext.request.contextPath}/event/discount">더보기</a>
-		</div>
-	</div>
 </div>
 <!-- 내용 끝 -->

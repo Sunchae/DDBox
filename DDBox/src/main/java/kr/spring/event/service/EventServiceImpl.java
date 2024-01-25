@@ -35,8 +35,7 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public Event_listVO selectEvent(int event_num) {
-		// TODO Auto-generated method stub
-		return null;
+		return eventMapper.selectEvent(event_num);
 	}
 
 	@Override
