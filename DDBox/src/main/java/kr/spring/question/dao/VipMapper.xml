@@ -31,10 +31,8 @@
 				rownum rnum
 			  FROM (SELECT
 					  vip_num,
-					  <![CDATA[
-					  REPLACE(REPLACE(vip_title,'<','&lt;'),'>','&gt;') vip_title,
-					  ]]>
-				    FROM vip_faq
+					  vip_title
+				    FROM vip_faq)a)
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>

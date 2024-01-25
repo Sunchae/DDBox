@@ -21,10 +21,8 @@
 	<sql id="newsSearch">
 		<where>
 			<if test="keyword != null and keyword != ''">
-				<if test="keyfield==1">
-					news_title LIKE '%' || #{keyword} || '%' OR
-					news_content LIKE '%' || #{keyword} || '%' 
-				</if>
+				news_title LIKE '%' || #{keyword} || '%' OR
+				news_content LIKE '%' || #{keyword} || '%' 
 			</if>
 		</where>
 	</sql>

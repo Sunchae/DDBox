@@ -17,14 +17,12 @@
 	<table class="striped-table">
 		<tr>
 			<th class="align-center">번호</th>
-			<th class="align-center">구분</th>
 			<th width="400" class="align-center">제목</th>
-			<th class="align-center">조회수</th>
 		</tr>
 		<c:forEach var="vip" items="${list}"> <!-- 여기 다시 한번 확인 -->
 		<tr>
 			<td class="align-center"><a href="vip/detail?vip_num=${vip.vip_num}">${vip.vip_num}</a></td>
-			<td class="align-center"><a href="vip/detail?news_num=${vip.vip_num}">${vip.vip_title}</a></td>
+			<td class="align-center"><a href="vip/detail?vip_num=${vip.vip_num}">${vip.vip_title}</a></td>
 		</tr>
 		</c:forEach>
 	</table>

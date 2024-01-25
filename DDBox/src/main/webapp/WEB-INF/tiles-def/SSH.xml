@@ -70,6 +70,33 @@
     <definition name="vip_write" extends="faqMain">
     	<put-attribute name="body" value="/WEB-INF/views/faq/vip/vip_write.jsp"/>                                           
     </definition> 
+    <!-- 글상세 -->
+    <definition name="vip_detail" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/vip/vip_detail.jsp"/>                               
+    </definition> 
+    <!-- 수정 -->
+    <definition name="vip_update" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/vip/vip_update.jsp"/>                                           
+    </definition>
+    
+    
+    
+    <!-- 이메일 문의 -->
+    <definition name="email" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/email/email.jsp"/>                                           
+    </definition>
+    <!-- 이메일 글쓰기 -->
+    <definition name="email_write" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/email/email_write.jsp"/>                                           
+    </definition>
+    
+    
+    
+    
+    <!-- 대관 문의 -->
+    <definition name="rental" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/rental/rental.jsp"/>                                           
+    </definition>
     
     
 </tiles-definitions>

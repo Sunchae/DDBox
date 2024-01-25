@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.question.dao.EmailMapper">
+	<!-- 문의 글등록 -->
+	<insert id="insertEmail" parameterType="emailVO">
+		INSERT INTO email_faq(
+			qna_num,
+			mem_num,
+			qna_title,
+			qna_type,
+			qna_scr,
+			res_num,
+			question_content,
+			question_file,
+			question_regdate,
+			ask_content,
+			ask_regdate)
+		VALUES (
+			email_faq.nextval,
+			#{mem_num},
+			#{qna_title},
+			#{qna_type},
+			#{qna_scr},
+			#{res_num,jdbcType=VARCHAR},
+			#{question_content},
+			#{question_file,jdbcType=VARCHAR},
+			#{question_regdate},
+			#{ask_content},
+			#{ask_regdate})
+	</insert>
+	
+	<!-- 검색 기능 -->
+	<sql id="emailSearch">
+		<where>
+			<if test="keyword != null and keyword != ''">
+				qna_title LIKE '%' || #{keyword} || '%' OR
+				question_content LIKE '%' || #{keyword} || '%' 
+			</if>
+		</where>
+	</sql>
+	
+	
+	<!-- 총 개수/ 검색 개수 -->
+	<select id="selectRowCount" parameterType="map" resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM email_faq JOIN member USING (mem_num)
+		<include refid="emailSearch"></include>
+	</select>
+	
+	
+	<!-- 전체 목록/검색 목록 -->
+	<select id="selectList" parameterType="map" resultType="emailVO">
+		SELECT
+		  *
+		FROM (SELECT
+				a.*,
+				rownum rnum
+			  FROM (SELECT
+					  qna_num,
+					  qna_type,
+					  <![CDATA[
+					  REPLACE(REPLACE(question_title,'<','&lt;'),'>','&gt;') question_title,
+					  ]]>
+				    FROM email_faq
+				    JOIN member USING(mem_num)
+					<include refid="emailSearch"></include>
+					ORDER BY question_regdate DESC)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	
+	
+	<!-- 글 상세 -->
+	
+	
+	
+	<!-- 글 수정 -->
+	
+	
+	
+	
+</mapper>

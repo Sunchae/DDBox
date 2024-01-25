@@ -23,7 +23,6 @@ import kr.spring.member.vo.MemberVO;
 import kr.spring.question.service.VipService;
 import kr.spring.question.vo.VipVO;
 import kr.spring.util.PageUtil;
-import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -36,19 +35,18 @@ public class VipController {
 	 * 글 목록
 	 *==========================*/
 	@RequestMapping("/faq/vip")
-	public ModelAndView vippro(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
-							   String keyfield, String keyword) {
+	public ModelAndView vippro(@RequestParam(value="pageNum",defaultValue="1") int currentPage) {
 		Map<String,Object> map = new HashMap<String,Object>();
-		
+		/*
 		map.put("keyfield", keyfield);
-		map.put("keyword", keyword);
+		map.put("keyword", keyword);*/
 		
 		//전체, 검색 레코드 수
 		int count = vipService.selectRowCount(map);
 		log.debug("<<vip 글목록 count>> : " + count);
 		
 		//페이지 처리
-		PageUtil page = new PageUtil(keyfield,keyword,currentPage,count,20,10,"list");
+		PageUtil page = new PageUtil(currentPage,count,20,10,"list");
 		
 		List<VipVO> list = null;
 		
@@ -122,7 +120,6 @@ public class VipController {
 		log.debug("<<VIP 글 상세 vip_num>> : " + vip_num);
 		
 		VipVO vip = vipService.selectVip(vip_num);
-		vip.setVip_title(StringUtil.useNoHtml(vip.getVip_title()));
 		
 		return new ModelAndView("vip_detail", "vip", vip);//tiles설정명,속성명,속성값
 	}
@@ -133,13 +130,50 @@ public class VipController {
 	/*==========================
 	 * 글 수정
 	 *==========================*/
+	//수정폼 호출
+	@GetMapping("/faq/vip/update")
+	public String formUpdate(@RequestParam int vip_num, Model model) {
+		VipVO vipVO = vipService.selectVip(vip_num);
+		
+		model.addAttribute("vipVO", vipVO);
+		
+		return "vip_update";
+	}
 	
-	
-	
+	//수정 데이터 처리
+	@PostMapping("/faq/vip/update")
+	public String submitUpdate(@Valid VipVO vipVO, BindingResult result,
+								HttpServletRequest request, Model model) {
+		log.debug("<<글 수정>> : " + vipVO);
+		
+		if(result.hasErrors()) {
+			return "vip_update";
+		}
+		
+		vipService.updateVip(vipVO);
+		
+		model.addAttribute("message", "수정 완료되었습니다.");
+		model.addAttribute("url", request.getContextPath()+"/faq/vip/detail?vip_num="+vipVO.getVip_num());
+		
+		return "common/resultAlert";
+	}
 	
 	
 	
 	/*==========================
 	 * 글 삭제
 	 *==========================*/
+	@RequestMapping("/faq/vip/delete")
+	public String submitDelete(@RequestParam int vip_num, HttpServletRequest request) {
+		log.debug("<<공지글 삭제 vip_num>> : " + vip_num);
+		
+		vipService.deleteVip(vip_num);
+		
+		return "redirect:/faq/vip";
+	}
+	
+	
+	
+	
+	
 }

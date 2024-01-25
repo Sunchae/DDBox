@@ -48,10 +48,9 @@ public class QuestionController {
 	@RequestMapping("/faq/question")
 	public ModelAndView questionprocess(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
 										@RequestParam(value="order",defaultValue="1") int order,
-										String keyfield, String keyword) {
+										String keyword) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 		
 		//전체,검색 레코드 수
@@ -59,7 +58,7 @@ public class QuestionController {
 		log.debug("<<글목록 count>> : " + count);
 		
 		//페이지처리
-		PageUtil page = new PageUtil(keyfield, keyword, currentPage, count, 20, 10, "list","&order="+order);
+		PageUtil page = new PageUtil(null, keyword, currentPage, count, 20, 10, "list","&order="+order);
 		
 		List<QuestionVO> list = null;
 		

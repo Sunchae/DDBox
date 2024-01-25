@@ -9,12 +9,7 @@
 	<form action="question" id="search_form" method="get">
 		<ul class="search">
 			<li>
-				<select name="keyfield" id="keyfield">
-					<option value="1" <c:if test="${param.keyfield==1}">selected</c:if>>제목+내용</option>
-				</select>
-			</li>
-			<li>
-				<input type="search" name="keyword" id="keyword" value="${param.keyword}">
+				<input type="search" name="keyword" id="keyword" value="${param.keyword}" placeholder="검색어를 입력하세요">
 			</li>
 			<li>
 				<input type="submit" value="검색">
@@ -47,15 +42,15 @@
 		<tr>
 			<td class="align-center"><a href="question/detail?board_num=${question.board_num}">${question.board_num}</a></td>
 			<td class="align-center">
-				<c:if test="${question.board_category==1}">예매</c:if>
-				<c:if test="${question.board_category==2}">관람/결제수단</c:if>
-				<c:if test="${question.board_category==3}">멤버십</c:if>
-				<c:if test="${question.board_category==4}">VIP</c:if>
-				<c:if test="${question.board_category==5}">할인/혜택</c:if>
-				<c:if test="${question.board_category==6}">영화관</c:if>
-				<c:if test="${question.board_category==7}">특별관</c:if>
-				<c:if test="${question.board_category==8}">기프트샵</c:if>
-				<c:if test="${question.board_category==9}">홈페이지/모바일</c:if>
+				<c:if test="${question.board_category==1}">[예매]</c:if>
+				<c:if test="${question.board_category==2}">[관람/결제수단]</c:if>
+				<c:if test="${question.board_category==3}">[멤버십]</c:if>
+				<c:if test="${question.board_category==4}">[VIP]</c:if>
+				<c:if test="${question.board_category==5}">[할인/혜택]</c:if>
+				<c:if test="${question.board_category==6}">[영화관]</c:if>
+				<c:if test="${question.board_category==7}">[특별관]</c:if>
+				<c:if test="${question.board_category==8}">[기프트샵]</c:if>
+				<c:if test="${question.board_category==9}">[홈페이지/모바일]</c:if>
 			</td>
 			<td class="align-center"><a href="question/detail?board_num=${question.board_num}">${question.board_title}</a></td>
 			<td class="align-center"><a href="question/detail?board_num=${question.board_num}">${question.board_hit}</a></td>

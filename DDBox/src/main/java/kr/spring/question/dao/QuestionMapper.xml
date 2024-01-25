@@ -21,10 +21,8 @@
 	<sql id="boardSearch">
 		<where>
 			<if test="keyword != null and keyword != ''">
-				<if test="keyfield == 1">
 					board_title LIKE '%' || #{keyword} || '%' OR
 					board_content LIKE '%' || #{keyword} || '%'
-				</if>
 			</if>
 		</where>
 	</sql>
