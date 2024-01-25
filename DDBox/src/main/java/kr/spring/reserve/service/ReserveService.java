@@ -11,4 +11,8 @@ import kr.spring.reserve.vo.TicketVO;
 public interface ReserveService {
 	
 	 public List<MovieVO> selectMovieList(Map<String,Object> map); 
+	 
+	 public List<ScreenVO> selectScreenList(Map<String,Object> map);
+	 
+	public List<ScreenVO> selectSeoulList(Map<String,Object> map);
 }

@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>예매</title>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/reserve.region.js"></script>
 </head>
 <body>
 	<h3>빠른 예매</h3>
@@ -23,20 +24,21 @@
 				<div class="col-body">
 					<c:forEach var="reserve" items="${list}">
 						<ul>
-							<li id="movie_choice" data-id="${reserve.movie_poster}">${reserve.movie_title}</li>
+							<li id="movie_choice"><a>${reserve.movie_title}</a></li>
 						</ul>
 					</c:forEach>
 					
 				</div>
 				<div class="movie-img">
 					<div class="choice-list" id="choiceMovieList-0">
-						<img id="picture" src="${movie.movie_poster}">
-						<p id="picture-name" style="border-style:dotted">영화를 클릭하세요</p>
+						<img id="picture" src="${reserve.movie_poster}">
+						<p class="align-center" id="picture-name" style="border-style:dotted">영화를 클릭하세요</p>
 					</div>
 				</div>
 			</div>
 		</div>
 		</div>
+		
 		<!-- li 클릭시 영화 제목+포스터 출력& 해당 영화가 상영되고 있는 극장 -->
 		
 		<!------------------------------ 극장 ------------------------------>
@@ -44,20 +46,38 @@
 			<div class="v-line" style="border-right: 3px solid #ccc; height:100%; left: 50%;">
 			<div class="center-one">
 				<h3 class="align-center" style="width:100%; height:40px; background-color:black; color:white;">극장</h3>
-				<div class="list-theater-detail">
 					<div class="all-theater-list">
-						<div class="explain-button">
-							<c:forEach var="region" items="${regions }">
-								<button class='list-theater-button' data-region='${region.no }'
-									style="display: none">${region.name }</button>
-							</c:forEach>
+						<div class="search_boxes" style="display:flex; width:700px;">
+							<div class="search_box" >
+								<select style="overflow-y: hidden;"size="9" name="do" id="do" onchange="categoryChange(this)">
+									<option value="general01">서울</option>
+									<option value="general02">경기</option>
+									<option value="general03">인천</option>
+									<option value="general04">강원</option>
+									<option value="general05">대전/충청</option>
+									<option value="general06">대구</option>
+									<option value="general07">부산/울산</option>
+									<option value="general08">경상</option>
+									<option value="general09">광주/전라/제주</option>
+								</select>
+							</div>
+
+							<div class="search_box" style="overflow-y: scroll;">
+								<c:forEach var="reserve" items="${list3}">
+									<ul>
+										<li id="seoul_choice"><a>${reserve.scr_name}</a></li>
+									</ul>
+								</c:forEach>
+								<select size="20" name="state" id="state">
+									<option value="0general01"></option>
+								</select>
+							</div>
 						</div>
 					</div>
 					<div class="theater-choies"></div>
-				</div>
 				
 				<div class="theater-choies-check">
-					<p class="check-content"  style="border-style:dotted">
+					<p class="check-content align-center"  style="border-style:dotted">
 						극장을 선택하세요
 					</p>
 					<!--선택했을 경우 클릭하면 입력되고 아니면 열리지 않는다.-->
@@ -76,5 +96,6 @@
 			</div>
 		</div>
 	</div>
+	
 </body>
 </html>

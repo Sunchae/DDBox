@@ -25,6 +25,19 @@ public class ReserveServiceImpl implements ReserveService{
 		return reserveMapper.selectMovieList(map);
 	}
 
+	@Override
+	public List<ScreenVO> selectScreenList(Map<String, Object> map) {
+		return reserveMapper.selectScreenList(map);
+	}
+
+	@Override
+	public List<ScreenVO> selectSeoulList(Map<String, Object> map) {
+		return reserveMapper.selectSeoulList(map);
+	}
+
+	
+
+
 	
 	
 	

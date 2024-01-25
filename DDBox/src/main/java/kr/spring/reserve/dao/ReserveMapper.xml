@@ -14,10 +14,18 @@
 	
 	
 	<!-- 극장 목록 -->
-	<!-- <select id="selectScreenList" parameterType="map" resultType="ScreenVO">
-		SELECT scr_num, scr_name, scr_do, scr_si FROM screen JOIN show USING(shw_num) WHERE shw_num=#{shw_num}
-	</select> -->
+	<select id="selectScreenList" parameterType="map" resultType="ScreenVO">
+		SELECT DISTINCT
+			scr_do
+		FROM 
+			screen
+	</select>
 	
+	<select id="selectSeoulList" parameterType="map" resultType="ScreenVO">
+		SELECT substr(scr_name,4,10) scr_name
+		FROM screen
+		WHERE scr_do= '서울시'
+	</select>
 	
 	<!-- 시간 목록 -->
 </mapper>

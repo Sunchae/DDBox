@@ -31,8 +31,10 @@ public interface ReserveMapper {
 	 * 	  	예매 극장
 	 ====================*/
 	//예매 극장 정보
+	//서울시 극장정보 list
+	public List<ScreenVO> selectSeoulList(Map<String,Object> map);
 	//극장 목록처리(도)
-	public List<ScreenVO> selectScreenDoList(Map<String,Object> map);
+	public List<ScreenVO> selectScreenList(Map<String,Object> map);
 	//극장 선택1(도)
 	public int selectMovieDO(Map<String,Object> map);
 	

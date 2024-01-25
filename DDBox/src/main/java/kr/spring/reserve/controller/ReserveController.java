@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.spring.movie.service.MovieService;
 import kr.spring.movie.vo.MovieVO;
 import kr.spring.reserve.service.ReserveService;
+import kr.spring.reserve.vo.ScreenVO;
 import kr.spring.reserve.vo.TicketVO;
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,41 +38,33 @@ public class ReserveController {
 	}
 
 	@RequestMapping("/reserve/reserveMain")
-	public String process(Model model) {
+	public String moive(Model model, HttpSession session) {
 
 		Map<String,Object> map = new HashMap<String,Object>();
 		
 		List<MovieVO> list =null;
 		list = movieService.selectList(map);
 		log.debug("list : " + list);
+		
+		List<ScreenVO> list2 =null;
+		list2 = reserveService.selectScreenList(map);
+		
+		
+		ScreenVO screen = (ScreenVO)session.getAttribute("screen");
+		List<ScreenVO> list3 = null;
+		list3 = reserveService.selectSeoulList(map);
 
 		model.addAttribute("list", list);
+		model.addAttribute("list2", list2);
+		model.addAttribute("list3", list3);
 
 		return "reserveMain";
 	}
+	
 
 	/*====================
 	 * 	  예매 영화 목록
 	 ====================*/
-
-	@RequestMapping("reserve/list") 
-	public ModelAndView process(int movie_num,String movie_title,String movie_poster,int movie_gradeNm) {
-		Map<String,Object> map = new HashMap<String,Object>();
-
-
-		List<MovieVO> list =null;
-		list = movieService.selectList(map);
-		log.debug("list : " + list);
-
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("reserveMain");
-		mav.addObject("list",list);
-
-
-
-		return mav;
-	}
-
 
 
 	/*====================
