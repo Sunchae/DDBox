@@ -27,9 +27,8 @@ public class StoreServiceImpl implements StoreService{
 	}
 
 	@Override
-	public StoreVO selectStoreVO(int Store_num) {
-		// TODO Auto-generated method stub
-		return null;
+	public StoreVO selectStore(int Store_num) {
+		return storeMapper.selectStore(Store_num);
 	}
 
 	@Override

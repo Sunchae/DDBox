@@ -15,14 +15,6 @@
 			<th width="400">제목</th>
 			<th>작성일</th>
 		</tr>
-		<c:forEach var="store" items="${list}">
-		<tr>
-			<td class="align-center">${store.store_num}</td>
-			<td><a href="detail?store_num=${store.store_num}">${store.title}</a></td>
-			<td class="align-center">${store.reg_date}</td>
-		</tr>
-		</c:forEach>
 	</table>
-	<div class="align-center">${page}</div>
 </div>
 <!-- 내용 끝 -->

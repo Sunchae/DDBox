@@ -10,6 +10,7 @@
 			store_price,
 			store_photo,
 			store_name,
+			store_type,
 			store_ip,
 			mem_num)
 		VALUES (store_seq.nextval,
@@ -18,6 +19,7 @@
 			#{store_price},
 			#{store_photo,jdbcType=VARCHAR},		<!-- filename이 명시되어있을 때, 필수적으로 넣지 않아도 될 때, 널이 들어가면 오류나기때문에 jdbcType=VARCHAR 표기해야됨 -->
 			#{store_name},
+			#{store_type},
 			#{store_ip},
 			#{mem_num})
 	</insert>
@@ -53,6 +55,14 @@
 	</select>
 	
 	<!-- Store 글 상세 -->
+	<select id="selectStoreVO" parameterType="integer">
+		SELECT
+			*
+		FROM store
+		JOIN member USING(mem_num)
+		WHERE store_num=#{store_num}
+		
+	</select>
 	<!-- Store 글 수정 -->
 </mapper>
 

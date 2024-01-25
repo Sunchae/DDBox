@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 내용 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <div class="page-main">
 	<h2>글쓰기</h2>
@@ -20,24 +20,22 @@
 			<li>
 				<form:textarea path="store_content"/>
 				<form:errors path="store_content" cssClass="error-color" />
-				<script>
-					function MyCustomUploadAdapterPlugin(editor){
-						editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
-						return new UploadAdapter(loader);
-						}
-					}
-					
-					ClassicEditor
-						.create(document.querySelector('#content'),{
-							extraPlugins:[MyCustomUploadAdapterPlugin]
-						})
-						.then(editor => {
-							window.editor = editor;
-						})
-						.catch(error => {
-							console.error(error);
-						});
-				</script>
+			</li>
+			<li>
+				<form:label path="store_type">게시글 종류</form:label>
+				<select id="store_type" name="store_type" class="type-select">
+ 					<option value="0" <c:if test="${store_type==0}">selected</c:if>>디디티켓</option>
+ 			 		<option value="1" <c:if test="${store_type==1}">selected</c:if>>팝콘/음료/굿즈</option>
+				</select>
+			<li>
+				<form:label path="store_price">가격</form:label>
+				<form:input path="store_price"/>
+				<form:errors path="store_price" cssClass="error-color" />
+			</li>
+			<li>
+				<form:label path="store_name">상품이름</form:label>
+				<form:input path="store_name"/>
+				<form:errors path="store_name" cssClass="error-color" />
 			</li>
 			<li>
 				<form:label path="upload">파일업로드</form:label>

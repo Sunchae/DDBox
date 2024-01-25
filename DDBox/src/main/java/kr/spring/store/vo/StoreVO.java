@@ -19,12 +19,12 @@ public class StoreVO {
 	private String store_title;
 	@NotBlank
 	private String store_content;
-	@NotBlank
 	private int store_price;
 	private MultipartFile upload;
 	private String store_photo;
 	@NotBlank
 	private String store_name;
+	private int store_type;
 	private Date store_reg_date;
 	private Date store_modify_date;
 	private int store_status;
