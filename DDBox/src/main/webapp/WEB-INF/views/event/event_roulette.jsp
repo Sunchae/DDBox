@@ -1,12 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!-- 내용 끝 -->
-<div id="page-main">
-	<form action="main" id="event_form" method="get">
-		<div class="tit-util">
-			<h3 class="tit">룰렛이벤트</h3>
-		</div>
-	</form>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roulette</title>
+<title>룰렛이벤트</title>
+</head>
+<body>
+<div id="app">
+	<h2>룰렛이벤트</h2>
+	<div class="roullette-outer">
+	  <!-- Canvas 엘리먼트 추가 -->
+	  <div class="roullette">
+	  <canvas id="rouletteCanvas" width="400" height="400"></canvas>
+	  </div>
+	  <div class="roullette-pin"></div>
+	  <button class="start-btn" onclick="rotate()">start</button>
+	</div>
 </div>
-<!-- 내용 끝 -->
+<!-- <div id="app">
+	<h2>룰렛이벤트</h2>
+	<div class="roullette-outer">
+		<div class="roullette-pin"></div>
+		<div class="roullette">
+		값 영역
+		<div class="item-wrapper">
+			<div class="item">0point</div>
+			<div class="item">100point</div>
+			<div class="item">200point</div>
+			<div class="item">300point</div>
+			<div class="item">400point</div>
+			<div class="item">500point</div>
+		</div>
+		선 영역
+		<div class="line-wrapper">
+			<div class="line"></div>
+			<div class="line"></div>
+			<div class="line"></div>
+			<div class="line"></div>
+			<div class="line"></div>
+			<div class="line"></div>
+		</div>
+		</div>
+	</div>
+	<button class="start-btn">start</button>
+</div> -->
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/event_roullette.js"></script>
+</body>
+</html>
