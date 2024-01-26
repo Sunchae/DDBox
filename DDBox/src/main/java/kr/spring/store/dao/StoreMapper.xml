@@ -17,7 +17,7 @@
 			#{store_title},
 			#{store_content},
 			#{store_price},
-			#{store_photo,jdbcType=VARCHAR},		<!-- filename이 명시되어있을 때, 필수적으로 넣지 않아도 될 때, 널이 들어가면 오류나기때문에 jdbcType=VARCHAR 표기해야됨 -->
+			#{store_photo,jdbcType=VARCHAR},
 			#{store_name},
 			#{store_type},
 			#{store_ip},

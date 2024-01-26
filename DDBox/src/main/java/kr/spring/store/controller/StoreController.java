@@ -2,6 +2,9 @@ package kr.spring.store.controller;
 
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -81,10 +84,26 @@ public class StoreController {
 
 
 	/*=================================
+	 *	스토어 메인 글 목록 
+	 *=================================*/
+	@RequestMapping("/store/storeMain")
+	public String submit(HttpSession session, Model model) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<StoreVO> list = null;
+		list = storeService.selectList(map);
+		log.debug("<<스토어 메인 글 목록 storeMainList>> : " + list);
+		
+		model.addAttribute("list", list);
+		
+		return "storeMain";
+	}
+	
+	/*=================================
 	 *	스토어 티켓 글 목록 
 	 *=================================*/
 	@RequestMapping("/store/storeTicketList")
-	public String ticketList(@RequestParam(value="pagenum",defaultValue="1") int currentPage, HttpSession session, Model model) {
+	public String submit(@RequestParam(value="pagenum",defaultValue="1") int currentPage, HttpSession session, Model model) {
 
 		return "storeTicketList";
 	}

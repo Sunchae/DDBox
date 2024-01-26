@@ -1,1 +1,17 @@
 @charset "UTF-8";
+/*---------------------
+* 메인 타이틀
+*-----------------------*/
+.main-title {
+  font-size: 15px;
+  font-weight: 400;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 0;
+}
+
+#store_form {
+    border: none; 
+    margin: 0; 
+    padding: 0; 
+}
