@@ -12,4 +12,5 @@ public interface EmailService {
 	public EmailVO selectEmail(int qna_num); //한건의 레코드 반환
 	public void updateEmail(EmailVO email);
 	public void deleteEmail(int qna_num);
+	public void deleteFile(int qna_num); //쓰레기파일 삭제
 }

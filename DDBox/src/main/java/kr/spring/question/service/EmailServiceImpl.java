@@ -23,27 +23,32 @@ public class EmailServiceImpl implements EmailService{
 
 	@Override
 	public int selectRowCount(Map<String, Object> map) {
-		return 0;
+		return emailMapper.selectRowCount(map);
 	}
 
 	@Override
 	public void insertEmail(EmailVO email) {
-		
+		emailMapper.insertEmail(email);
 	}
 
 	@Override
 	public EmailVO selectEmail(int qna_num) {
-		return null;
+		return emailMapper.selectEmail(qna_num);
 	}
 
 	@Override
 	public void updateEmail(EmailVO email) {
-		
+		emailMapper.updateEmail(email);
 	}
 
 	@Override
 	public void deleteEmail(int qna_num) {
-		
+		emailMapper.deleteEmail(qna_num);
+	}
+
+	@Override
+	public void deleteFile(int qna_num) {
+		emailMapper.deleteFile(qna_num);
 	}
 
 }

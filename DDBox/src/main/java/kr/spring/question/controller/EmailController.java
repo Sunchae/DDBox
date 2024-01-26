@@ -25,6 +25,7 @@ import kr.spring.question.service.EmailService;
 import kr.spring.question.vo.EmailVO;
 import kr.spring.util.FileUtil;
 import kr.spring.util.PageUtil;
+import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -34,7 +35,7 @@ public class EmailController {
 	private EmailService emailService;
 	
 	/*===========================
-	 * 문의게시판 글 목록
+	 * 이메일 글 목록
 	 * ==========================*/
 	@RequestMapping("/faq/email")
 	public ModelAndView process(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
@@ -46,10 +47,10 @@ public class EmailController {
 		
 		//전체,검색 레코드 수
 		int count = emailService.selectRowCount(map);
-		log.debug("<<글목록 count>> : " + count);
+		log.debug("<<이메일 글목록 count>> : " + count);
 		
 		//페이지처리
-		PageUtil page = new PageUtil(null, keyword, currentPage, count, 20, 10, "list");
+		PageUtil page = new PageUtil(null, keyword, currentPage, count, 20, 10, "list","&order="+order);
 		
 		List<EmailVO> list = null;
 		if(count > 0) {
@@ -71,7 +72,7 @@ public class EmailController {
 	
 	
 	/*==========================
-	 * 이메일 문의 글 목록
+	 * 이메일 문의 글등록
 	 *==========================*/
 	//자바빈(VO) 초기화
 	@ModelAttribute
@@ -102,6 +103,9 @@ public class EmailController {
 		
 		//파일업로드
 		emailVO.setQuestion_file(FileUtil.createFile(request, emailVO.getUpload()));
+		
+		log.debug("<<이메일 QNA>> EmailVO : " + emailVO);
+		
 		//글쓰기
 		emailService.insertEmail(emailVO);
 		
@@ -113,29 +117,100 @@ public class EmailController {
 	}
 
 	
-	
-	/*==========================
-	 * 이메일 문의 글 등록
-	 *==========================*/
-	
-	
-	
 	/*==========================
 	 * 글상세
 	 *==========================*/
+	@RequestMapping("/faq/email/detail")
+	public ModelAndView detailProcess(@RequestParam int qna_num) {
+		log.debug("<<이메일 글 상세 qna_num>> : " + qna_num);
+		
+		EmailVO email = emailService.selectEmail(qna_num);
+		//제목에 태그 허용 X
+		email.setQna_title(StringUtil.useNoHtml(email.getQna_title()));
+		
+		return new ModelAndView("email_detail", "email", email);
+	}
 	
 	
+	/*===========================
+	 * 파일 다운로드
+	 * ==========================*/
+	@RequestMapping("/faq/email/file")
+	public ModelAndView download(@RequestParam int qna_num, HttpServletRequest request) {
+		EmailVO email = emailService.selectEmail(qna_num);
+		
+		byte[] downloadFile = FileUtil.getBytes(request.getServletContext().getRealPath("/upload")+"/"+email.getQuestion_file());
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("downloadView");
+		mav.addObject("downloadFile", downloadFile);
+		mav.addObject("filename", email.getQuestion_file());
+		
+		return mav;
+	}
 	
 	/*==========================
-	 * 글수정
+	 * 글수정 (답글 작성) 
 	 *==========================*/
+	//답글 작성폼 호출
+	@GetMapping("/faq/email/update")
+	public String formUpdate(@RequestParam int qna_num, Model model) {
+		EmailVO emailVO = emailService.selectEmail(qna_num);
+		
+		model.addAttribute("emailVO", emailVO);
+		
+		return "email_update";
+	}
 	
+	//수정 데이터 처리 (답글달기)
+	@PostMapping("/faq/email/update")
+	public String submitUpdate(@Valid EmailVO emailVO, BindingResult result,
+							   HttpServletRequest request, Model model) throws IllegalStateException, IOException {
+		log.debug("<<글 수정>> : " + emailVO);
 	
+		//유효성 체크 결과 오류가 있으면 폼 재호출
+		if(result.hasErrors()) {
+			EmailVO vo = emailService.selectEmail(emailVO.getQna_num());
+			emailVO.setQuestion_file(vo.getQuestion_file());
+			
+			return "email_update";
+		}
+		
+		//db 파일정보 구하기
+		EmailVO db_email = emailService.selectEmail(emailVO.getQna_num());
+		
+		//파일명 셋팅
+		emailVO.setQuestion_file(FileUtil.createFile(request, emailVO.getUpload()));
+		
+		emailService.updateEmail(emailVO);
+		
+		if(emailVO.getUpload()!=null && !emailVO.getUpload().isEmpty()) {
+			FileUtil.removeFile(request, db_email.getQuestion_file());
+		}
+		
+		model.addAttribute("message", "답변이 등록되었습니다");
+		model.addAttribute("url", request.getContextPath()+"/faq/email/detail?qna_num="+emailVO.getQna_num());
+		
+		return "common/resultAlert";
+	}
 	
 	
 	/*==========================
 	 * 글삭제
 	 *==========================*/
+	@RequestMapping("/faq/email/delete")
+	public String submitDelete(@RequestParam int qna_num, HttpServletRequest request) {
+		log.debug("<<문의글 삭제 qna_num>> : " + qna_num);
+		
+		EmailVO db_email = emailService.selectEmail(qna_num);
+		
+		emailService.deleteEmail(qna_num);
+		
+		if(db_email.getQuestion_file() != null) {
+			FileUtil.removeFile(request, db_email.getQuestion_file());
+		}
+		return "redirect:/faq/email";
+	}
 	
 	
 	
