@@ -43,4 +43,16 @@ function categoryChange(e) {
 		
 	}
 	
+	$(document).on('click','#region_choice', function(){
+		let scr_do = $(this).parent().find('#state').val();
+		let scr_si = $(this).parent().find('option').val();
+		
+		let regionUI = '<p id="region">';
+			regionUI += $('#state').val() + $('#region_choice').val();
+			regionUI += '</p>';
+			
+		$(this).parent('.check_content').hide();
+		$(this).parent('p').appenmd(regionUI);
+	});
+	
 }
