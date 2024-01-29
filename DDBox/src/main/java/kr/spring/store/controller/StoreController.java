@@ -35,7 +35,6 @@ public class StoreController {
 	@Autowired
 	private StoreService storeService;
 
-
 	/*=================================
 	 *	스토어 글 등록
 	 *=================================*/
