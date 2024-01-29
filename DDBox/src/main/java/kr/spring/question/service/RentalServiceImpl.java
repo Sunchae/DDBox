@@ -18,22 +18,22 @@ public class RentalServiceImpl implements RentalService{
 	
 	@Override
 	public List<RentalVO> selectList(Map<String, Object> map) {
-		return null;
+		return rentalMapper.selectList(map);
 	}
 
 	@Override
 	public int selectRowCount(Map<String, Object> map) {
-		return 0;
+		return rentalMapper.selectRowCount(map);
 	}
 
 	@Override
 	public void insertRental(RentalVO rental) {
-		
+		rentalMapper.insertRental(rental);
 	}
 
 	@Override
 	public RentalVO selectRental(int rental_num) {
-		return null;
+		return rentalMapper.selectRental(rental_num);
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class RentalServiceImpl implements RentalService{
 
 	@Override
 	public void deleteRental(int rental_num) {
-		
+		rentalMapper.deleteRental(rental_num);
 	}
 
 }

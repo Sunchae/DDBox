@@ -109,6 +109,10 @@
     <definition name="rental_write" extends="faqMain">
     	<put-attribute name="body" value="/WEB-INF/views/faq/rental/rental_write.jsp"/>                                           
     </definition>
+    <!-- 상세 -->
+    <definition name="rental_detail" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/rental/rental_detail.jsp"/>                                           
+    </definition>
     
     
 </tiles-definitions>

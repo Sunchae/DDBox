@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 내용 시작 -->
 <div class="page-main">
-	<h2>VIP</h2>
+	<h6>VIP FAQ</h6>
+	<span>고객님께서 궁금하신 내용을 먼저 확인해주세요.</span>
 	
 	<div class="align-right">
 		<c:if test="${user.mem_auth==9}">

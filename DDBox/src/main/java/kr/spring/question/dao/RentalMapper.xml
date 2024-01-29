@@ -2,97 +2,85 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.question.dao.RentalMapper">
 	<!-- 문의 글등록 -->
-	<insert id="insertEmail" parameterType="emailVO">
-		INSERT INTO email_faq(
-			qna_num,
+	<insert id="insertRental" parameterType="rentalVO">
+		INSERT INTO rental(
+			rental_num,
 			mem_num,
-			qna_title,
-			qna_type,
-			qna_scr,
 			res_num,
-			question_content,
-			question_file,
-			ask_content,
-			ask_regdate)
+			rental_date,
+			rental_per,
+			rental_content,
+			rental_name,
+			rental_phone,
+			rental_email)
 		VALUES (
-			email_faq_seq.nextval,
+			rental_seq.nextval,
 			#{mem_num},
-			#{qna_title},
-			#{qna_type},
-			#{qna_scr},
-			#{res_num,jdbcType=VARCHAR},
-			#{question_content},
-			#{question_file,jdbcType=VARCHAR},
-			#{ask_content,jdbcType=VARCHAR},
-			#{ask_regdate,jdbcType=VARCHAR})
+			#{res_num},
+			#{rental_date},
+			#{rental_per},
+			#{rental_content},
+			#{rental_name},
+			#{rental_phone},
+			#{rental_email})
 	</insert>
 	
 	<!-- 검색 기능 -->
-	<sql id="emailSearch">
+	<sql id="rentalSearch">
 		<where>
 			<if test="keyword != null and keyword != ''">
-				qna_title LIKE '%' || #{keyword} || '%' OR
-				question_content LIKE '%' || #{keyword} || '%' 
+				rental_name LIKE '%' || #{keyword} || '%' OR
+				rental_content LIKE '%' || #{keyword} || '%' 
 			</if>
 		</where>
 	</sql>
-	
 	
 	<!-- 총 개수/ 검색 개수 -->
 	<select id="selectRowCount" parameterType="map" resultType="integer">
 		SELECT
 			COUNT(*)
-		FROM email_faq JOIN member USING (mem_num)
-		<include refid="emailSearch"></include>
+		FROM rental JOIN member USING (mem_num)
+		<include refid="rentalSearch"></include>
 	</select>
 	
-	
-	<!-- 전체 목록/검색 목록 -->
-	<select id="selectList" parameterType="map" resultType="emailVO">
+	<!-- 전체 목록/ 검색 목록 -->
+	<select id="selectList" parameterType="map" resultType="rentalVO">
 		SELECT
-		  *
-		FROM (SELECT
+			*
+		FROM(SELECT
 				a.*,
 				rownum rnum
-			  FROM (SELECT
-					  qna_num,
-					  qna_type,
-					  <![CDATA[
-					  REPLACE(REPLACE(qna_title,'<','&lt;'),'>','&gt;') qna_title
-					  ]]>
-				    FROM email_faq
-				    JOIN member USING(mem_num)
-					<include refid="emailSearch"></include>
-					ORDER BY question_regdate DESC)a)
+			FROM (SELECT
+					rental_num,
+					res_num,
+					rental_name,
+					rental_date,
+					rental_regdate,
+					rental_status
+				  FROM rental
+				  JOIN member USING(mem_num)
+				  <include refid="rentalSearch"></include>
+				  ORDER BY rental_regdate DESC)a)
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
 	</select>
 	
-<!-- 		
-SELECT * FROM (SELECT a.*, rownum rnum FROM
-(SELECT * FROM email_faq e LEFT OUTER JOIN
-member_detail m ON e.mem_num=m.mem_num
-ORDER BY question_regdate  DESC)a) 
-WHERE rnum>=1 AND rnum<=100 -->
-	
 	<!-- 글 상세 -->
-	<select id="selectEmail" parameterType="integer">
+	<select id="selectRental" parameterType="integer">
 		SELECT
 			*
-		FROM email_faq
+		FROM rental
 		JOIN member USING(mem_num) 
 		LEFT OUTER JOIN member_detail USING(mem_num) 
-		WHERE qna_num=#{qna_num}
+		WHERE rental_num=#{rental_num}
 	</select>
 	
-	<!-- 글 수정 (답글 달기) -->
-	<update id="updateEmail" parameterType="emailVO">
-		UPDATE email_faq SET
-			ask_content=#{ask_content},
-			ask_regdate=SYSDATE
-		WHERE qna_num=#{qna_num}
-	</update>
+	
+	
+	
+	
+	
 	
 	
 	

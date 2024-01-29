@@ -4,12 +4,8 @@
 <!-- 내용 시작 -->
 <div class="page-main">
 	<h2>대관 문의</h2>
-	<c:if test="${!empty user}">
-		<input type="button" value="글쓰기" onclick="location.href='rental/write'">
-	</c:if>
-</div>
+
 	<!-- 검색 기능 -->
-	<!-- 
 	<form action="rental" id="search_form" method="get">
 		<ul class="search">
 			<li>
@@ -21,48 +17,37 @@
 			</li>
 		</ul>
 		<div class="align-right">
-			<select id="order" name="order">
-				<option value="1" <c:if test="${param.order == 1}">selected</c:if>>목록순</option>
-				<option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회수</option>
-				<option value="3" <c:if test="${param.order == 3}">selected</c:if>>최신순</option>
-			</select>
 			<c:if test="${!empty user}">
 				<input type="button" value="글쓰기" onclick="location.href='rental/write'">
 			</c:if>
 		</div>
 	</form>
+	
 	<c:if test="${count==0}">
-	<div class="result-display">작성한 문의사항이 없습니다</div>
+	<div class="result-display">신청한 예약건이 없습니다</div>
 	</c:if>
 	<c:if test="${count>0}">
 	<table class="striped-table">
 		<tr>
 			<th class="align-center">번호</th>
-			<th class="align-center">영화관(일자)</th>
+			<th class="align-center">희망영화관</th>
 			<th width="400" class="align-center">문의자명</th>
+			<th class="align-center">관람희망일</th>
+			<th class="align-center">등록일</th>
 			<th class="align-center">상태</th>
 		</tr>
 		<c:forEach var="rental" items="${list}"> 
 		<tr>
 			<td class="align-center"><a href="rental/detail?rental_num=${rental.rental_num}">${rental.rental_num}</a></td>
+			<td class="align-center"><a href="rental/detail?rental_num=${rental.rental_num}">${rental.res_num}</a></td>
+			<td class="align-center"><a href="rental/detail?rental_num=${rental.rental_num}">${rental.rental_name}</a></td>
+			<td class="align-center"><a href="rental/detail?rental_num=${rental.rental_num}">${rental.rental_date}</a></td>
+			<td class="align-center"><a href="rental/detail?rental_num=${rental.rental_num}">${rental.rental_regdate}</a></td>
 			<td class="align-center">
-			<c:if test="${!empty rental.rental_modifydate}">
-				임시작성-영화관(${rental.rental_modifydate})
-			</c:if>
-			<c:if test="${!empty rental.rental_modifydate}">
-				임시작성-영화관(${rental.rental_regdate})
-			</c:if>
-			</td>
-			<td class="align-center">
-				<a href="rental/detail?rental_num=${rental.rental_num}">${user.mem_id}</a>
-			</td>
-			<td class="align-center">
-				<a href="rental/detail?rental_num=${rental.rental_num}">
-					<c:if test="${rental.rental_status==1}">접수중</c:if>
-					<c:if test="${rental.rental_status==2}">접수완료</c:if>
-					<c:if test="${rental.rental_status==3}">승인완료</c:if>
-					<c:if test="${rental.rental_status==9}">접수취소</c:if>
-				</a>
+				<c:if test="${rental.rental_status==1}">접수중</c:if>
+				<c:if test="${rental.rental_status==2}">접수완료</c:if>
+				<c:if test="${rental.rental_status==3}">승인완료</c:if>
+				<c:if test="${rental.rental_status==9}">접수취소</c:if>
 			</td>
 		</tr>
 		</c:forEach>
@@ -86,5 +71,6 @@ $(function(){
 		location.href='rental?keyword='+$('#keyword').val()+'&order='+$('#order').val();
 	});
 });
-</script> -->
+</script>
 <!-- 내용 끝 -->
+</div>

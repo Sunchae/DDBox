@@ -23,7 +23,8 @@ create table rental(
  rental_num number not null,
  mem_num number not null,
  res_num number not null, --해당 영화관
- rental_regdate date not null, --대관 희망 날짜
+ rental_regdate date default sysdate not null,
+ rental_date date not null,--대관 희망 날짜
  rental_modifydate date,
  rental_per number not null, --희망인원
  rental_content clob not null,

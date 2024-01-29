@@ -18,8 +18,7 @@
 			<form:radiobutton path="news_category" value="1"/>시스템점검
 			<form:radiobutton path="news_category" value="2"/>극장
 			<form:radiobutton path="news_category" value="3"/>행사/이벤트
-			<form:radiobutton path="news_category" value="4"/>제휴이벤트
-			<form:radiobutton path="news_category" value="5"/>기타
+			<form:radiobutton path="news_category" value="4"/>기타
 			<form:errors path="news_category" cssClass="error-color"/>
 		</li>
 		<li>

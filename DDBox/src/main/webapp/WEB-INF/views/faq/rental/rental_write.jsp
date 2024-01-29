@@ -14,9 +14,9 @@
 				<form:errors path="res_num" cssClass="error-color"/>
 			</li>
 			<li>
-				<form:label path="rental_regdate">관람 희망일(*) (기본 날짜 입력해서 test)</form:label>
-				<form:input path="rental_regdate"/>
-				<form:errors path="rental_regdate" cssClass="error-color"/>
+				<form:label path="rental_date">관람 희망일(*) (기본 날짜 입력해서 test)</form:label>
+				<input type="date" id="rental_date" name="rental_date">
+				<form:errors path="rental_date" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="rental_per">희망인원(*)</form:label>

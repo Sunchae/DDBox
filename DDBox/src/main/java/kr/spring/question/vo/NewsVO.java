@@ -16,7 +16,7 @@ import lombok.ToString;
 public class NewsVO {
 	private int news_num;
 	private int mem_num;
-	@Range(min=1,max=5)
+	@Range(min=1,max=4)
 	private int news_category;
 	@NotBlank
 	private String news_title;
