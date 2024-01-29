@@ -4,6 +4,9 @@
 <!-- 내용 시작 -->
 <div class="page-main">
 	<h2>대관 문의</h2>
+	<c:if test="${!empty user}">
+		<input type="button" value="글쓰기" onclick="location.href='rental/write'">
+	</c:if>
 </div>
 	<!-- 검색 기능 -->
 	<!-- 

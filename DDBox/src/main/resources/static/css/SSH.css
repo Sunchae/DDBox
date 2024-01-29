@@ -16,3 +16,67 @@ faq 메인 좌측 메뉴 레이아웃
 	clear:both;
 }
 
+
+
+
+/*======================
+ *    메인
+ ======================*/
+.check_warp{
+	overflow:hidden;
+}
+
+/*검색*/
+.check_warp .box.qna_search{
+	width:200px;
+	background-color: rgba(75,0,132,0.83);
+	color: white;
+    background-size: 50px;
+    border-right: none;
+}
+
+.check_warp .box {
+    float: left;
+    display: block;
+    width: 199px;
+    height: 260px;
+    text-align: center;
+    border-right: 1px solid #dedace;
+}
+
+.check_warp .box input{
+	width:160px;
+	height:30px;
+}
+
+
+/*상담톡*/
+.check_warp .quick_chat{
+    float: left;
+    display: block;
+    width: 199px;
+    height: 260px;
+    text-align: center;
+    border-right: 1px solid #dedace;
+}
+
+/*이메일 문의*/
+.check_warp .quick_email{
+    float: left;
+    display: block;
+    width: 199px;
+    height: 260px;
+    text-align: center;
+    border-right: 1px solid #dedace;
+}
+
+/*상담내역*/
+.check_warp .quick_mypage{
+    float: left;
+    display: block;
+    width: 199px;
+    height: 260px;
+    text-align: center;
+    border-right: 1px solid #dedace;
+}
+

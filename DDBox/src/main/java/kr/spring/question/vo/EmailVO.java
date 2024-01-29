@@ -23,7 +23,7 @@ public class EmailVO {
 	private int qna_type;
 	@Range(min=0,max=1)
 	private int qna_scr; //해당 영화관 선택 유무
-	private int res_num; //영화관
+	private Integer res_num; //영화관
 	@NotBlank
 	private String question_content;
 	private String question_file;
@@ -32,8 +32,10 @@ public class EmailVO {
 	private String ask_content;
 	private Date ask_regdate;
 	
-	//member_detail
 	private String mem_name;
-	private String mem_email;
-	private String mem_phone;
+	
+	//member_detail
+//	private String mem_name;
+//	private String mem_email;
+//	private String mem_phone;
 }

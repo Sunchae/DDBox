@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.spring.question.dao.EmailMapper">
+<mapper namespace="kr.spring.question.dao.RentalMapper">
 	<!-- 문의 글등록 -->
 	<insert id="insertEmail" parameterType="emailVO">
 		INSERT INTO email_faq(
@@ -58,9 +58,8 @@
 					  qna_num,
 					  qna_type,
 					  <![CDATA[
-					  REPLACE(REPLACE(qna_title,'<','&lt;'),'>','&gt;') qna_title,
+					  REPLACE(REPLACE(qna_title,'<','&lt;'),'>','&gt;') qna_title
 					  ]]>
-					  ask_content
 				    FROM email_faq
 				    JOIN member USING(mem_num)
 					<include refid="emailSearch"></include>

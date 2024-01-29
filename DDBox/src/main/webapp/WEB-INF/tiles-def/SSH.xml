@@ -15,7 +15,7 @@
     <definition name="faqMain" template="/WEB-INF/views/template/layout_faq.jsp">
     	<put-attribute name="title" value="문의 게시판"/>
     	<put-attribute name="header" value="/WEB-INF/views/template/DDBox_navbar.jsp"/> 
-    	<put-attribute name="body" value="/WEB-INF/views/faq/faqView.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/faq/faq_main.jsp"/>
     	<put-attribute name="nav" value="/WEB-INF/views/template/faq_nav.jsp"/>
     	<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
     </definition>
@@ -27,15 +27,15 @@
     <definition name="faq_question" extends="faqMain">
     	<put-attribute name="body" value="/WEB-INF/views/faq/question/question.jsp"/>                                           
     </definition>
-    <!-- 자주묻는 질문 글쓰기 -->
+    <!-- 작성 -->
     <definition name="question_write" extends="faqMain">
     	<put-attribute name="body" value="/WEB-INF/views/faq/question/question_write.jsp"/>                                           
     </definition>
-    <!-- 자주묻는 질문 상세보기 -->
+    <!-- 상세 -->
     <definition name="question_detail" extends="faqMain">
     	<put-attribute name="body" value="/WEB-INF/views/faq/question/question_detail.jsp"/>                                           
     </definition>
-    <!-- 자주묻는 질문 수정 -->
+    <!-- 수정 -->
     <definition name="question_update" extends="faqMain">
     	<put-attribute name="body" value="/WEB-INF/views/faq/question/question_update.jsp"/>                                           
     </definition>
@@ -47,7 +47,7 @@
     <definition name="news" extends="faqMain">
     	<put-attribute name="body" value="/WEB-INF/views/faq/news/news.jsp"/>                                           
     </definition>
-    <!-- 글작성 -->
+    <!-- 작성 -->
     <definition name="news_write" extends="faqMain">
     	<put-attribute name="body" value="/WEB-INF/views/faq/news/news_write.jsp"/>                                           
     </definition>    
@@ -66,11 +66,11 @@
     <definition name="vip" extends="faqMain">
     	<put-attribute name="body" value="/WEB-INF/views/faq/vip/vip.jsp"/>                                           
     </definition>
-    <!-- 글작성 -->
+    <!-- 작성 -->
     <definition name="vip_write" extends="faqMain">
     	<put-attribute name="body" value="/WEB-INF/views/faq/vip/vip_write.jsp"/>                                           
     </definition> 
-    <!-- 글상세 -->
+    <!-- 상세 -->
     <definition name="vip_detail" extends="faqMain">
     	<put-attribute name="body" value="/WEB-INF/views/faq/vip/vip_detail.jsp"/>                               
     </definition> 
@@ -85,9 +85,17 @@
     <definition name="email" extends="faqMain">
     	<put-attribute name="body" value="/WEB-INF/views/faq/email/email.jsp"/>                                           
     </definition>
-    <!-- 이메일 글쓰기 -->
+    <!-- 작성 -->
     <definition name="email_write" extends="faqMain">
     	<put-attribute name="body" value="/WEB-INF/views/faq/email/email_write.jsp"/>                                           
+    </definition>
+    <!-- 상세 -->
+    <definition name="email_detail" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/email/email_detail.jsp"/>                                           
+    </definition>
+    <!-- 관리자 답글 작성(수정) -->
+    <definition name="email_update" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/email/email_update.jsp"/>                                           
     </definition>
     
     
@@ -96,6 +104,10 @@
     <!-- 대관 문의 -->
     <definition name="rental" extends="faqMain">
     	<put-attribute name="body" value="/WEB-INF/views/faq/rental/rental.jsp"/>                                           
+    </definition>
+    <!-- 작성 -->
+    <definition name="rental_write" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/rental/rental_write.jsp"/>                                           
     </definition>
     
     
