@@ -38,6 +38,7 @@ public class AppConfig implements WebMvcConfigurer{
 		        .addPathPatterns("/faq/email/write")
 		        .addPathPatterns("/faq/email/update")
 		        .addPathPatterns("/faq/email/delete")
+		        .addPathPatterns("/faq/rental")
 		        .addPathPatterns("/faq/rental/write");
 	}
 	

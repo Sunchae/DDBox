@@ -32,6 +32,8 @@ public class EmailVO {
 	private String ask_content;
 	private Date ask_regdate;
 	
+	private String mem_name;
+	
 	//member_detail
 //	private String mem_name;
 //	private String mem_email;
