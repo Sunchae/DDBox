@@ -1,8 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.movie.dao.MovieMapper">
-
-
-
+	<!-- 영화 데이터 삽입 -->
+	<insert id="insertMovieData" parameterType="movieVO">
+	INSERT INTO movie_data(
+		movie_num,
+		movie_title,
+		movie_original_title,
+		movie_tagline,
+		movie_popularity,
+		movie_director,
+		movie_opendate,
+		movie_poster_path,
+		movie_gradeNm,
+		movie_img1,
+		movie_img2,
+		movie_img3,
+		movie_overview,
+		movie_runtime,
+		movie_status)
+	VALUES (
+		#{movie_num},
+		#{movie_title},
+		#{movie_original_title,jdbcType=VARCHAR},
+		#{movie_tagline,jdbcType=VARCHAR},
+		#{movie_popularity,jdbcType=VARCHAR},
+		#{movie_director,jdbcType=VARCHAR},
+		#{movie_opendate},
+		#{movie_poster_path},
+		#{movie_gradeNm,jdbcType=VARCHAR},
+		#{movie_img1,jdbcType=VARCHAR},
+		#{movie_img2,jdbcType=VARCHAR},
+		#{movie_img3,jdbcType=VARCHAR},
+		#{movie_overview,jdbcType=VARCHAR},
+		#{movie_runtime,jdbcType=VARCHAR},
+		#{movie_status,jdbcType=VARCHAR})
+		
+	</insert>
+	<update id="updateMovieData" parameterType="movieVO">
+	UPDATE movie_data
+	SET movie_tagline=#{movie_tagline},
+		movie_status=#{movie_status},
+		movie_runtime=#{movie_runtime},
+		movie_director=#{movie_director},
+		movie_img1=#{movie_img1},
+		movie_img2=#{movie_img2},
+		movie_img3=#{movie_img3},
+		movie_gradeNm=#{movie_gradeNm}
+	WHERE movie_num=#{movie_num}	
+		
+	</update>
 
 </mapper>

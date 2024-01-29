@@ -11,6 +11,16 @@ import kr.spring.movie.vo.MovieVO;
 
 @Mapper
 public interface MovieMapper {
+	//영화 데이터 삽입
+	public void insertMovieData(MovieVO movie);
+	//영화 데이터 2차 삽입(정보 업데이트)
+	public void updateMovieData(MovieVO movie);
+	
+	
+	//movie pk 겹치는지 확인
+	@Select("SELECT * FROM movie_data WHERE movie_num = #{movie_num}")
+	public MovieVO selectByMovieNum(int movie_num);
+	
 	//영화 리스트 뽑기
 	@Select("SELECT movie_title,movie_gradeNm,movie_poster FROM movie ORDER BY movie_title ASC")
 	public List<MovieVO> selectList(Map<String, Object> map);
@@ -26,8 +36,7 @@ public interface MovieMapper {
 	public void deleteFavByMovieNum(int Movie_num);
 	//====영화 상세정보====
 	//영화 상세 정보들 호출
-	
-	
+		
 	
 	
 }

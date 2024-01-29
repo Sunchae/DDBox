@@ -2,25 +2,36 @@ package kr.spring.movie.vo;
 
 import java.sql.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@Entity
+@Table(name = "movie_data")
 public class MovieVO {
+	@Id
 	private int movie_num;
+	
 	private String movie_title;
+	private String movie_original_title;
+	private String movie_tagline;
+	private String movie_overview;
 	private String movie_director;
 	private Date movie_opendate;
 	private int movie_gradeNm;
-	private String movie_poster;
+	private double movie_popularity;
+	private String movie_poster_path;
 	private String movie_img1;
 	private String movie_img2;
 	private String movie_img3;
 	
-	private String movie_plot;
 	private int movie_runtime;
-	private int movie_status;
+	private String movie_status;
 	
 }

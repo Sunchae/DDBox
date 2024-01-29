@@ -46,20 +46,24 @@ create table point(
 );
 create sequence point_seq;
 --MOVIE
-create table movie(
+create table movie_data(
 	movie_num number not null,
-	movie_title varchar2(50) not null,
-	movie_director varchar2(30) not null,
-	movie_opendate date not null,
-	movie_poster varchar2(200),
-	movie_gradeNm number not null,--일단 number로 해놨는데 varchar2로 '전체이용가' 이런식으로 넣어야할지도?
+	movie_title varchar2(200),
+	movie_original_title varchar2(200),
+	movie_tagline varchar2(200),
+	movie_popularity number,
+	
+	movie_director varchar2(30),
+	movie_opendate date,
+	movie_poster_path varchar2(200),
+	movie_gradeNm number,
 	movie_img1 varchar2(200),
 	movie_img2 varchar2(200),
 	movie_img3 varchar2(200),
-	movie_plot varchar2(200),
-	movie_runtime number(10) not null,
-	movie_status number(10) not null, --0:개봉예정,1:상영중,2:상영 종료
-	constraint movie_pk primary key (movie_num)
+	movie_overview clob,
+	movie_runtime number(10),
+	movie_status varchar2(100), 
+	constraint movie_data_pk primary key (movie_num)
 );
 
 --MOVIE_DETAIL
