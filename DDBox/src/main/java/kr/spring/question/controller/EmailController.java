@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.question.service.EmailService;
 import kr.spring.question.vo.EmailVO;
@@ -33,6 +34,8 @@ import lombok.extern.slf4j.Slf4j;
 public class EmailController {
 	@Autowired
 	private EmailService emailService;
+	@Autowired
+	private MemberService memberService;
 	
 	/*===========================
 	 * 이메일 글 목록
@@ -125,6 +128,7 @@ public class EmailController {
 		log.debug("<<이메일 글 상세 qna_num>> : " + qna_num);
 		
 		EmailVO email = emailService.selectEmail(qna_num);
+		MemberVO member = memberService.selectMember(qna_num); //여기 멤버 이름 나와야되는데 안나오는중....
 		//제목에 태그 허용 X
 		email.setQna_title(StringUtil.useNoHtml(email.getQna_title()));
 		
@@ -165,28 +169,15 @@ public class EmailController {
 	//수정 데이터 처리 (답글달기)
 	@PostMapping("/faq/email/update")
 	public String submitUpdate(@Valid EmailVO emailVO, BindingResult result,
-							   HttpServletRequest request, Model model) throws IllegalStateException, IOException {
+							   HttpServletRequest request, Model model) {
 		log.debug("<<글 수정>> : " + emailVO);
 	
 		//유효성 체크 결과 오류가 있으면 폼 재호출
-		if(result.hasErrors()) {
-			EmailVO vo = emailService.selectEmail(emailVO.getQna_num());
-			emailVO.setQuestion_file(vo.getQuestion_file());
-			
+		if(result.hasFieldErrors("ask_content")) {
 			return "email_update";
 		}
 		
-		//db 파일정보 구하기
-		EmailVO db_email = emailService.selectEmail(emailVO.getQna_num());
-		
-		//파일명 셋팅
-		emailVO.setQuestion_file(FileUtil.createFile(request, emailVO.getUpload()));
-		
 		emailService.updateEmail(emailVO);
-		
-		if(emailVO.getUpload()!=null && !emailVO.getUpload().isEmpty()) {
-			FileUtil.removeFile(request, db_email.getQuestion_file());
-		}
 		
 		model.addAttribute("message", "답변이 등록되었습니다");
 		model.addAttribute("url", request.getContextPath()+"/faq/email/detail?qna_num="+emailVO.getQna_num());

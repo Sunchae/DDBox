@@ -50,10 +50,8 @@
 			</td>
 			<td class="align-center"><a href="email/detail?qna_num=${email.qna_num}">${email.qna_title}</a></td>
 			<td class="align-center">
-			<a href="email/detail?qna_num=${email.qna_num}">
-				<c:if test="${empty email.ask_content}">답변대기</c:if>
-				<c:if test="${!empty email.ask_content}">답변완료</c:if>
-			</a>
+				<c:if test="${email.ask_content==null}">답변대기</c:if>
+				<c:if test="${email.ask_content!=null}">답변완료</c:if>
 			</td>
 		</tr>
 		</c:forEach>

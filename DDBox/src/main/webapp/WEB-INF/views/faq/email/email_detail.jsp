@@ -9,9 +9,6 @@
 	<ul class="detail-info">
 		<li>
 			작성일 : ${email.question_regdate}
-			<c:if test="${!empty email.ask_regdate}">
-			답변등록일 : ${email.ask_regdate}
-			</c:if>
 		</li>
 	</ul>
 	<hr size="1" width="100%">
@@ -31,11 +28,30 @@
 		<img src="${pageContext.request.contextPath}/upload/${email.question_file}" class="detail-img">
 	</div>
 	</c:if>
-	<!-- 글 -->
+	<!-- 질문글 -->
 	<div class="detail-content">
 		${email.question_content}
 	</div>
 	<hr size="1" width="100%">
+	
+	<!-- 답글 -->
+	<c:if test="${email.ask_content!=null}">
+	
+	<div class="page-main">
+	<h2>${member.mem_name}님, 답변 드립니다.</h2> <!-- 여기 다시 한번 확인하기 -->
+	<ul class="detail-info">
+		<li>
+			답변 등록일 : ${email.ask_regdate}
+		</li>
+	</ul>
+	<hr size="1" width="100%">
+	<div class="detail-content">
+		${email.ask_content}
+	</div>
+	</div>
+	<hr size="1" width="100%">	
+	</c:if>
+	
 	<div class="align-right">
 		<c:if test="${!empty user && user.mem_auth == 9}">
 			<input type="button" value="답글작성" onclick="location.href='update?qna_num=${email.qna_num}'">

@@ -58,8 +58,9 @@
 					  qna_num,
 					  qna_type,
 					  <![CDATA[
-					  REPLACE(REPLACE(qna_title,'<','&lt;'),'>','&gt;') qna_title
+					  REPLACE(REPLACE(qna_title,'<','&lt;'),'>','&gt;') qna_title,
 					  ]]>
+					  ask_content
 				    FROM email_faq
 				    JOIN member USING(mem_num)
 					<include refid="emailSearch"></include>
