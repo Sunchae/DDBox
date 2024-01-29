@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 내용 시작 -->
 <div id="page-main">
-	<form action="main" id="event_form" method="get">
+	<!-- <form action="main" id="event_form" method="get"> -->
 		<div class="tit-util">
 			<h3 class="tit">SPECIAL</h3>
 			<div class="more-btn">
@@ -122,6 +122,6 @@
 		</div>
 		</c:if>
 		</c:forEach>
-	</form>
+	<!-- </form> -->
 </div>
 <!-- 내용 끝 -->

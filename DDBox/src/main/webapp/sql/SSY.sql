@@ -21,6 +21,7 @@ create sequence eventlist_seq;
 --당첨자 리스트
 create table win_list(
 event_num number not null,
+point_num number not null,
 mem_num number not null,
 entry_num number not null,
 win_date date default sysdate not null,
@@ -34,11 +35,15 @@ constraint win_list_fk3 foreign key (entry_num) references entry_list(entry_num)
 --참여자 리스트
 create table entry_list(
 entry_num number not null,
-event_num number not null,
+event_num number,
 mem_num number not null,
+event_type number not null,
+event_point number,
 entry_date date default sysdate not null,
 constraint entry_list_pk primary key (entry_num),
 constraint entry_list_fk1 foreign key (mem_num) references member(mem_num),
-constraint entry_list_fk2 foreign key (event_num) references event_list(event_num)
+constraint entry_list_fk2 foreign key (event_num) references event_list(event_num),
+constraint entry_list_fk3 foreign key (event_type) references event_list(event_num),
+constraint entry_list_fk4 foreign key (event_point) references event_list(event_num)
 );
 create sequence entrylist_seq;

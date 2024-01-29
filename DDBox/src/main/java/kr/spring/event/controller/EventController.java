@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +19,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.event.service.EventService;
+import kr.spring.event.vo.Entry_listVO;
 import kr.spring.event.vo.Event_listVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.FileUtil;
@@ -285,8 +288,45 @@ public class EventController {
 	/*========================
 	 * 이벤트 roulette
 	 *========================*/
-	@RequestMapping("/event/roulette")
-	public String roulettepro() {
-		return "event_roulette";
+	//roulette 폼 호출
+	@GetMapping("/event/roulette")
+	public String rouletteform() {
+		return "event_roulette";//tiles설정명
+	}
+	@PostMapping("/event/rouletteAjax")//ajax통신따로 만들어줌
+	@ResponseBody
+	public Map<String,String> roulettepro(@Valid Entry_listVO entry_listVO,HttpSession session) {
+		Map<String,String> mapJson = new HashMap<String,String>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user == null) {
+			//로그인 안됨
+			mapJson.put("result", "logout");
+		}else {
+			mapJson.put("result", "success");
+		}
+		
+		return mapJson;
+	}
+	
+	/*========================
+	 * roulette 참여자 리스트 등록
+	 *========================*/
+	@PostMapping("/event/rouletteinsertAjax")//ajax통신따로 만들어줌
+	@ResponseBody
+	public Map<String,Object> rouletteinsert(Entry_listVO entry_listVO,HttpSession session) {
+		Map<String,Object> mapJson = new HashMap<String,Object>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user == null) {
+			//로그인이 안됨
+			mapJson.put("result", "logout");
+		}else {
+			entry_listVO.setEvent_type(0);
+			eventService.insertEntry(entry_listVO);
+			mapJson.put("result", "success");
+		}
+		
+		return mapJson;
 	}
 }

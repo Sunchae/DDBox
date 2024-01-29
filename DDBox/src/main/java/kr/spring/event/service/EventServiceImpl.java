@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.event.dao.EventMapper;
+import kr.spring.event.vo.Entry_listVO;
 import kr.spring.event.vo.Event_listVO;
 
 @Service
@@ -52,6 +53,30 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public void deleteFile(int event_num) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Entry_listVO> selectEntryList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insertEntry(Entry_listVO entry) {
+		eventMapper.insertEntry(entry);
+		
+	}
+
+	@Override
+	public Entry_listVO selectEntry(int entry_num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateEntry(Event_listVO entry) {
 		// TODO Auto-generated method stub
 		
 	}

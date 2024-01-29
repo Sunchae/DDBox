@@ -11,14 +11,14 @@
 	margin: 0;
 	display: flex; /* ul을 가로로 나열하는 flex 컨테이너로 설정 */
 	background-color: #fff;
+	justify-content: space-between; /* 자식 요소 사이의 여백을 최대화하여 부모 요소를 가로로 꽉 채움 */
+  margin-right: 0; /* 오른쪽 여백 제거 */
 }
 /*---------------------
 * 메인 폼
 *-----------------------*/
-#event_form {
-    border: none; /* border 속성을 none으로 설정하여 라인을 제거합니다. */
-    margin: 0; /* margin 속성을 0으로 설정하여 여백을 없앱니다. */
-    padding: 0; /* padding 속성을 0으로 설정하여 내부 여백을 없앱니다. */
+.more-btn {
+    text-align:right;
 }
 /*---------------------
 * 메인 타이틀
@@ -28,7 +28,7 @@
   font-weight: 400;
   display: flex; /* 부모 요소를 flex 컨테이너로 설정 */
   justify-content: space-between; /* 자식 요소 사이의 여백을 최대화하여 부모 요소를 가로로 꽉 채움 */
-  margin-right: 0; /* 오른쪽 여백 제거 */
+  margin-right: 0; /* 오른쪽 여백 제거 */   
 }
 h3.tit {
   margin: 0;
@@ -95,114 +95,9 @@ h3.tit {
 /*---------------------
 * 이벤트 룰렛
 *-----------------------*/
-/* #app{
-	text-align: center;
-}
-.roullette-outer{
-	position: relative;
-	overflow: hidden;
-	width: 500px;
-	height: 500px;
-	font-size: 30px;
-	margin-left: auto;
-	margin-right: auto;
-	border-radius: 50%;
-	background: #ffeaa7;
-}
-.roullette-outer > .roullette{
-	position: absolute;
-	top: 5%;
-	left: 5%;
-	right: 5%;
-	bottom: 5%;
-	border-radius: 50%;
-	border: 2px solid black;
-}
-.roullette-outer > .roullette-pin{
-	position: absolute;
-	top: 3%;
-	left: 50%;
-	width: 0;
-	height: 0;
-	border-style: solid;
-	border-width: 30px 5px 0 5px;
-	border-color: #ff0000 transparent transparent transparent;
-	margin-left: -5px;
-}
-.roullette-outer > .roullette > .item-wrapper > .item{
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	padding-top: 10%;
-	text-align: center;
-	display: flex;
-	justify-content: center;
-}
-.roullette-outer > .roullette > .item-wrapper > .item:nth-child(1){
-	transform: rotate(0deg);
-}
-.roullette-outer > .roullette > .item-wrapper > .item:nth-child(2){
-	transform: rotate(60deg);
-}
-.roullette-outer > .roullette > .item-wrapper > .item:nth-child(3){
-	transform: rotate(120deg);
-}
-.roullette-outer > .roullette > .item-wrapper > .item:nth-child(4){
-	transform: rotate(180deg);
-}
-.roullette-outer > .roullette > .item-wrapper > .item:nth-child(5){
-	transform: rotate(240deg);
-}
-.roullette-outer > .roullette > .item-wrapper > .item:nth-child(6){
-	transform: rotate(300deg);
-}
-.roullette-outer > .roullette > .line-wrapper > .line{
-	position: absolute;
-	top: 0;
-	bottom: 50%;
-	left: 50%;
-	width: 2px;
-	margin-left: -1px;
-	background: black;
-	transform-origin: bottom;
-}
-.roullette-outer > .roullette > .line-wrapper > .line:nth-child(1){
-	transform: rotate(30deg);
-}
-.roullette-outer > .roullette > .line-wrapper > .line:nth-child(2){
-	transform: rotate(90deg);
-}
-.roullette-outer > .roullette > .line-wrapper > .line:nth-child(3){
-	transform: rotate(150deg);
-}
-.roullette-outer > .roullette > .line-wrapper > .line:nth-child(4){
-	transform: rotate(210deg);
-}
-.roullette-outer > .roullette > .line-wrapper > .line:nth-child(5){
-	transform: rotate(270deg);
-}
-.roullette-outer > .roullette > .line-wrapper > .line:nth-child(6){
-	transform: rotate(330deg);
-}
-
-
-.spin {
-    transform: rotate(720deg); 회전 각도 설정
-}
-.roulette {
-	width: 200px;
-	height: 200px;
-	background-color: lightgray;
-	border-radius: 50%;
-	position: relative;
-	transition: transform 3s ease-out; 회전에 대한 트랜지션 설정
-} */
-
 #app {
       text-align: center;
-    }
+}
 
 .roullette-outer {
     position: relative;

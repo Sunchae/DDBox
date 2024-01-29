@@ -66,6 +66,20 @@
 		JOIN member USING(mem_num)
 		WHERE event_num=#{event_num}
 	</select>
+	<insert id="insertEntry" parameterType="Entry_listVO">
+		INSERT INTO entry_list(
+			entry_num,
+			event_num,
+			event_type,
+			mem_num,
+			entry_date)
+		VALUES (
+			entrylist_seq.nextval,
+			#{event_num},
+			#{event_type},
+			#{mem_num},
+			SYSDATE)
+	</insert>
 </mapper>
  
 
