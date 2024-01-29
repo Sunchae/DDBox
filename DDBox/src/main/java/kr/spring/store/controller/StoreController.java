@@ -25,6 +25,7 @@ import kr.spring.member.vo.MemberVO;
 import kr.spring.store.service.StoreService;
 import kr.spring.store.vo.StoreVO;
 import kr.spring.util.FileUtil;
+import kr.spring.util.PageUtil;
 import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,12 +34,6 @@ import lombok.extern.slf4j.Slf4j;
 public class StoreController {
 	@Autowired
 	private StoreService storeService;
-
-	@RequestMapping("/store/main")
-	public String process() {
-
-		return "storeMain";
-	}
 
 
 	/*=================================
@@ -76,7 +71,7 @@ public class StoreController {
 
 		//뷰에 표시할 메세지
 		model.addAttribute("message", "상품등록이 완료되었습니다.");
-		model.addAttribute("url", request.getContextPath()+"/store/main");
+		model.addAttribute("url", request.getContextPath()+"/store/storeMain");
 
 		return "common/resultAlert";
 	}
@@ -87,33 +82,32 @@ public class StoreController {
 	 *	스토어 메인 글 목록 
 	 *=================================*/
 	@RequestMapping("/store/storeMain")
-	public String submit(HttpSession session, Model model) {
+	public String mainList(HttpSession session, Model model) {
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("mem_num", user.getMem_num());
+		
+		int count = storeService.selectRowCount(map);
+		
 		
 		List<StoreVO> list = null;
-		list = storeService.selectList(map);
-		log.debug("<<스토어 메인 글 목록 storeMainList>> : " + list);
-		
+		if(count>0) {
+			list = storeService.selectList(map);
+		}
+		model.addAttribute("count", count);
 		model.addAttribute("list", list);
 		
 		return "storeMain";
 	}
 	
-	/*=================================
-	 *	스토어 티켓 글 목록 
-	 *=================================*/
-	@RequestMapping("/store/storeTicketList")
-	public String submit(@RequestParam(value="pagenum",defaultValue="1") int currentPage, HttpSession session, Model model) {
-
-		return "storeTicketList";
-	}
 	
 	
 	/*=================================
 	 *	스토어 글 상세
 	 *=================================*/
 	@RequestMapping("/store/detail")
-	public ModelAndView process(@RequestParam int store_num) {
+	public ModelAndView process1(@RequestParam int store_num) {
 		log.debug("<<스토어 게시글 상세 store_num>> : " + store_num);
 		
 		StoreVO store = storeService.selectStore(store_num);
@@ -125,4 +119,13 @@ public class StoreController {
 		return new ModelAndView("storeDetail","store",store);
 	}
 
+	
+	/*=================================
+	 *	스토어 티켓 글 목록 
+	 *=================================*/
+	@RequestMapping("/store/storeTicketList")
+	public String submit(@RequestParam(value="pagenum",defaultValue="1") int currentPage, HttpSession session, Model model) {
+		
+		return "storeTicketList";
+	}
 }

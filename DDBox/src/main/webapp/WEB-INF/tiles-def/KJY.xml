@@ -6,7 +6,7 @@
 
 <tiles-definitions>
     
-    <definition name="storeMain" template="/WEB-INF/views/template/layout_basic.jsp">
+    <definition name="storeMain" template="/WEB-INF/views/template/store_layout.jsp">
     	<put-attribute name="title" value="스토어 메인"/>
     	<put-attribute name="header" value="/WEB-INF/views/template/DDBox_navbar.jsp"/> 
     	<put-attribute name="body" value="/WEB-INF/views/store/storeMain.jsp"/>

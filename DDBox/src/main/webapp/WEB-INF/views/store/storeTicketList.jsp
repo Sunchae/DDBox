@@ -9,12 +9,20 @@
 			<input type="button" value="글쓰기" onclick="location.href='write'">
 			</c:if>
 		</div>
-	<table>
-		<tr>
-			<th>번호</th>
-			<th width="400">제목</th>
-			<th>작성일</th>
-		</tr>
-	</table>
+	<c:forEach var="store" items="${list}">
+	<c:if test="${store.store_type == 0}">
+	<div class="store-main-list">
+		<ul>
+			<li class="store-ticket">
+				<a href="detail?store_num=${store.store_num}">
+				<img src="${pageContext.request.contextPath}/upload/${store.store_photo}">
+				<p>${store.store_title}</p>
+				<p>${store.store_name}</p>
+				</a>
+			</li>
+		</ul>
+	</div>
+	</c:if>
+	</c:forEach>
 </div>
 <!-- 내용 끝 -->
