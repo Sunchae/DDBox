@@ -32,6 +32,10 @@
     	<put-attribute name="title" value="디디티켓"/>
     	<put-attribute name="body" value="/WEB-INF/views/store/storeTicketList.jsp"/>                                           
     </definition>
+    <definition name="storePopcorn" extends="storeMain">
+    	<put-attribute name="title" value="팝콘/음료/굿즈"/>
+    	<put-attribute name="body" value="/WEB-	INF/views/store/storePopcorn.jsp"/>                                           
+    </definition>
     
     
 </tiles-definitions>

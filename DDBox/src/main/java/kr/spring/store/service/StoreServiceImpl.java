@@ -27,8 +27,8 @@ public class StoreServiceImpl implements StoreService{
 	}
 
 	@Override
-	public StoreVO selectStore(int Store_num) {
-		return storeMapper.selectStore(Store_num);
+	public StoreVO selectStore(int store_num) {
+		return storeMapper.selectStore(store_num);
 	}
 
 	@Override

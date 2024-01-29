@@ -12,7 +12,7 @@ public interface StoreMapper {
 	public List<StoreVO> selectList(Map<String, Object> map);		//xml
 	public int selectRowCount(Map<String, Object> map);				//xml
 	public void insertStore(StoreVO store);							//xml
-	public StoreVO selectStore(int Store_num);						//xml
+	public StoreVO selectStore(int store_num);						//xml
 	public void updateStore(StoreVO store);
 	public void deleteStore(int store_num);
 	public void deleteFile(int store_num);

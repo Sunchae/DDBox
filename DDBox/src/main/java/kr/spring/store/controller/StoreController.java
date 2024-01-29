@@ -25,7 +25,6 @@ import kr.spring.member.vo.MemberVO;
 import kr.spring.store.service.StoreService;
 import kr.spring.store.vo.StoreVO;
 import kr.spring.util.FileUtil;
-import kr.spring.util.PageUtil;
 import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,13 +35,32 @@ public class StoreController {
 	private StoreService storeService;
 
 	/*=================================
-	 *	스토어 글 등록
+	 *	스토어 메인 글 목록 
 	 *=================================*/
 	//자바빈(VO) 초기화
 	@ModelAttribute
 	public StoreVO initCommand() {
 		return new StoreVO();
 	}
+	
+	@RequestMapping("/store/main")
+	public String mainList(HttpSession session, Model model) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<StoreVO> list = null;
+		list = storeService.selectList(map);
+		log.debug("<<글 목록 list>> : " + list);
+		
+		
+		model.addAttribute("list", list);
+		
+		return "storeMain";
+	}
+	
+	/*=================================
+	 *	스토어 글 등록
+	 *=================================*/
 	//등록 폼 호출
 	@GetMapping("/store/write")
 	public String form() {
@@ -75,37 +93,11 @@ public class StoreController {
 		return "common/resultAlert";
 	}
 
-
-
-	/*=================================
-	 *	스토어 메인 글 목록 
-	 *=================================*/
-	@RequestMapping("/store/storeMain")
-	public String mainList(HttpSession session, Model model) {
-		
-		MemberVO user = (MemberVO)session.getAttribute("user");
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("mem_num", user.getMem_num());
-		
-		int count = storeService.selectRowCount(map);
-		
-		
-		List<StoreVO> list = null;
-		if(count>0) {
-			list = storeService.selectList(map);
-		}
-		model.addAttribute("count", count);
-		model.addAttribute("list", list);
-		
-		return "storeMain";
-	}
-	
-	
 	
 	/*=================================
 	 *	스토어 글 상세
 	 *=================================*/
-	@RequestMapping("/store/detail")
+	@RequestMapping("/store/storeDetail")
 	public ModelAndView process1(@RequestParam int store_num) {
 		log.debug("<<스토어 게시글 상세 store_num>> : " + store_num);
 		
@@ -123,8 +115,31 @@ public class StoreController {
 	 *	스토어 티켓 글 목록 
 	 *=================================*/
 	@RequestMapping("/store/storeTicketList")
-	public String submit(@RequestParam(value="pagenum",defaultValue="1") int currentPage, HttpSession session, Model model) {
+	public String ticket(@RequestParam(value="pagenum",defaultValue="1") int currentPage, HttpSession session, Model model) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<StoreVO> list = null;
+		list = storeService.selectList(map);
+		log.debug("<<스토어 티켓 글 목록 list>> : " + list);
+		
+		model.addAttribute("list", list);
 		
 		return "storeTicketList";
+	}
+	
+	/*=================================
+	 *	스토어 메뉴 목록
+	 *=================================*/
+	@RequestMapping("/store/storePopcorn")
+	public String popcorn(@RequestParam(value="pagenum",defaultValue="1") int currentPage, HttpSession session, Model model) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<StoreVO> list = null;
+		list = storeService.selectList(map);
+		log.debug("<<스토어 티켓 글 목록 list>> : " + list);
+		
+		model.addAttribute("list", list);
+		
+		return "storePopcorn";
 	}
 }
