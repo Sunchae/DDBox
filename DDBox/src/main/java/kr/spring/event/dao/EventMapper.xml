@@ -70,12 +70,14 @@
 		INSERT INTO entry_list(
 			entry_num,
 			event_num,
+			event_point,
 			event_type,
 			mem_num,
 			entry_date)
 		VALUES (
 			entrylist_seq.nextval,
 			#{event_num},
+			#{event_point},
 			#{event_type},
 			#{mem_num},
 			SYSDATE)

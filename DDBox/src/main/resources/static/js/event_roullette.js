@@ -89,7 +89,7 @@ $(function(){//로그인 확인...
 		  if (point[ran] == "0point") {
 		    alert('아쉽지만 다음 기회에^^');
 		  } else {
-			$.ajax({
+			$.ajax({//이부분 수정
 				url:'rouletteinsertAjax',
 				type:'post',
 				data:{

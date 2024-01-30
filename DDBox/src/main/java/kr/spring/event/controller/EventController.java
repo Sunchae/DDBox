@@ -312,6 +312,7 @@ public class EventController {
 	/*========================
 	 * roulette 참여자 리스트 등록
 	 *========================*/
+	//insert부분 수정
 	@PostMapping("/event/rouletteinsertAjax")//ajax통신따로 만들어줌
 	@ResponseBody
 	public Map<String,Object> rouletteinsert(Entry_listVO entry_listVO,HttpSession session) {
