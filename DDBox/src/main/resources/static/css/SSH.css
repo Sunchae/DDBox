@@ -1,22 +1,7 @@
 @charset "UTF-8";
-
-/*----------------------
-faq 메인 좌측 메뉴 레이아웃
-------------------------*/
-#faq_nav{
-	float:left;
-	width:25%;
-	min-height:530px;
-}
-#page_body{
-	width:75%;
-	float:left;
-}
-.page_clear{
-	clear:both;
-}
-
-
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 
 
 /*======================
@@ -89,4 +74,12 @@ faq 메인 좌측 메뉴 레이아웃
  .search_area ul li{
  	float:left;
  }
+ 
+ 
+ 
+ #faq_nav{
+	float:left;
+	width:25%;
+	min-height:530px;	
+}
  

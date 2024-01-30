@@ -25,6 +25,7 @@ import kr.spring.member.vo.MemberVO;
 import kr.spring.question.service.EmailService;
 import kr.spring.question.vo.EmailVO;
 import kr.spring.util.FileUtil;
+import kr.spring.util.MailUtil;
 import kr.spring.util.PageUtil;
 import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -129,8 +130,9 @@ public class EmailController {
 		
 		EmailVO email = emailService.selectEmail(qna_num);
 		MemberVO member = memberService.selectMember(qna_num); //여기 멤버 이름 나와야되는데 안나오는중....
+		
 		//제목에 태그 허용 X
-		email.setQna_title(StringUtil.useNoHtml(email.getQna_title()));
+		//email.setQna_title(StringUtil.useNoHtml(email.getQna_title()));
 		
 		return new ModelAndView("email_detail", "email", email);
 	}
@@ -182,7 +184,7 @@ public class EmailController {
 		model.addAttribute("message", "답변이 등록되었습니다");
 		model.addAttribute("url", request.getContextPath()+"/faq/email/detail?qna_num="+emailVO.getQna_num());
 		
-		return "common/resultAlert";
+		return "redirect:/send";
 	}
 	
 	

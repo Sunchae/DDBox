@@ -12,9 +12,7 @@
 		</li>
 	</ul>
 	<hr size="1" width="100%">
-	<ul> <!-- 파일 다운로드 -->
-		<li>첨부파일 : <a href="file?qna_num=${email.qna_num}">${email.question_file}</a></li>
-	</ul>
+	
 	<!-- 사진 -->
 	<c:if test="${fn:endsWith(email.question_file, '.jpg') ||
 				  fn:endsWith(email.question_file, '.JPG') ||
@@ -24,6 +22,9 @@
 				  fn:endsWith(email.question_file, '.GIF') ||
 				  fn:endsWith(email.question_file, '.png') ||
 				  fn:endsWith(email.question_file, '.PNG')}">
+	<ul> <!-- 파일 다운로드 -->
+		<li>첨부파일 : <a href="file?qna_num=${email.qna_num}">${email.question_file}</a></li>
+	</ul>
 	<div class="align-center">
 		<img src="${pageContext.request.contextPath}/upload/${email.question_file}" class="detail-img">
 	</div>
@@ -38,7 +39,7 @@
 	<c:if test="${email.ask_content!=null}">
 	
 	<div class="page-main">
-	<h2>${member.mem_name}님, 답변 드립니다.</h2> <!-- 여기 다시 한번 확인하기 -->
+	<h2>${member.mem_num}님, 답변 드립니다.</h2> <!-- 여기 다시 한번 확인하기 -->
 	<ul class="detail-info">
 		<li>
 			답변 등록일 : ${email.ask_regdate}
