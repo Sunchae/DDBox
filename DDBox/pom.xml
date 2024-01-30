@@ -118,6 +118,12 @@
             <artifactId>hibernate-jpa-2.1-api</artifactId>
             <version>1.0.0.Final</version>
         </dependency>
+		<!-- === 이메일 발송 === -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		<!-- === 이메일 발송 === -->
 		<!--라이브러리 추가 끝-->
 	</dependencies>
 
