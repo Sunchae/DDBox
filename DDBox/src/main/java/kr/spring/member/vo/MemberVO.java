@@ -26,7 +26,7 @@ public class MemberVO {
 	private int mem_auth;
 	@NotBlank
 	private String mem_name;
-	
+	@NotBlank(message = "생년월일을 입력해주세요.")
 	private String mem_birth;
 	private String mem_nickname;
 	private String mem_autoid;	//아이디 저장 기능 

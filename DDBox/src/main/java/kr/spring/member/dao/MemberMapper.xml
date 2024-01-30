@@ -56,6 +56,13 @@
 		USING(mem_num)
 		WHERE mem_id=#{mem_id}	
 	</select>
+	
+	<select id="selectCheckMemberRegistered" parameterType="string">
+		SELECT
+			COUNT(*)
+		FROM member_detail
+		WHERE mem_name=#{mem_name} AND mem_birth=#{mem_birth} AND mem_phone=#{mem_phone}
+	</select>
 </mapper>
 
 

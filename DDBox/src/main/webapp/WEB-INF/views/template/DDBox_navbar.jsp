@@ -21,7 +21,7 @@
 				<ul class="navbar-nav">
 					<c:if test="${empty user }">
 						<li class="nav-item"><a href="${pageContext.request.contextPath}/member/login" class="nav-link">로그인</a></li>
-						<li class="nav-item"><a href="${pageContext.request.contextPath}/member/registerUser" class="nav-link">회원가입</a></li>
+						<li class="nav-item"><a href="${pageContext.request.contextPath}/member/registerUserCheck" class="nav-link">회원가입</a></li>
 					</c:if>
 					<c:if test="${!empty user }">
 						<li class="nav-item"><a href="${pageContext.request.contextPath}/member/logout" class="nav-link">로그아웃</a></li>

@@ -1,5 +1,7 @@
 package kr.spring.member.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,6 +38,36 @@ public class MemberController {
 	/*==============================
 	 * 회원가입
 	 *==============================*/
+	//회원가입여부 체크
+	@GetMapping("/member/registerUserCheck")
+	public String formCheck() {
+		return "memberRegisterCheck";
+	}
+	//전송된 회원 데이터 처리
+	@PostMapping("/member/registerUserCheck")
+	public String submitCheck(@Valid MemberVO memberVO,
+			BindingResult result,
+			HttpServletRequest request) {
+		log.debug("<<회원가입 여부>> : " + memberVO);
+		
+		// 유효성 체크 결과 오류 있으면 폼 호출
+	    if(result.hasFieldErrors("mem_name") || result.hasFieldErrors("mem_birth") || result.hasFieldErrors("mem_phone")) {
+	    	List<FieldError> list =  result.getFieldErrors();
+	    	for(FieldError error : list) {
+	    		log.debug("<<에러 필드>> : " + error.getField());
+	    	}
+	        return formCheck();
+	    }
+		// 회원가입 여부
+		if (memberService.selectCheckMemberRegistered(memberVO) >= 1) {
+			// 회원 DB에 이미 가입한 전적이 있는 회원(신규가입 불가한 회원)
+			return "main";
+		}
+	    // 타일스 설정명
+	    return "memberRegister";
+	}
+	
+	
 	//회원가입 폼 호출
 	@GetMapping("/member/registerUser")
 	public String form() {

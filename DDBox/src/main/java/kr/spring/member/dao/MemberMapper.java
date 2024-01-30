@@ -15,6 +15,9 @@ public interface MemberMapper {
 	@Insert("INSERT INTO member (mem_num,mem_id) VALUES (#{mem_num},#{mem_id})")
 	public void insertMember(MemberVO member);
 	public void insertMember_detail(MemberVO member);
+	
+	public int selectCheckMemberRegistered(MemberVO member);
+	
 	public MemberVO selectCheckMember(String id);
 	@Select("SELECT * FROM member JOIN member_detail USING (mem_num) WHERE mem_num=#{mem_num}")
 	public MemberVO selectMember(int mem_num);

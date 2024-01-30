@@ -5,6 +5,12 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
+    <definition name="memberRegisterCheck"  extends="main">
+    	<put-attribute name="title" value="회원가입여부 확인"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/memberRegisterCheck.jsp"/>                                           
+    </definition>
+    
     <definition name="memberRegister"  extends="main">
     	<put-attribute name="title" value="회원가입"/>
     	<put-attribute name="body"
@@ -34,6 +40,11 @@
     	<put-attribute name="title" value="영화 메인"/>
     	<put-attribute name="body"
     	               value="/WEB-INF/views/movie/movieMain.jsp"/>                                           
+    </definition>
+  	 <definition name="movieDetail"  extends="main">
+    	<put-attribute name="title" value="영화 상세페이지"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/movie/movieDetail.jsp"/>                                           
     </definition>
     
 </tiles-definitions>

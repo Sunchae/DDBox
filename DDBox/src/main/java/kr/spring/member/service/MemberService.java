@@ -12,6 +12,8 @@ public interface MemberService {
 	public void updateMember_detail(MemberVO member);
 	public void updatePassword(MemberVO member);
 	
+	public int selectCheckMemberRegistered(MemberVO member);
+	
 	//public void deleteMember(int mem_num); 디테일만 지우고 member 테이블은 지우지말자 일단
 	public void deleteMember_detail(int mem_num);
 

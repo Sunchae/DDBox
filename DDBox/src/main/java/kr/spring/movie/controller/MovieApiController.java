@@ -36,7 +36,7 @@ public class MovieApiController {
 
 		//영화 now-playing 리스트 호출 api
 		HttpRequest request = HttpRequest.newBuilder()
-				.uri(URI.create("https://api.themoviedb.org/3/movie/now_playing?language=ko-KR&page=3&region=KR"))
+				.uri(URI.create("https://api.themoviedb.org/3/movie/now_playing?language=ko-KR&page=1&region=KR"))
 				.header("accept", "application/json")
 				.header("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmYTQ0ZjdiYTIyZTdiN2E1YTdkNDFkNmZlYWYzOWNlYSIsInN1YiI6IjY1YWVhODc1YWFkOWMyMDBjYTVhMGY5YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QSYL0JwzjYqHZIIl_kZIu9S6ZTo5EAJUyc2FrTSsNMk")
 				.method("GET", HttpRequest.BodyPublishers.noBody())

@@ -60,4 +60,11 @@ public class MemberServiceImpl implements MemberService{
 		
 	}
 
+	@Override
+	public int selectCheckMemberRegistered(MemberVO member) {
+		return memberMapper.selectCheckMemberRegistered(member);
+	}
+
+	
+
 }
