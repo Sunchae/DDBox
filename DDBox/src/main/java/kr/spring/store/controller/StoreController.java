@@ -113,7 +113,7 @@ public class StoreController {
 	/*=================================
 	 *	스토어 티켓 글 목록 
 	 *=================================*/
-	@RequestMapping("/store/ticketlist")
+	@RequestMapping("/store/ticketList")
 	public String ticket(@RequestParam(value="pagenum",defaultValue="1") int currentPage, HttpSession session, Model model) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -140,5 +140,72 @@ public class StoreController {
 		model.addAttribute("list", list);
 		
 		return "storePopcorn";
+	}
+	
+	/*=================================
+	 *	스토어 글 수정
+	 *=================================*/
+	//수정 폼 호출
+	@GetMapping("/store/update")
+	public String formUpdate(@RequestParam int store_num, Model model) {
+		StoreVO storeVO = storeService.selectStore(store_num);
+		
+		model.addAttribute("storeVO", storeVO);
+		
+		return "storeModify";
+	}
+	
+	//수정 폼에서 전송된 데이터 처리
+	@PostMapping("/store/update")
+	public String submitUpadte(@Valid StoreVO storeVO, BindingResult result, HttpServletRequest request, Model model) throws IllegalStateException, IOException {
+		log.debug("<<스토어 글 수정>> : " + storeVO);
+		
+		//유효성 체크 결과 오류가 있으면 폼 호출
+		if(result.hasErrors()) {
+			StoreVO vo = storeService.selectStore(storeVO.getStore_num());
+			storeVO.setStore_photo(vo.getStore_photo());
+			
+			return "storeModify";
+		}
+		//DB에 저장된 파일 정보 구하기						이전 글을 가져오기위함
+		StoreVO db_store = storeService.selectStore(storeVO.getStore_num());
+		
+		//파일명 세팅
+		storeVO.setStore_photo(FileUtil.createFile(request, storeVO.getUpload()));
+		//ip 세팅
+		storeVO.setStore_ip(request.getRemoteAddr());
+		
+		//글 수정
+		storeService.updateStore(storeVO);
+		
+		//전송된 파일이 있을 경우 이전 파일 삭제
+		if(storeVO.getUpload() != null && !storeVO.getUpload().isEmpty()) {
+			//수정된 파일 삭제 처리
+			FileUtil.removeFile(request, db_store.getStore_photo());
+		}
+		//View에 표시할 메시지
+		model.addAttribute("message", "글 수정 완료!!");
+		model.addAttribute("url", request.getContextPath() + "/store/detail?store_num=" + storeVO.getStore_num());
+		return "common/resultAlert";
+	}
+	
+	/*=================================
+	 *	게시판 글 삭제 
+	 *=================================*/
+	@RequestMapping("/store/delete")
+	public String submitDelete(@RequestParam int store_num, HttpServletRequest request) {
+		log.debug("<<스토어 글 삭제 store_num>> : " + store_num);
+		
+		//DB에 저장된 파일 정보 구하기 -> 안해도 되지만 쓰레기가 쌓이기 때문에 하는게 좋다
+		StoreVO db_store = storeService.selectStore(store_num);
+		
+		//글 삭제
+		storeService.deleteStore(store_num);
+		
+		if(db_store.getStore_photo() != null) {
+			//파일 삭제
+			FileUtil.removeFile(request, db_store.getStore_photo());
+		}
+		return "redirect:/store/storeMain";
 	}
 }
