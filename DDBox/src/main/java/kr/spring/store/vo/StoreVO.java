@@ -22,7 +22,6 @@ public class StoreVO {
 	private int store_price;
 	private MultipartFile upload;
 	private String store_photo;
-	@NotBlank
 	private String store_name;
 	private int store_type;
 	private Date store_reg_date;

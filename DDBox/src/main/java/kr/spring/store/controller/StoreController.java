@@ -43,14 +43,13 @@ public class StoreController {
 		return new StoreVO();
 	}
 	
-	@RequestMapping("/store/main")
-	public String mainList(HttpSession session, Model model) {
+	@RequestMapping("/store/storeMain")
+	public String storeMain(HttpSession session, Model model) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		List<StoreVO> list = null;
 		list = storeService.selectList(map);
-		log.debug("<<글 목록 list>> : " + list);
 		
 		
 		model.addAttribute("list", list);
@@ -97,8 +96,8 @@ public class StoreController {
 	/*=================================
 	 *	스토어 글 상세
 	 *=================================*/
-	@RequestMapping("/store/storeDetail")
-	public ModelAndView process1(@RequestParam int store_num) {
+	@RequestMapping("/store/detail")
+	public ModelAndView detail(@RequestParam int store_num) {
 		log.debug("<<스토어 게시글 상세 store_num>> : " + store_num);
 		
 		StoreVO store = storeService.selectStore(store_num);
@@ -114,7 +113,7 @@ public class StoreController {
 	/*=================================
 	 *	스토어 티켓 글 목록 
 	 *=================================*/
-	@RequestMapping("/store/storeTicketList")
+	@RequestMapping("/store/ticketlist")
 	public String ticket(@RequestParam(value="pagenum",defaultValue="1") int currentPage, HttpSession session, Model model) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -130,7 +129,7 @@ public class StoreController {
 	/*=================================
 	 *	스토어 메뉴 목록
 	 *=================================*/
-	@RequestMapping("/store/storePopcorn")
+	@RequestMapping("/store/popcorn")
 	public String popcorn(@RequestParam(value="pagenum",defaultValue="1") int currentPage, HttpSession session, Model model) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		

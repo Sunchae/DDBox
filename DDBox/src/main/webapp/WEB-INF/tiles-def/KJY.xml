@@ -22,6 +22,7 @@
 -->
     <definition name="storeWrite" extends="storeMain">
     	<put-attribute name="title" value="글쓰기"/>
+    	<put-attribute name="css" value="/WEB-INF/views/store/storeCSS.jsp" />
     	<put-attribute name="body" value="/WEB-INF/views/store/storeWrite.jsp"/>
     </definition>
     <definition name="storeDetail" extends="storeMain">
@@ -34,7 +35,7 @@
     </definition>
     <definition name="storePopcorn" extends="storeMain">
     	<put-attribute name="title" value="팝콘/음료/굿즈"/>
-    	<put-attribute name="body" value="/WEB-	INF/views/store/storePopcorn.jsp"/>                                           
+    	<put-attribute name="body" value="/WEB-INF/views/store/storePopcorn.jsp"/>                                           
     </definition>
     
     
