@@ -197,11 +197,56 @@ public class MemberController {
 		
 		return "myPage";
 	}
+	@RequestMapping("/member/myPageTicket")
+	public String process1() {
+		
+		
+		return "myPageTicket";
+	}
+	@RequestMapping("/member/myPageCoupon")
+	public String process2() {
+		
+		
+		return "myPageCoupon";
+	}
+	@RequestMapping("/member/myPagePoint")
+	public String process3() {
+		
+		
+		return "myPagePoint";
+	}
+	@RequestMapping("/member/myPageEvent")
+	public String process4() {
+		
+		
+		return "myPageEvent";
+	}
 	
+	@RequestMapping("/member/myPageGiftshop")
+	public String process5() {
+		
+		
+		return "myPageGiftshop";
+	}
+	@RequestMapping("/member/myPageInfo")
+	public String process6() {
+		
+		
+		return "myPageInfo";
+	}
+	@RequestMapping("/member/myPageProfile")
+	public String process7() {
+		
+		
+		return "myPageProfile";
+	}
 	
-	
-	
-	
+	@RequestMapping("/member/myPageFAQ")
+	public String process8() {
+		
+		
+		return "myPageFAQ";
+	}
 }
 
 

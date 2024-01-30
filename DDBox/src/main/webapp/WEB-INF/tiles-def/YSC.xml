@@ -29,12 +29,57 @@
     	<put-attribute name="header"
     	               value="/WEB-INF/views/template/DDBox_navbar.jsp"/>
     	<put-attribute name="nav"
-    	               value="/WEB-INF/views/template/nav_mypage.jsp"/>               
+    	               value="/WEB-INF/views/template/DDBox_sidebar.jsp"/>               
     	<put-attribute name="body"
     	               value="/WEB-INF/views/member/MypageMain.jsp"/>
     	<put-attribute name="footer"
     	               value="/WEB-INF/views/template/footer.jsp"/>                                             
     </definition>
+    
+    <definition name="myPageTicket" extends="myPage">
+    	<put-attribute name="title" value="MyPageTicket"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/MypageTicket.jsp"/>
+    </definition>
+    <definition name="myPageCoupon" extends="myPage">
+    	<put-attribute name="title" value="MyPageCoupon"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/MypageCoupon.jsp"/>
+    </definition>
+    <definition name="myPagePoint" extends="myPage">
+    	<put-attribute name="title" value="MyPagePoint"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/MypagePoint.jsp"/>
+    </definition>
+    <definition name="myPageEvent" extends="myPage">
+    	<put-attribute name="title" value="MyPageEvent"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/MypageEvent.jsp"/>
+    </definition>
+    <definition name="myPageGiftshop" extends="myPage">
+    	<put-attribute name="title" value="MyPageGiftshop"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/MypageGiftshop.jsp"/>
+    </definition>
+    <definition name="myPageInfo" extends="myPage">
+    	<put-attribute name="title" value="MyPageInfo"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/MypageInfo.jsp"/>
+    </definition>
+    <definition name="myPageProfile" extends="myPage">
+    	<put-attribute name="title" value="MyPageProfile"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/MypageProfile.jsp"/>
+    </definition>
+    
+    <definition name="myPageFAQ" extends="myPage">
+    	<put-attribute name="title" value="MyPageFAQ"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/MypageFAQ.jsp"/>
+    </definition>
+    
+    
+    
     
   	 <definition name="movieMain"  extends="main">
     	<put-attribute name="title" value="영화 메인"/>

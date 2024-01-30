@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 내용 시작 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/YSC.css">
 <div class="page-main">
 	<h2>회원가입</h2>
 	<form:form action="registerUser" id="member_register" modelAttribute="memberVO">
@@ -27,18 +28,26 @@
 			</li>
 
 			<li>
-				성별 : 
-				<form:radiobutton path="mem_gender" value="Male" label="Male" />&nbsp; 
-				<form:radiobutton path="mem_gender"	value="Female" label="Female" />&nbsp;
-
+				<form:label path="mem_gender">성별</form:label> 
+				<div class="radio-group">
+				<form:radiobutton path="mem_gender" value="Male" label="Male" /> 
+				<form:radiobutton path="mem_gender"	value="Female" label="Female" />
+				</div>
+				<div class="divider"></div>
 			</li>
+			
 			<li>
-				연령대 : 
-				<form:radiobutton path="mem_age" value="10대" label="10대" />&nbsp; 
-				<form:radiobutton path="mem_age" value="20대" label="20대" />&nbsp; 
-				<form:radiobutton path="mem_age" value="30대" label="30대" />&nbsp; 
-				<form:radiobutton path="mem_age" value="40대" label="40대" />&nbsp; 
+				<form:label path="mem_age">연령대</form:label> 
+				<div class="radio-group">
+				<form:radiobutton path="mem_age" value="10대" label="10대" />
+				<form:radiobutton path="mem_age" value="20대" label="20대" /> 
+				<form:radiobutton path="mem_age" value="30대" label="30대" />
+				</div>
+				<form:label path="mem_age"></form:label> 
+				<div class="radio-group">
+				<form:radiobutton path="mem_age" value="40대" label="40대" />
 				<form:radiobutton path="mem_age" value="50대 이상" label="50대 이상" />
+				</div>
 			</li>
 			<li>
 				<form:label path="mem_pw">비밀번호</form:label>
