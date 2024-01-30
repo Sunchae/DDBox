@@ -247,6 +247,18 @@ public class MemberController {
 		
 		return "myPageFAQ";
 	}
+	@RequestMapping("/member/myPageEmail")
+	public String process9() {
+		
+		
+		return "myPageEmail";
+	}
+	@RequestMapping("/member/myPageRental")
+	public String process10() {
+		
+		
+		return "myPageRental";
+	}
 }
 
 

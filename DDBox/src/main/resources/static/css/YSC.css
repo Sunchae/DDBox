@@ -405,7 +405,7 @@ input[type="checkbox"]{
 /* 마우스를 올렸을 때의 스타일 */
 .nav-pills .nav-link:hover {
   color: #fff; /* 원하는 hover 시 색상으로 설정 */
-  background-color: #007bff; /* 원하는 hover 시 배경색으로 설정 */
+  background-color: #4b3891; /* 원하는 hover 시 배경색으로 설정 */
 }
 
 
