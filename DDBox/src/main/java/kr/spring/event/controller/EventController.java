@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.event.service.EventService;
+import kr.spring.event.vo.Rentry_listVO;
 import kr.spring.event.vo.Entry_listVO;
 import kr.spring.event.vo.Event_listVO;
 import kr.spring.member.vo.MemberVO;
@@ -295,7 +296,7 @@ public class EventController {
 	}
 	@PostMapping("/event/rouletteAjax")//ajax통신따로 만들어줌
 	@ResponseBody
-	public Map<String,String> roulettepro(@Valid Entry_listVO entry_listVO,HttpSession session) {
+	public Map<String,String> roulettepro(@Valid Rentry_listVO entry_listVO,HttpSession session) {
 		Map<String,String> mapJson = new HashMap<String,String>();
 		
 		MemberVO user = (MemberVO)session.getAttribute("user");
@@ -312,10 +313,9 @@ public class EventController {
 	/*========================
 	 * roulette 참여자 리스트 등록
 	 *========================*/
-	//insert부분 수정
-	@PostMapping("/event/rouletteinsertAjax")//ajax통신따로 만들어줌
+	@RequestMapping("/event/rouletteinsertAjax")//ajax통신따로 만들어줌
 	@ResponseBody
-	public Map<String,Object> rouletteinsert(Entry_listVO entry_listVO,HttpSession session) {
+	public Map<String,Object> rouletteinsert(Rentry_listVO rentry_listVO,HttpSession session) {
 		Map<String,Object> mapJson = new HashMap<String,Object>();
 		
 		MemberVO user = (MemberVO)session.getAttribute("user");
@@ -323,11 +323,38 @@ public class EventController {
 			//로그인이 안됨
 			mapJson.put("result", "logout");
 		}else {
-			entry_listVO.setEvent_type(0);
+			//회원번호 등록
+			rentry_listVO.setMem_num(user.getMem_num());
+			eventService.insertRentry(rentry_listVO);
+			mapJson.put("result", "success");
+		}
+		
+		return mapJson;
+	}
+	/*========================
+	 * 응모권 참여자 리스트 등록
+	 *========================*/
+	@RequestMapping("/event/entryinsertAjax")//ajax통신따로 만들어줌
+	@ResponseBody
+	public Map<String,Object> entryinsert(@RequestParam int event_num,Entry_listVO entry_listVO,HttpSession session) {
+		Map<String,Object> mapJson = new HashMap<String,Object>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user == null) {
+			//로그인이 안됨
+			mapJson.put("result", "logout");
+		}else {
+			//회원번호 등록
+			entry_listVO.setMem_num(user.getMem_num());
 			eventService.insertEntry(entry_listVO);
 			mapJson.put("result", "success");
 		}
 		
 		return mapJson;
+	}
+	@GetMapping("/event/entrylist")
+	public String entryEventList() {
+		
+		return "entryList";
 	}
 }

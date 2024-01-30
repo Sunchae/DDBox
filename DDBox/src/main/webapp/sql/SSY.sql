@@ -9,7 +9,6 @@ event_type number(1) not null,
 event_status number(1) not null,
 event_start varchar2(10) not null,
 event_end varchar2(10) not null,
-event_point number(5),
 mem_num number not null,
 scr_num number,
 constraint event_list_pk primary key (event_num),
@@ -32,18 +31,25 @@ constraint win_list_fk2 foreign key (point_num) references point(point_num),
 constraint win_list_fk3 foreign key (entry_num) references entry_list(entry_num)
 );
 
---참여자 리스트
+--응모권 참여자 리스트
 create table entry_list(
 entry_num number not null,
-event_num number,
+event_num number not null,
 mem_num number not null,
-event_type number not null,
-event_point number,
 entry_date date default sysdate not null,
 constraint entry_list_pk primary key (entry_num),
 constraint entry_list_fk1 foreign key (mem_num) references member(mem_num),
-constraint entry_list_fk2 foreign key (event_num) references event_list(event_num),
-constraint entry_list_fk3 foreign key (event_type) references event_list(event_num),
-constraint entry_list_fk4 foreign key (event_point) references event_list(event_num)
+constraint entry_list_fk2 foreign key (event_num) references event_list(event_num)
 );
 create sequence entrylist_seq;
+
+--룰렛 참여자 리스트
+create table rentry_list(
+rentry_num number not null,
+mem_num number not null,
+event_point number(5),
+rentry_date date default sysdate not null,
+constraint rentry_list_pk primary key (rentry_num),
+constraint rentry_list_fk1 foreign key (mem_num) references member(mem_num)
+);
+create sequence rentrylist_seq;

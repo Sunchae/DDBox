@@ -5,6 +5,7 @@
 	<ul>
 		<li><a href="${pageContext.request.contextPath}/member/admin">회원관리</a></li>
 		<li><a href="${pageContext.request.contextPath}/member/admin">문의내역</a></li>
+		<li><a href="${pageContext.request.contextPath}/event/entrylist">이벤트</a></li>
 	</ul>
 </div>
 <!-- MyPage 메뉴 끝 -->

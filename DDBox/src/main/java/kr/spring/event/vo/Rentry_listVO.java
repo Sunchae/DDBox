@@ -9,9 +9,9 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Entry_listVO {
-	private int entry_num;
-	private int event_num;
+public class Rentry_listVO {
+	private int rentry_num;
 	private int mem_num;
-	private Date entry_date;
+	private Date rentry_date;
+	private int event_point;
 }

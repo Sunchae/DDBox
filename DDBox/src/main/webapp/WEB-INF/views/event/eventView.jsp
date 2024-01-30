@@ -25,6 +25,12 @@
 		<img src="${pageContext.request.contextPath}/upload/${event_list.event_photo2}" class="detail-img">
 	</div>
 	</c:if>
+	<div>
+	<c:if test="${event_list.event_type == 2}">
+		<button id="entry_btn" class="entry_btn" data-event_num="${event_list.event_num}">응모하기</button>
+	</c:if>
+	</div>
 </div>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/event_entry.js"></script>
 <!-- 내용 끝 -->
