@@ -79,7 +79,8 @@
 										<%-- type end --%>
 				<div class="btn-group">
 					<!-- ::before -->
-					<button type="button" class="button gray large" disabled="disabled">판매준비</button>
+					<a href="#" id="btnGift" class="button large" w-data="500" h-data="410" title="선물">선물</a>
+					<a href="#" id="btnPurc" class="button purple large" w-data="500" h-data="400" title="구매">구매</a>
 					<!-- ::after -->
 				</div>
 			</div>
