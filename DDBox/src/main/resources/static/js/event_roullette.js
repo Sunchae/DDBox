@@ -57,8 +57,10 @@ $(function(){//로그인 확인...
 	        ch + Math.sin(angle) * (ch - 50),
 	      );
 	      ctx.rotate(angle + Math.PI / 2);
-	
+		
+		//룰렛판에 텍스트 나타내기 위해
 	      point[i].split(" ").forEach((text, j) => {
+			console.log(text+","+j);
 	        ctx.fillText(text, 0, 30 * j);
 	      });
 	
@@ -92,29 +94,22 @@ $(function(){//로그인 확인...
 			$.ajax({//이부분 수정
 				url:'rouletteinsertAjax',
 				type:'post',
-				data:{
-					event_num:$('#event_num').val(),
-					event_type:0
-				},
+				data:{event_point:point[ran].split('point')[0]},//split을 써서 숫자만 전달
 				dataType:'json',
 				success:function(param){
 					if(param.result == 'logout'){
 						alert('로그인해야 사용할 수 있습니다.');
 					}else if(param.result == 'success'){
-						alert('point내역에서 조회 가능합니다.');
+						alert(`${point[ran]}가 적립되었습니다.`);
 					}	
 				},
 				error:function(){
 					alert('네트워크 오류 발생');
 				}
 			});
-		    alert(`${point[ran]}가 적립되었습니다.`);
 		  }
 		}, 2000);
-	    /*setTimeout(() => alert(`${point[ran]}가 적립되었습니다.`), 2000);*/
 	  }, 1);
 	};
-	
-	
 	// 초기 룰렛 그리기
 	newMake();
