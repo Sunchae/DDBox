@@ -46,7 +46,7 @@ create table point(
 );
 create sequence point_seq;
 --MOVIE
-create table movie_data(
+create table movie(
 	movie_num number not null,
 	movie_title varchar2(200),
 	movie_original_title varchar2(200),
@@ -63,7 +63,7 @@ create table movie_data(
 	movie_overview clob,
 	movie_runtime number(10),
 	movie_status varchar2(100), 
-	constraint movie_data_pk primary key (movie_num)
+	constraint movie_pk primary key (movie_num)
 );
 
 --MOVIE_DETAIL

@@ -18,7 +18,7 @@ public interface MovieMapper {
 	
 	
 	//movie pk 겹치는지 확인
-	@Select("SELECT * FROM movie_data WHERE movie_num = #{movie_num}")
+	@Select("SELECT * FROM movie WHERE movie_num = #{movie_num}")
 	public MovieVO selectByMovieNum(int movie_num);
 	
 	//영화 리스트 뽑기

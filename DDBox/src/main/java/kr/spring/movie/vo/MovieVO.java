@@ -13,7 +13,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
-@Table(name = "movie_data")
+@Table(name = "movie")
 public class MovieVO {
 	@Id
 	private int movie_num;

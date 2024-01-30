@@ -3,7 +3,7 @@
 <mapper namespace="kr.spring.movie.dao.MovieMapper">
 	<!-- 영화 데이터 삽입 -->
 	<insert id="insertMovieData" parameterType="movieVO">
-	INSERT INTO movie_data(
+	INSERT INTO movie(
 		movie_num,
 		movie_title,
 		movie_original_title,
@@ -38,7 +38,7 @@
 		
 	</insert>
 	<update id="updateMovieData" parameterType="movieVO">
-	UPDATE movie_data
+	UPDATE movie
 	SET movie_tagline=#{movie_tagline},
 		movie_status=#{movie_status},
 		movie_runtime=#{movie_runtime},
