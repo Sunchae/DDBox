@@ -69,7 +69,7 @@ public class MovieApiController {
 
 				movie.setMovie_num(Math.toIntExact((Long) jsonObj.get("id")));
 				movie.setMovie_title((String) jsonObj.get("title"));
-				movie.setMovie_poster_path((String) jsonObj.get("poster_path"));
+				movie.setMovie_poster((String) jsonObj.get("poster_path"));
 				movie.setMovie_original_title((String)jsonObj.get("original_title"));
 				movie.setMovie_overview((String)jsonObj.get("overview"));
 				movie.setMovie_popularity((Double) jsonObj.get("popularity"));

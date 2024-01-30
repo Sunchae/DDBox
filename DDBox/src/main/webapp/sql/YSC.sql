@@ -55,7 +55,7 @@ create table movie(
 	
 	movie_director varchar2(30),
 	movie_opendate date,
-	movie_poster_path varchar2(200),
+	movie_poster varchar2(200),
 	movie_gradeNm number,
 	movie_img1 varchar2(200),
 	movie_img2 varchar2(200),

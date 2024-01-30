@@ -26,7 +26,7 @@ public class MovieVO {
 	private Date movie_opendate;
 	private int movie_gradeNm;
 	private double movie_popularity;
-	private String movie_poster_path;
+	private String movie_poster;
 	private String movie_img1;
 	private String movie_img2;
 	private String movie_img3;
