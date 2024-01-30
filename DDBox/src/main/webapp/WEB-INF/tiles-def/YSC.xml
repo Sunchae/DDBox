@@ -77,6 +77,16 @@
     	<put-attribute name="body"
     	               value="/WEB-INF/views/member/MypageFAQ.jsp"/>
     </definition>
+    <definition name="myPageEmail" extends="myPage">
+    	<put-attribute name="title" value="MyPageEmail"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/MypageEmail.jsp"/>
+    </definition>
+    <definition name="myPageRental" extends="myPage">
+    	<put-attribute name="title" value="MyPageRental"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/MypageRental.jsp"/>
+    </definition>
     
     
     
