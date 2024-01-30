@@ -7,8 +7,8 @@
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <div class="page-main">
-	<h2>글쓰기</h2>
-	<form:form action="write" modelAttribute="storeVO" id="register_form" enctype="multipart/form-data">
+	<h2>글수정</h2>
+	<form:form action="update" modelAttribute="storeVO" id="register_form" enctype="multipart/form-data">
 		<form:errors element="div" cssClass="error-color" />		<%-- 오류가 날 수 있기때문에 맨 위쪽에 표시 --%>
 		<ul>
 			<li>
@@ -44,7 +44,7 @@
 		</ul>
 		<div class="align-center">
 			<form:button>전송</form:button>
-			<input type="button" value="목록" onclick="location.href='ticketList'">
+			<input type="button" value="목록" onclick="location.href='storeMain'">
 		</div>
 	</form:form>
 </div>

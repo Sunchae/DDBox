@@ -33,14 +33,12 @@ public class StoreServiceImpl implements StoreService{
 
 	@Override
 	public void updateStore(StoreVO store) {
-		// TODO Auto-generated method stub
-		
+		storeMapper.updateStore(store);
 	}
 
 	@Override
 	public void deleteStore(int store_num) {
-		// TODO Auto-generated method stub
-		
+		storeMapper.deleteStore(store_num);
 	}
 
 	@Override
@@ -50,8 +48,7 @@ public class StoreServiceImpl implements StoreService{
 
 	@Override
 	public void deleteFile(int store_num) {
-		// TODO Auto-generated method stub
-		
+		storeMapper.deleteFile(store_num);
 	}
 
 }

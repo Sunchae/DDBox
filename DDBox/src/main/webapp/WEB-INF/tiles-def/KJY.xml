@@ -29,6 +29,11 @@
     	<put-attribute name="title" value="글상세" />
     	<put-attribute name="body" value="/WEB-INF/views/store/storeDetail.jsp" />
     </definition>
+    <definition name="storeModify" extends="storeMain">
+    	<put-attribute name="title" value="글수정"/>
+    	<put-attribute name="css" value="/WEB-INF/views/store/storeCSS.jsp" />
+    	<put-attribute name="body" value="/WEB-INF/views/store/storeModify.jsp"/>
+    </definition>
     <definition name="storeTicketList" extends="storeMain">
     	<put-attribute name="title" value="디디티켓"/>
     	<put-attribute name="body" value="/WEB-INF/views/store/storeTicketList.jsp"/>                                           

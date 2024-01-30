@@ -11,7 +11,7 @@
 <tiles:insertAttribute name="css" ignore="true"/>
 </head>
 <body>
-<div id="storeMain">
+<div id="main">
 	<div id="main_header">
 		<tiles:insertAttribute name="header"/>
 	</div>
