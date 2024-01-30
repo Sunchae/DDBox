@@ -1,27 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.reserve.dao.ReserveMapper">
-	<!-- 영화 목록 -->
-	<select id="selectMovieList" parameterType="map" resultType="MovieVO">
-		SELECT
-			movie_title,movie_gradeNm,movie_poster
-		FROM 
-			movie
-		WHERE 
-			movie_status=1
-		<!-- ORDER BY movie_title DESC -->
-	</select>
+	
 	
 	
 	<!-- 극장 목록 -->
-	<select id="selectScreenList" parameterType="map" resultType="ScreenVO">
-		SELECT DISTINCT
-			scr_do
-		FROM 
-			screen
-	</select>
 	
-	<select id="selectSeoulList" parameterType="map" resultType="ScreenVO">
+	<select id="selectSeoulList" parameterType="map" resultType="screenVO">
 		SELECT substr(scr_name,4,10) scr_name
 		FROM screen
 		WHERE scr_do= '서울시'

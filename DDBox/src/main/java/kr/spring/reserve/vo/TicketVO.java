@@ -31,7 +31,7 @@ public class TicketVO {
 	private String scr_name;
 	private int scr_seatLine;
 	private int scr_seatRow;
-	private int movice_num;
+	private int movie_num;
 	private String movie_title;
 	private String scr_seatCnt;
 }

@@ -44,18 +44,14 @@ public class ReserveController {
 		
 		List<MovieVO> list =null;
 		list = movieService.selectList(map);
-		log.debug("list : " + list);
+		log.debug("개봉 영화 list : " + list);
 		
-		List<ScreenVO> list2 =null;
-		list2 = reserveService.selectScreenList(map);
-		
-		
+	
 		ScreenVO screen = (ScreenVO)session.getAttribute("screen");
 		List<ScreenVO> list3 = null;
 		list3 = reserveService.selectSeoulList(map);
 
 		model.addAttribute("list", list);
-		model.addAttribute("list2", list2);
 		model.addAttribute("list3", list3);
 
 		return "reserveMain";

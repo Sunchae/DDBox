@@ -14,23 +14,7 @@ function categoryChange(e) {
 
   if (e.value == "general01") {
     add = seoul;
-  } else if (e.value == "general02") {
-    add = gyeonggi;
-  } else if (e.value == "general03") {
-    add = incheon;
-  } else if (e.value == "general04") {
-    add = gangwon;
-  } else if (e.value == "general05") {
-    add = daejeon;
-  } else if (e.value == "general06") {
-    add = daegu;
-  } else if (e.value == "general07") {
-    add = busan;
-  } else if (e.value == "general08") {
-    add = gyeongsang;
-  } else if (e.value == "general09") {
-    add = gwangju;
-  } 
+  }
 
   state.options.length = 0;
   // 군/구 갯수;

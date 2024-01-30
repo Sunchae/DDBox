@@ -23,4 +23,5 @@ public class ShowVO {
 	private String movie_title;
 	private int movie_runtime;
 	private String movie_poster;
+	private String movie_status;
 }

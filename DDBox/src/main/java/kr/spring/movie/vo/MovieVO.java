@@ -2,20 +2,13 @@ package kr.spring.movie.vo;
 
 import java.sql.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@Entity
-@Table(name = "movie")
 public class MovieVO {
-	@Id
 	private int movie_num;
 	
 	private String movie_title;
