@@ -21,8 +21,8 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public MemberVO selectCheckMember(String id) {
-		return memberMapper.selectCheckMember(id);
+	public MemberVO selectCheckMember(String mem_id) {
+		return memberMapper.selectCheckMember(mem_id);
 	}
 
 	@Override
@@ -63,6 +63,23 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int selectCheckMemberRegistered(MemberVO member) {
 		return memberMapper.selectCheckMemberRegistered(member);
+	}
+
+	@Override
+	public void updateAutoid(String autoid, int mem_num) {
+		memberMapper.updateAutoid(autoid, mem_num);
+	}
+
+	@Override
+	public void selectAutoid(String autoid) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteAutoid(int mem_num) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

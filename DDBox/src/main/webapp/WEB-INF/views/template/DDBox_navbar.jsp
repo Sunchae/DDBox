@@ -43,14 +43,14 @@
 						aria-expanded="false"> <img
 							src="${pageContext.request.contextPath}/images/nav/ico-search.png">
 					</a>
-					<%-- 	<ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="">
+					 	<ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="">
 							<div class="search-box p-3">
 								<form action="">
 		     		 				<input class="form-control" type="search" name="keyword" value="" placeholder="영화를 검색하세요!" aria-label="Search">
 		      						<button class="btn btn-sm" type="button"><img src="${pageContext.request.contextPath}/images/nav/ico-search.png"></button>
 		    					</form>
 							</div>
-						</ul> --%>
+						</ul> 
 					</li>
 				</ul>
 			</div>

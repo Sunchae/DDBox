@@ -1,7 +1,9 @@
 package kr.spring.member.controller;
 
 import java.util.List;
+import java.util.UUID;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -47,6 +49,7 @@ public class MemberController {
 	@PostMapping("/member/registerUserCheck")
 	public String submitCheck(@Valid MemberVO memberVO,
 			BindingResult result,
+			Model model,
 			HttpServletRequest request) {
 		log.debug("<<회원가입 여부>> : " + memberVO);
 		
@@ -58,11 +61,15 @@ public class MemberController {
 	    	}
 	        return formCheck();
 	    }
-		// 회원가입 여부
+		// 회원가입 여부  
 		if (memberService.selectCheckMemberRegistered(memberVO) >= 1) {
 			// 회원 DB에 이미 가입한 전적이 있는 회원(신규가입 불가한 회원)
-			return "main";
+			model.addAttribute("accessTitle","회원 가입 불가");
+			model.addAttribute("accessMsg","이미 가입한 회원입니다.");
+			model.addAttribute("accessUrl",request.getContextPath()+"/member/login");
+			return "common/resultView";
 		}
+		//회원 가입 이력 없는 사람이면 다음 절차로 통과
 	    // 타일스 설정명
 	    return "memberRegister";
 	}
@@ -130,7 +137,29 @@ public class MemberController {
 			}
 			if(check) {//인증 성공
 				//자동 로그인 체크 시작
+				boolean autoLogin = memberVO.getAuto() != null && memberVO.getAuto().equals("on");
 				
+				if(autoLogin) {
+					//자동로그인 체크를 한 경우
+					String autoid = member.getMem_autoid();
+					if(autoid==null) {
+						//자동 로그인 체크 식별값 생성
+						autoid = UUID.randomUUID().toString();
+						log.debug("<<autodi>> : " + autoid);
+						member.setMem_autoid(autoid);
+						memberService.updateAutoid(member.getMem_autoid(), member.getMem_num());
+								
+					}
+					
+					Cookie auto_cookie = new Cookie("au-log",autoid);
+					auto_cookie.setMaxAge(60*60*24*7);//쿠키의 유효기간은 1주일
+					auto_cookie.setPath("/");
+					
+					response.addCookie(auto_cookie);
+					
+					
+				
+				}
 				//자동로그인 체크 끝
 				
 				//인증 성공, 로그인 처리
@@ -172,8 +201,10 @@ public class MemberController {
 		//로그아웃
 		session.invalidate();
 		//자동로그인 처리 시작
-		
-		
+		//클라이언트 쿠키 처리
+		Cookie auto_cookie = new Cookie("au-log","");
+		auto_cookie.setMaxAge(0);//쿠키 삭제
+		auto_cookie.setPath("/");
 		
 		//자동로그인 처리 끝
 		

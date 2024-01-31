@@ -18,7 +18,7 @@ public interface MemberMapper {
 	
 	public int selectCheckMemberRegistered(MemberVO member);
 	
-	public MemberVO selectCheckMember(String id);
+	public MemberVO selectCheckMember(String mem_id);
 	@Select("SELECT * FROM member JOIN member_detail USING (mem_num) WHERE mem_num=#{mem_num}")
 	public MemberVO selectMember(int mem_num);
 	public void updateMember(MemberVO member);
@@ -27,9 +27,11 @@ public interface MemberMapper {
 	//public void deleteMember(int mem_num); 디테일만 지우고 member 테이블은 지우지말자 일단
 	public void deleteMember_detail(int mem_num);
 	
-	
 	//자동 로그인
-	
+	@Update("UPDATE member_detail SET mem_autoid=#{autoid} WHERE mem_num=#{mem_num}")
+	public void updateAutoid(String autoid, int mem_num);
+	public void selectAutoid(String autoid);
+	public void deleteAutoid(int mem_num);
 	//프로필 이미지 업데이트
 	@Update("UPDATE member_detail SET mem_photo=#{mem_photo},mem_photoname=#{mem_photoname} WHERE mem_num=#{mem_num}")
 	public void updateProfile(MemberVO member);

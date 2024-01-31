@@ -9,6 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Getter;
@@ -29,6 +30,7 @@ public class MemberVO {
 	@NotBlank(message = "생년월일을 입력해주세요.")
 	private String mem_birth;
 	private String mem_nickname;
+	private String auto;
 	private String mem_autoid;	//아이디 저장 기능 
 	@Pattern(regexp="^[A-Za-z0-9]{4,12}$")
 	private String mem_pw;

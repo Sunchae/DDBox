@@ -88,7 +88,7 @@
     <div class="dropdown">
       <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
         <img id="myPage-profile"src="${pageContext.request.contextPath}/images/face.png" alt="" width="32" height="32" class="rounded-circle me-2">
-        <strong>User</strong>
+        <strong>${sessionScope.user.mem_id}</strong>
       </a>
       <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
         <li><a class="dropdown-item" href="#">New project...</a></li>

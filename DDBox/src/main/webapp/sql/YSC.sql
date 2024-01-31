@@ -11,7 +11,7 @@ create table member_detail(
 	mem_num number not null,
 	mem_name varchar2(30) not null,
 	mem_nickname varchar2(30),
-	mem_autoid varchar2(30) unique,
+	mem_autoid varchar2(50) unique,
 	mem_pw varchar2(12) not null,
 	mem_birth varchar2(10) not null,
 	mem_phone varchar2(15) not null,
