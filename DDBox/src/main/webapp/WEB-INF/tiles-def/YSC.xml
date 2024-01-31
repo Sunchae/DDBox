@@ -78,7 +78,7 @@
     	               value="/WEB-INF/views/member/MypageFAQ.jsp"/>
     </definition>
     <definition name="myPageEmail" extends="myPage">
-    	<put-attribute name="title" value="MyPageFAQ"/>
+    	<put-attribute name="title" value="MyPageEmail"/>
     	<put-attribute name="body"
     	               value="/WEB-INF/views/member/MypageFAQ.jsp"/>
     </definition>
