@@ -43,7 +43,7 @@ public class StoreController {
 		return new StoreVO();
 	}
 	
-	@RequestMapping("/store/storeMain")
+	@RequestMapping("/store/storeMainTest")
 	public String storeMain(HttpSession session, Model model) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -54,7 +54,7 @@ public class StoreController {
 		
 		model.addAttribute("list", list);
 		
-		return "storeMain";
+		return "storeMainTest";
 	}
 	
 	/*=================================
@@ -87,7 +87,7 @@ public class StoreController {
 
 		//뷰에 표시할 메세지
 		model.addAttribute("message", "상품등록이 완료되었습니다.");
-		model.addAttribute("url", request.getContextPath()+"/store/storeMain");
+		model.addAttribute("url", request.getContextPath()+"/store/storeMainTest");
 
 		return "common/resultAlert";
 	}
@@ -206,6 +206,6 @@ public class StoreController {
 			//파일 삭제
 			FileUtil.removeFile(request, db_store.getStore_photo());
 		}
-		return "redirect:/store/storeMain";
+		return "redirect:/store/storeMainTest";
 	}
 }

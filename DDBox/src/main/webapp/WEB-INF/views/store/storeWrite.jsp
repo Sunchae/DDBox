@@ -44,7 +44,7 @@
 		</ul>
 		<div class="align-center">
 			<form:button>전송</form:button>
-			<input type="button" value="목록" onclick="location.href='ticketList'">
+			<input type="button" value="목록" onclick="location.href='storeMainTest'">
 		</div>
 	</form:form>
 </div>
