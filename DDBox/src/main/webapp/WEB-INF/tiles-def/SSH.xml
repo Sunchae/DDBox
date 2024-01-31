@@ -98,7 +98,7 @@
     	<put-attribute name="body" value="/WEB-INF/views/faq/email/email_update.jsp"/>                                           
     </definition>
     
-    
+        
     
     
     <!-- 대관 문의 -->
@@ -113,6 +113,21 @@
     <definition name="rental_detail" extends="faqMain">
     	<put-attribute name="body" value="/WEB-INF/views/faq/rental/rental_detail.jsp"/>                                           
     </definition>
+    <!-- 수정 -->
+    <definition name="rental_update" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/rental/rental_update.jsp"/>                                           
+    </definition>
+    
+    
+    
+    <!-- 채팅 문의 -->
+    <definition name="chatUser" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/chat/chatUser.jsp"/>                                           
+    </definition>
+    <!-- 채팅방 생성 -->
+    <definition name="chatRoomWrite" extends="faqMain">
+    	<put-attribute name="body" value="/WEB-INF/views/faq/chat/chatUserRoom.jsp"/>                                           
+    </definition>    
     
   
     
