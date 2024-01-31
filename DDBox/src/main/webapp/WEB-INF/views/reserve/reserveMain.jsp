@@ -44,8 +44,8 @@ s		<!------------------------------ 양화 ------------------------------>
 				</div>
 					<div class="movie-img">
 						<div class="choice-list" id="choiceMovieList-0">
-							<img id="picture" alt="no-pricture" src="/resources/images/movie/noimage.png">
-							<p id="picture-name">영화를 클릭하세요</p>
+							<img id="picture" alt="no-pricture" src="/resources/images/noimage.png">
+							<p  style="border-style:dotted" id="picture-name">영화를 클릭하세요</p>
 						</div>
 					</div>
 				</div>
@@ -54,9 +54,37 @@ s		<!------------------------------ 양화 ------------------------------>
 		<script type="text/javascript">
 			$('.movie_choice').click(function(){
 				let movie_num = $(this).attr('data-num');
-				alert(movie_num);
+				
+				function selectMovie(movie_num){
+					$.ajax({
+						url:'getMovie',
+						type:'get',
+						data:{movie_num:movie_num},
+						dataType:'json',
+						success:function(param){
+							displayMovie(param);
+							alert('영화 선택 성공');
+						},
+						error:function(){
+							alert('네트워크 오류 발생');
+						}
+					});
+					
+				}
 			});
 			
+			
+			function displayMovie(param){
+				let output;
+				if(param.status == 'yesMovie'){
+					output = 'https://image.tmdb.org/t/p/w500/'+movie_poster;
+					output += $('.movie_class').val();
+				}else if(param.status == 'noMovie'){
+					output = '../resources/images/noimage.png';
+				}else{
+					alert('영화 표시 오류 발생');
+				}
+			}
 		</script>
 		<!-- li 클릭시 영화 제목+포스터 출력& 해당 영화가 상영되고 있는 극장 -->
 		
