@@ -134,25 +134,26 @@ public class RentalController {
 		return "redirect:/faq/rental";
 	}
 	
-	
 	/*==========================
 	 * 상태 변경
-	 *==========================
-	@PostMapping("/faq/rental/updateStatus")
-	public String execute(@RequestParam int rental_num, 
-						  HttpServletRequest request,
-						  HttpServletResponse response,
-						  HttpSession session){
+	 *==========================*/
+	 //상태 수정폼 호출
+	@GetMapping("/faq/rental/update")
+	public String formUpdate(@RequestParam int rental_num, Model model) {
+		RentalVO rentalVO = rentalService.selectRental(rental_num);
 		
-		MemberVO user = (MemberVO)session.getAttribute("user");
-		RentalVO rental = rentalService.selectRental(rental_num);
-		
-		
-		
-		
-		return "";
+		model.addAttribute("rentalVO", rentalVO);
+		return "rental_update";
 	}
-	*/
+	
+	@RequestMapping("/faq/rental/updateStatus")
+	public String execute(@RequestParam int rental_num, @RequestParam int rental_status){
+		
+		//rental status update 메서드
+		rentalService.updateRentalStatus(rental_status, rental_num);
+		
+		return "redirect:/faq/rental/detail?rental_num="+rental_num;
+	}
 	
 	
 }

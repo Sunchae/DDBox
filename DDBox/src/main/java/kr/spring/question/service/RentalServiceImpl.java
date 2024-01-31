@@ -46,4 +46,9 @@ public class RentalServiceImpl implements RentalService{
 		rentalMapper.deleteRental(rental_num);
 	}
 
+	@Override
+	public void updateRentalStatus(int rental_status, int rental_num) {
+		rentalMapper.updateRentalStatus(rental_status, rental_num);
+	}
+
 }
