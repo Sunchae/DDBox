@@ -21,30 +21,19 @@
 						</li> -->
 					</ul>
 					<div class="qu">
-					<a href="/faq/question?keyword=현금영수증">현금영수증</a>
-					<a href="/faq/question?keyword=관람권">관람권</a>
-					<a href="/faq/question?keyword=예매">예매</a>
-					<a href="/faq/question?keyword=환불">환불</a>
-					<a href="/faq/question?keyword=취소">취소</a>
-				</div>
+						<a href="/faq/question?keyword=현금영수증">현금영수증</a>
+						<a href="/faq/question?keyword=관람권">관람권</a>
+						<a href="/faq/question?keyword=예매">예매</a>
+						<a href="/faq/question?keyword=환불">환불</a>
+						<a href="/faq/question?keyword=취소">취소</a>
+					</div>
 				</form>
-				<!-- 
-					<input id="keyword" type="text" title="검색어 입력" placeholder="검색어를 입력해 주세요.">
-					<button type="button" class="btn-search" title="검색하기" id="btn_search">검색</button>
-				</form>
-				<div class="qu">
-					<a href="#">현금영수증</a>
-					<a href="#">관람권</a>
-					<a href="#">예매</a>
-					<a href="#">환불</a>
-					<a href="#">취소</a>
-				</div> -->
 			</div>
 			<!-- 상담톡 -->
 			<div class="quick_chat" style="cursor:pointer;">
 				<b class="c_tit">상담톡 이용</b><br>
 				<span>상담 톡을 이용해보세요.</span><br>
-				<input type="button" onclick="" value="문의하기">
+				<input type="button" value="문의하기" onclick="location.href='${pageContext.request.contextPath}/faq/chat/chatUser'">
 			</div>
 			
 			<div class="quick_email"  style="cursor:pointer;">

@@ -29,26 +29,36 @@
 		<c:if test="${!empty user && user.mem_auth == 9}">
 			<form action="updateStatus" id="update_form" method="post" style="border:0 solid black;">
 			<input type="hidden" name="rental_num" value="${rental.rental_num}">
-			<select name="rental_status" onchange="this.form.submit()">
+			<select name="rental_status" id="rental_status">
 				<option value="1" <c:if test="${rental.rental_status==1}">selected</c:if>>접수중</option>
 				<option value="2" <c:if test="${rental.rental_status==2}">selected</c:if>>접수완료</option>
 				<option value="3" <c:if test="${rental.rental_status==3}">selected</c:if>>승인완료</option>
 				<option value="9" <c:if test="${rental.rental_status==9}">selected</c:if>>접수취소</option>
 			</select>
 			</form>
+			<script>
+				let rental_status = document.getElementById('rental_status');
+				rental_status.onchange=function(){
+					let update_form = document.getElementById('update_form');
+					update_form.submit();
+				};
+			</script>
 		</c:if>
+	</div>
+	<div class="align-right">
 		<c:if test="${!empty user && user.mem_num == rental.mem_num}">
 			<input type="button" value="삭제" id="delete_btn">
 			<script type="text/javascript">
 				let delete_btn = document.getElementById('delete_btn');
 				delete_btn.onclick=function(){
 					let choice = confirm('삭제하시겠습니까?');
-				if(choice){
-					location.href='delete?rental_num=${rental.rental_num}'
-				}
-			};
-		</script>
-	</c:if>
+					if(choice){
+						location.href='delete?rental_num=${rental.rental_num}'
+					}
+				};
+			</script>
+		</c:if>
+	</div>
 	<input type="button" value="목록" onclick="location.href='${pageContext.request.contextPath}/faq/rental'">
 	</div>
 	<hr size="1" width="100%">

@@ -16,4 +16,7 @@ public interface RentalService {
 	public void updateRental(RentalVO rental);
 	@Delete("DELETE FROM rental WHERE rental_num=#{rental_num}")
 	public void deleteRental(int rental_num);
+	
+	//상태 변경
+	public void updateRentalStatus(int rental_status, int rental_num);
 }

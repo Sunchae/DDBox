@@ -9,6 +9,7 @@
 	<h2>문의 답변하기</h2>
 	<form:form action="update" modelAttribute="emailVO" id="update_form" enctype="multipart/form-data">
 	<form:hidden path="qna_num"/>
+	<form:hidden path="mem_num"/>
 	<form:errors element="div" cssClass="error-color" />
 	<ul>
 		<li>
