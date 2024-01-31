@@ -10,8 +10,6 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,7 +25,6 @@ import kr.spring.member.vo.MemberVO;
 import kr.spring.question.service.EmailService;
 import kr.spring.question.vo.EmailVO;
 import kr.spring.util.FileUtil;
-import kr.spring.util.MailUtil;
 import kr.spring.util.PageUtil;
 import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -39,8 +36,7 @@ public class EmailController {
 	private EmailService emailService;
 	@Autowired
 	private MemberService memberService;
-	@Autowired
-    private JavaMailSender javaMailSender;
+	
 	
 	/*===========================
 	 * 이메일 글 목록
@@ -185,16 +181,10 @@ public class EmailController {
 		
 		emailService.updateEmail(emailVO);
 
-		//변수 설정
-		MemberVO member = memberService.selectMember(emailVO.getMem_num());
-		log.debug("<<이메일>> : " + member.getMem_email());
-		MailUtil.send(javaMailSender, member.getMem_email(), "[DDBOX'] 문의하신 글에 답변이 등록되었습니다.",
-				 "안녕하세요, 고객님 :)\n문의하신 글에 답변이 등록되었습니다.\n 확인 url: <a href=\"http://localhost:8000/main/main\">홈페이지</a>");
-		
 		model.addAttribute("message", "답변이 등록되었습니다");
 		model.addAttribute("url", request.getContextPath()+"/faq/email/detail?qna_num="+emailVO.getQna_num());
 		
-		return "common/resultAlert";
+		return "redirect:/send";
 	}
 	
 	
