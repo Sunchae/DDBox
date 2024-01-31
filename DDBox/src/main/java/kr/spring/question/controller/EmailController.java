@@ -177,7 +177,7 @@ public class EmailController {
 		//유효성 체크 결과 오류가 있으면 폼 재호출
 		if(result.hasFieldErrors("ask_content")) {
 			return "email_update";
-		}
+		}   
 		
 		emailService.updateEmail(emailVO);
 
