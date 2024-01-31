@@ -14,4 +14,8 @@ public class Entry_listVO {
 	private int event_num;
 	private int mem_num;
 	private Date entry_date;
+	
+	private String event_title;
+	//private String event_start;
+	//private String event_end;
 }

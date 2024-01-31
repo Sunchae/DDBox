@@ -76,11 +76,7 @@ public class EventServiceImpl implements EventService {
 		return null;
 	}
 
-	@Override
-	public List<Entry_listVO> selectEntryList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	public void insertEntry(Entry_listVO entry) {
@@ -89,8 +85,7 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public Entry_listVO selectEntry(int entry_num) {
-		// TODO Auto-generated method stub
-		return null;
+		return eventMapper.selectEntry(entry_num);
 	}
 
 }

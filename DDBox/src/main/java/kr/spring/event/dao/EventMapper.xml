@@ -50,6 +50,7 @@
 					event_type,
 					event_photo1
 				FROM event_list
+				
 				ORDER BY event_num DESC
 			)a
 		)
@@ -90,7 +91,49 @@
 			#{mem_num},
 			SYSDATE)
 	</insert>
+	<!-- <sql id="entrySub">
+		FROM entry_list JOIN member USING (mem_num)
+		LEFT OUTER JOINT (SELECT
+							event_num,
+							event_title
+						FROM event_list
+						WHERE event_num=#{event_num}
+						GROUP BY event_num,event_title) USING(event_num)
+						
+	</sql>
+	 -->
 	
+	<!-- 응모권 이벤트글 전체 목록/검색 목록 -->
+	<!-- <select id="selectEntryList" parameterType="map" resultType="Entry_listVO">
+		SELECT 
+			*
+		FROM (SELECT
+			     a.*,
+			     rownum rnum
+			  FROM (SELECT
+			        	entry_num,
+                        event_list.event_num,
+                        event_list.event_title,
+                        member.mem_num,
+                        entry_date
+			        FROM entry_list
+			       LEFT OUTER JOIN
+			            member ON entry_list.mem_num = member.mem_num
+			        LEFT OUTER JOIN
+			            event_list ON entry_list.event_num = event_list.event_num
+			        ORDER BY entry_num DESC)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select> -->
+
+	<select id="selectEntry" parameterType="integer" resultType="Entry_listVO">
+		SELECT
+			*
+		FROM entry_list						
+		JOIN member USING(mem_num)
+		WHERE event_num=#{event_num}
+	</select>
 </mapper>
  
 

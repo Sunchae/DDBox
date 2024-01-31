@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.reserve.dao.ShowMapper">
+	<insert id="insertShow" parameterType="showVO">
+		INSERT INTO show(
+			shw_num,
+			shw_sdate,
+			shw_edate,
+			shw_time,
+			shw_seatCnt,
+			scr_num,
+			movie_num
+			)
+		VALUES(
+			show_seq.nextval,
+			#{shw_sdate},
+			#{shw_edate},
+			#{shw_time},
+			#{shw_seatCnt},
+			#{scr_num},
+			#{movie_num}
+			)
+	</insert>
+	
+	<select id="selectRowShowCount" parameterType="map" resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM
+			show
+		JOIN
+			movie
+		USING(movie_num)	
+	</select>
+	
+	
+	<!-- <select id="selectShowList" parameterType="map" resultType="showVO">
+		SELECT
+			*
+		FROM (SELECT
+			a.*,
+			rownum rnum
+		FROM (SELECT
+				shw_num,
+				shw_date,
+				shw_time,
+				shw_seatCnt,
+				movie_num)
+				FROM show
+				LEFT OUTER JOIN (SELECT COUNT(*) movie_num,movie_title,movie_poster FROM movie GROUP BY movie_num) USING(movie_num))a)
+		<![CDATA[
+      WHERE rnum >= #{start} AND rnum <= #{end}
+      ]]>		
+	</select> -->
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
