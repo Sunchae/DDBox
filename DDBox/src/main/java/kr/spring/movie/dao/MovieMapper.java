@@ -22,7 +22,7 @@ public interface MovieMapper {
 	public MovieVO selectByMovieNum(int movie_num);
 	
 	//영화 리스트 뽑기
-	@Select("SELECT movie_num,movie_title,movie_gradeNm,movie_poster FROM movie ORDER BY movie_title ASC")
+	@Select("SELECT * FROM (SELECT * FROM movie ORDER BY movie_popularity DESC) WHERE ROWNUM <= 10")
 	public List<MovieVO> selectList(Map<String, Object> map);
 	@Select("SELECT * FROM movie WHERE movie_num=#{movie_num}")
 	public MovieVO selectMovie(int movie_num);
