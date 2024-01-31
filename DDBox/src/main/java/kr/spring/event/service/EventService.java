@@ -23,8 +23,8 @@ public interface EventService {
 	public Rentry_listVO selectRentry(int rentry_num);//참여자 등록 상세
 	
 	//응모권 참여자
-	public List<Entry_listVO> selectEntryList(Map<String,Object> map);//응모권 이벤트 참여자 리스트
+	//public List<Entry_listVO> selectEntryList(Map<String,Object> map);//응모권 이벤트 참여자 리스트
 	public void insertEntry(Entry_listVO entry);//응모권 이벤트 참여자 등록
-	public Entry_listVO selectEntry(int entry_num);//응모권 이벤트 참여자 상세
+	public Entry_listVO selectEntry(int event_num);//응모권 이벤트 참여자 상세
 
 }

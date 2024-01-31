@@ -331,6 +331,42 @@ public class EventController {
 		
 		return mapJson;
 	}
+	
+	/*========================
+	 * 응모권 참여자 리스트 목록
+	 *========================*/
+	@RequestMapping("/event/entryEventList")
+	public ModelAndView entryEventList(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+								@RequestParam(value="order",defaultValue="1") int order,
+								String keyword, String keyfield) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		
+		//전체,검색 레코드 수
+		int count = eventService.selectRowCount(map);
+		log.debug("<<이벤트 참여 글 목록 count>> : " + count);
+		
+		//페이지처리
+		PageUtil page = new PageUtil(null, keyword, currentPage, count, 20, 10, "list","&order="+order);
+		
+		List<Event_listVO> list = null;
+		if(count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());		
+			list = eventService.selectList(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("event/entryEventList");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		
+		return mav;
+	}
 	/*========================
 	 * 응모권 참여자 리스트 등록
 	 *========================*/
@@ -352,9 +388,18 @@ public class EventController {
 		
 		return mapJson;
 	}
-	@GetMapping("/event/entrylist")
-	public String entryEventList() {
+	/*========================
+	 * 응모권 이벤트 참여자 상세
+	 *========================*/
+	@RequestMapping("/event/entryName")
+	public ModelAndView entryprocess(@RequestParam int event_num) {
+		log.debug("<<응모자 상세 event_num>> : " + event_num);
 		
-		return "entryList";
+		Entry_listVO entry_list = eventService.selectEntry(event_num);
+		
+		
+								//타일스 설정명,속성명	,속성값
+		return new ModelAndView("entryName","entry_list",entry_list);
 	}
+	
 }
