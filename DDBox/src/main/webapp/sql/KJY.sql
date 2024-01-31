@@ -69,3 +69,7 @@ create table porder_detail(
 	constraint porder_detail_fk foreign key (mem_num) references member (mem_num)
 );
 create sequence porder_detail_seq;
+
+create table payment(
+	paymentCode
+);
