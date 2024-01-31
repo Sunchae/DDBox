@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.member.vo.MemberVO;
@@ -33,20 +34,21 @@ public class ReserveAjaxController {
 	@ResponseBody
 	public Map<String,Object> getMovie(MovieVO movie){
 		log.debug("<<영화 등록/삭제>> : "+ movie);
-		
+
 		Map<String,Object> mapJson = new HashMap<String, Object>();
-		
+
 		MovieVO movieVO = movieservice.selectMovie(movie.getMovie_num());
-		
+
 		if(movieVO != null) {
 			mapJson.put("status", "yesMovie");
 		}else {
 			mapJson.put("status", "noMovie");
 		}
-		mapJson.put("rseult", "success");
-		
+		mapJson.put("movieVO", movieVO);
+		mapJson.put("result", "success");
+
 		return mapJson;
 	}
-	
+
 	
 }

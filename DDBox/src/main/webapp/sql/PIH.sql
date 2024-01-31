@@ -23,7 +23,8 @@ create sequence ticket_seq;
 --SHOW
 create table show(
 	shw_num number not null,					--상영 번호
-	shw_date varchar2(50) not null,				--상영 날짜
+	shw_sdate varchar2(50) not null,			--상영 날짜
+	shw_edate varchar2(50) not null,			--상영 날짜
 	shw_time varchar2(50) not null,				--상영 시간
 	shw_seatCnt varchar2(50) not null,			--남은 좌석수
 	scr_num number not null,					--상영관 번호

@@ -10,7 +10,8 @@ import lombok.ToString;
 @ToString
 public class ShowVO {
 	private int shw_num;
-	private String shw_date;
+	private String shw_sdate;
+	private String shw_edate;
 	private String shw_time;
 	private String shw_seatCnt;
 	private int scr_num;
