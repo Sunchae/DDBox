@@ -7,7 +7,7 @@
 	<!-- 극장 목록 -->
 	
 	<select id="selectSeoulList" parameterType="map" resultType="screenVO">
-		SELECT substr(scr_name,4,10) scr_name
+		SELECT substr(scr_name,4,10) scr_name,scr_num
 		FROM screen
 		WHERE scr_do= '서울시'
 	</select>

@@ -33,7 +33,7 @@
 	</select>
 	
 	
-	<!-- <select id="selectShowList" parameterType="map" resultType="showVO">
+	<select id="selectShowList" parameterType="map" resultType="showVO">
 		SELECT
 			*
 		FROM (SELECT
@@ -41,16 +41,20 @@
 			rownum rnum
 		FROM (SELECT
 				shw_num,
-				shw_date,
+				shw_sdate,
+				shw_edate,
 				shw_time,
 				shw_seatCnt,
-				movie_num)
-				FROM show
-				LEFT OUTER JOIN (SELECT COUNT(*) movie_num,movie_title,movie_poster FROM movie GROUP BY movie_num) USING(movie_num))a)
+				scr_num,
+				movie_num
+			 FROM show
+			 LEFT OUTER JOIN (SELECT * FROM screen) USING(scr_num)
+			 LEFT OUTER JOIN (SELECT * FROM movie) USING(movie_num)
+			 )a)
 		<![CDATA[
-      WHERE rnum >= #{start} AND rnum <= #{end}
-      ]]>		
-	</select> -->
+     	 WHERE rnum >= #{start} AND rnum <= #{end}
+      	]]>	 
+	</select>
 	
 </mapper>
 
