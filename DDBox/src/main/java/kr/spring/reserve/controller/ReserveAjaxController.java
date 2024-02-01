@@ -32,7 +32,7 @@ public class ReserveAjaxController {
 	@Autowired
 	private ShowService showService;
 	
-	
+	 
 	/*=============================
 	 * 		영화 좋아요 등록/삭제
 	 ============================*/
