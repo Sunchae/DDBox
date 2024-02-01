@@ -32,14 +32,14 @@ public class ChatController {
 	/*==================================
 	 * 채팅방 생성
 	 *================================== */
-	/*//채팅방 리스트 호출
-	@GetMapping("/faq/chat/chatRoomWrite")
+	//채팅방 리스트 호출
+	@RequestMapping("/faq/chat/chatRoomWrite")
 	public String insertChatRoom() {
 		return "/faq/chat/chatUserRoom";
-	}*/
+	}
 
 	//채팅방 생성  
-	@RequestMapping("/faq/chat/chatRoomWrite")
+	@PostMapping("/faq/chat/chatRoomWrite")
 	public String insertChatRoom(ChatroomVO vo, HttpSession session) {
 		log.debug("<<채팅방 생성 ChatRoomVO>> : " + vo);
 		

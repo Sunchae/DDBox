@@ -120,14 +120,14 @@
     
     
     
-    <!-- 채팅 문의 -->
-    <definition name="chatUser" extends="faqMain">
-    	<put-attribute name="body" value="/WEB-INF/views/faq/chat/chatUser.jsp"/>                                           
-    </definition>
-    <!-- 채팅방 생성 -->
-    <definition name="chatRoomWrite" extends="faqMain">
-    	<put-attribute name="body" value="/WEB-INF/views/faq/chat/chatUserRoom.jsp"/>                                           
-    </definition>    
+	<!--  채팅 문의  -->
+	<definition name="chatUser" extends="faqMain">
+		<put-attribute name="body" value="/WEB-INF/views/faq/chat/chatUser.jsp"/>
+	</definition>
+	<!--  채팅방 생성  -->
+	<definition name="chatRoomWrite" extends="faqMain">
+		<put-attribute name="body" value="/WEB-INF/views/faq/chat/chatUserRoom.jsp"/>
+	</definition>
     
   
     
