@@ -30,9 +30,15 @@
 }
 
 .check_warp .box input{
-	width:160px;
+	width:170px;
 	height:30px;
+	float: left;
 }
+
+/* 색 바꾸고 싶다
+.check_warp .qu{
+	color:white;
+}*/
 
 
 /*상담톡*/

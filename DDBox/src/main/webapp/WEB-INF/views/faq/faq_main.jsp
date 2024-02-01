@@ -15,12 +15,8 @@
 						<li>
 							<input type="search" name="keyword" id="keyword" value="${param.keyword}" placeholder="검색어를 입력해 주세요.">
 						</li>
-						<!-- 
-						<li>
-							<input type="submit" value="검색">
-						</li> -->
 					</ul>
-					<div class="qu">
+					<div class="qu" >
 						<a href="/faq/question?keyword=현금영수증">현금영수증</a>
 						<a href="/faq/question?keyword=관람권">관람권</a>
 						<a href="/faq/question?keyword=예매">예매</a>
