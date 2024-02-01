@@ -51,12 +51,11 @@ public class ShowController {
 	public String form(Model model,HttpSession session) {
 
 		Map<String,Object> map = new HashMap<String,Object>();
-
+		
 		List<MovieVO> list =null;
 		list = movieService.selectList(map);
 		log.debug("개봉 영화 list : " + list);
 		
-		ScreenVO screen = (ScreenVO)session.getAttribute("screen");
 		List<ScreenVO> list3 = null;
 		list3 = reserveService.selectSeoulList(map);
 		
@@ -77,7 +76,7 @@ public class ShowController {
 		showService.insertShow(showVO);
 
 		model.addAttribute("message","상영정보가 등록되었습니다");
-		model.addAttribute("url",request.getContextPath()+"reserve/reserveList");
+		model.addAttribute("url",request.getContextPath()+"/reserve/reserveList");
 
 		return "common/resultAlert";
 	}

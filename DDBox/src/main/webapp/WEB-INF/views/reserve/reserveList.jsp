@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 내용 시작 -->
 <div class="page-main">
@@ -19,13 +20,22 @@
 
 	<c:if test="${count > 0}">
 		<table class="striped-table">
+			<tr class="align-center">
+				<th>상영번호</th>
+				<th>상영시작날짜</th>
+				<th>상영종료날짜</th>
+				<th>상영시간</th>
+				<th>상영영화</th>
+				<th>상영관이름</th>
+			</tr>
 			<c:forEach var="reserve" items="${list}">
 				<tr>
 					<td class="align-center">${reserve.shw_num}</td>
-					<td class="align-center">${reserve.shw_date}</td>
+					<td class="align-center">${reserve.shw_sdate}</td>
+					<td class="align-center">${reserve.shw_edate}</td>
+					<td class="align-center">${reserve.shw_time}</td>
+					<td class="align-center">${reserve.movie_title}</td>
 					<td class="align-center">${reserve.scr_name}</td>
-					<td class="align-center">${reserve.shw_tiem}</td>
-					<td><a href="detail?board_num=${board.board_num}">${reserve.movie_title}</a></td>
 				</tr>
 			</c:forEach>
 		</table>

@@ -17,7 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.spring.movie.service.MovieService;
 import kr.spring.movie.vo.MovieVO;
 import kr.spring.reserve.service.ReserveService;
+import kr.spring.reserve.service.ShowService;
 import kr.spring.reserve.vo.ScreenVO;
+import kr.spring.reserve.vo.ShowVO;
 import kr.spring.reserve.vo.TicketVO;
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,6 +32,9 @@ public class ReserveController {
 
 	@Autowired
 	private MovieService movieService;
+	
+	@Autowired
+	private ShowService showService;
 
 	//자바빈 초기화
 	@ModelAttribute
@@ -45,9 +50,7 @@ public class ReserveController {
 		List<MovieVO> list =null;
 		list = movieService.selectList(map);
 		log.debug("개봉 영화 list : " + list);
-		
-	
-		ScreenVO screen = (ScreenVO)session.getAttribute("screen");
+
 		List<ScreenVO> list3 = null;
 		list3 = reserveService.selectSeoulList(map);
 

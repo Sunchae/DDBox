@@ -14,7 +14,9 @@
    <div class="row mb-3">
       <div class="col">
          <h2>빠른 예매</h2>
-         <input type="button" value="상영정보 추가" onclick="location.href='reserveList'">
+         <c:if test="${!empty user && user.mem_auth==9}">
+			<input type="button" value="상영정보 추가" onclick="location.href='reserveList'">
+		</c:if>
       </div>
    </div>
    <div class="col-10">
@@ -56,17 +58,18 @@
       <script type="text/javascript">
          $('.movie_choice').click(function(){
              let movie_num = $(this).attr('data-num');
-             selectMovie(movie_num); 
+             selectMovie(movie_num);
          });
 
          function selectMovie(movie_num){
              $.ajax({
                  url: 'getMovie',
                  type: 'get',
-                 data: { movie_num: movie_num },
+                 data: {movie_num: movie_num},
                  dataType: 'json',
                  success: function(param){
-                     displayMovie(param);
+                	 displayMovie(param);
+                     displayScreen(movie_num);
                  },
                  error: function(){
                      alert('네트워크 오류 발생');
@@ -78,7 +81,6 @@
              let output;
              if(param.status == 'yesMovie'){
                  output = 'https://image.tmdb.org/t/p/w500/' + param.movieVO.movie_poster; 
-                 
              } else if(param.status == 'noMovie'){
                  output = '../resources/images/noimage.png';
              } else {
@@ -87,7 +89,22 @@
              $('#picture').attr('src', output); 
              $('#picture-name').text(param.movieVO.movie_title); 
              console.log(param);
+             
          }
+		
+         function displayScreen(movie_num) {
+        	    let screenList = $('.screen-list');
+        	    screenList.empty(); // 기존 목록 제거
+
+        	    $(movie_num.list).each(function(index,item) {
+        	        let output = '<ul class="screen-list">';
+        	        output += '<li>';
+        	        output += item.showVO.scr_name;
+        	        output += '</li>';
+        	        output += '</ul>';
+        	        screenList.append(output);
+        	    });
+        	}
       </script>
       <!-- li 클릭시 영화 제목+포스터 출력& 해당 영화가 상영되고 있는 극장 -->
       
@@ -99,11 +116,11 @@
                <div class="all-theater-list">
                   <div class="search_boxes" style="display:flex; height:600px;">
                      <div class="search_box" style="overflow-y: scroll; height:550px; width:300px;">
+                        <ul class="screen-list">
                         <c:forEach var="reserve" items="${list3}">
-                           <ul>
-                              <li id="movie_choice"><a id="movie_choice2">${reserve.scr_name}</a></li>
-                           </ul>
+                              <li class="screen_choice" data-num="${reserve.scr_num}">${reserve.scr_name}</li>
                         </c:forEach>
+                        </ul>
                      </div>
                   </div>
                </div>

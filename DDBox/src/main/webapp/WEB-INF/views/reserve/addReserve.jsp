@@ -35,12 +35,12 @@
 		<ul>
 			<li>
 				<form:label path="shw_sdate">상영시작날짜</form:label>
-				<form:input	path="shw_sdate" id="startDate" placeholder="날짜 선택" /> 
+				<form:input	path="shw_sdate" id="startDate" placeholder="날짜 선택" autocomplete="off"/> 
 				<form:errors path="shw_sdate" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="shw_edate">상영종료날짜</form:label>
-				<form:input	path="shw_edate" id="endDate" placeholder="날짜 선택" /> 
+				<form:input	path="shw_edate" id="endDate" placeholder="날짜 선택" autocomplete="off"/> 
 				<form:errors path="shw_edate" cssClass="error-color"/>
 			</li>
 			<li>
@@ -74,8 +74,7 @@
 		</ul> 
 		<div class="align-center">
 			<form:button class="default-btn">전송</form:button>
-			<input type="button" value="홈으로" class="default-btn"
-			    onclick="location.href='${pageContext.request.contextPath}/reserveList.jsp'">
+			<input type="submit" value="홈으로" class="default-btn" onclick="location.href='reserveList'">
 		</div>                                  
 	</form:form>
 </div>

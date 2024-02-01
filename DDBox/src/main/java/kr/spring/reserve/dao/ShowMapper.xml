@@ -45,16 +45,36 @@
 				shw_edate,
 				shw_time,
 				shw_seatCnt,
-				scr_num,
-				movie_num
+				scr_name,
+				movie_title
 			 FROM show
 			 LEFT OUTER JOIN (SELECT * FROM screen) USING(scr_num)
 			 LEFT OUTER JOIN (SELECT * FROM movie) USING(movie_num)
-			 )a)
+			 ORDER BY scr_num DESC)a)
 		<![CDATA[
      	 WHERE rnum >= #{start} AND rnum <= #{end}
       	]]>	 
 	</select>
+	
+	<select id="selectShowListForRev" parameterType="screenVO" resultType="integer">
+		SELECT
+			scr_name
+		FROM
+			screen
+		JOIN show USING(scr_num)
+		WHERE movie_num=#{movie_num}
+	</select>
+	
+	
+	
+	<sql id="movieOrder">
+		<if test="order == 1">
+			ORDER BY movie_num DESC
+		</if>
+		<if test="order == 2">
+			ORDER BY scr_num DESC
+		</if>
+	</sql>
 	
 </mapper>
 

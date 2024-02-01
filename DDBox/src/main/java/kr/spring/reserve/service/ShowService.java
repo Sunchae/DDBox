@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 
+import kr.spring.reserve.vo.ScreenVO;
 import kr.spring.reserve.vo.ShowVO;
 import kr.spring.reserve.vo.TicketVO;
 
@@ -16,7 +17,9 @@ public interface ShowService {
 	//예매 등록
 	public void insertShow(ShowVO show);
 	//한건의 예매 읽기
-	public TicketVO selectShow(int shw_num);
+	public ShowVO selectShow(int movie_num, int shw_num);
+	
+	public List<ScreenVO> selectShowListForRev(int movie_num);
 
 	//예매 수정
 	public void updateShow(ShowVO show);

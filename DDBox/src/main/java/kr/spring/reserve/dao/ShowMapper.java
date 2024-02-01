@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import kr.spring.reserve.vo.ShowVO;
 import kr.spring.reserve.vo.TicketVO;
@@ -15,10 +16,13 @@ public interface ShowMapper {
 	public List<ShowVO> selectShowList(Map<String,Object> map);
 	public int selectRowShowCount(Map<String,Object> map);
 	
+	public List<ShowVO> selectShowListForRev(int movie_num);
+	
 	//예매 등록
 	public void insertShow(ShowVO show);
 	//한건의 예매 읽기
-	public TicketVO selectShow(int shw_num);
+	@Select("SELECT * FROM show JOIN movie USING(movie_num) WHERE movie_num=#{movie_num} AND scr_num=#{scr_num}")
+	public ShowVO selectShow(int movie_num, int shw_num);
 	
 	//예매 수정
 	public void updateShow(ShowVO show);
