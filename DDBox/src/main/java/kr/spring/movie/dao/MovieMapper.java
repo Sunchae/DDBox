@@ -25,7 +25,7 @@ public interface MovieMapper {
 	@Select("SELECT * FROM (SELECT * FROM movie ORDER BY movie_popularity DESC) WHERE ROWNUM <= 10")
 	public List<MovieVO> selectList(Map<String, Object> map);
 
-	@Select("SELECT * FROM movie ORDER BY movie_popularity DESC")
+	@Select("SELECT * FROM (SELECT * FROM movie ORDER BY movie_popularity DESC) WHERE ROWNUM <= 10")
 	public List<MovieVO> selectMovieList();
 	@Select("SELECT * FROM movie WHERE movie_num=#{movie_num}")
 	public MovieVO selectMovie(int movie_num);

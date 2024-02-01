@@ -58,8 +58,13 @@
     <definition name="event_roulette" extends="eventMain">
     	<put-attribute name="body" value="/WEB-INF/views/event/event_roulette.jsp"/>                                           
     </definition>
+    <!-- 관리자 -->
+    <!-- <definition name="entry" extends="admin">
+    	<put-attribute name="title" value="참여자리스트"/>
+    	<put-attribute name="body" value="/WEB-INF/views/event/entry.jsp"/>
+    </definition> -->
     <!-- 이벤트 -->
-    <definition name="entryList" extends="admin">
+    <definition name="entryEventList" extends="admin">
     	<put-attribute name="title" value="참여자리스트"/>
     	<put-attribute name="body" value="/WEB-INF/views/event/entryEventList.jsp"/>
     </definition>
