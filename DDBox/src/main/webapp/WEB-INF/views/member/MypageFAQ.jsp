@@ -5,11 +5,11 @@
 <div class="page-main">
 	<h6>나의 문의내역</h6>
 	<span>문의조회</span>
-	<!-- 검색 기능
+	<!-- 검색 기능 -->
 	<form action="question" id="search_form" method="get">
 		<ul class="search">
 			<li>
-				문의조회 <input type="search" name="keyword" id="keyword" value="${param.keyword}" placeholder="검색어를 입력하세요">
+				<input type="search" name="keyword" id="keyword" value="${param.keyword}" placeholder="검색어를 입력하세요">
 			</li>
 		</ul>
 		<div class="align-right">
@@ -18,13 +18,13 @@
 				<option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회수</option>
 				<option value="3" <c:if test="${param.order == 3}">selected</c:if>>최신순</option>
 			</select>
-			<c:if test="${!empty user && user.mem_num == question.mem_num}">
-				<input type="button" value="선택 삭제" id="delete_btn">
+			<!--<c:if test="${!empty user && user.mem_num == question.mem_num}"> -->
+					<input type="button" value="선택 삭제" id="delete_btn">
 				<!-- 여기 체크박스 삭제 넣을 예정 -->
-				<!-- 
-			</c:if>
+				<!-- </c:if> -->
 		</div>
 	</form>
+	<!--
 	<c:if test="${count==0}">
 	<div class="result-display">표시할 게시물이 없습니다.</div>
 	</c:if>
