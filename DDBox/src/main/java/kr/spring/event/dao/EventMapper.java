@@ -27,5 +27,5 @@ public interface EventMapper {
 	
 	//응모권 참여자
 	public void insertEntry(Entry_listVO entry);//응모권 이벤트 참여자 등록
-	public Entry_listVO selectEntry(int event_num);//응모권 이벤트 참여자 상세
+	public List<Entry_listVO> selectEntry(Map<String,Object> map,int event_num);//응모권 이벤트 참여자 상세
 }

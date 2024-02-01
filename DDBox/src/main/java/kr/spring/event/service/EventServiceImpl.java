@@ -83,9 +83,15 @@ public class EventServiceImpl implements EventService {
 		eventMapper.insertEntry(entry);
 	}
 
+	/*
+	 * @Override public List<Entry_listVO> selectEntry(int entry_num) { return
+	 * eventMapper.selectEntry(entry_num); }
+	 */
+
 	@Override
-	public Entry_listVO selectEntry(int entry_num) {
-		return eventMapper.selectEntry(entry_num);
+	public List<Entry_listVO> selectEntry(Map<String, Object> map,int event_num) {
+		// TODO Auto-generated method stub
+		return eventMapper.selectEntry(map, event_num);
 	}
 
 }
