@@ -30,6 +30,37 @@ public class MovieServiceImpl implements MovieService{
 		return movieMapper.selectList(map);
 	}
 
+	
+
+	@Override
+	public MovieVO selectMovie(int movie_num) {
+		return movieMapper.selectMovie(movie_num);
+	}
+	
+	@Override
+	public List<MovieVO> selectMovieList() {
+		return movieMapper.selectMovieList();
+	}
+	
+	@Override
+	public void saveMovieDataFromList(List<MovieVO> movieList) {
+		log.debug("==============영화 저장 서비스 진입================");
+		for (MovieVO movie : movieList) {
+			MovieVO vo = movieMapper.selectByMovieNum(movie.getMovie_num());
+			if(vo==null) {
+				movieMapper.insertMovieData(movie);
+			}else {
+				log.debug("중복된 데이터 : " + movie.getMovie_num());
+			}
+			
+		}
+		
+	}
+
+	
+	/*==================================
+	 * 영화 좋아요 PART
+	 ===================================*/
 	@Override
 	public MovieFavVO selectFav(MovieFavVO fav) {
 		return null;
@@ -54,28 +85,6 @@ public class MovieServiceImpl implements MovieService{
 	public void deleteFavByMovieNum(int Movie_num) {
 		
 	}
-
-	@Override
-	public MovieVO selectMovie(int movie_num) {
-		return movieMapper.selectMovie(movie_num);
-	}
-
-	@Override
-	public void saveMovieDataFromList(List<MovieVO> movieList) {
-		log.debug("==============영화 저장 서비스 진입================");
-		for (MovieVO movie : movieList) {
-			MovieVO vo = movieMapper.selectByMovieNum(movie.getMovie_num());
-			if(vo==null) {
-				movieMapper.insertMovieData(movie);
-			}else {
-				log.debug("중복된 데이터 : " + movie.getMovie_num());
-			}
-			
-		}
-		
-	}
-
-	
 	
 
 	

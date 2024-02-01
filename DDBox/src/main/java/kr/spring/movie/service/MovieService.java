@@ -3,6 +3,8 @@ package kr.spring.movie.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Select;
+
 import kr.spring.movie.vo.MovieFavVO;
 import kr.spring.movie.vo.MovieVO;
 
@@ -13,7 +15,7 @@ public interface MovieService {
 	
 	//영화 리스트 뽑기
 	public List<MovieVO> selectList(Map<String, Object> map);
-
+	public List<MovieVO> selectMovieList();
 	public MovieVO selectMovie(int movie_num);
 	//영화 좋아요 삽입 
 	public MovieFavVO selectFav(MovieFavVO fav);

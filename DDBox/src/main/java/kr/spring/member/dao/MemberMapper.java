@@ -30,7 +30,8 @@ public interface MemberMapper {
 	//자동 로그인
 	@Update("UPDATE member_detail SET mem_autoid=#{autoid} WHERE mem_num=#{mem_num}")
 	public void updateAutoid(String autoid, int mem_num);
-	public void selectAutoid(String autoid);
+	@Select("SELECT mem_num,mem_id,mem_auth,mem_autoid,mem_pw,mem_nickname,mem_email FROM member JOIN member_detail USING(mem_num) WHERE mem_autoid=#{mem_autoid}")
+	public MemberVO selectAutoid(String autoid);
 	public void deleteAutoid(int mem_num);
 	//프로필 이미지 업데이트
 	@Update("UPDATE member_detail SET mem_photo=#{mem_photo},mem_photoname=#{mem_photoname} WHERE mem_num=#{mem_num}")
@@ -38,3 +39,28 @@ public interface MemberMapper {
 	//회원관리 - 관리자
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

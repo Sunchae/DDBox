@@ -17,8 +17,8 @@ create table member_detail(
 	mem_phone varchar2(15) not null,
 	mem_email varchar2(50) not null,
 	mem_zipcode varchar2(5) not null,
-	mem_address1 varchar2(50) not null,
-	mem_address2 varchar2(50) not null,
+	mem_address1 varchar2(100) not null,
+	mem_address2 varchar2(100) not null,
 	mem_regdate date default sysdate not null,
 	mem_modifydate date,
 	mem_gender number(1) not null,-- 1:남자,2:여자

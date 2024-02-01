@@ -22,7 +22,7 @@ public interface MemberService {
 
 	//자동 로그인
 	public void updateAutoid(String autoid, int mem_num);
-	public void selectAutoid(String autoid);
+	public MemberVO selectAutoid(String autoid);
 	public void deleteAutoid(int mem_num);
 
 	//프로필 이미지 업데이트

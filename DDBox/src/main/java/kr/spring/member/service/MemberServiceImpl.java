@@ -71,9 +71,8 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void selectAutoid(String autoid) {
-		// TODO Auto-generated method stub
-		
+	public MemberVO selectAutoid(String autoid) {
+		return memberMapper.selectAutoid(autoid);
 	}
 
 	@Override
