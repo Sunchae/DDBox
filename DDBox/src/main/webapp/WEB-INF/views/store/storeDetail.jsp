@@ -221,7 +221,7 @@
 			});
 		</script> 
 
-		<input type="button" value="목록" onclick="location.href='storeMain'">
+		<input type="button" value="목록" onclick="location.href='storeMainTest'">
 	</div>
 </div>
 <!-- 내용 끝 -->
