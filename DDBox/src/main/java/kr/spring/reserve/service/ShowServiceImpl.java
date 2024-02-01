@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.reserve.dao.ShowMapper;
-import kr.spring.reserve.vo.ScreenVO;
 import kr.spring.reserve.vo.ShowVO;
 import kr.spring.reserve.vo.TicketVO;
 
@@ -52,7 +51,7 @@ public class ShowServiceImpl implements ShowService{
 	}
 
 	@Override
-	public List<ScreenVO> selectShowListForRev(int movie_num) {
+	public List<ShowVO> selectShowListForRev(int movie_num) {
 		return showMapper.selectShowListForRev(movie_num);
 	}
 

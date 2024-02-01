@@ -56,12 +56,13 @@
       	]]>	 
 	</select>
 	
-	<select id="selectShowListForRev" parameterType="screenVO" resultType="integer">
+	<select id="selectShowListForRev" parameterType="showVO" resultType="integer">
 		SELECT
+			scr_num,
 			scr_name
 		FROM
-			screen
-		JOIN show USING(scr_num)
+			show
+		LEFT OUTER JOIN (SELECT * FROM screen) USING(scr_num)
 		WHERE movie_num=#{movie_num}
 	</select>
 	

@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
-import kr.spring.reserve.vo.ScreenVO;
 import kr.spring.reserve.vo.ShowVO;
 import kr.spring.reserve.vo.TicketVO;
 
@@ -17,7 +16,7 @@ public interface ShowMapper {
 	public List<ShowVO> selectShowList(Map<String,Object> map);
 	public int selectRowShowCount(Map<String,Object> map);
 	
-	public List<ScreenVO> selectShowListForRev(int movie_num);
+	public List<ShowVO> selectShowListForRev(int movie_num);
 	
 	//예매 등록
 	public void insertShow(ShowVO show);

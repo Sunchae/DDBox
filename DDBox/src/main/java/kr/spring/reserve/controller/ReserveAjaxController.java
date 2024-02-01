@@ -32,7 +32,7 @@ public class ReserveAjaxController {
 	@Autowired
 	private ShowService showService;
 	
-	 
+	
 	/*=============================
 	 * 		영화 좋아요 등록/삭제
 	 ============================*/
@@ -45,7 +45,8 @@ public class ReserveAjaxController {
 
 		MovieVO movieVO = movieService.selectMovie(movie.getMovie_num());
 		
-		List<ScreenVO> showVO = showService.selectShowListForRev(movie_num);
+		log.debug("<<상영관>> : "+ show);
+		List<ShowVO> showVO = showService.selectShowListForRev(movie_num);
 
 		if(movieVO != null) {
 			mapJson.put("status", "yesMovie");
