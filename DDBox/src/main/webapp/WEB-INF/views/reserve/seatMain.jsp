@@ -465,7 +465,7 @@ li {
 				<span class="seat">7</span> 
 				<span class="seat">8</span>
 			</div>
-
+			
 			<div class="row">I
 				<span class="seat">1</span> 
 				<span class="occupiedSeat">2</span> 
@@ -486,7 +486,37 @@ li {
 		</p>
 	</div>	
 
+	<!-- <div class="wrap">
+		<div class="tit-area">
+			<span class="tit"></span>
+		</div>
+		<div class="info-area">
+			<p class="theater"></p>
+			<p class="date"></p>
+			<p class="poster"></p>
+		</div>
+		<div class="legend">
+			
+		</div>
+		<div class="seat-num">
+			<div class="seat-all" title="구매가능 좌석">-</div>
+			<div class="seat-all" title="구매가능 좌석">-</div>
+			<div class="seat-all" title="구매가능 좌석">-</div>
+			<div class="seat-all" title="구매가능 좌석">-</div>
+			<div class="seat-all" title="구매가능 좌석">-</div>
+			<div class="seat-all" title="구매가능 좌석">-</div>
+			<div class="seat-all" title="구매가능 좌석">-</div>
+			<div class="seat-all" title="구매가능 좌석">-</div>
+		</div>
+		<div class="pay-area">
+			<p class="text">
+			최종결제금액 
+			<span id="costs">0</span>
+			</p>
+		</div>
+	</div> -->
 	</div>
+	
 
 	<script>
         document.addEventListener('DOMContentLoaded', () =>{

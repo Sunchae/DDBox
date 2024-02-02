@@ -58,8 +58,7 @@
 	
 	<select id="selectShowListForRev" parameterType="integer" resultType="showVO">
 		SELECT
-			<!-- scr_num 도 받아와야 한다면 resultType="Map"으로 설정 하면 될듯 -->
-			scr_name, 
+			DISTINCT(scr_name), 
 			scr_num
 		FROM
 			show
@@ -96,35 +95,5 @@
 	</sql>
 	
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
