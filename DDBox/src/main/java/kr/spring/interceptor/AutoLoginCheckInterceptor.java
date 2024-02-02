@@ -31,7 +31,7 @@ public class AutoLoginCheckInterceptor implements HandlerInterceptor{
 				 MemberVO memberVO = memberService.selectAutoid(now_cookie.getValue());
 				 
 				 log.debug("<<자동로그인 체크 여부 MemberVO>> : " + memberVO);
-				 if(memberVO != null && memberVO.getMem_auth()>=2) {
+				 if(memberVO != null && memberVO.getMem_auth()==1) {
 					 //일반회원부터 자동 로그인 처리
 					 session.setAttribute("user", memberVO);
 					 log.debug("<<자동로그인 성공>>");

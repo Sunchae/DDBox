@@ -212,12 +212,12 @@ public class MemberController {
 		session.invalidate();
 		//자동로그인 처리 시작
 		//클라이언트 쿠키 처리
-		Cookie auto_cookie = new Cookie("au-log","");
+		Cookie auto_cookie = new Cookie("autoid-log","");
 		auto_cookie.setMaxAge(0);//쿠키 삭제
 		auto_cookie.setPath("/");
 		
 		//자동로그인 처리 끝
-		
+		response.addCookie(auto_cookie);
 		return "redirect:/main/main";
 	}
 	
