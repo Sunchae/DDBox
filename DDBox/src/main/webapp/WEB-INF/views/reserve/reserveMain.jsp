@@ -69,7 +69,7 @@
                  dataType: 'json',
                  success: function(param){
                 	 displayMovie(param);
-                     displayScreen(movie_num);
+                     displayScreen(param.showVO);
                  },
                  error: function(){
                      alert('네트워크 오류 발생');
@@ -92,18 +92,22 @@
              
          }
 		
-         function displayScreen(movie_num) {
+         function displayScreen(showVO) {
         	    let screenList = $('.screen-list');
         	    screenList.empty(); // 기존 목록 제거
-
-        	    $(movie_num.list).each(function(index,item) {
+				
+        	    //$(movie_num.list).each(function(index,item) {
+        	    $.each(showVO, function(index, item) {	
         	        let output = '<ul class="screen-list">';
         	        output += '<li>';
-        	        output += item.showVO.scr_name;
+        	        output += item;
         	        output += '</li>';
         	        output += '</ul>';
         	        screenList.append(output);
+        	        
+        	        console.log(item);
         	    });
+        	    
         	}
       </script>
       <!-- li 클릭시 영화 제목+포스터 출력& 해당 영화가 상영되고 있는 극장 -->

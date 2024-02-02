@@ -28,6 +28,7 @@ import kr.spring.member.vo.MemberVO;
 import kr.spring.question.service.EmailService;
 import kr.spring.question.vo.EmailVO;
 import kr.spring.util.AuthCheckException;
+import kr.spring.util.FileUtil;
 import kr.spring.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -237,6 +238,67 @@ public class MemberController {
 		
 		return "myPage";
 	}
+	
+	/*==============================
+	 * 	프로필 사진 출력
+	 *==============================*/
+	//프로필 사진 출력
+	@RequestMapping("/member/photoView")
+	public String getProfile(HttpSession session,HttpServletRequest request,Model model) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		log.debug("<<프로실 사진 읽기>> : " + user);
+		if(user==null) {//로그인 되지 않은 경우
+			getBasicProfileImage(request,model);
+		}else {//로그인 된 경우
+			MemberVO memberVO = memberService.selectMember(user.getMem_num());
+			viewProfile(memberVO,request,model);
+		}
+		return "imageView";
+		
+	}
+	//프로필 사진 출력(회원번호 지정)
+	@RequestMapping("/member/viewProfile")
+	public String getProfileByMem_num(@RequestParam int mem_num,HttpServletRequest request,Model model) {
+		MemberVO memberVO = memberService.selectMember(mem_num);
+		
+		viewProfile(memberVO,request,model);
+		
+		return "imageView";
+	}
+	//프로필 사진 처리를 위한 공통 코드
+	public void viewProfile(MemberVO memberVO,HttpServletRequest request,Model model) {
+		if(memberVO==null || memberVO.getMem_photoname()==null) {
+			//업로드한 프로필 사진 정보가 없어서 기본 이미지 표시
+			getBasicProfileImage(request,model);
+			
+		}else {//업로드한 아미지 읽기
+			model.addAttribute("imageFile",memberVO.getMem_photo());
+			model.addAttribute("filename",memberVO.getMem_photoname());
+		}
+	}
+	//기본 이미지 읽기
+	public void getBasicProfileImage(HttpServletRequest request, Model model) {
+		byte[] readbyte = FileUtil.getBytes(request.getServletContext().getRealPath("/image_bundle/face.png"));
+		
+		model.addAttribute("imageFile",readbyte);
+		model.addAttribute("filename","face.png");
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping("/member/myPageTicket")
 	public String process1() {
 		
