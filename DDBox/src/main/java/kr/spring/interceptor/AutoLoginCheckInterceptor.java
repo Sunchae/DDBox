@@ -26,7 +26,7 @@ public class AutoLoginCheckInterceptor implements HandlerInterceptor{
 		 HttpSession session = request.getSession();
 		 MemberVO user = (MemberVO)session.getAttribute("user");
 		 if(user==null) {
-			 Cookie now_cookie = findCookie(request.getCookies(),"au-log");
+			 Cookie now_cookie = findCookie(request.getCookies(),"autoid-log");
 			 if(now_cookie!=null) {
 				 MemberVO memberVO = memberService.selectAutoid(now_cookie.getValue());
 				 
