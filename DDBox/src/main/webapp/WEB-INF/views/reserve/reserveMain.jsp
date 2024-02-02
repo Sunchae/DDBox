@@ -70,6 +70,7 @@
                  success: function(param){
                 	 displayMovie(param);
                      displayScreen(param.showVO);
+                   /*   displayScr(param); */
                  },
                  error: function(){
                      alert('네트워크 오류 발생');
@@ -109,6 +110,14 @@
         	    });
         	    
         	}
+        	    
+       /*   function displayScr(param){
+             let screenPick = $('screen-name');
+             	 screenPick.empty();
+        	 
+        	 $('.check-content').text(param.showVO2.scr_name); 
+             console.log(param);
+         }	     */
       </script>
       <!-- li 클릭시 영화 제목+포스터 출력& 해당 영화가 상영되고 있는 극장 -->
       
@@ -132,7 +141,7 @@
             <!-- 영화관 선택하지 않았을 때 -->
             <div class="theater-choies-check" style="display:block;">
                <p class="check-content align-center"  style="border-style:dotted">
-                  목록에서 극장을 선택하세요
+                  <b class="screen-name">목록에서 극장을 선택하세요</b>
                </p>
                <!--선택했을 경우 클릭하면 입력되고 아니면 열리지 않는다.-->
                <div class="check-theater" style="display: none;">
@@ -142,7 +151,6 @@
          </div>
          </div>
       </div>
-      
       <!------------------------------ 날짜 ------------------------------>
       <div style="width:33%; height:700px;">
          <div class="right-one">

@@ -32,11 +32,6 @@ public class ShowServiceImpl implements ShowService{
 		showMapper.insertShow(show);
 	}
 
-	@Override
-	public ShowVO selectShow(int movie_num, int shw_num) {
-		return showMapper.selectShow(movie_num, shw_num);
-	}
-	
 
 	@Override
 	public void updateShow(ShowVO show) {
@@ -53,6 +48,11 @@ public class ShowServiceImpl implements ShowService{
 	@Override
 	public List<ShowVO> selectShowListForRev(int movie_num) {
 		return showMapper.selectShowListForRev(movie_num);
+	}
+
+	@Override
+	public ShowVO selectShow(int movie_num, String scr_name) {
+		return showMapper.selectShow(movie_num, scr_name);
 	}
 
 	

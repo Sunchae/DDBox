@@ -67,6 +67,23 @@
 	</select>
 	
 	
+	<select id="selectShow" parameterType="showVO" resultType="String">
+	SELECT
+		scr_name
+	FROM
+		(SELECT
+			scr_name
+		FROM
+			show
+		LEFT OUTER JOIN (SELECT * FROM screen) USING(scr_num)
+		LEFT OUTER JOIN (SELECT * FROM movie) USING(movie_num)
+		WHERE movie_num=#{movie_num})
+		WHERE scr_name=#{scr_name};
+	</select>
+	
+	
+	
+	
 	
 	<sql id="movieOrder">
 		<if test="order == 1">

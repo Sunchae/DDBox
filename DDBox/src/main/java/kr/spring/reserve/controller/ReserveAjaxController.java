@@ -17,6 +17,7 @@ import kr.spring.movie.service.MovieService;
 import kr.spring.movie.vo.MovieVO;
 import kr.spring.reserve.service.ReserveService;
 import kr.spring.reserve.service.ShowService;
+import kr.spring.reserve.vo.ScreenVO;
 import kr.spring.reserve.vo.ShowVO;
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,6 +48,8 @@ public class ReserveAjaxController {
 		
 		log.debug("<<상영관>> : "+ show);
 		List<ShowVO> showVO = showService.selectShowListForRev(movie_num);
+		
+		ShowVO showVO2 = showService.selectShow(movie_num, show.getScr_name());
 
 		if(movieVO != null) {
 			mapJson.put("status", "yesMovie");
@@ -55,10 +58,13 @@ public class ReserveAjaxController {
 		}
 		mapJson.put("movieVO", movieVO);
 		mapJson.put("showVO", showVO);
+		mapJson.put("showVO2", showVO2);
 		mapJson.put("result", "success");
 		
 
 		return mapJson;
 	}
+	
+	
 	
 }

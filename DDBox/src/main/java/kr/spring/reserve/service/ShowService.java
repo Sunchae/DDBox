@@ -16,7 +16,7 @@ public interface ShowService {
 	//예매 등록
 	public void insertShow(ShowVO show);
 	//한건의 예매 읽기
-	public ShowVO selectShow(int movie_num, int shw_num);
+	public ShowVO selectShow(int movie_num, String scr_name);
 	
 	public List<ShowVO> selectShowListForRev(int movie_num);
 
