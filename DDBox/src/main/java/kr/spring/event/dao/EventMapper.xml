@@ -70,6 +70,7 @@
 		JOIN member USING(mem_num)
 		WHERE event_num=#{event_num}
 	</select>
+	<!-- 룰렛 참여자 등록 -->
 	<insert id="insertRentry" parameterType="Rentry_listVO">
 		INSERT INTO rentry_list(
 			rentry_num,

@@ -27,8 +27,10 @@
 	</c:if>
 	<div>
 	<c:if test="${event_list.event_type == 2}">
-		<button id="entry_btn" class="entry_btn" data-event_num="${event_list.event_num}">응모하기</button>
-	</c:if>
+		<fieldset id='btn_fieldset_${event_list.event_num}'>
+                <input type="button" class="entry_btn" value="응모하기" onclick='entryButtonClick("${event_list.event_num}")' data-event_num="${event_list.event_num}">
+            </fieldset>
+	</c:if>		
 	</div>
 </div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>

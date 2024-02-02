@@ -20,6 +20,7 @@ public interface EventMapper {
 	public void deleteEvent(int event_num);//이벤트 글 삭제
 	public void deleteFile(int event_num);//특정 경로의 파일 올렸을때 삭제(filename을 event_photo1,2)
 	
+	
 	//룰렛 참여자 리스트
 	//public List<Rentry_listVO> selectRentryList(Map<String,Object> map);//룰렛 이벤트 참여자 리스트 목록
 	public void insertRentry(Rentry_listVO rentry);//이벤트 참여자 등록
