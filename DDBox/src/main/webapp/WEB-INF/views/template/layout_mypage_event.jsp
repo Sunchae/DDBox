@@ -20,11 +20,10 @@
 			<tiles:insertAttribute name="nav"/>
 		</div>
 		<div id="page_body">
-			<tiles:insertAttribute name="body"/>
 			<div id="mypage_event_nav">
 				<tiles:insertAttribute name="nav2"/>
 			</div>
-			
+			<tiles:insertAttribute name="body"/>
 		</div>
 	</div>
 	<div id="main_footer" class="page_clear">

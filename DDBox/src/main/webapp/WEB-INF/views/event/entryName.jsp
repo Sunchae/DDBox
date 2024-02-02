@@ -25,6 +25,7 @@
 	</table>
 	
 	<input type="button" value="추첨" id="entry" onclick="randomDraw(2)">
+	
 	<hr size="1" width="100%">
 	<div id="winner-section" style="display:none;">
             <h3>추첨 결과</h3>

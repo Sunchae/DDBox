@@ -5,7 +5,7 @@
 <!-- 내용 시작 -->
 <div class="page-main">
 	<div class="tit-util">
-		<h3>응모권 이벤트 리스트</h3>
+		<h3>응모권 당첨 내역</h3>
 		<c:if test="${count == 0}">
 		<div class="result-display">표시할 게시물이 없습니다.</div>
 		</c:if>
@@ -18,12 +18,14 @@
 			</tr>
 			<c:forEach var="list" items="${list}">
 			<tr>
-				<c:if test="${list.event_type == 2">
+				
+				
 				<td class="align-center">${list.event_num}</td>
 				<td><a href="detail?event_num=${list.event_num}">${list.event_title}</a></td>
 																														<!-- 이벤트넘으로 넘겨줌 -->
 				<td><input type="button" value="결과확인" onclick="location.href='${pageContext.request.contextPath}/event/entryName?event_num=${list.event_num}'"></td>
-				</c:if>
+			
+				
 			</tr>
 			</c:forEach>
 		</table>
