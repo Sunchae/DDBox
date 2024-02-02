@@ -22,10 +22,23 @@
 				<form:errors path="mem_name" cssClass="error-color"/>
 			</li>
 			<li>
-				<form:label path="mem_birth">생년월일</form:label> 
-				<form:input	path="mem_birth" id="datepicker" placeholder="날짜 선택" /> 
-				<form:errors path="mem_birth" cssClass="error-color" />
-			</li>
+                <form:label path="mem_birth">생년월일</form:label>
+                <!-- Select2 사용 -->
+                <select class="mem-birth-select" name="mem_birth_year">
+                    <option value="">년</option>
+                    <!-- 나머지 년 추가 -->
+                </select>
+                <select class="mem-birth-select" name="mem_birth_month">
+                    <option value="">월</option>
+                    <!-- 나머지 월 추가 -->
+                </select>
+                <select class="mem-birth-select" name="mem_birth_day">
+                    <option value="">일</option>
+                    <!-- 나머지 일 추가 -->
+                </select>
+                <form:errors path="mem_birth" cssClass="error-color" />
+            </li>
+            
 
 			<li>
 				<form:label path="mem_gender">성별</form:label> 
@@ -93,11 +106,23 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/member.register.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jquery-ui.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+
 <!-- 우편번호 검색 시작 -->
 	<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
 <div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
 <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
 </div>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        // Select2 초기화
+        $(".mem-birth-select").select2();
+    });
+</script>
+
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>

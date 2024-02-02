@@ -28,8 +28,8 @@ public interface MemberMapper {
 	public void deleteMember_detail(int mem_num);
 	
 	//자동 로그인
-	@Update("UPDATE member_detail SET mem_autoid=#{autoid} WHERE mem_num=#{mem_num}")
-	public void updateAutoid(String autoid, int mem_num);
+	@Update("UPDATE member_detail SET mem_autoid=#{mem_autoid} WHERE mem_num=#{mem_num}")
+	public void updateAutoid(String mem_autoid, int mem_num);
 	@Select("SELECT mem_num,mem_id,mem_auth,mem_autoid,mem_pw,mem_nickname,mem_email FROM member JOIN member_detail USING(mem_num) WHERE mem_autoid=#{mem_autoid}")
 	public MemberVO selectAutoid(String autoid);
 	public void deleteAutoid(int mem_num);

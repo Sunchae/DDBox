@@ -22,7 +22,7 @@ public interface ReserveMapper {
 	  public MovieVO selectMovie(Map<String, Object> map); 
 	  //선택 영화 출력 
 	  public MovieVO selectMovieDetail(int movie_num);
-	 
+	 public String selectScr_name();
 	
 	
 	/*====================

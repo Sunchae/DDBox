@@ -56,8 +56,12 @@
       </div>
       </div>
       <script type="text/javascript">
+      	 let choice_num;
+      	 let choice_screen;
+      	 let choice_date;
          $('.movie_choice').click(function(){
              let movie_num = $(this).attr('data-num');
+             choice_num = movie_num;
              selectMovie(movie_num);
          });
 
@@ -69,7 +73,7 @@
                  dataType: 'json',
                  success: function(param){
                 	 displayMovie(param);
-                     displayScreen(param.showVO);
+                     displayScreen(param.list);
                    /*   displayScr(param); */
                  },
                  error: function(){
@@ -93,31 +97,42 @@
              
          }
 		
-         function displayScreen(showVO) {
+         function displayScreen(list) {
         	    let screenList = $('.screen-list');
         	    screenList.empty(); // 기존 목록 제거
 				
         	    //$(movie_num.list).each(function(index,item) {
-        	    $.each(showVO, function(index, item) {	
-        	        let output = '<ul class="screen-list">';
-        	        output += '<li>';
-        	        output += item;
+        	    $.each(list, function(index, item) {	
+        	        let output = '<li class="each-screen" data-num="'+item.scr_num+'">';
+        	        output += item.scr_name;
         	        output += '</li>';
-        	        output += '</ul>';
         	        screenList.append(output);
         	        
         	        console.log(item);
         	    });
         	    
         	}
+        	//동적 생성된 영화관 클릭 했을 시 클릭한 영화관 이름 받아오고 싶음    
+        	$(document).on('click','.each-screen',function(){
+        		choice_screen = $(this).attr('data-num');
+        		console.log('choice_num : ' + choice_num);
+        		console.log('choice_screen : ' + choice_screen);
+        		console.log('choice_date : ' + choice_date);
+            });	    
+        	
+        	$(document).on('click','.screen-choice',function(){
+                alert('영화를 먼저 선택하세요');
+                
+            });
+        	
         	    
-       /*   function displayScr(param){
+          function displayScr(param){
              let screenPick = $('screen-name');
              	 screenPick.empty();
         	 
         	 $('.check-content').text(param.showVO2.scr_name); 
              console.log(param);
-         }	     */
+         }	     
       </script>
       <!-- li 클릭시 영화 제목+포스터 출력& 해당 영화가 상영되고 있는 극장 -->
       
@@ -131,7 +146,7 @@
                      <div class="search_box" style="overflow-y: scroll; height:550px; width:300px;">
                         <ul class="screen-list">
                         <c:forEach var="reserve" items="${list3}">
-                              <li class="screen_choice" data-num="${reserve.scr_num}">${reserve.scr_name}</li>
+                              <li class="screen-choice" data-num="${reserve.scr_num}">${reserve.scr_name}</li>
                         </c:forEach>
                         </ul>
                      </div>
@@ -206,31 +221,31 @@
       if (d == '01') {
          d = weekOfDay[1];
          button.classList = "mon";
-         button.setAttribute('data-day', yyyy + mm + dd + d);
+         button.setAttribute('data-day', yyyy +'-'+ mm +'-'+ dd);
       } else if (d == '02') {
          d = weekOfDay[2];
          button.classList = "mon";
-         button.setAttribute('data-day', yyyy + mm + dd + d);
+         button.setAttribute('data-day', yyyy +'-'+ mm +'-'+ dd);
       } else if (d == '03') {
          d = weekOfDay[3];
          button.classList = "mon";
-         button.setAttribute('data-day', yyyy + mm + dd + d);
+         button.setAttribute('data-day', yyyy +'-'+ mm +'-'+ dd);
       } else if (d == '04') {
          d = weekOfDay[4];
          button.classList = "mon";
-         button.setAttribute('data-day', yyyy + mm + dd + d);
+         button.setAttribute('data-day', yyyy +'-'+ mm +'-'+ dd);
       } else if (d == '05') {
          d = weekOfDay[5];
          button.classList = "mon";
-         button.setAttribute('data-day', yyyy + mm + dd + d);
+         button.setAttribute('data-day', yyyy +'-'+ mm +'-'+ dd);
       } else if (d == '06') {
          d = weekOfDay[6];
          button.classList = "mon sat";
-         button.setAttribute('data-day', yyyy + mm + dd + d);
+         button.setAttribute('data-day', yyyy +'-'+ mm +'-'+ dd);
       } else if (d == '00') {
          d = weekOfDay[0];
          button.classList = "mon sun";
-         button.setAttribute('data-day', yyyy + mm + dd + d);
+         button.setAttribute('data-day', yyyy +'-'+ mm +'-'+ dd);
       }
       if (i === dayNumber) {
          button.classList = "mon active";
@@ -254,6 +269,12 @@
          $btnActive.addClass('active');
       }
    });
+
+   $(document).on('click','.mon',function(){
+	   choice_date = $(this).attr('data-day');
+   });
+   
+   
    //날짜 클릭했으면 활성화버튼 해제 
 
    /* //영화버튼 클릭시 극장 정보 가져오기

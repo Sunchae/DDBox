@@ -65,13 +65,13 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void updateAutoid(String autoid, int mem_num) {
-		memberMapper.updateAutoid(autoid, mem_num);
+	public void updateAutoid(String mem_autoid, int mem_num) {
+		memberMapper.updateAutoid(mem_autoid, mem_num);
 	}
 
 	@Override
-	public MemberVO selectAutoid(String autoid) {
-		return memberMapper.selectAutoid(autoid);
+	public MemberVO selectAutoid(String mem_autoid) {
+		return memberMapper.selectAutoid(mem_autoid);
 	}
 
 	@Override

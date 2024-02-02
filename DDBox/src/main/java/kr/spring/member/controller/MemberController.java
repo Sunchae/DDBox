@@ -1,8 +1,6 @@
 package kr.spring.member.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.Cookie;
@@ -21,15 +19,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
-import kr.spring.question.service.EmailService;
-import kr.spring.question.vo.EmailVO;
 import kr.spring.util.AuthCheckException;
 import kr.spring.util.FileUtil;
-import kr.spring.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -37,8 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
-	@Autowired
-	private EmailService emailService;
+	
 	
 	/*==============================
 	 * 자바빈(VO) 초기화
@@ -155,7 +148,7 @@ public class MemberController {
 					if(autoid==null) {
 						//자동 로그인 체크 식별값 생성
 						autoid = UUID.randomUUID().toString();
-						log.debug("<<autodi>> : " + autoid);
+						log.debug("<<autoid>> : " + autoid);
 						member.setMem_autoid(autoid);
 						memberService.updateAutoid(member.getMem_autoid(), member.getMem_num());
 								

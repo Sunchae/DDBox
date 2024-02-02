@@ -39,17 +39,16 @@ public class ReserveAjaxController {
 	 ============================*/
 	@RequestMapping("/reserve/getMovie")
 	@ResponseBody
-	public Map<String,Object> getMovie(@RequestParam int movie_num, MovieVO movie, ShowVO show,HttpSession session){
-		log.debug("<<영화 등록/삭제>> : "+ movie);
+	public Map<String,Object> getMovie(@RequestParam int movie_num, HttpSession session){
+		log.debug("<<영화 등록/삭제>> : "+ movie_num);
 
 		Map<String,Object> mapJson = new HashMap<String, Object>();
 
-		MovieVO movieVO = movieService.selectMovie(movie.getMovie_num());
+		MovieVO movieVO = movieService.selectMovie(movie_num);
 		
-		log.debug("<<상영관>> : "+ show);
 		List<ShowVO> showVO = showService.selectShowListForRev(movie_num);
 		
-		ShowVO showVO2 = showService.selectShow(movie_num, show.getScr_name());
+		//ShowVO showVO2 = showService.selectShow(movie_num, show.getScr_name());
 
 		if(movieVO != null) {
 			mapJson.put("status", "yesMovie");
@@ -57,8 +56,8 @@ public class ReserveAjaxController {
 			mapJson.put("status", "noMovie");
 		}
 		mapJson.put("movieVO", movieVO);
-		mapJson.put("showVO", showVO);
-		mapJson.put("showVO2", showVO2);
+		mapJson.put("list", showVO);
+		//mapJson.put("showVO2", showVO2);
 		mapJson.put("result", "success");
 		
 
