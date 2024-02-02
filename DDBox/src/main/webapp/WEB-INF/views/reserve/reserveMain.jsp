@@ -157,6 +157,7 @@
             <h3 class="align-center" style="width:100%; height:40px; background-color:black; color:white;">시간</h3>
             <div class="time-check"></div>
             <div class="movie-check"></div>
+            <input type="button" value="좌석선택" onclick="location.href='seatMain'">
          </div>
       </div>
    </div>

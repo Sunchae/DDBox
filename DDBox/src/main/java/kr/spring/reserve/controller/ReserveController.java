@@ -60,6 +60,7 @@ public class ReserveController {
 		return "reserveMain";
 	}
 	
+	
 
 	/*====================
 	 * 	  예매 영화 목록

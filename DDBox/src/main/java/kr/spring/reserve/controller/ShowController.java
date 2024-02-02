@@ -86,8 +86,8 @@ public class ShowController {
 	 ====================*/
 	@RequestMapping("/reserve/reserveList")
 	public ModelAndView process(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
-			@RequestParam(value="order", defaultValue="1") int order,
-			String keyfield, String keyword) {
+								@RequestParam(value="order", defaultValue="1") int order,
+								String keyfield, String keyword) {
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
