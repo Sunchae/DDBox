@@ -40,8 +40,7 @@ public class CartServiceImpl implements CartService{
 
 	@Override
 	public CartVO selectCart(int cart_num) {
-		// TODO Auto-generated method stub
-		return null;
+		return cartMapper.selectCart(cart_num);
 	}
 
 	@Override

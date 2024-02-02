@@ -87,7 +87,7 @@
 										<%-- type end --%>
 				<div class="btn-group">
 					<!-- ::before -->
-					<a href="#" id="btnGift" class="button large" w-data="500" h-data="410" title="선물">선물</a>
+					<a href="${pageContext.request.contextPath}/cart/cartDetail" id="btnCart" class="button large" w-data="500" h-data="410" title="장바구니">장바구니</a>
 					<a href="#" id="btnPurc" class="button purple large" w-data="500" h-data="400" title="구매">구매</a>
 					<!-- ::after -->
 				</div>
@@ -177,7 +177,7 @@
 		</script>
 		</c:if>
 
-		<button id="check_module" type="button">테스트 결제</button>
+		<button id="check_module" type="button">구매</button>
 		<script>
 			$("#check_module").click(function() {
 				var IMP = window.IMP; // 생략가능

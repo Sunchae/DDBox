@@ -18,6 +18,7 @@ public interface CartMapper{
 	@Insert("INSERT INTO pcart(cart_num, store_num, order_quantity, mem_num) VALUES (pcart_seq.nextval,#{store_num},#{order_quantity},#{mem_num})")
 	public void insertCart(CartVO cart);
 	public int getTotalByMem_num(int mem_num);
+	@Select("SELECT * FROM pcart WHERE store_num=#{store_num} AND mem_num=#{mem_num}")
 	public CartVO selectCart(int cart_num);
 	public void updateCart(CartVO cart);
 	public void updateCartByStore_num(CartVO cart);
