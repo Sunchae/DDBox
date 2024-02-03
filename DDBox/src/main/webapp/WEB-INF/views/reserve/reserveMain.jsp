@@ -208,13 +208,16 @@
                 
             });
         	
-        	//보류 코드    
+        	    
           function displaySelectedScreen(param){
              //param.screen에 데이터 담겨 있음  아래에 마련된 공간에 데이터 비우고 영화관 이름 집어넣으면 됨
         	let screenPick = $('.screen-name');
             screenPick.empty();
         	 
-        	 $('.screen-name').text(param.screen.scr_name); 
+        	 let output = '<li class="selected-screen" data-num="'+param.screen.scr_num+'">';
+ 	       		 output += param.screen.scr_name;
+ 	        	output += '</li>';
+ 	        screenPick.append(output);
              
          }	     
       
