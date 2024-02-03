@@ -1,14 +1,8 @@
 package kr.spring.movie.service;
 
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Map;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,6 +52,13 @@ public class MovieServiceImpl implements MovieService{
 	}
 
 	
+
+	@Override
+	public List<MovieVO> selectMoviesByDate(String date) {
+		return movieMapper.selectMoviesByDate(date);
+	}
+	
+	
 	/*==================================
 	 * 영화 좋아요 PART
 	 ===================================*/
@@ -85,7 +86,9 @@ public class MovieServiceImpl implements MovieService{
 	public void deleteFavByMovieNum(int Movie_num) {
 		
 	}
-	
+
+
+
 
 	
 }	

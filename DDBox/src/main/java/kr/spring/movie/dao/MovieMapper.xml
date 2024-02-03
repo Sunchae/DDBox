@@ -50,5 +50,12 @@
 	WHERE movie_num=#{movie_num}	
 		
 	</update>
-
+	
+	<select id="selectMoviesByDate" parameterType="String">
+	SELECT DISTINCT m.movie_title, m.movie_num
+	FROM movie m
+	JOIN show s ON m.movie_num = s.movie_num
+	WHERE
+	#{date} BETWEEN s.shw_sdate AND s.shw_edate
+	</select>
 </mapper>

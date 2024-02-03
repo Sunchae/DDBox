@@ -41,7 +41,7 @@
             <div class="col-body" style="overflow-y: scroll; height:550px;" >
                <ul>
                <c:forEach var="reserve" items="${list}">
-                  <li class="movie_choice" data-num="${reserve.movie_num}">${reserve.movie_title}</li>
+                  <li class="movie-choice" data-num="${reserve.movie_num}">${reserve.movie_title}</li>
                </c:forEach>
                </ul>
             </div>
@@ -59,30 +59,113 @@
       	 let choice_num;
       	 let choice_screen;
       	 let choice_date;
-         $('.movie_choice').click(function(){
+        
+         //날짜 클릭
+         $(document).on('click','.mon',function(){
+      	   choice_date = $(this).attr('data-day');
+      	   alert('선택한 날짜 : ' + choice_date);
+      	   
+			//선택한 날짜에 해당하는 상영 정보 가져오는 함수 호출
+			getMoviesByDate(choice_date);
+         });
+         //영화 클릭
+      	 $(document).on('click','.movie-choice',function(){
              let movie_num = $(this).attr('data-num');
              choice_num = movie_num;
              selectMovie(movie_num);
          });
-
+         //극장 클릭
+         $(document).on('click','.each-screen',function(){
+        	 let scr_num = $(this).attr('data-num');
+        	 choice_screen = scr_num;
+        	 selectScreen(scr_num);
+        	 
+         })
+         
+         
          function selectMovie(movie_num){
-             $.ajax({
-                 url: 'getMovie',
-                 type: 'get',
-                 data: {movie_num: movie_num},
-                 dataType: 'json',
-                 success: function(param){
-                	 displayMovie(param);
-                     displayScreen(param.list);
-                   /*   displayScr(param); */
-                 },
-                 error: function(){
-                     alert('네트워크 오류 발생');
-                 }
-             });
+         $.ajax({
+             url: 'getMovie',
+             type: 'get',
+             data: {movie_num: movie_num},
+             dataType: 'json',
+             success: function(param){
+            	 displaySelectedMovie(param);
+                 displayScreen(param.list);
+                  
+             },
+             error: function(){
+                 alert('네트워크 오류 발생(영화선택)');
+             }
+         });
+     	}
+         //영화관 선택 시 선택한 영화관 정보 출력
+    	function selectScreen(scr_num){
+    		$.ajax({
+    			url: 'getScreen',
+    			type: 'get',
+    			data: {scr_num:scr_num},
+    			dataType: 'json',
+    			success: function(param){
+    				displaySelectedScreen(param);
+    			},
+    			error: function(){
+    				alert('네트워크 오류 발생(극장선택)');
+    			}
+    		});
+    	}
+       
+         function getMoviesByDate() {
+        	    $.ajax({
+        	        url: 'getMoviesByDate', // 서버에서 해당 날짜에 상영하는 영화 목록을 가져오는 엔드포인트
+        	        type: 'get',
+        	        data: { date : choice_date },
+        	        dataType: 'json',
+        	        success: function (param) {
+        	            console.log(param.movielist);
+        	        	// 성공적으로 받은 영화 목록을 화면에 표시하는 함수 호출
+        	            displayMovies(param.movielist);
+        	            
+        	        },
+        	        error: function () {
+        	            alert('네트워크 오류 발생(날짜선택)');
+        	        }
+        	    });
+        	}
+         
+         function displayMovies(movies){
+        	 //영화 목록을 표시할 부분의 선택자를 지정
+        	 let movieListContainer = $('.col-body');
+        	 
+        	 //이전에 표시된 영화목록 삭제
+        	 movieListContainer.empty();
+        	 
+        	 //받아온 영화 목록을 반복하여 화면에 추가
+        	 $.each(movies, function(index,movie){
+        		//각 영화에 대한 화면 출력 처리
+        		displayMovieItem(movie);
+        		 
+        	 });
+        		 
+        	 
          }
-
-         function displayMovie(param){
+         //반복 돌려서 영화 리스트 출력하는 function 
+         function displayMovieItem(movie) {
+        	 	let movieListContainer = $('.col-body');
+        	
+        	    let output = '<li class="movie-choice" data-num="' + movie.movie_num + '">';
+        	    output += movie.movie_title;
+        	    //output += '<h3>' + movie.title + '</h3>';
+        	    // 추가적인 영화 정보 표시 로직 작성
+        	    output += '</li>';
+        	    
+        	    // movieListContainer에 영화 정보 추가
+        	    movieListContainer.append(output);
+        	}
+         
+         
+         //영화 클릭시 아래에 선택 영화 보여주는 function
+         function displaySelectedMovie(param){
              let output;
              if(param.status == 'yesMovie'){
                  output = 'https://image.tmdb.org/t/p/w500/' + param.movieVO.movie_poster; 
@@ -125,14 +208,17 @@
                 
             });
         	
-        	    
-          function displayScr(param){
-             let screenPick = $('screen-name');
-             	 screenPick.empty();
+        	//보류 코드    
+          function displaySelectedScreen(param){
+             //param.screen에 데이터 담겨 있음  아래에 마련된 공간에 데이터 비우고 영화관 이름 집어넣으면 됨
+        	let screenPick = $('.screen-name');
+            screenPick.empty();
         	 
-        	 $('.check-content').text(param.showVO2.scr_name); 
-             console.log(param);
+        	 $('.screen-name').text(param.screen.scr_name); 
+             
          }	     
+      
+      
       </script>
       <!-- li 클릭시 영화 제목+포스터 출력& 해당 영화가 상영되고 있는 극장 -->
       
@@ -267,12 +353,11 @@
       } else {
          $('button.mon').removeClass('active');
          $btnActive.addClass('active');
+         
+         
       }
    });
 
-   $(document).on('click','.mon',function(){
-	   choice_date = $(this).attr('data-day');
-   });
    
    
    //날짜 클릭했으면 활성화버튼 해제 

@@ -24,6 +24,11 @@ public interface MovieMapper {
 	//영화 리스트 뽑기
 	@Select("SELECT * FROM (SELECT * FROM movie ORDER BY movie_popularity DESC) WHERE ROWNUM <= 10")
 	public List<MovieVO> selectList(Map<String, Object> map);
+	//예매페이지 날짜 선택 후 영화 리스트 뽑기 
+	public List<MovieVO> selectMoviesByDate(String date);
+	
+	
+	
 
 	@Select("SELECT * FROM (SELECT * FROM movie ORDER BY movie_popularity DESC) WHERE ROWNUM <= 10")
 	public List<MovieVO> selectMovieList();
