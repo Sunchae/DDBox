@@ -12,4 +12,7 @@ public interface ScreenMapper {
 	//극장 선택
 	@Select("SELECT * FROM screen WHERE scr_num=#{scr_num}")
 	public ScreenVO selectedScreen(int scr_num);
+	
+	@Select("")
+	public List<ScreenVO> selectTimeList(int scr_num);
 }

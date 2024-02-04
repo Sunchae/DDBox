@@ -81,15 +81,21 @@ public class ReserveAjaxController {
 	    mapJson.put("movielist", movielist);
 	    return mapJson;
 	}
+	
+	
 	@RequestMapping("/reserve/getScreen")
 	@ResponseBody
-	public Map<String,Object> getScreen(@RequestParam int scr_num, HttpSession session) {
+	public Map<String,Object> getScreen(@RequestParam int scr_num,@RequestParam int movie_num, HttpSession session) {
 		log.debug("<<선택한 극장>> : " + scr_num);
 		Map<String,Object> mapJson = new HashMap<String, Object>();
 		// 해당 날짜에 상영하는 영화 목록을 가져오는 서비스 메서드 호출
 		ScreenVO screen = screenService.selectedScreen(scr_num);
 		
+		List<ScreenVO> timeList = screenService.selectTimeList(scr_num);
+		
 		mapJson.put("screen", screen);
+		mapJson.put("timeList", timeList);
+		
 		return mapJson;
 	}
 	
