@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Movie Booking</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/ticketingList.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
@@ -16,14 +19,12 @@
     color: #fff;
     box-sizing: border-box;
 }
-
 #container{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 800px;
-
 }
 
 .movieContainer{
@@ -178,54 +179,63 @@ li{
 #costs{
     color: #6feaf6;
 }
-/* #ticket .section-numberofpeople .col-body .numberofpeople-select .group ul {
+.all-check-people{
+	display: flex;
+    width: 70%;
+    margin-left: 10%;
+    margin-top: 25px;
+    height: 10%;
+	top: 20px;
+}
+.check-people-box{
+	position:relative;
+	display: flex;
+	width:10px;
+	margin-left: 10%;
+}
+.check-people{
+	float:left;
+    display:flex;
+    clear:both;
+    width: 20%;
+    height: 40px;
+    border-top: 1px solid rgb(238, 241, 255);
+    background-color: rgb(238, 241, 255);
+}
+.txt{
     float: left;
-    width: auto;
-    height: 22px;
-    line-height: 22px;
-    overflow: hidden;
-}
-#ticket .section-numberofpeople .col-body .numberofpeople-select .group ul li {
-    width: 20px;
-    height: 20px;
-    line-height: 20px;
-    border: 1px solid #d6d3ce;
-    background-color: #f2f0e5;
-}
-#ticket .section-numberofpeople .col-body .numberofpeople-select .group ul li a {
-    display: block;
-    height: 100%;
-    color: #333;
-    font-family: Verdana;
-    font-size: 14px;
-    font-weight: bold;
     text-align: center;
+    font-size: small;
+    margin-right: 20px;
+    margin-top: 10px;
 }
-a {
-    text-decoration: none;
-    text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-    color: #333;
+.down,.up{
+    width: 18.2px;
+    height: 22px;
+    border-radius: 3px;
+    margin-top: 10px;
+    position: sticky;
 }
-#ticket .section-numberofpeople .col-body .numberofpeople-select .group ul li.selected a {
-    margin: 1px;
-    border: 1px solid #5c5c5c;
-    width: 16px;
-    height: 16px;
-    line-height: 16px;
+
+.now{
+    width: 20px;
+    height: 22px;
+    margin-top: 10px;
+    position: sticky;
+    
 }
-#ticket .section-numberofpeople .col-body .numberofpeople-select .group ul li.selected a {
-    color: #fff;
+.down,.now,.up{
+    float: left;
+    border: 1px solid rgb(197, 196, 196);
+    background-color: white;
+    margin-top: 5px;
+
 }
-ul {
-    display: block;
-    list-style-type: disc;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 40px;
-} */
+.count{
+    font-size: 10px;
+    color: rgb(160, 160, 160);
+    text-align: left;
+}
 ul {
     list-style:none;
     margin:0;
@@ -243,125 +253,39 @@ li {
 <body>
 	<div id="container" style="border:1px solid black;  background-color: #4a4777;">
 		<div class="movieContainer">
-			<label for="movie"> Pick a Movie : </label> 
+			<label for="movie"> 관람인원선택 : </label> 
 			<select name="pickMovie" id="movie">
-				<option class="price" value="10">Avengers:Endgame ($10)</option>
-				<option class="price" value="12">Joker ($12)</option>
-				<option class="price" value="8">Toy Story 4 ($8)</option>
-				<option class="price" value="9">The Lion King ($9)</option>
+				<option class="price" value="15000">일반</option>
+				<option class="price" value="12000">청소년</option>
 			</select>
 		</div>
-		<div class="person_screen">
-			<div class="section section-numberofpeople">
-				<div class="col-body">
-					<div class="numverofpeople-select" id="nopContainer" style="min-width: 426px;">
-						<div id="maximum-people" style="padding-bottom: 5px; text-align:right; font-size:11px; !important; color:red;"> * 최대 8명 선택 가능</div>
-						<div class="group adult" id="nop_group_adult" style="display:block;">
-							<span class="title">일반</span>
-							<ul>
-								<li data-count="0" class="selected" style="border:1px solid white;">
-									<a href="#" onclick="return false;">
-										<span style="cursor:pointer; color:white; font-size:12pt;">0명</span>
-									</a>
-								</li>
-								<li data-count="1" style="border:1px solid white;">
-									<a href="#" onclick="return false;">
-										<span style="cursor:pointer; color:white; font-size:12pt;">1명</span>
-									</a>
-								</li>
-								<li data-count="2" style="border:1px solid white;">
-									<a href="#" onclick="return false;">
-										<span style="cursor:pointer; color:white; font-size:12pt;">2명</span>
-									</a>
-								</li>
-								<li data-count="3" style="border:1px solid white;">
-									<a href="#" onclick="return false;">
-										<span style="cursor:pointer; color:white; font-size:12pt;">3명</span>
-									</a>
-								</li>
-								<li data-count="4" style="border:1px solid white;">
-									<a href="#" onclick="return false;">
-										<span style="cursor:pointer; color:white; font-size:12pt;">4명</span>
-									</a>
-								</li>
-								<li data-count="5" style="border:1px solid white;">
-									<a href="#" onclick="return false;">
-										<span style="cursor:pointer; color:white; font-size:12pt;">5명</span>
-									</a>
-								</li>
-								<li data-count="6" style="border:1px solid white;">
-									<a href="#" onclick="return false;">
-										<span style="cursor:pointer; color:white; font-size:12pt;">6명</span>
-									</a>
-								</li>
-								<li data-count="7" style="border:1px solid white;">
-									<a href="#" onclick="return false;">
-										<span style="cursor:pointer; color:white; font-size:12pt;">7명</span>
-									</a>
-								</li>
-								<li data-count="8" style="border:1px solid white;">
-									<a href="#" onclick="return false;">
-										<span style="cursor:pointer; color:white; font-size:12pt;">8명</span>
-									</a>
-								</li>
-							</ul>
-						</div>
-						<br>
-						<br>
-						<div class="group_child" id="nop_group_child" style="display:block;">
-							<span class="title">청소년</span>
-							<ul>
-								<li data-count="0" class="selected" style="border:1px solid white;">
-									<a href="#" onclick="return false;">
-										<span style="cursor:pointer; color:white; font-size:12pt;">0명</span>
-									</a>
-								</li>
-								<li data-count="1" style="border:1px solid white;">
-									<a href="#" onclick="return false;">
-										<span style="cursor:pointer; color:white; font-size:12pt;">1명</span>
-									</a>
-								</li>
-								<li data-count="2" style="border:1px solid white;">
-									<a href="#" onclick="return false;">
-										<span style="cursor:pointer; color:white; font-size:12pt;">2명</span>
-									</a>
-								</li>
-								<li data-count="3" style="border:1px solid white;">
-									<a href="#" onclick="return false;">
-										<span style="cursor:pointer; color:white; font-size:12pt;">3명</span>
-									</a>
-								</li>
-								<li data-count="4" style="border:1px solid white;">
-									<a href="#" onclick="return false;">
-										<span style="cursor:pointer; color:white; font-size:12pt;">4명</span>
-									</a>
-								</li>
-								<li data-count="5" style="border:1px solid white;">
-									<a href="#" onclick="return false;">
-										<span style="cursor:pointer; color:white; font-size:12pt;">5명</span>
-									</a>
-								</li>
-								<li data-count="6" style="border:1px solid white;">
-									<a href="#" onclick="return false;">
-										<span style="cursor:pointer; color:white; font-size:12pt;">6명</span>
-									</a>
-								</li>
-								<li data-count="7" style="border:1px solid white;">
-									<a href="#" onclick="return false;">
-										<span style="cursor:pointer; color:white; font-size:12pt;">7명</span>
-									</a>
-								</li>
-								<li data-count="8" style="border:1px solid white;">
-									<a href="#" onclick="return false;">
-										<span style="cursor:pointer; color:white; font-size:12pt;">8명</span>
-									</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		
+			<div class="check-people-box">
+              <div class="check-people">
+                    <p class="txt">성인</p>
+                    <div class="count">
+                        <button type="button" class="down" title="성인 좌석 선택 감소">-</button>
+                        <div class="number">
+                            <button type="button" class="now" title="성인 현재 좌석 선택 수">0</button>
+                        </div>
+                        <button type="button" class="up" title="성인 좌석 선택 증가">+</button>
+                    </div>
+                </div>
+                
+                <div class="check-people">
+                    <p class="txt">청소년</p>
+                    <div class="count">
+                        <button type="button" class="down" title="청소년 좌석 선택 감소">-</button>
+                        <div class="number">
+                            <button type="button" class="now" title="청소년 현재 좌석 선택 수">0</button>
+                        </div>
+                        <button type="button" class="up" title="청소년 좌석 선택 증가">+</button>
+                    </div>
+                </div>
+            </div>
+		<p></p>
+		<p></p>
+		<p></p>
 		<ul class="showcase">
 			<li>
 				<div class="availableSeat"></div> <small class="small">선택가능</small>
@@ -481,11 +405,13 @@ li {
 		
 	<div>
 		<p class="text">
-			You have selected <span id="count">0</span> seats for a price of $ <span
-				id="costs">0</span>
+			<span id="count">0</span>명 최종결제금액 <span id="costs">0</span>
 		</p>
+	</div>
+	<div class="align-center">
+		<input type="submit" value="결제하기" onclick="location.href='payMain'">
 	</div>	
-
+	
 	<!-- <div class="wrap">
 		<div class="tit-area">
 			<span class="tit"></span>

@@ -47,4 +47,14 @@ public class SeatController {
 		
 		return "seatMain";
 	}
+
+	/*====================
+	 * 	  	  결제
+	 ====================*/
+	@RequestMapping("reserve/payMain")
+	public String pay(Model model, HttpSession session) {
+		
+		return "payMain";
+	}
+	
 }

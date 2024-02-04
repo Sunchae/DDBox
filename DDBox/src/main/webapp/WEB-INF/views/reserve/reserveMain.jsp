@@ -15,8 +15,8 @@
       <div class="col">
          <h2>빠른 예매</h2>
          <c:if test="${!empty user && user.mem_auth==9}">
-			<input type="button" value="상영정보 추가" onclick="location.href='reserveList'">
-		</c:if>
+         <input type="button" value="상영정보 추가" onclick="location.href='reserveList'">
+      </c:if>
       </div>
    </div>
    <div class="col-10">
@@ -56,72 +56,34 @@
       </div>
       </div>
       <script type="text/javascript">
-      	 let choice_num;
-      	 let choice_screen;
-      	 let choice_date;
-      	 let choice_time;
+          let choice_num;
+          let choice_screen;
+          let choice_date;
         
          //날짜 클릭
          $(document).on('click','.mon',function(){
-      	   choice_date = $(this).attr('data-day');
-      	   alert('선택한 날짜 : ' + choice_date);
-      	   
-			//선택한 날짜에 해당하는 상영 정보 가져오는 함수 호출
-			getMoviesByDate(choice_date);
+            choice_date = $(this).attr('data-day');
+            alert('선택한 날짜 : ' + choice_date);
+            
+         //선택한 날짜에 해당하는 상영 정보 가져오는 함수 호출
+         getMoviesByDate(choice_date);
          });
-         
-         //날짜 클릭 이벤트 ajax 처리
-         function getMoviesByDate() {
-     	    $.ajax({
-     	        url: 'getMoviesByDate', // 서버에서 해당 날짜에 상영하는 영화 목록을 가져오는 엔드포인트
-     	        type: 'get',
-     	        data: { date : choice_date },
-     	        dataType: 'json',
-     	        success: function (param) {
-     	            console.log(param.movielist);
-     	        	// 성공적으로 받은 영화 목록을 화면에 표시하는 함수 호출
-     	            displayMovies(param.movielist);
-     	            
-     	        },
-     	        error: function () {
-     	            alert('네트워크 오류 발생(날짜선택)');
-     	        }
-     	    });
-     	}
-         
-        //날짜 클릭시 해당 날짜에 상영하는 영화 list
-         function displayMovies(movies){
-        	 let movieListContainer = $('.col-body');
-        	 movieListContainer.empty();
-        	 
-        	 $.each(movies, function(index,movie){
-        		displayMovieItem(movie);
-        	 });
-         }
-        
-       //반복 돌려서 영화 리스트 출력하는 function 
-         function displayMovieItem(movie) {
-        	 	let movieListContainer = $('.col-body');
-        	
-        	    let output = '<li class="movie-choice" data-num="' + movie.movie_num + '">';
-        	    output += movie.movie_title;
-        	    //output += '<h3>' + movie.title + '</h3>';
-        	    // 추가적인 영화 정보 표시 로직 작성
-        	    output += '</li>';
-        	    
-        	    // movieListContainer에 영화 정보 추가
-        	    movieListContainer.append(output);
-        	}
-      
-         
          //영화 클릭
-      	 $(document).on('click','.movie-choice',function(){
+          $(document).on('click','.movie-choice',function(){
              let movie_num = $(this).attr('data-num');
              choice_num = movie_num;
              selectMovie(movie_num);
          });
+         //극장 클릭
+         $(document).on('click','.each-screen',function(){
+            let scr_num = $(this).attr('data-num');
+            choice_screen = scr_num;
+            selectScreen(scr_num);
+            getMovieSchedule(choice_num,choice_screen,choice_date);
+            
+         })
          
-         //영화 클릭 이벤트 처리 ajax 통신
+         
          function selectMovie(movie_num){
          $.ajax({
              url: 'getMovie',
@@ -129,16 +91,122 @@
              data: {movie_num: movie_num},
              dataType: 'json',
              success: function(param){
-            	 displaySelectedMovie(param);
+                displaySelectedMovie(param);
                  displayScreen(param.list);
+                  
              },
              error: function(){
                  alert('네트워크 오류 발생(영화선택)');
              }
          });
-     	}
+        }
+         //영화관 선택 시 선택한 영화관 정보 출력
+       function selectScreen(scr_num){
+          $.ajax({
+             url: 'getScreen',
+             type: 'get',
+             data: {scr_num:scr_num},
+             dataType: 'json',
+             success: function(param){
+                displaySelectedScreen(param);
+             },
+             error: function(){
+                alert('네트워크 오류 발생(극장선택)');
+             }
+          });
+       }
+       //영화 스케줄 가져오기위한 ajax통신
+       function getMovieSchedule(choice_num,choice_screen,choice_date) {
+           $.ajax({
+               url: 'getMovieSchedule',  // 해당 URL은 실제로 서버에서 처리하는 URL로 변경해야 합니다.
+               type: 'get',
+               data: {
+                   choice_num: choice_num,
+                   choice_screen: choice_screen,
+                   choice_date: choice_date
+               },
+               dataType: 'json',
+               success: function (param) {
+                   // 성공적으로 데이터를 받아왔을 때의 처리
+                   displayMovieSchedule(param.scheduleList);
+                   alert('scheduleList.shw_num : '+ param.scheduleList[0].shw_num);
+               },
+               error: function () {
+                   // 오류 발생 시 처리
+                   alert('네트워크 오류 발생(상영 시간표 조회)');
+               }
+           });
+       }
          
-       //영화 클릭시 아래에 선택 영화 보여주는 function
+         
+       // 상영 시간표를 화면에 표시하는 함수
+       function displayMovieSchedule(scheduleList) {
+           let timeListContainer = $('.time-list');
+            timeListContainer.empty();
+            
+           $.each(scheduleList, function(index, item) {
+                  let output = '<li class="each-time" data-num="'+item.shw_num+'">';
+                   output += item.shw_time;
+                   output += '</li>';
+                   timeListContainer.append(output);
+                   
+                   console.log(item);
+            });           
+           console.log(scheduleList);
+        } 
+         
+         
+         
+         function getMoviesByDate() {
+               $.ajax({
+                   url: 'getMoviesByDate', // 서버에서 해당 날짜에 상영하는 영화 목록을 가져오는 엔드포인트
+                   type: 'get',
+                   data: { date : choice_date },
+                   dataType: 'json',
+                   success: function (param) {
+                       console.log(param.movielist);
+                      // 성공적으로 받은 영화 목록을 화면에 표시하는 함수 호출
+                       displayMovies(param.movielist);
+                       
+                   },
+                   error: function () {
+                       alert('네트워크 오류 발생(날짜선택)');
+                   }
+               });
+           }
+         
+         function displayMovies(movies){
+            //영화 목록을 표시할 부분의 선택자를 지정
+            let movieListContainer = $('.col-body');
+            
+            //이전에 표시된 영화목록 삭제
+            movieListContainer.empty();
+            
+            //받아온 영화 목록을 반복하여 화면에 추가
+            $.each(movies, function(index,movie){
+              //각 영화에 대한 화면 출력 처리
+              displayMovieItem(movie);
+               
+            });
+               
+            
+         }
+         //반복 돌려서 영화 리스트 출력하는 function 
+         function displayMovieItem(movie) {
+               let movieListContainer = $('.col-body');
+           
+               let output = '<li class="movie-choice" data-num="' + movie.movie_num + '">';
+               output += movie.movie_title;
+               //output += '<h3>' + movie.title + '</h3>';
+               // 추가적인 영화 정보 표시 로직 작성
+               output += '</li>';
+               
+               // movieListContainer에 영화 정보 추가
+               movieListContainer.append(output);
+           }
+         
+         
+         //영화 클릭시 아래에 선택 영화 보여주는 function
          function displaySelectedMovie(param){
              let output;
              if(param.status == 'yesMovie'){
@@ -153,91 +221,47 @@
              console.log(param);
              
          }
-       
-       //영화 클릭시 극장 list 보여주는 function  
+      
          function displayScreen(list) {
-     	    let screenList = $('.screen-list');
-     	    screenList.empty(); // 기존 목록 제거
-				
-     	    $.each(list, function(index, item) {	
-     	        let output = '<li class="each-screen" data-num="'+item.scr_num+'">';
-     	        output += item.scr_name;
-     	        output += '</li>';
-     	        screenList.append(output);
-     	        
-     	        console.log(item);
-     	    });
-     	    
-     	}
-         
-         //극장 클릭 이벤트
-         $(document).on('click','.each-screen',function(){
-        	 let scr_num = $(this).attr('data-num');
-        	 choice_screen = scr_num;
-        	 selectScreen(scr_num);
-         });
-         
-         
-         //극장 클릭 이벤트 처리 ajax 통신
-    	function selectScreen(scr_num){
-    		$.ajax({
-    			url: 'getScreen',
-    			type: 'get',
-    			data: {scr_num:scr_num},
-    			dataType: 'json',
-    			success: function(param){
-    				displaySelectedScreen(param);
-    				displayTime(param.timeList);
-    			},
-    			error: function(){
-    				alert('네트워크 오류 발생(극장선택)');
-    			}
-    		});
-    	}
-         
-        //영화관 선택시 선택한 영화관 정보 출력 
-         function displaySelectedScreen(param){
-             //param.screen에 데이터 담겨 있음  아래에 마련된 공간에 데이터 비우고 영화관 이름 집어넣으면 됨
-        	let screenPick = $('.screen-name');
-            screenPick.empty();
-        	 
-        	 let output = '<li class="selected-screen" data-num="'+param.screen.scr_num+'">';
- 	       		 output += param.screen.scr_name;
- 	        	output += '</li>';
- 	        screenPick.append(output);
-         }	     
-       
-          
-       function displayTime(timeList){
-        	 let timeListContainer = $('.time-list');
-        	 	 timeListContainer.empty();
-        	 	 
-        	 	$.each(timeList, function(index, item) {
-               		 let output = '<li class="each-time" data-num="'+item.scr_num+'">';
-                   	 output += item.shw_time;
-                   	 output += '</li>';
-                   	 timeListContainer.append(output);
-         	    });	 
-         } 
-     
-       
-        	    
-        	//동적 생성된 영화관 클릭 했을 시 클릭한 영화관 이름 받아오고 싶음    
-        	$(document).on('click','.each-screen',function(){
-        		choice_screen = $(this).attr('data-num');
-        		console.log('choice_num : ' + choice_num);
-        		console.log('choice_screen : ' + choice_screen);
-        		console.log('choice_date : ' + choice_date);
-        		console.log('choice_time : ' + choice_time);
-            });	    
-        	
-        	$(document).on('click','.screen-choice',function(){
+               let screenList = $('.screen-list');
+               screenList.empty(); // 기존 목록 제거
+            
+               //$(movie_num.list).each(function(index,item) {
+               $.each(list, function(index, item) {   
+                   let output = '<li class="each-screen" data-num="'+item.scr_num+'">';
+                   output += item.scr_name;
+                   output += '</li>';
+                   screenList.append(output);
+                   
+                   console.log(item);
+               });
+               
+           }
+           //동적 생성된 영화관 클릭 했을 시 클릭한 영화관 이름 받아오고 싶음    
+           $(document).on('click','.each-screen',function(){
+              choice_screen = $(this).attr('data-num');
+              console.log('choice_num : ' + choice_num);
+              console.log('choice_screen : ' + choice_screen);
+              console.log('choice_date : ' + choice_date);
+            });       
+           
+           $(document).on('click','.screen-choice',function(){
                 alert('영화를 먼저 선택하세요');
                 
             });
-        	
-        	    
-        
+           
+               
+          function displaySelectedScreen(param){
+             //param.screen에 데이터 담겨 있음  아래에 마련된 공간에 데이터 비우고 영화관 이름 집어넣으면 됨
+           let screenPick = $('.screen-name');
+            screenPick.empty();
+            
+            let output = '<li class="selected-screen" data-num="'+param.screen.scr_num+'">';
+                  output += param.screen.scr_name;
+               output += '</li>';
+            screenPick.append(output);
+             
+         }        
       
       
       </script>
@@ -274,15 +298,15 @@
          </div>
       </div>
       <!------------------------------ 날짜 ------------------------------>
-      <div style="width:33%; height:700px;">
+       <div style="width:33%; height:700px;">
          <div class="right-one">
             <h3 class="align-center" style="width:100%; height:40px; background-color:black; color:white;">시간</h3>
-				<div class="time-check">
-					<ul class="time-list">
-						
-					</ul>
-				</div>
-				<input type="button" value="좌석선택" onclick="location.href='seatMain'">
+            <div class="time-check">
+               <ul class="time-list">
+                  
+               </ul>
+            </div>
+            <input type="button" value="좌석선택" onclick="location.href='seatMain'">
          </div>
       </div>
    </div>
