@@ -12,7 +12,7 @@ public interface ShowService {
    //예매 리스트
    public List<ShowVO> selectShowList(Map<String,Object> map);
    public int selectRowShowCount(Map<String,Object> map);
-
+ 
    //예매 등록
    public void insertShow(ShowVO show);
    //한건의 예매 읽기

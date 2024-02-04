@@ -119,7 +119,7 @@ strong{
     box-sizing: border-box;
     display: flex;
 }
-.selected-screen,.movie-choice{
+.selected-screen, .movie-choice{
 	list-style:none; 
 }
 h2{
@@ -136,7 +136,7 @@ h2{
 }
 .right-container{
     float: right;
-    width: 40%;
+    width: 40%; 
     margin: auto;
     height: 400px;
     margin-right: 10%;

@@ -20,7 +20,7 @@
     	<put-attribute name="title" value="상영정보 작성"/>
     	<put-attribute name="body" value="/WEB-INF/views/reserve/addReserve.jsp"/>                                           
     </definition>
-    
+     
     <definition name="seatMain" extends="main">
     	<put-attribute name="title" value="좌석선택"/>
     	<put-attribute name="body" value="/WEB-INF/views/reserve/seatMain.jsp"/>                                           

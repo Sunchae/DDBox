@@ -192,7 +192,7 @@ li{
 	display: flex;
 	width:10px;
 	margin-left: 10%;
-}
+} 
 .check-people{
 	float:left;
     display:flex;

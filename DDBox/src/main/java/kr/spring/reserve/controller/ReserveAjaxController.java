@@ -79,7 +79,7 @@ public class ReserveAjaxController {
        List<MovieVO> movielist = movieService.selectMoviesByDate(date);
        
        mapJson.put("movielist", movielist);
-       return mapJson;
+       return mapJson; 
    }
    @RequestMapping("/reserve/getScreen")
    @ResponseBody

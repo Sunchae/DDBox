@@ -419,7 +419,7 @@
 			  	// $('#coupon-modal').css('display','none');
 			   }
 			});
-		 });
+		 }); 
 		   $('#vipcoupon-modal-show').click(function(){
 			   $('#vipcoupon-modal').css("display","flex");
 		   });

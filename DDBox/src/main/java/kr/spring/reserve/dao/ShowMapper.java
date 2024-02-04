@@ -18,7 +18,7 @@ public interface ShowMapper {
    
    public List<ShowVO> selectShowListForRev(int movie_num);
    
-   
+    
    //예매 등록
    public void insertShow(ShowVO show);
    //한건의 예매 읽기

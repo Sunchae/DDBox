@@ -35,8 +35,8 @@
          <div class="left-one">
             <h3 class="align-center" style="width:100%; height:40px; background-color:black; color:white;">영화</h3>
             <div class="col-head align-center" >
-               <a href="#" onclick="sortMovieByRank();return false;" id="movieSortRank-btn" class="button btn-rank selected">예매율순</a> 
-               <a href="#" onclick="sortMovieByName();return false;" id="movieSortName-btn" class="button btn-abc">가나다순</a>
+               <a href="#" onclick="sortMovieByRank();return false;" id="movieSortRank-btn">예매율순</a> 
+               <a href="#" onclick="sortMovieByName();return false;" id="movieSortName-btn">가나다순</a>
             </div>
             <div class="col-body" style="overflow-y: scroll; height:550px;" >
                <ul>
@@ -138,7 +138,7 @@
            });
        }
          
-         
+          
        // 상영 시간표를 화면에 표시하는 함수
        function displayMovieSchedule(scheduleList) {
            let timeListContainer = $('.time-list');
@@ -286,7 +286,7 @@
                <div class="theater-choies"></div>
             <!-- 영화관 선택하지 않았을 때 -->
             <div class="theater-choies-check" style="display:block;">
-               <p class="check-content align-center"  style="border-style:dotted">
+               <p class="check-content align-center"  style="color:black; border-style:dotted">
                   <b class="screen-name">목록에서 극장을 선택하세요</b>
                </p>
                <!--선택했을 경우 클릭하면 입력되고 아니면 열리지 않는다.-->

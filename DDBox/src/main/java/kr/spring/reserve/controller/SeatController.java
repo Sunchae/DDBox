@@ -20,7 +20,7 @@ import kr.spring.reserve.vo.ScreenVO;
 import kr.spring.reserve.vo.ShowVO;
 import lombok.extern.slf4j.Slf4j;
 
-@Controller
+@Controller 
 @Slf4j
 public class SeatController {
 	@Autowired

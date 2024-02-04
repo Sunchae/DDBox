@@ -32,7 +32,7 @@
       USING(movie_num)   
    </select>
    
-   
+    
    <select id="selectShowList" parameterType="map" resultType="showVO">
       SELECT
          *
