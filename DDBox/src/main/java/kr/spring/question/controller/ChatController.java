@@ -1,5 +1,7 @@
 package kr.spring.question.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,32 +27,41 @@ public class ChatController {
 	//채팅방 목록
 	@RequestMapping("/faq/chat/chatUser")
 	public String process() {
-		
 		return "chatUser";
 	}
 	
 	/*==================================
 	 * 채팅방 생성
 	 *================================== */
-	//채팅방 리스트 호출
-	@RequestMapping("/faq/chat/chatRoomWrite")
-	public String insertChatRoom() {
-		return "/faq/chat/chatUserRoom";
-	}
-
 	//채팅방 생성  
-	@PostMapping("/faq/chat/chatRoomWrite")
-	public String insertChatRoom(ChatroomVO vo, HttpSession session) {
-		log.debug("<<채팅방 생성 ChatRoomVO>> : " + vo);
-		
+	@GetMapping("/faq/chat/chattingListForUser")
+	public String insertChatRoom(HttpSession session) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
-		
-		//유저 지정
-		vo.setUser_num(user.getMem_num());
-		chatService.insertChatRoom(vo);
-		
-		return "redirect:/faq/chat/chatUserRoom";
+		log.debug("<<MemberVO>> : " + user);
+		ChatroomVO vo = chatService.checkChatRoom(user.getMem_num());
+		log.debug("<<catroom_num>>");
+		int chatroom_num=0;
+		if(vo == null) {
+			ChatroomVO ChatroomVO = new ChatroomVO();
+			ChatroomVO.setUser_num(user.getMem_num());
+			ChatroomVO.setAdmin_num(2);
+			ChatroomVO chatroom = chatService.insertChatRoom(ChatroomVO);
+			chatroom_num = chatroom.getChatroom_num();
+		}else {
+			chatroom_num = vo.getChatroom_num();
+		}
+		return "redirect:/faq/chat/chatUserRoom_detail?chatroom_num="+chatroom_num;
+	
 	}
+	
+	
+	
+	/*==================================
+	 * 채팅 생성
+	 *================================== */
+	
+	
+	
 	
 	
 }

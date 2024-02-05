@@ -8,7 +8,7 @@
 	<h2>단체/대관 문의 조회</h2> 
 	<ul class="detail-info">
 		<li>
-			희망 영화관 : ${rental.res_num}<br>
+			희망 영화관 : ${rental.scr_num}<br>
 		</li>
 		<li>
 			관람 희망일 : ${rental.rental_date}<br>

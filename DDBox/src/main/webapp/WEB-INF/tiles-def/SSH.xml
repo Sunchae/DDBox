@@ -29,7 +29,8 @@
     </definition>
     <!-- 작성 -->
     <definition name="question_write" extends="faqMain">
-    	<put-attribute name="body" value="/WEB-INF/views/faq/question/question_write.jsp"/>                                           
+   		<put-attribute name="css" value="/WEB-INF/views/faq/faqCSS.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/faq/question/question_write.jsp"/>
     </definition>
     <!-- 상세 -->
     <definition name="question_detail" extends="faqMain">
@@ -37,6 +38,7 @@
     </definition>
     <!-- 수정 -->
     <definition name="question_update" extends="faqMain">
+    	<put-attribute name="css" value="/WEB-INF/views/faq/faqCSS.jsp"/>
     	<put-attribute name="body" value="/WEB-INF/views/faq/question/question_update.jsp"/>                                           
     </definition>
     
@@ -126,7 +128,7 @@
 	</definition>
 	<!--  채팅방 생성  -->
 	<definition name="chatRoomWrite" extends="faqMain">
-		<put-attribute name="body" value="/WEB-INF/views/faq/chat/chatUserRoom.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/faq/chat/chatUserRoom_detail.jsp"/>
 	</definition>
     
   

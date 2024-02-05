@@ -9,9 +9,9 @@
 		<form:errors element="div" cssClass="error-color"/>
 		<ul>
 			<li>
-				<form:label path="res_num">영화관 선택(*) (일단 ticket 임의값 넣고 1로 입력해서 해보기)</form:label>
-				<form:input path="res_num"/>
-				<form:errors path="res_num" cssClass="error-color"/>
+				<form:label path="scr_num">영화관 선택(*) (일단 ticket 임의값 넣고 1로 입력해서 해보기)</form:label>
+				<form:input path="scr_num"/>
+				<form:errors path="scr_num" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="rental_date">관람 희망일(*) (기본 날짜 입력해서 test)</form:label>

@@ -38,7 +38,7 @@
 			<li class="on"><a href="question?board_category=3">멤버십</a></li>
 			<li class="on"><a href="question?board_category=4">VIP</a></li>
 			<li class="on"><a href="question?board_category=5">할인/혜택</a></li>
-			<li class="on"><a href="question?board_category=6">영화관</a></li>
+			<li class="on"><a href="question?board_category=6">영화관이용</a></li>
 			<li class="on"><a href="question?board_category=7">특별관</a></li>
 			<li class="on"><a href="question?board_category=8">기프트샵</a></li>
 			<li class="on"><a href="question?board_category=9">홈페이지/모바일</a></li>
@@ -109,7 +109,7 @@ $(function(){
 	
 	//정렬 선택
 	$('#order').change(function(){
-		location.href='question?keyfield='+$('#keyfield').val()+'&keyword='+$('#keyword').val()+'&order='+$('#order').val();
+		location.href='question?keyword='+$('#keyword').val()+'&order='+$('#order').val();
 	});
 });
 </script>

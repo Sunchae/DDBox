@@ -29,16 +29,20 @@ public class ChatServiceImpl implements ChatService{
 		return 0;
 	}
 
-
 	@Override
-	public void insertChatRoom(ChatroomVO chatroomVO) {
+	public ChatroomVO checkChatRoom(int user_num) {
+		return chatMapper.checkChatRoom(user_num);
+	}
+	
+	@Override
+	public ChatroomVO insertChatRoom(ChatroomVO chatroomVO) {
 		chatMapper.insertChatRoom(chatroomVO);
+		return checkChatRoom(chatroomVO.getUser_num());
 	}
 
 	@Override
 	public List<ChatroomVO> getChattingListForUser(int mem_num) {
-		// TODO Auto-generated method stub
-		return null;
+		return chatMapper.getChattingListForUser(mem_num);
 	}
 
 	@Override
@@ -70,4 +74,6 @@ public class ChatServiceImpl implements ChatService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 }

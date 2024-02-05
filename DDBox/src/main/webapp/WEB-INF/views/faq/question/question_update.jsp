@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 내용 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <div class="page-main">
 	<h2>글 수정</h2>
 	<form:form action="update" modelAttribute="questionVO" id="update_form">
@@ -27,10 +31,29 @@
 			<form:radiobutton path="board_category" value="9"/>홈페이지/모바일
 			<form:errors path="board_category" cssClass="error-color"/>
 		</li>
+		<li><b>내용</b></li>
 		<li>
-			<form:label path="board_content">내용</form:label>
 			<form:textarea path="board_content"/>
 			<form:errors path="board_content" cssClass="error-color"/>
+			<script>
+				function MyCustomUploadAdapterPlugin(editor){
+					editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+						return new UploadAdapter(loader);
+					}
+				}
+				
+				//데이터를 넣어야하기 때문에 #content를 찾음 (에러 발생시 console에 찍기)
+				ClassicEditor
+					.create(document.querySelector('#board_content'),{
+						extraPlugins:[MyCustomUploadAdapterPlugin]
+					})
+					.then(editor => {
+						window.editor = editor;
+					})
+					.catch(error => {
+						console.error(error);
+					});
+			</script>
 		</li>
 	</ul>
 	<div class="align-center">

@@ -90,7 +90,7 @@ $(function(){
 	
 	//정렬 선택
 	$('#order').change(function(){
-		location.href='news?keyfield='+$('#keyfield').val()+'&keyword='+$('#keyword').val()+'&order='+$('#order').val();
+		location.href='question?keyword='+$('#keyword').val()+'&order='+$('#order').val();
 	});
 });
 </script>

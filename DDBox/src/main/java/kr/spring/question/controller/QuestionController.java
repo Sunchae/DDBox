@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,17 +49,20 @@ public class QuestionController {
 	@RequestMapping("/faq/question")
 	public ModelAndView questionprocess(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
 										@RequestParam(value="order",defaultValue="1") int order,
+										@RequestParam(value="board_category",defaultValue="") Integer board_category,
 										String keyword) {
-		Map<String,Object> map = new HashMap<String,Object>();
+		
+		Map<String,Object> map = new HashMap<>();
 		
 		map.put("keyword", keyword);
+		map.put("board_category", board_category);
 		
 		//전체,검색 레코드 수
 		int count = questionService.selectRowCount(map);
 		log.debug("<<글목록 count>> : " + count);
 		
 		//페이지처리
-		PageUtil page = new PageUtil(null, keyword, currentPage, count, 20, 10, "list","&order="+order);
+		PageUtil page = new PageUtil(null, keyword, currentPage, count, 20, 10, "list","&order="+order+"&board_category="+board_category);
 		
 		List<QuestionVO> list = null;
 		
@@ -71,6 +75,7 @@ public class QuestionController {
 		}
 		
 		ModelAndView mav = new ModelAndView();
+		
 		mav.setViewName("faq_question");
 		mav.addObject("count", count);
 		mav.addObject("list", list);
@@ -78,6 +83,8 @@ public class QuestionController {
 		
 		return mav;
 	}
+	
+
 	
 	/*==========================
 	 * 자주묻는 질문 글 등록

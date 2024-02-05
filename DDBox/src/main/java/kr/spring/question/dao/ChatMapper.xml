@@ -10,8 +10,10 @@
 		VALUES (
 			faq_chatroom_seq.nextval,
 			#{user_num},
-			2)
+			#{admin_num})
 	</insert>
+	
+	
 	<!-- 
 	<sql id="selectChatroomNum">
 		faq_chatroom_seq.nextval FROM dual

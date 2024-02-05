@@ -19,14 +19,20 @@
 	
 	<!-- 검색기능(sql문) -->
 	<sql id="boardSearch">
-		<where>
-			<if test="keyword != null and keyword != ''">
-					board_title LIKE '%' || #{keyword} || '%' OR
-					board_content LIKE '%' || #{keyword} || '%'
-			</if>
+	    <where>
+	    <if test="board_category != null and board_category != ''">
+				board_category = #{board_category} 
+		</if>
+		<if test="(board_category != null and board_category != '') and (keyword != null and keyword != '')">
+				AND (board_title LIKE '%' || #{keyword} || '%' OR
+				board_content LIKE '%' || #{keyword} || '%')
+		</if>
+		<if test="(board_category == null or board_category == '') and (keyword != null and keyword != '')">
+				board_title LIKE '%' || #{keyword} || '%' OR
+				board_content LIKE '%' || #{keyword} || '%'
+		</if>
 		</where>
 	</sql>
-	
 	
 	<!-- 정렬태그 -->
 	<sql id="boardOrder">

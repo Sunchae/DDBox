@@ -11,9 +11,10 @@ public interface ChatService {
 		public List<ChatroomVO> selectChatRoomList(Map<String,Object> map);
 		public int selectRowCount(Map<String,Object> map);
 
+		//채팅방 유무 체크
+		public ChatroomVO checkChatRoom(int user_num);
 		//채팅방 생성
-		public void insertChatRoom(ChatroomVO chatroomVO);
-		
+		public ChatroomVO insertChatRoom(ChatroomVO chatroomVO);
 		
 		//회원 채팅방 입장
 		public List<ChatroomVO> getChattingListForUser(int mem_num);

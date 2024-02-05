@@ -5,7 +5,7 @@ create table email_faq(
  qna_title varchar2(90) not null,
  qna_type number not null, --문의유형
  qna_scr number not null, --문의 대상 영화관 (0:선택하지않음,1:선택함)
- res_num number, --해당되는 영화관
+ scr_num number, --해당되는 영화관
  question_content clob not null,
  question_file varchar2(200),
  question_regdate date default sysdate not null,
@@ -13,7 +13,7 @@ create table email_faq(
  ask_regdate date,
  constraint email_faq_pk primary key (qna_num),
  constraint email_faq_fk1 foreign key (mem_num) references member (mem_num),
- constraint email_faq_fk2 foreign key (res_num) references ticket (res_num)
+ constraint email_faq_fk3 foreign key (scr_num) references screen (scr_num)
 );
 create sequence email_faq_seq;
 
@@ -22,7 +22,7 @@ create sequence email_faq_seq;
 create table rental(
  rental_num number not null,
  mem_num number not null,
- res_num number not null, --해당 영화관
+ scr_num number not null, --해당 영화관
  rental_regdate date default sysdate not null,
  rental_date date not null,--대관 희망 날짜
  rental_modifydate date,
@@ -34,7 +34,7 @@ create table rental(
  rental_status number default 0 not null,
  constraint rental_pk primary key (rental_num),
  constraint rental_fk1 foreign key (mem_num) references member (mem_num),
- constraint rental_fk2 foreign key (res_num) references ticket (res_num)
+ constraint rental_fk2 foreign key (scr_num) references screen (scr_num)
 );
 create sequence rental_seq;
 
@@ -90,7 +90,6 @@ create sequence vip_seq;
 --실시간 채팅방 테이블 (**생성 완)
 create table faq_chatroom(
  chatroom_num number primary key,
- -- chatting_num number references question_board (board_num) not null,  <<<<<< 이 컬럼 삭제
  user_num number references member (mem_num) not null,
  admin_num number references member (mem_num) not null
 );

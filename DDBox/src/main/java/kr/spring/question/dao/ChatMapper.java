@@ -16,12 +16,15 @@ public interface ChatMapper {
 	public List<ChatroomVO> selectChatRoomList(Map<String,Object> map);
 	public int selectRowCount(Map<String,Object> map);
 
-	//채팅방 번호생성 지움
+	//채팅방 유무 체크
+	@Select("SELECT * FROM faq_chatroom WHERE user_num=#{user_num}")
+	public ChatroomVO checkChatRoom(int user_num);
 	//채팅방 생성
 	public void insertChatRoom(ChatroomVO chatroomVO);
 	
 	
 	//회원 채팅방 입장
+	@Select("SELECT * FROM member JOIN faq_chatroom ON mem_num=#{user_num} WHERE chatroom_num=#{chatroom_num}")
 	public List<ChatroomVO> getChattingListForUser(int mem_num);
 	//관리자 채팅방 입장
 	public List<ChatroomVO> getChattingListForAdmin(int mem_num);

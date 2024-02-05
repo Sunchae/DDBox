@@ -38,18 +38,20 @@ public class NewsController {
 	@RequestMapping("/faq/news")
 	public ModelAndView questionprocess(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
 										@RequestParam(value="order",defaultValue="1") int order,
-										/*String keyfield, */String keyword) {
+										@RequestParam(value="news_category",defaultValue="") Integer news_category,
+										String keyword) {
+		
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		/*map.put("keyfield", keyfield);*/
 		map.put("keyword", keyword);
+		map.put("news_category", news_category);
 		
 		//전체,검색 레코드 수
 		int count = newsService.selectRowCount(map);
 		log.debug("<<글목록 count>> : " + count);
 		
 		//페이지처리
-		PageUtil page = new PageUtil(null, keyword, currentPage, count, 20, 10, "list","&order="+order);
+		PageUtil page = new PageUtil(null, keyword, currentPage, count, 20, 10, "list","&order="+order+"&news_category="+news_category);
 		
 		List<NewsVO> list = null;
 		

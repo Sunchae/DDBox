@@ -20,10 +20,17 @@
 	<!-- 검색기능 -->
 	<sql id="newsSearch">
 		<where>
-			<if test="keyword != null and keyword != ''">
-				news_title LIKE '%' || #{keyword} || '%' OR
-				news_content LIKE '%' || #{keyword} || '%' 
-			</if>
+		<if test="news_category != null and news_category != ''">
+			news_category = #{news_category} 
+		</if>
+		<if test="(news_category != null and news_category != '') and (keyword != null and keyword != '')">
+			AND (news_title LIKE '%' || #{keyword} || '%' OR
+			news_content LIKE '%' || #{keyword} || '%')
+		</if>
+		<if test="(news_category == null or news_category == '') and (keyword != null and keyword != '')">
+			news_title LIKE '%' || #{keyword} || '%' OR
+			news_content LIKE '%' || #{keyword} || '%'
+		</if>
 		</where>
 	</sql>
 	

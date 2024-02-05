@@ -39,7 +39,7 @@
 		<c:forEach var="rental" items="${list}"> 
 		<tr>
 			<td class="align-center"><a href="rental/detail?rental_num=${rental.rental_num}">${rental.rental_num}</a></td>
-			<td class="align-center"><a href="rental/detail?rental_num=${rental.rental_num}">${rental.res_num}</a></td>
+			<td class="align-center"><a href="rental/detail?rental_num=${rental.rental_num}">${rental.scr_num}</a></td>
 			<td class="align-center"><a href="rental/detail?rental_num=${rental.rental_num}">${rental.rental_name}</a></td>
 			<td class="align-center"><a href="rental/detail?rental_num=${rental.rental_num}">${rental.rental_date}</a></td>
 			<td class="align-center"><a href="rental/detail?rental_num=${rental.rental_num}">${rental.rental_regdate}</a></td>
