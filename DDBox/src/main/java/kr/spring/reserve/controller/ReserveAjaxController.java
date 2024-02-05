@@ -93,6 +93,19 @@ public class ReserveAjaxController {
       return mapJson;
    }
    
+   @RequestMapping("/reserve/getTime")
+   @ResponseBody
+   public Map<String,Object> getTime(@RequestParam int shw_num,HttpSession session){
+	   log.debug("<<선택한 시간>> : " + shw_num);
+	   Map<String,Object> mapJson = new HashMap<String, Object>();
+	   
+	   ShowVO selectedTime = showService.selectedTime(shw_num);
+	   
+	   mapJson.put("selectedTime", selectedTime);
+	   return mapJson;
+   }
+   
+   
    @RequestMapping("/reserve/getMovieSchedule")
    @ResponseBody
    public Map<String, Object> getMovieSchedule(@RequestParam int choice_num, @RequestParam int choice_screen, @RequestParam String choice_date, HttpSession session) {

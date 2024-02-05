@@ -60,6 +60,9 @@ public class ShowServiceImpl implements ShowService{
       return showMapper.selectShowTimeList(choice_num, choice_screen, choice_date);
    }
 
-   
+   @Override
+   public ShowVO selectedTime(int shw_num) {
+	   return showMapper.selectedTime(shw_num);
+   }
 
 }

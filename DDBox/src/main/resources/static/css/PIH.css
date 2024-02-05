@@ -94,14 +94,9 @@ strong{
     opacity: 0.9;
 }
 
-/* .left-one{
-    height: 535px;
-    width: 25%;
-    border: 1px solid rgb(207, 204, 204);
-    border-left: 1px solid white;
-    border-top: 1px solid white;
-    padding-bottom: 35px;
-} */
+.left-one{
+    height: 650px;
+}
 .movie-name-button{
     height: 30px;
     background-color: white;
@@ -119,7 +114,7 @@ strong{
     box-sizing: border-box;
     display: flex;
 }
-.selected-screen, .movie-choice{
+.selected-screen, .movie-choice, .selected-time{
 	list-style:none; 
 }
 h2{
