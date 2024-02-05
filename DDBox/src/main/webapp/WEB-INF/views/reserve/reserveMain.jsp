@@ -64,6 +64,7 @@
          //날짜 클릭
          $(document).on('click','.mon',function(){
             choice_date = $(this).attr('data-day');
+            $('#choice_date').val(choice_date);
             
          //선택한 날짜에 해당하는 상영 정보 가져오는 함수 호출
          getMoviesByDate(choice_date);
@@ -72,12 +73,14 @@
           $(document).on('click','.movie-choice',function(){
              let movie_num = $(this).attr('data-num');
              choice_num = movie_num;
+             $('#choice_num').val(choice_num);
              selectMovie(movie_num);
          });
          //극장 클릭
          $(document).on('click','.each-screen',function(){
             let scr_num = $(this).attr('data-num');
             choice_screen = scr_num;
+            $('#choice_screen').val(choice_screen);
             selectScreen(scr_num);
             getMovieSchedule(choice_num,choice_screen,choice_date);
             
@@ -86,6 +89,7 @@
          $(document).on('click','.each-time',function(){
         	 let shw_num = $(this).attr('data-num');
         	 choice_time = shw_num;
+        	 $('#choice_time').val(choice_time);
         	 selectTime(shw_num);
          });
          
@@ -347,12 +351,12 @@
          </div>
       </div>
    </div>
-            <form style="border:none;" class="align-center" id="seat_form">
-	            <input type="button" value="좌석선택" onclick="location.href='seatMain'">
-            	<input type="hidden" name="choice_num" value="${reserve.movie_num}" id="choice_num">
-            	<input type="hidden" name="choice_screen" value="${reserve.scr_num}" id="choice_screen">
+            <form action="seatMain" style="border:none;" class="align-center" id="seat_form">
+            	<input type="hidden" name="choice_num" value="${reserve.movie_title}" id="choice_num">
+            	<input type="hidden" name="choice_screen" value="${reserve.scr_name}" id="choice_screen">
             	<input type="hidden" name="choice_date" value="${reserve.date}" id="choice_date">
-            	<input type="hidden" name="choice_time" value="${reserve.shw_num}" id="choice_time">
+            	<input type="hidden" name="choice_time" value="${reserve.shw_time}" id="choice_time">
+            	<input type="submit" value="좌석선택">
          	</form>
    
 <script type="text/javascript">
