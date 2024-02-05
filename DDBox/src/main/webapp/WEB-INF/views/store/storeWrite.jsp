@@ -29,7 +29,7 @@
 				</select>
 			<li>
 				<form:label path="store_price">가격</form:label>
-				<form:input path="store_price"/>
+				<input type="number" name="store_price" id="store_price" min="1" class="input-check" max="99999999">
 				<form:errors path="store_price" cssClass="error-color" />
 			</li>
 			<li>
@@ -38,8 +38,19 @@
 				<form:errors path="store_name" cssClass="error-color" />
 			</li>
 			<li>
+				<form:label path="quantity">상품수량</form:label>
+				<input type="number" name="quantity" id="quantity" class="input-check" min="0" max="99999">
+				<form:errors path="quantity" cssClass="error-color" />
+			</li>
+			<li>
 				<form:label path="upload">파일업로드</form:label>
 				<input type="file" name="upload" id="upload">
+			</li>
+			<li>
+				<form:label path="store_status">상품표시여부</form:label>
+				<input type="radio" name="store_status" value="1" id="status1">미표시
+				<input type="radio" name="store_status" value="2" id="status2">표시
+				<form:errors pat="store_status" cssClass="error-color" />
 			</li>
 		</ul>
 		<div class="align-center">

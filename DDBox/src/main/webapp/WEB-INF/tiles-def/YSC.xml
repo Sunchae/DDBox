@@ -88,6 +88,17 @@
     	               value="/WEB-INF/views/member/MypageRental.jsp"/>
     </definition>
     
+    <!-- 영화 페이지 -->
+     <definition name="movie" 
+           template="/WEB-INF/views/template/DDBox_layout.jsp">
+    	<put-attribute name="title" value="SpringPage"/>
+    	<put-attribute name="header"
+    	               value="/WEB-INF/views/template/DDBox_navbar.jsp"/> 
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/main/main.jsp"/>
+    	<put-attribute name="footer"
+    	               value="/WEB-INF/views/template/footer.jsp"/>                                             
+    </definition>
     
     
     

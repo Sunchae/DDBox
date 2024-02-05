@@ -28,6 +28,7 @@ import kr.spring.member.vo.MemberVO;
 import kr.spring.question.service.EmailService;
 import kr.spring.question.vo.EmailVO;
 import kr.spring.util.AuthCheckException;
+import kr.spring.util.FileUtil;
 import kr.spring.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -154,13 +155,13 @@ public class MemberController {
 					if(autoid==null) {
 						//자동 로그인 체크 식별값 생성
 						autoid = UUID.randomUUID().toString();
-						log.debug("<<autodi>> : " + autoid);
+						log.debug("<<autoid>> : " + autoid);
 						member.setMem_autoid(autoid);
 						memberService.updateAutoid(member.getMem_autoid(), member.getMem_num());
 								
 					}
 					
-					Cookie auto_cookie = new Cookie("au-log",autoid);
+					Cookie auto_cookie = new Cookie("autoid-log",autoid);
 					auto_cookie.setMaxAge(60*60*24*7);//쿠키의 유효기간은 1주일
 					auto_cookie.setPath("/");
 					
@@ -211,12 +212,12 @@ public class MemberController {
 		session.invalidate();
 		//자동로그인 처리 시작
 		//클라이언트 쿠키 처리
-		Cookie auto_cookie = new Cookie("au-log","");
+		Cookie auto_cookie = new Cookie("autoid-log","");
 		auto_cookie.setMaxAge(0);//쿠키 삭제
 		auto_cookie.setPath("/");
 		
 		//자동로그인 처리 끝
-		
+		response.addCookie(auto_cookie);
 		return "redirect:/main/main";
 	}
 	
@@ -237,6 +238,67 @@ public class MemberController {
 		
 		return "myPage";
 	}
+	
+	/*==============================
+	 * 	프로필 사진 출력
+	 *==============================*/
+	//프로필 사진 출력
+	@RequestMapping("/member/photoView")
+	public String getProfile(HttpSession session,HttpServletRequest request,Model model) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		log.debug("<<프로실 사진 읽기>> : " + user);
+		if(user==null) {//로그인 되지 않은 경우
+			getBasicProfileImage(request,model);
+		}else {//로그인 된 경우
+			MemberVO memberVO = memberService.selectMember(user.getMem_num());
+			viewProfile(memberVO,request,model);
+		}
+		return "imageView";
+		
+	}
+	//프로필 사진 출력(회원번호 지정)
+	@RequestMapping("/member/viewProfile")
+	public String getProfileByMem_num(@RequestParam int mem_num,HttpServletRequest request,Model model) {
+		MemberVO memberVO = memberService.selectMember(mem_num);
+		
+		viewProfile(memberVO,request,model);
+		
+		return "imageView";
+	}
+	//프로필 사진 처리를 위한 공통 코드
+	public void viewProfile(MemberVO memberVO,HttpServletRequest request,Model model) {
+		if(memberVO==null || memberVO.getMem_photoname()==null) {
+			//업로드한 프로필 사진 정보가 없어서 기본 이미지 표시
+			getBasicProfileImage(request,model);
+			
+		}else {//업로드한 아미지 읽기
+			model.addAttribute("imageFile",memberVO.getMem_photo());
+			model.addAttribute("filename",memberVO.getMem_photoname());
+		}
+	}
+	//기본 이미지 읽기
+	public void getBasicProfileImage(HttpServletRequest request, Model model) {
+		byte[] readbyte = FileUtil.getBytes(request.getServletContext().getRealPath("/image_bundle/face.png"));
+		
+		model.addAttribute("imageFile",readbyte);
+		model.addAttribute("filename","face.png");
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping("/member/myPageTicket")
 	public String process1() {
 		

@@ -32,6 +32,7 @@
 		FROM event_list JOIN member USING(mem_num)
 	</select>
 	
+	
 	<!-- 이벤트글 전체 목록/검색 목록 -->
 	<select id="selectList" parameterType="map" resultType="Event_listVO">
 		SELECT *
@@ -48,12 +49,14 @@
 					event_start,
 					event_end,
 					event_type,
-					event_photo1
+					event_photo1,
+					mem_num
 				FROM event_list
 				
 				ORDER BY event_num DESC
 			)a
 		)
+		
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
@@ -67,6 +70,7 @@
 		JOIN member USING(mem_num)
 		WHERE event_num=#{event_num}
 	</select>
+	<!-- 룰렛 참여자 등록 -->
 	<insert id="insertRentry" parameterType="Rentry_listVO">
 		INSERT INTO rentry_list(
 			rentry_num,
@@ -104,28 +108,28 @@
 	 -->
 	
 	<!-- 응모권 이벤트글 전체 목록/검색 목록 -->
-	<!-- <select id="selectEntryList" parameterType="map" resultType="Entry_listVO">
-		SELECT 
-			*
-		FROM (SELECT
-			     a.*,
-			     rownum rnum
-			  FROM (SELECT
-			        	entry_num,
-                        event_list.event_num,
-                        event_list.event_title,
-                        member.mem_num,
-                        entry_date
-			        FROM entry_list
-			       LEFT OUTER JOIN
-			            member ON entry_list.mem_num = member.mem_num
-			        LEFT OUTER JOIN
-			            event_list ON entry_list.event_num = event_list.event_num
-			        ORDER BY entry_num DESC)a)
+	<select id="selectEntryList" parameterType="map" resultType="Entry_listVO">
+					
+		SELECT *
+		FROM (
+			SELECT
+				a.*,
+				rownum rnum
+			FROM (
+				SELECT
+					event_num,
+					<![CDATA[
+					REPLACE(REPLACE(event_title,'<','&lt;'),'>','&gt;') event_title,
+					]]>
+                    entry_list.mem_num
+				FROM entry_list 
+				LEFT OUTER JOIN
+			            event_list USING(event_num) 
+				ORDER BY entry_date DESC) a)
 		<![CDATA[
-		WHERE rnum >= #{start} AND rnum <= #{end}
+		WHERE rnum >= #{start} AND rnum <= #{end} AND mem_num=#{mem_num}
 		]]>
-	</select> -->
+	</select>
 
 	<select id="selectEntry" parameterType="integer" resultType="Entry_listVO">
 		SELECT

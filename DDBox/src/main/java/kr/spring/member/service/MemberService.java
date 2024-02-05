@@ -1,8 +1,6 @@
 package kr.spring.member.service;
 
 
-import org.apache.ibatis.annotations.Update;
-
 import kr.spring.member.vo.MemberVO;
 
 public interface MemberService {
@@ -21,7 +19,7 @@ public interface MemberService {
 
 
 	//자동 로그인
-	public void updateAutoid(String autoid, int mem_num);
+	public void updateAutoid(String mem_autoid, int mem_num);
 	public MemberVO selectAutoid(String autoid);
 	public void deleteAutoid(int mem_num);
 

@@ -87,8 +87,8 @@
 										<%-- type end --%>
 				<div class="btn-group">
 					<!-- ::before -->
-					<a href="#" id="btnGift" class="button large" w-data="500" h-data="410" title="선물">선물</a>
-					<a href="#" id="btnPurc" class="button purple large" w-data="500" h-data="400" title="구매">구매</a>
+					<a href="${pageContext.request.contextPath}/cart/cartDetail" id="btnCart" class="button large" w-data="500" h-data="410" title="장바구니">장바구니</a>
+					<a href="${pageContext.request.contextPath}/kakaoPay/kakaoPay" id="btn-kakao-pay" class="button purple large" w-data="500" h-data="400" title="구매">구매</a>
 					<!-- ::after -->
 				</div>
 			</div>
@@ -177,7 +177,7 @@
 		</script>
 		</c:if>
 
-		<button id="check_module" type="button">테스트 결제</button>
+		<button id="check_module" type="button">구매</button>
 		<script>
 			$("#check_module").click(function() {
 				var IMP = window.IMP; // 생략가능
@@ -197,10 +197,10 @@
 					// 결제창에서 보여질 이름
 					// name: '주문명 : ${auction.a_title}',
 					// 위와같이 model에 담은 정보를 넣어 쓸수도 있습니다.
-					amount : 2000,
+					amount : ${store.store_price},
 					// amount: ${bid.b_bid},
 					// 가격 
-					buyer_name : '이름',
+					buyer_name : '${member.mem_id}',
 					// 구매자 이름, 구매자 정보도 model값으로 바꿀 수 있습니다.
 					// 구매자 정보에 여러가지도 있으므로, 자세한 내용은 맨 위 링크를 참고해주세요.
 					buyer_postcode : '123-456',
@@ -219,9 +219,9 @@
 					alert(msg);
 				});
 			});
-		</script> 
+		</script>
 
-		<input type="button" value="목록" onclick="location.href='storeMain'">
+		<input type="button" value="목록" onclick="location.href='storeMainTest'">
 	</div>
 </div>
 <!-- 내용 끝 -->

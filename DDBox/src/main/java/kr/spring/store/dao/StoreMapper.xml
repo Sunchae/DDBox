@@ -12,6 +12,8 @@
 			store_name,
 			store_type,
 			store_ip,
+			store_status,
+			quantity,
 			mem_num)
 		VALUES (store_seq.nextval,
 			#{store_title},
@@ -21,6 +23,8 @@
 			#{store_name},
 			#{store_type},
 			#{store_ip},
+			#{store_status},
+			#{quantity},
 			#{mem_num})
 	</insert>
 	
@@ -36,6 +40,8 @@
 			store_name=#{store_name},
 			store_type=#{store_type},
 			store_ip=#{store_ip},
+			store_status=#{store_status},
+			quantity=#{quantity},
 			store_modify_date=SYSDATE
 		WHERE store_num=#{store_num}
 	</update>

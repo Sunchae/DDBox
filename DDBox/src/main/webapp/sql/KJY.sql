@@ -8,9 +8,11 @@ create table store(
 	store_name varchar2(150) not null,
 	store_reg_date date default sysdate not null,
 	store_modify_date date,
-	store_status number(1) default 0 not null,		--판매상태(0:판매중, 1:판매완료)
+	store_status number(1) default 0 not null,		--판매여부(1:미표시 2:표시)
 	store_ip varchar2(40) not null,
 	mem_num number not null,
+	store_type number(1) default 0 not null,
+	quantity number(5) not null
 	constraint store_pk primary key (store_num),
 	constraint store_fk foreign key (mem_num) references member (mem_num)
 );
@@ -69,7 +71,3 @@ create table porder_detail(
 	constraint porder_detail_fk foreign key (mem_num) references member (mem_num)
 );
 create sequence porder_detail_seq;
-
-create table payment(
-	paymentCode
-);

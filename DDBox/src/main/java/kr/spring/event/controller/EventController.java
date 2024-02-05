@@ -258,7 +258,7 @@ public class EventController {
 	 * 이벤트 discount
 	 *========================*/
 	@RequestMapping("/event/discount")
-	public ModelAndView discountpro(@RequestParam(value="pageNum",defaultValue="1") int currentPage,@RequestParam(value="order",defaultValue="1") int order ,String keyfield,String keyword) {
+	public ModelAndView discountpro(@RequestParam(value="pageNum",defaultValue="1") int currentPage,String keyfield,String keyword) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
@@ -267,11 +267,10 @@ public class EventController {
 		int count = eventService.selectRowCount(map);
 		log.debug("<<count>> : " + count);
 		
-		PageUtil page = new PageUtil(keyfield,keyword,currentPage,count,20,10,"list","&order="+order);
+		PageUtil page = new PageUtil(keyfield,keyword,currentPage,count,20,10,"discount");
 		
 		List<Event_listVO> list = null;
 		if(count > 0) {
-			map.put("order", order);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
 			
@@ -334,42 +333,90 @@ public class EventController {
 	
 	 
 	 
-	  /*========================
-		 * 응모권 참여자 리스트 목록
-		 *========================*/
-		@RequestMapping("/event/entryEventList")
-		public ModelAndView entryEventList(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
-									@RequestParam(value="order",defaultValue="1") int order,
-									String keyword, String keyfield) {
-			Map<String,Object> map = new HashMap<String,Object>();
-			map.put("keyfield", keyfield);
-			map.put("keyword", keyword);
-			
-			//전체,검색 레코드 수
-			int count = eventService.selectRowCount(map);
-			log.debug("<<이벤트 참여 글 목록 count>> : " + count);
-			
-			//페이지처리
-			PageUtil page = new PageUtil(null, keyword, currentPage, count, 20, 10, "list","&order="+order);
-			
-			List<Event_listVO> list = null;
-			if(count > 0) {
-				map.put("order", order);
-				map.put("start", page.getStartRow());
-				map.put("end", page.getEndRow());		
-				list = eventService.selectList(map);
-			}
-			
-			ModelAndView mav = new ModelAndView();
-			mav.setViewName("entryEventList");//타일즈 설정명으로 호출
-			mav.addObject("count", count);
-			mav.addObject("list", list);
-			mav.addObject("page", page.getPage());
-			
-			
-			return mav;
+	/*========================
+	 * 응모권 참여자 리스트 목록
+	 *========================*/
+	@RequestMapping("/event/entryEventList")
+	public ModelAndView entryEventList(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+								@RequestParam(value="order",defaultValue="1") int order,
+								String keyword, String keyfield) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		
+		//전체,검색 레코드 수
+		int count = eventService.selectRowCount(map);
+		log.debug("<<이벤트 참여 글 목록 count>> : " + count);
+		
+		//페이지처리
+		PageUtil page = new PageUtil(null, keyword, currentPage, count, 20, 10, "list","&order="+order);
+		
+		List<Event_listVO> list = null;
+		if(count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());		
+			list = eventService.selectList(map);
 		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("entryEventList");//타일즈 설정명으로 호출
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		
+		return mav;
+	}
 	 
+	/*========================
+	 * 응모권 참여자 리스트 목록
+	 *========================*/
+	@RequestMapping("/event/memberEntryList")
+	public ModelAndView memberEntrytList(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+								String keyword, String keyfield,HttpServletRequest request) {
+		
+		 // 로그인된 사용자 정보 가져오기
+	    HttpSession session = request.getSession();
+	    MemberVO user = (MemberVO) session.getAttribute("user");
+	    
+	 // 로그인 체크
+	    if (user == null) {
+	        // 로그인되지 않은 경우 처리
+	        // 예를 들어 로그인 페이지로 리다이렉트
+	        return new ModelAndView("redirect:/member/login");
+	    }
+	    
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		
+		//전체,검색 레코드 수
+		int count = eventService.selectRowCount(map);
+		log.debug("<<이벤트 참여 글 목록 count>> : " + count);
+		
+		//페이지처리
+		PageUtil page = new PageUtil(null, keyword, currentPage, count, 20, 10, "memberEntryList");
+		
+		List<Entry_listVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			map.put("mem_num", user.getMem_num());
+			list = eventService.selectEntryList(map);
+			log.debug("<<이벤트 참여 글 목록 >> : " + list);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("memberEntryList");//타일즈 설정명으로 호출
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		//mav.addObject("user", user.getMem_num());
+		
+		return mav;
+	}
 	/*========================
 	 * 응모권 참여자 리스트 등록
 	 *========================*/
@@ -396,7 +443,6 @@ public class EventController {
 	 *========================*/
 	@RequestMapping("/event/entryName")
 	   public ModelAndView entryprocess(@RequestParam int event_num,@RequestParam(value="pageNum",defaultValue="1") int currentPage,
-	                           @RequestParam(value="order",defaultValue="1") int order,
 	                           String keyword, String keyfield) {
 	      Map<String,Object> map = new HashMap<String,Object>();
 	      map.put("keyfield", keyfield);
@@ -405,11 +451,10 @@ public class EventController {
 	      //전체,검색 레코드 수
 	      int count = eventService.selectRowCount(map);
 	      //페이지처리
-	      PageUtil page = new PageUtil(null, keyword, currentPage, count, 20, 10, "list","&order="+order);
+	      PageUtil page = new PageUtil(null, keyword, currentPage, count, 20, 10, "entryName");
 	      
 	      List<Entry_listVO> entry_list = null;
 	      if(count > 0) {
-	         map.put("order", order);
 	         map.put("start", page.getStartRow());
 	         map.put("end", page.getEndRow());      
 	         entry_list = eventService.selectEntry(map, event_num);
