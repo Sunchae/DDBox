@@ -1,5 +1,6 @@
 package kr.spring.cart.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.cart.service.CartService;
@@ -54,19 +56,10 @@ public class CartController {
 	/*=================================
 	 *	장바구니 등록
 	 *=================================*/
-	@GetMapping("/cart/cartInsert")
-	public String form() {
-		return "cartList";
-	}
+	@ResponseBody
 	@PostMapping("/cart/insert")
-	public String cartInsert(@Valid CartVO cartVO, BindingResult result, HttpServletRequest request, HttpSession session, Model model) {
+	public String cartInsert(@Valid CartVO cartVO, BindingResult result, HttpServletRequest request, HttpSession session, Model model) throws IllegalStateException, IOException{
 		log.debug("<<장바구니 등록>> : " + cartVO);
-		
-		
-		//유효성 체크
-		if(result.hasErrors()) {
-			return form();
-		}
 		
 		//회원번호 세팅
 		MemberVO vo = (MemberVO)session.getAttribute("user");

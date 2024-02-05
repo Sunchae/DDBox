@@ -18,12 +18,12 @@ public class PaymentController{
 	@Setter(onMethod_=@Autowired)
 	private KakaoPayService kakaopay;
 	
-	@GetMapping("/kakaoPay")
+	@GetMapping("/kakaoPay/kakaoPay")
 	public void kakaoPayGet() {
 		
 	}
 	
-	@PostMapping("/kakaoPay")
+	@PostMapping("/kakaoPay/kakaoPay")
 	public String kakaoPay() {
 		log.info("kakaopay post..................");
 		

@@ -5,6 +5,7 @@
 <!-- 내용 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/shop.cart.js"></script>
 <div class="page-main">
 <div class="main-title" id="store_form">
 		<div class="align-right">
@@ -69,13 +70,9 @@
 								<span class="line32">수량/금액</span>
 							</p>
 							<div class="cont">
-								<button type="button" class="btn minus" title="수량감소">
-									<i class="iconset ico-minus"></i>
-								</button>
+								<button type="button" class="btn minus" title="수량감소">-</button>
 								<input type="text" title="수량 입력" class="input-text" readonly="readonly" value="1">
-								<button type="button" class="btn plus" title="수량증가">
-									<i class="iconset ico-plus"></i>
-								</button>
+								<button type="button" class="btn plus" title="수량증가">+</button>
 								<div class="money">
 									<em id="prdSumAmt">${store.store_price}</em>
 									<span>원</span>
@@ -87,7 +84,7 @@
 										<%-- type end --%>
 				<div class="btn-group">
 					<!-- ::before -->
-					<a href="${pageContext.request.contextPath}/cart/cartDetail" id="btnCart" class="button large" w-data="500" h-data="410" title="장바구니">장바구니</a>
+					<input type="button" value="장바구니" id="btn_cart" onclick="location.href='${pageContext.request.contextPath}/cart/cartDetail'">
 					<a href="${pageContext.request.contextPath}/kakaoPay/kakaoPay" id="btn-kakao-pay" class="button purple large" w-data="500" h-data="400" title="구매">구매</a>
 					<!-- ::after -->
 				</div>
