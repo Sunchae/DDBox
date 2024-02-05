@@ -30,4 +30,6 @@ public interface ShowService {
    //상영시간 호출
    public List<ShowVO> selectShowTimeList(int choice_num, int choice_screen, String choice_date);
       
+   
+   public ShowVO selectedTime(int shw_num);
 }

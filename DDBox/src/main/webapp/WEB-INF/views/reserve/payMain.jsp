@@ -33,7 +33,7 @@
                 <h5>결제수단 선택</h5>
                 <div class="text-wrap">
                     <div class="" id="pay-kakao-id"></div>
-                    <div class="text-event"><p>1만원 이상 결제시 영화관람권 추첨 이벤트 자동응모!</p></div>
+                    <div class="text-event align-center"><p>1만원 이상 결제시 영화관람권 추첨 이벤트 자동응모!</p></div>
                 </div>
                 <div class="pay-wrap">
                     <input type="radio" class="active" name="radio-kakao-pay" id="kakao-pay-radiobox" checked>
@@ -49,34 +49,15 @@
         </div>
         <div class="right-container">
             <div class="title-name">
-                <img src="${movie.ratingImageURL}" alt="count-age" class="count-age">
-                <p class="title-text">${movie.movieName}</p>
-              		<p class="screen-system">예매 좌석 정보
-                	<c:forEach var="seat" items="${seats }">
-                	<c:if test="${not empty seat }">
-                		(${seat})
-                	</c:if>
-                	</c:forEach>
-               		 </p>
-                <p class="screen-location">${theater.name }/${screen.name }</p>
-                <p class="screen-day">${showTime.name }</p>
-                <p class="screen-time"><i class="fas fa-clock"></i></p>
+                <p class="title-text">영화 제목 : ${movie.movieName}</p>
+s               <p class="screen-location">상영관 이름 : ${theater.name }${screen.name }</p>
+                <p class="screen-day">상영 날짜 : ${showTime.name }</p>
             </div>
+            
             <div class="pay-container">
-                <div class="kind-age">
-	                	<p class="name">
-	               <c:if test="${not empty audult}">${audult }</c:if>
-                	<c:if test="${not empty baby}">${baby }</c:if>
-                	<c:if test="${not empty old}">${old }</c:if>
-                	 </p>
-                	<c:forEach var="number" items="${ticketAudience }">
-                		<p class="name" data-audienceTypeNo="${number.audienceTypeNo }" data-thicketNo="${number.ticketNo }">${number.totalNumber}</p>
-                	</c:forEach>
-                    <p class="pay">${ticket.ticketTotalAmount }</p>
-                </div>
                 <div class="total">
                     <p class="total-title">금액</p>
-                    <p class="total-pay"><em>${ticketingPay }</em>원</p>
+                    <p class="total-pay"><span>${ticketingPay }</span>원</p>
                 </div>
                 <i class="fas fa-minus-circle"></i>
                 <div class="discount-total">
@@ -84,19 +65,22 @@
                         할인적용
                     </p>
                     <p class="discount-pay">
-                        <em>0</em>원
+                        <span>0</span>원
                     </p>
                 </div>
                 <div class="discount-content">
                     <div class="point">
+                    <br>
                         <p class="use-point">포인트 적립</p>
-                        <p class="point-discount"><em>${point }</em>원</p>
+                        <p class="point-discount"><span>${cost}*0.01</span>원</p>
                     </div>
                 </div>
+                <br>
                 <div class="final-pay">
                     <p class="final-title">최종결제금액</p>
-                    <p class="final-total"><em>${ticketingPay }</em>원</p>
+                    <p class="final-total"><span>${costs}</span>원</p>
                 </div>
+                <br>
                 <div class="way-pay">
                     <p class="way-pay-title">결제수단</p>
                     <p class="way-pay-content">카카오페이결제</p>
@@ -114,21 +98,6 @@
                 </div>
             </div>
         </div>
-        <form action="/ticketing/complete" method="post" id="form-submit">
-        	<input type="hidden" name="theater"  value="${theater }"/>
-        	<input type="hidden" name="screen"  value="${screen }"/>
-        	<input type="hidden" name="movie"  value="${movie.movieNo }"/>
-        	<input type="hidden" name="ticketingPay"  value="${ticketingPay }" />
-        	<input type="hidden" name="seatList" value="${seatList }"/>
-        	<input type="hidden" name="userPoint"  value="${point }"/>
-        	<input type="hidden" name="adult"  value="${audult }" />
-        	<input type="hidden" name="baby"  value="${baby }" />
-        	<input type="hidden" name="old"  value="${old }" />
-        	<input type="hidden" name="showTime"  value="${showTime }" />
-        	<input type="hidden" name="ticket"  value="${ticket }" />
-        	<input type="hidden" name="startTime"  value="${startTime }" />
-        	<input type="hidden" name="showScheduleNo"  value="${showScheduleNo }" />
-        </form>
     </div>
     <div id="point-modal">
         <div class="point-modal">
@@ -223,16 +192,7 @@
                             <p>사용</p>
                         </div>
                     </div>
-                    <div class="coupon-content">
-                     <!-- 
-                         <div id="coupon-list">왈왈이 영화 무료 이용권</div>
-                         
-                           <div id="coupon-date">2022년12월01일</div>
-                         <div id="coupon-use-btn">
-                            <button type="button" id="button-use" data-use="">사용</button>
-                         </div> 
-                          -->
-                    </div>
+                  
                 </div>
                 <div class="text-center">
                    <ul class="dot-list">
@@ -241,7 +201,7 @@
                        <li>보유하신 쿠폰은 등록 후 이용하실 수 있습니다.</li>
                    </ul>
                 </div>
-                <div class="button-list">
+                <div class="button-list align-center">
                     <!--적용시 금액 할인되도록-->
                     <button type="button" class="btn-discount-pay" id="btn-coupon-close">닫기</button>
                     <!--취소시 style의 display값을 none으로 -->

@@ -34,5 +34,7 @@ public interface ShowMapper {
    //상영시간 호출
    public List<ShowVO> selectShowTimeList(int choice_num, int choice_screen, String choice_date);
    
+   @Select("SELECT * FROM show WHERE shw_num=#{shw_num}")
+   public ShowVO selectedTime(int shw_num);
    
 }

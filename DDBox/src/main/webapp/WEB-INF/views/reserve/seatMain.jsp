@@ -14,17 +14,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
 <style type="text/css">
-	body{
-    font-family: 'Lato', sans-serif;
-    color: #fff;
-    box-sizing: border-box;
-}
+
 #container{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 800px;
+
 }
 
 .movieContainer{
@@ -77,7 +74,7 @@ li{
 }
 
 .screen{
-   background-color: #fff;
+   background-color: white;
    margin: 25px;
    padding: 5px;
    width: 200px;
@@ -95,6 +92,7 @@ li{
     border-top-right-radius: 10px;
     cursor: pointer;
     font-size:7pt;
+    color:white;
 }
 
 .availableSeat{
@@ -179,63 +177,6 @@ li{
 #costs{
     color: #6feaf6;
 }
-.all-check-people{
-	display: flex;
-    width: 70%;
-    margin-left: 10%;
-    margin-top: 25px;
-    height: 10%;
-	top: 20px;
-}
-.check-people-box{
-	position:relative;
-	display: flex;
-	width:10px;
-	margin-left: 10%;
-} 
-.check-people{
-	float:left;
-    display:flex;
-    clear:both;
-    width: 20%;
-    height: 40px;
-    border-top: 1px solid rgb(238, 241, 255);
-    background-color: rgb(238, 241, 255);
-}
-.txt{
-    float: left;
-    text-align: center;
-    font-size: small;
-    margin-right: 20px;
-    margin-top: 10px;
-}
-.down,.up{
-    width: 18.2px;
-    height: 22px;
-    border-radius: 3px;
-    margin-top: 10px;
-    position: sticky;
-}
-
-.now{
-    width: 20px;
-    height: 22px;
-    margin-top: 10px;
-    position: sticky;
-    
-}
-.down,.now,.up{
-    float: left;
-    border: 1px solid rgb(197, 196, 196);
-    background-color: white;
-    margin-top: 5px;
-
-}
-.count{
-    font-size: 10px;
-    color: rgb(160, 160, 160);
-    text-align: left;
-}
 ul {
     list-style:none;
     margin:0;
@@ -251,27 +192,29 @@ li {
 </head>
 
 <body>
-	<div id="container" style="border:1px solid black;  background-color: #4a4777;">
-		<div class="movieContainer">
+	<h2 style="color:black;">빠른예매</h2>	
+	<div style="display:flex;">	
+	<div class="left-container" style="display:inline-block; align-items:center; width:100%; padding: 80px; background-color:lightgray;">
+		<div class="align-center">
 			<label for="movie"> 관람인원선택 : </label> 
-			<select name="pickMovie" id="movie">
+			<select name="pickType" id="people">
 				<option class="price" value="15000">일반</option>
 				<option class="price" value="12000">청소년</option>
 			</select>
-		</div>
-		
-			<div class="check-people-box">
+		</div>	
+		<!-- <div class="person_screen">
+			<div class="section section-numberofpeople">
+				<div class="check-people-box">
               <div class="check-people">
                     <p class="txt">성인</p>
-                    <div class="count">
+                    <div class="count" style="display:inline-block; color:black; width: 100%; text-align: center;">
                         <button type="button" class="down" title="성인 좌석 선택 감소">-</button>
-                        <div class="number">
+                        <div class="number" style="display:inline-block;">
                             <button type="button" class="now" title="성인 현재 좌석 선택 수">0</button>
                         </div>
                         <button type="button" class="up" title="성인 좌석 선택 증가">+</button>
                     </div>
                 </div>
-                
                 <div class="check-people">
                     <p class="txt">청소년</p>
                     <div class="count">
@@ -283,9 +226,8 @@ li {
                     </div>
                 </div>
             </div>
-		<p></p>
-		<p></p>
-		<p></p>
+			</div>
+		</div> -->
 		<ul class="showcase">
 			<li>
 				<div class="availableSeat"></div> <small class="small">선택가능</small>
@@ -298,7 +240,7 @@ li {
 			</li>
 		</ul>
 
-		<div class="seatContainer">
+		<div class="seatContainer" style="width:45%; margin:0 auto;">
 			<div class="screen"></div>
 			
 			
@@ -402,98 +344,112 @@ li {
 			</div>
 
 		</div>
-		
-	<div>
-		<p class="text">
-			<span id="count">0</span>명 최종결제금액 <span id="costs">0</span>
-		</p>
-	</div>
-	<div class="align-center">
-		<input type="submit" value="결제하기" onclick="location.href='payMain'">
 	</div>	
-	
-	<!-- <div class="wrap">
-		<div class="tit-area">
-			<span class="tit"></span>
-		</div>
-		<div class="info-area">
-			<p class="theater"></p>
-			<p class="date"></p>
-			<p class="poster"></p>
-		</div>
-		<div class="legend">
+		
+	<div class="right-container" style=" width:40%; display:inline-block; ">
+            <div class="movie-container" style="width:80%; height:600px;">
+                <div class="title-area">
+                    <p class="tit">영화제목 : ${param.choice_num}</p>
+                </div>
+                  <br>
+                <div class="movie-detail-area" style="height:240px;">
+                    <p class="place">상영관 이름 : ${param.choice_screen}</p>
+                    <p class="date">
+                    	<span>
+                    		상영 날짜 : ${param.choice_date}
+                    	</span>
+                    </p>
+                    <p class="time">
+                    	<span>
+                    		상영 시간 : ${param.choice_time}
+                    	</span>
+                    </p>
+                </div>
+                <div>
+                    <div class="kind-seat align-center" style="width:200px;">
+                        <p class="tit-seat" style="font-size:15pt;">관람인원</p>
+                         <span id="count" style="font-size:12pt;">0</span>명      
+                    </div>
+                </div>
+                <div class="pay-area">
+                    <p class="count">
+                        
+                    </p>
+                    <div class="pay">
+                        <p class="tit-pay" style="font-size:10pt;">최종결제금액 </p>
+                    </div>   
+                    <div class="money">
+                        <span id="costs" style="font-size:10pt;">0</span>원
+                    </div>
+                </div>
+                <div class="btn-group" style="height:150px;">
+                    <a href="javascript:history.back();" class="button" id="pagePrevious" title="이전">이전</a>
+                      <c:choose>
+	                    <c:when test="${empty LOGIN_USER }">
+	                    	<a href="#" class="button" id="pageNext-1" data-bs-toggle="modal" data-bs-target="#modal-login-form">
+	                    	다음</a>
+	                     </c:when>
+	                     <c:otherwise>
+	                     <input type="submit" value="다음" class="button" id="pageNext" title="다음">
+	                      </c:otherwise>
+                    </c:choose> 
+                </div>
+            </div>
+        </div>	
+      </div>  
+      
+      <form action="payMain" style="border:none;" class="align-center" id="pay_form">
+            	<input type="hidden" name="choice_num" value="${reserve.movie_title}" id="choice_num">
+            	<input type="hidden" name="choice_screen" value="${reserve.scr_name}" id="choice_screen">
+            	<input type="hidden" name="choice_date" value="${reserve.date}" id="choice_date">
+            	<input type="hidden" name="choice_time" value="${reserve.shw_time}" id="choice_time">
+            	<input type="hidden" name="choice_people" value="${count}" id="choice_people">
+            	<input type="hidden" name="choice_price" value="${costs}" id="choice_price">
+            	<input type="submit" value="티켓결제">
+      </form>
+
+<script type="text/javascript">
+			let choice_people;
+			let choice_price;
 			
-		</div>
-		<div class="seat-num">
-			<div class="seat-all" title="구매가능 좌석">-</div>
-			<div class="seat-all" title="구매가능 좌석">-</div>
-			<div class="seat-all" title="구매가능 좌석">-</div>
-			<div class="seat-all" title="구매가능 좌석">-</div>
-			<div class="seat-all" title="구매가능 좌석">-</div>
-			<div class="seat-all" title="구매가능 좌석">-</div>
-			<div class="seat-all" title="구매가능 좌석">-</div>
-			<div class="seat-all" title="구매가능 좌석">-</div>
-		</div>
-		<div class="pay-area">
-			<p class="text">
-			최종결제금액 
-			<span id="costs">0</span>
-			</p>
-		</div>
-	</div> -->
-	</div>
-	
-
-	<script>
-        document.addEventListener('DOMContentLoaded', () =>{
-
-const seatContainer = document.querySelector('.seatContainer');
-
-const movie = document.getElementById('movie'); // 선택할 영화
-let moviePrice = Number(movie.value); // 영화과격 
-
-let count = document.querySelector('#count'); // 인원수
-let costs = document.querySelector('#costs'); // 가격
-
-// 선택한 좌석수 텍스트 변경해주기
-
-function countSeatPrice(){
-    const selectedSeatCount = document.querySelectorAll('.selectedSeat').length;
-
-    count.textContent = selectedSeatCount;
-    costs.textContent = selectedSeatCount * moviePrice;
-    
-}
-
-
-//좌석 클릭했을때
-
-seatContainer.addEventListener('click', (e) => {
-
-    if(e.target.className === 'seat'){
-        e.target.className = 'selectedSeat';
-    } else if(e.target.className === 'selectedSeat'){
-        e.target.className = 'seat';
-    }
-
-    countSeatPrice();
-})
-
-// 영화 변경할때
-
-movie.addEventListener('change', (e) => {
-
-    moviePrice = Number(e.target.value);
-
-    countSeatPrice()
-    
-})
-
-
-
-
-})
-    </script>
+		document.addEventListener('DOMContentLoaded', () =>{
+		
+			const seatContainer = document.querySelector('.seatContainer');
+		
+			const movie = document.getElementById('movie'); // 선택할 영화
+			let moviePrice = Number(people.value); // 영화가격 
+		
+		let count = document.querySelector('#count'); // 인원수
+		let costs = document.querySelector('#costs'); // 가격
+		
+		// 선택한 좌석수 텍스트 변경해주기
+		
+		function countSeatPrice(){
+		    const selectedSeatCount = document.querySelectorAll('.selectedSeat').length;
+		
+		    choice_people = selectedSeatCount;
+		    choice_price = selectedSeatCount * moviePrice;
+		    
+		    count.textContent = choice_people;
+		    costs.textContent = choice_price;
+		}
+		
+		
+		//좌석 클릭했을때
+		
+		seatContainer.addEventListener('click', (e) => {
+		
+		    if(e.target.className === 'seat'){
+		        e.target.className = 'selectedSeat';
+		    } else if(e.target.className === 'selectedSeat'){
+		        e.target.className = 'seat';
+		    }
+		
+		    countSeatPrice();
+		})
+		
+		})
+   </script>
 </body>
 
 </html>

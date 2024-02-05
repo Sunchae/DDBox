@@ -8,6 +8,7 @@
 			<c:if test="${user.mem_auth ==9}"> 		<%-- 관리자 로그인 되어있을 때 만 보임 --%>
 			<input type="button" value="글쓰기" onclick="location.href='write'">
 			</c:if>
+			<input type="button" value="결제테스트" onclick="location.href='${pageContext.request.contextPath}/kakaoPay/kakaoPay'">
 		</div>
 	</div>
 	<c:forEach var="store" items="${list}">

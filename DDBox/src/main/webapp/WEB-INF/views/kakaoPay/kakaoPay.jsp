@@ -10,7 +10,7 @@
 </head>
 <body>
 <h1> kakaoPay api</h1>
-<form method="post" action="/kakaoPay">
+<form method="post" action="/kakaoPay/kakaoPaySuccess">
     <button>결제</button>
 		<script>
 			$("#check_module").click(function() {
@@ -54,7 +54,6 @@
 				});
 			});
 		</script>
-</script>
 </form>
 </body>
 </html>

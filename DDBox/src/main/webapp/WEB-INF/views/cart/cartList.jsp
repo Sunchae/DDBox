@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="page-main">
-	<div class="content-main">
+	<div class="main-title">
 	<h2>장바구니</h2>
 	<c:if test="${empty list}">
 	<div class="result-display">
@@ -21,7 +21,7 @@
 	</div>
 	</c:if>
 	<c:if test="${!empty list}">
-	<form id="cart_order" action="${pageContext.request.contextPath}/order/orderForm.do" method="post">
+	<form id="cart_order" action="${pageContext.request.contextPath}/order" method="post">
 		<table>
 			<tr>
 				<th>상품명</th>
