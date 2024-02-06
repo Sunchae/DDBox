@@ -28,6 +28,8 @@
     	<put-attribute name="title" value="MyPage"/>
     	<put-attribute name="header"
     	               value="/WEB-INF/views/template/DDBox_navbar.jsp"/>
+    	<put-attribute name="summary"
+    	               value="/WEB-INF/views/member/UserSummary.jsp"/>
     	<put-attribute name="nav"
     	               value="/WEB-INF/views/template/DDBox_sidebar.jsp"/>               
     	<put-attribute name="body"
@@ -86,6 +88,11 @@
     	<put-attribute name="title" value="MyPageRental"/>
     	<put-attribute name="body"
     	               value="/WEB-INF/views/member/MypageRental.jsp"/>
+    </definition>
+    <definition name="withdrawForm" extends="myPage">
+    	<put-attribute name="title" value="withdrawForm"/>
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/member/withdrawForm.jsp"/>
     </definition>
     
     <!-- 영화 페이지 -->

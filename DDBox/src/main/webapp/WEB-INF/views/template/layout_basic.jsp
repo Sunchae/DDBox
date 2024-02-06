@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title><tiles:getAsString name="title"/></title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
+
 <tiles:insertAttribute name="css" ignore="true"/>
 </head>
 <body>
@@ -15,7 +16,15 @@
 		<tiles:insertAttribute name="header"/>
 	</div>
 	<div id="main_body">
-		<tiles:insertAttribute name="body"/>
+		<div>
+		<tiles:insertAttribute name="body1"/>
+		</div>
+		<div>
+		<tiles:insertAttribute name="body2"/>
+		</div>
+		<div>
+		<tiles:insertAttribute name="body3"/>
+		</div>
 	</div>
 	<div id="main_footer">
 		<tiles:insertAttribute name="footer"/>

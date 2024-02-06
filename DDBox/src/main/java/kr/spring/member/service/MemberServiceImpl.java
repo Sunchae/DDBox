@@ -48,11 +48,7 @@ public class MemberServiceImpl implements MemberService{
 		
 	}
 
-	@Override
-	public void deleteMember_detail(int mem_num) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	public void updateProfile(MemberVO member) {
@@ -78,6 +74,12 @@ public class MemberServiceImpl implements MemberService{
 	public void deleteAutoid(int mem_num) {
 		// TODO Auto-generated method stub
 		
+	}
+	//회원 탈퇴 처리 트랜잭션
+	@Override
+	public void withdrawMember(int mem_num) {
+		memberMapper.deleteMember_detail(mem_num);
+		memberMapper.updateMemberAuthByWithdraw(mem_num);
 	}
 
 	

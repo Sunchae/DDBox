@@ -16,6 +16,7 @@ public interface MovieService {
 	//영화 리스트 뽑기
 	public List<MovieVO> selectList(Map<String, Object> map);
 	public List<MovieVO> selectMovieList();
+	public List<MovieVO> selectMainMovieList();
 	public MovieVO selectMovie(int movie_num);
 	public List<MovieVO> selectMoviesByDate(String date);
 	//영화 좋아요 삽입 

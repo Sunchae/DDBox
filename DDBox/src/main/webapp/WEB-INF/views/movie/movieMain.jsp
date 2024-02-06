@@ -79,7 +79,7 @@
                             class="img-fluid movie-poster" alt="${movie.movie_title} Poster">
                         <div class="movie-summary">
                             <h5>${movie.movie_title}</h5>
-                            <p>${movie.movie_tagline}</p>
+                            <p>${movie.movie_overview}</p>
                         </div>
                     </a>
 

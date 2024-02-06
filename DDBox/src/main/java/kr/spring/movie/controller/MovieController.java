@@ -22,6 +22,21 @@ public class MovieController {
 	    @Autowired
 	    private MovieService movieService;
 
+	    @GetMapping("/main/main")
+	    public ModelAndView getMainMovieList() {
+	    	
+	    	List<MovieVO> movieList = movieService.selectMainMovieList();
+	    	log.debug("<<영화 목록 반환 >> + " + movieList);
+	    	
+	    	
+	    	ModelAndView mav = new ModelAndView();
+	    	mav.setViewName("mainpage");
+	    	mav.addObject("list",movieList);
+	    	
+	    	return mav;
+	    	
+	    }
+	    
 	    @GetMapping("/movie/main")
 	    public ModelAndView getMovieList() {
 	    	

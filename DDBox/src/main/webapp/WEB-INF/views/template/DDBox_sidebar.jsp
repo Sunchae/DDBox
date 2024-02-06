@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <link href="/docs/5.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
@@ -65,16 +66,6 @@
         </a>
       </li>
       <li>
-        <a href="/member/myPageInfo" class="nav-link link-dark">
-          회원정보
-        </a>
-      </li>
-      <li>
-        <a href="/member/myPageProfile" class="nav-link link-dark">
-          프로필 관리
-        </a>
-      </li>
-      <li>
         <a href="/member/myPageFAQ" class="nav-link link-dark">
           나의 문의내역
         </a>
@@ -87,15 +78,30 @@
     <hr>
     <div class="dropdown">
       <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-        <img id="myPage-profile"src="${pageContext.request.contextPath}/images/face.png" alt="" width="32" height="32" class="rounded-circle me-2">
-        <strong>${sessionScope.user.mem_id}</strong>
+        
+        <c:if test="${!empty user}">
+			<img id="myPage-profile" src="${pageContext.request.contextPath}/member/photoView" 
+	                              width="32" height="32" class="rounded-circle me-2 my-photo">
+		</c:if>
+        <c:if test="${!empty user && !empty user.mem_nickname}">
+			[<span class="user_name">${user.mem_nickname}</span>]
+		</c:if>
+		<c:if test="${!empty user && empty user.mem_nickname}">
+			<strong>${sessionScope.user.mem_id}</strong>
+		</c:if>
+        
+     
+        
+        
+        
       </a>
       <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-        <li><a class="dropdown-item" href="#">New project...</a></li>
-        <li><a class="dropdown-item" href="#">Settings</a></li>
-        <li><a class="dropdown-item" href="#">Profile</a></li>
+        <li><a class="dropdown-item" href="/member/myPageInfo">회원정보</a></li>
+        <li><a class="dropdown-item" href="/member/myPageProfile">프로필 관리</a></li>
+        <li><a class="dropdown-item" href="/member/withdraw">회원탈퇴</a></li>
+        
         <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#">Sign out</a></li>
+        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
       </ul>
     </div>
   </div>

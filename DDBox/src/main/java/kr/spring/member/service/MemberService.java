@@ -1,6 +1,9 @@
 package kr.spring.member.service;
 
 
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Update;
+
 import kr.spring.member.vo.MemberVO;
 
 public interface MemberService {
@@ -14,8 +17,9 @@ public interface MemberService {
 	
 	public int selectCheckMemberRegistered(MemberVO member);
 	
-	//public void deleteMember(int mem_num); 디테일만 지우고 member 테이블은 지우지말자 일단
-	public void deleteMember_detail(int mem_num);
+	//회원 탈퇴
+	public void withdrawMember(int mem_num);
+
 
 
 	//자동 로그인

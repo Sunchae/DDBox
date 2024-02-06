@@ -16,6 +16,12 @@
 	padding:5px 5px 30px 5px;
 	min-height:500px;
 }
+#user_summary{
+	display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    height: 50vh; /* 화면 전체 높이에 맞추기 위해 */
+}
 #main_footer{
 	background-color:gray;
 }
@@ -39,6 +45,7 @@ a:hover{
 	width:25%;
 	min-height:530px;	
 }
+
 #page_body{
 	width:75%;
 	float:left;

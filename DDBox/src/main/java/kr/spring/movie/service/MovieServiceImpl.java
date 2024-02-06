@@ -35,7 +35,11 @@ public class MovieServiceImpl implements MovieService{
 	public List<MovieVO> selectMovieList() {
 		return movieMapper.selectMovieList();
 	}
-	
+	@Override
+	public List<MovieVO> selectMainMovieList() {
+		return movieMapper.selectMainMovieList();
+	}
+
 	@Override
 	public void saveMovieDataFromList(List<MovieVO> movieList) {
 		log.debug("==============영화 저장 서비스 진입================");
@@ -87,6 +91,9 @@ public class MovieServiceImpl implements MovieService{
 		
 	}
 
+
+
+	
 
 
 

@@ -2,6 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 내용 시작 -->
+<style>
+    .mem-birth-select {
+        width: 85px; /* 적절한 넓이 값으로 조절하세요 */
+    }
+</style>
+		
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/member.register.js"></script>
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/YSC.css">
 <div class="page-main">
 	<h2>회원가입</h2>
@@ -23,20 +32,20 @@
 			</li>
 			<li>
                 <form:label path="mem_birth">생년월일</form:label>
+                <form:input path="mem_birth" type="hidden"/>
                 <!-- Select2 사용 -->
-                <select class="mem-birth-select" name="mem_birth_year">
+                <select class="mem-birth-select" name="mem_birth_year" id="birthYear">
                     <option value="">년</option>
-                    <!-- 나머지 년 추가 -->
                 </select>
-                <select class="mem-birth-select" name="mem_birth_month">
+                <form:errors path="mem_birth_year" cssClass="error-color" />
+                <select class="mem-birth-select" name="mem_birth_month" id="birthMonth">
                     <option value="">월</option>
-                    <!-- 나머지 월 추가 -->
                 </select>
-                <select class="mem-birth-select" name="mem_birth_day">
+                <form:errors path="mem_birth_month" cssClass="error-color" />
+                <select class="mem-birth-select" name="mem_birth_day" id="birthDay">
                     <option value="">일</option>
-                    <!-- 나머지 일 추가 -->
                 </select>
-                <form:errors path="mem_birth" cssClass="error-color" />
+                <form:errors path="mem_birth_day" cssClass="error-color" />
             </li>
             
 
@@ -45,32 +54,21 @@
 				<div class="radio-group">
 				<form:radiobutton path="mem_gender" value="Male" label="Male" /> 
 				<form:radiobutton path="mem_gender"	value="Female" label="Female" />
+				<form:errors path="mem_gender" cssClass="error-color" />
 				</div>
 				<div class="divider"></div>
 			</li>
 			
-			<li>
-				<form:label path="mem_age">연령대</form:label> 
-				<div class="radio-group">
-				<form:radiobutton path="mem_age" value="10대" label="10대" />
-				<form:radiobutton path="mem_age" value="20대" label="20대" /> 
-				<form:radiobutton path="mem_age" value="30대" label="30대" />
-				</div>
-				<form:label path="mem_age"></form:label> 
-				<div class="radio-group">
-				<form:radiobutton path="mem_age" value="40대" label="40대" />
-				<form:radiobutton path="mem_age" value="50대 이상" label="50대 이상" />
-				</div>
-			</li>
+			
 			<li>
 				<form:label path="mem_pw">비밀번호</form:label>
 				<form:password path="mem_pw" placeholder="영문,숫자만 4~12자"/>
 				<form:errors path="mem_pw" cssClass="error-color"/>
 			</li>
 			<li>
-				<form:label path="mem_phone">휴대폰번호</form:label>
-				<form:input path="mem_phone"/>
-				<form:errors path="mem_phone" cssClass="error-color"/>
+				<form:label path="mem_phone">휴대폰 번호</form:label> 
+				<form:input	path="mem_phone" placeholder="휴대폰 번호를 입력해주세요 ex)010-0000-0000" autocomplete="off"/> 
+				<form:errors path="mem_phone" cssClass="error-color" />
 			</li>
 			<li>
 				<form:label path="mem_email">이메일</form:label>
@@ -102,10 +100,9 @@
 		</div>                                  
 	</form:form>
 </div>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/member.register.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jquery-ui.min.css">
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
 
@@ -117,10 +114,58 @@
 
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        // Select2 초기화
-        $(".mem-birth-select").select2();
+$(document).ready(function() {
+    // Select2 초기화
+    $(".mem-birth-select").select2();
+});
+
+$(document).ready(function() {
+	let tyear = '${memberVO.mem_birth_year}';
+	if(tyear){
+		 $("#birthYear").prepend("<option value='"+tyear+"' selected>" + tyear + "년</option>");
+	}
+	let tmonth = '${memberVO.mem_birth_month}';
+	if(tmonth){
+		 $("#birthMonth").prepend("<option value='"+tmonth+"' selected>" + tmonth + "월</option>");
+	}
+	let tday = '${memberVO.mem_birth_day}';
+	if(tday){
+		 $("#birthDay").prepend("<option value='"+tday+"' selected>" + tday + "일</option>");
+	}
+	
+    var currentYear = new Date().getFullYear();
+    var endYear = currentYear - 100; // 100년 전까지의 연도
+
+    for (var year = currentYear; year >= endYear; year--) {
+        $("#birthYear").append("<option value='" + year + "'>" + year + "년</option>");
+    }
+ // 월의 일수를 계산하는 함수
+    function getDaysInMonth(month, year) {
+        return new Date(year, month, 0).getDate();
+    }
+
+    // 월 옵션 동적 생성
+    for (var month = 1; month <= 12; month++) {
+        $("#birthMonth").append("<option value='" + month + "'>" + month + "월</option>");
+    }
+
+    // 월이 변경될 때 일 옵션 업데이트
+    $("#birthMonth").change(function() {
+        var selectedMonth = $(this).val();
+        var selectedYear = $("#birthYear").val(); // 연도 선택 필요
+
+        if (selectedMonth !== "" && selectedYear !== "") {
+            $("#birthDay").empty();
+            var daysInMonth = getDaysInMonth(selectedMonth, selectedYear);
+
+            for (var day = 1; day <= daysInMonth; day++) {
+                $("#birthDay").append("<option value='" + day + "'>" + day + "일</option>");
+            }
+        }
     });
+    $(".mem-birth-select").select2();
+});
+
 </script>
 
 

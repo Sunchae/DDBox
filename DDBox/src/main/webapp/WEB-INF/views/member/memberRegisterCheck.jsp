@@ -3,7 +3,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 내용 시작 -->
 
-
+<style>
+    .mem-birth-select {
+        width: 85px; /* 적절한 넓이 값으로 조절하세요 */
+    }
+</style>
 		
 
 
@@ -26,18 +30,16 @@
                 </select>
                 <select class="mem-birth-select" name="mem_birth_month" id="birthMonth">
                     <option value="">월</option>
-                    <!-- 나머지 월 추가 -->
                 </select>
                 <select class="mem-birth-select" name="mem_birth_day" id="birthDay">
                     <option value="">일</option>
-                    <!-- 나머지 일 추가 -->
                 </select>
                 <form:errors path="mem_birth" cssClass="error-color" />
             </li>
             
 			<li>
 				<form:label path="mem_phone">휴대폰 번호</form:label> 
-				<form:input	path="mem_phone" placeholder="휴대폰 번호를 입력해주세요" autocomplete="off"/> 
+				<form:input	path="mem_phone" placeholder="휴대폰 번호를 입력해주세요 ex)010-0000-0000" autocomplete="off"/> 
 				<form:errors path="mem_phone" cssClass="error-color" />
 			</li>
             
@@ -94,10 +96,12 @@
             }
         });
 
-        
-        
         $(".mem-birth-select").select2();
     });
+    
+   
+    
+    
 </script>
 
 

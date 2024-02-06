@@ -15,6 +15,9 @@
 	<div id="main_header">
 		<tiles:insertAttribute name="header"/>
 	</div>
+	<div id="user_summary">
+		<tiles:insertAttribute name="summary"/>
+	</div>
 	<div class="side-height">
 		<div id="page_nav">
 			<tiles:insertAttribute name="nav"/>

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,6 +43,27 @@ public class MemberAjaxController {
 				//패턴 일치하면서 아이디 미중복
 				mapAjax.put("result", "idNotFound");
 			}
+		}
+		return mapAjax;
+	}
+	
+	/*==============================
+	 * 프로필 사진 업로드
+	 *==============================*/
+	@RequestMapping("/member/updateMyPhoto")
+	@ResponseBody
+	public Map<String,String> processProfile(MemberVO memberVO,
+			                                 HttpSession session){
+		Map<String,String> mapAjax = new HashMap<String,String>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			mapAjax.put("result", "logout");
+		}else {
+			memberVO.setMem_num(user.getMem_num());
+			memberService.updateProfile(memberVO);
+			
+			mapAjax.put("result", "success");
 		}
 		return mapAjax;
 	}

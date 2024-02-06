@@ -27,7 +27,7 @@ public class MainController {
 		
 		log.debug("<<메인 실행>>");
 		
-		return "main";//타일스 설정명
+		return "mainpage";//타일스 설정명
 	}
 	@RequestMapping("/member/AdminPageMain")
 	public String admin(Model model) {
