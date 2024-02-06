@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/SSH.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/YSC.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/chat.css">
 <tiles:insertAttribute name="css" ignore="true"/>
 </head>
 <body>

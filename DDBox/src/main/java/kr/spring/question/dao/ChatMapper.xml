@@ -13,10 +13,41 @@
 			#{admin_num})
 	</insert>
 	
+	<!-- sub sql -->
+	<sql id="read_check">
+		<if test="">
+		
+		</if>
+	</sql>
 	
-	<!-- 
-	<sql id="selectChatroomNum">
-		faq_chatroom_seq.nextval FROM dual
-	</sql> -->
+	<!-- 채팅 메시지 읽기 -->
+	<select id="selectChatDetail" parameterType="integer" resultType="chatVO">
+		SELECT
+			<![CDATA[
+			REPLACE(REPLACE(message,'<','&lt;'),'>','&gt;') message,
+			]]>
+			chat_num,
+			chatroom_num,
+			mem_num,
+			reg_date,
+			read_check
+		FROM faq_chat
+		WHERE chat_num = #{chat_num}
+		ORDER BY reg_date ASC
+	</select>
+	
+	<insert id="insertChat" parameterType="ChatVO">
+		INSERT INTO faq_chat(
+			chat_num,
+			chatroom_num,
+			mem_num,
+			message)
+		VALUES(
+			faq_chat_seq.nextval,
+			#{chatroom_num},
+			#{mem_num},
+			#{message})
+	</insert>
+	
 	
 </mapper>

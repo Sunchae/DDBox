@@ -65,14 +65,23 @@ public class ChatServiceImpl implements ChatService{
 
 	@Override
 	public void insertChat(ChatVO chat) {
-		// TODO Auto-generated method stub
-		
+		chatMapper.insertChat(chat);
 	}
 
 	@Override
 	public List<ChatVO> getChat(int chatroom_num, int mem_num) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public ChatroomVO getChatroomInfo(int chatroom_num) {
+		return chatMapper.getChatroomInfo(chatroom_num);
+	}
+
+	@Override
+	public List<ChatVO> selectChatDetail(Map<String, Integer> map) {
+		return chatMapper.selectChatDetail(map);
 	}
 
 
