@@ -3,10 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- 내용 시작 -->
+<div class="page-main">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/shop.cart.js"></script>
-<div class="page-main">
 <div class="main-title" id="store_form">
 		<div class="align-right">
 			<c:if test="${user.mem_auth ==9}"> 		<%-- 관리자 로그인 되어있을 때 만 보임 --%>
@@ -43,7 +43,7 @@
 						<p class="tit">판매수량</p>
 						<div class="cont">
 							<div class="sale-count">
-								<em>300</em>
+								<em>${quantity}</em>
 								<span>100개 한정</span>
 								" | "
 								<span> 1회 2개 구매가능 </span>
@@ -69,10 +69,10 @@
 							<p class="tit">
 								<span class="line32">수량/금액</span>
 							</p>
-							<div class="cont">
-								<button type="button" class="btn minus" title="수량감소">-</button>
-								<input type="text" title="수량 입력" class="input-text" readonly="readonly" value="1">
-								<button type="button" class="btn plus" title="수량증가">+</button>
+							<div>
+								<button class="btn_minus" title="수량감소">-</button>
+								<input type="text" title="수량 입력" class="quantity_input" value="1">
+								<button class="btn_plus" title="수량증가">+</button>
 								<div class="money">
 									<em id="prdSumAmt">${store.store_price}</em>
 									<span>원</span>
@@ -82,9 +82,9 @@
 					</div>
 				</div>
 										<%-- type end --%>
-				<div class="btn-group">
+				<div>
 					<!-- ::before -->
-					<input type="button" value="장바구니" id="btn_cart" onclick="location.href='${pageContext.request.contextPath}/cart/cartDetail'">
+					<input type="button" value="장바구니담기" id="btn_cart" onclick="location.href='${pageContext.request.contextPath}/cart/cartList'">
 					<a href="${pageContext.request.contextPath}/kakaoPay/kakaoPay" id="btn-kakao-pay" class="button purple large" w-data="500" h-data="400" title="구매">구매</a>
 					<!-- ::after -->
 				</div>

@@ -6,60 +6,65 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>장바구니 상세</title>
+<title>장바구니</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/shop.cart.js"></script>
 </head>
 <body>
 <div class="page-main">
 	<div class="main-title">
-		<c:if test="${store.store_status == 1}">
-		<div class="result-display">
-			<div class="align-center">
-				본 상품은 판매 중지 되었습니다.
-				<p>
-				<input type="button" value="판매상품 보기" onclick="location.href='storeMainTest'">
-			</div>
-		</div>
-		</c:if>
-		<c:if test="${store.store_status == 2}">
-		<h3 class="align-center">${store.store_title}</h3>
-		<div class="img">
-			<img src="${pageContext.request.contextPath}/upload/${store.store_photo}" width="400">
-		</div>
-		<div class="store-detail">
-			<form id="store_cart">
-				<input type="hidden" name="store_num" value="${store.item_num}" id="store_num">
-				<input type="hidden" name="store_price" value="${store.price}" id="store_price">
-				<input type="hidden" name="quantity" value="${quantity}" id="quantity">
-				<ul>
-					<li>가격 : <b><fmt:formatNumber value="${store.store_price}"/>원</b></li>
-					<li>재고 : <span><fmt:formatNumber value="${quantity}"/></span></li>
-					<c:if test="${quantity > 0}">
-					<li>
-						<label for="order_quantity">구매수량</label>
-						<input type="number" name="order_quantity" min="1" max="${quantity}" autocomplete="off" id="order_quantity" class="quantity-width">
-					</li>
-					<li>
-						<span id="item_total_txt">총주문 금액 : 0원</span>
-					</li>
-					<li>
-						<input type="submit" value="장바구니에 담기">
-					</li>
+	<h2>장바구니</h2>
+	<c:if test="${empty list}">
+	<div class="result-display">
+		 장바구니에 담은 상품이 없습니다.
+	</div>
+	</c:if>
+	<c:if test="${!empty list}">
+	<form id="cart_order" action="${pageContext.request.contextPath}/order" method="post">
+		<table>
+			<tr>
+				<th>상품명</th>
+				<th>수량</th>
+				<th>상품가격</th>
+				<th>합계</th>
+			</tr>
+			<c:forEach var="cart" items="${list}">
+			<tr>
+				<td>
+					<a href="${pageContext.request.contextPath}/store/detail.do?store_num=${cart.store_num}">
+						<img src="${pageContext.request.contextPath}/upload/${cart.storeVO.store_photo}" width="50">
+						${cart.storeVO.store_title}
+					</a>
+				</td>
+				<td class="align-center">
+					<c:if test="${cart.storeVO.status == 1 or cart.storeVO.quantity < cart.order_quantity}">[판매중지]</c:if>
+					<c:if test="${cart.storeVO.status == 2 and cart.storeVO.quantity >= cart.order_quantity}">
+					<input type="number" name="order_quantity" min="1" max="${cart.storeVO.quantity}" autocomplete="off" value="${cart.order_quantity}" class="quantity-width">
+					<br>
+					<input type="button" value="변경" class="cart-modify" data-cartnum="${cart.cart_num}" data-storenum="${cart.store_num}">
 					</c:if>
-					<c:if test="${quantity <= 0}">
-					<li class="align-center">
-						<span class="sold-out">품절</span>
-					</li>
-					</c:if>
-				</ul>
-			</form>
+				</td>
+				<td class="align-center">
+					<fmt:formatNumber value="${cart.storeVO.store_price}" />원
+				</td>
+				<td class="align-center">
+					<fmt:formatNumber value="${cart.sub_total}" />원
+					<br>
+					<input type="button" value="삭제" class="cart-del" data-cartnum="${cart.cart_num}">
+				</td>
+			</tr>
+			</c:forEach>
+			<tr>
+				<td colspan="3" class="align-right"><b>총구매금액</b></td>
+				<td class="align-center"><fmt:formatNumber value="${all_total}" />원</td>
+			</tr>
+		</table>
+		<div class="align-center cart-submit">
+			<input type="submit" value="구매하기">
 		</div>
-		<hr size="1" noshade="noshade" width="100%">
-		<p>
-			${store.store_content}
-		</p>
-		</c:if>
+	</form>
+	</c:if>
 	</div>
 </div>
 </body>

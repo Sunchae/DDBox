@@ -10,47 +10,39 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.spring.cart.dao.CartMapper;
 import kr.spring.cart.vo.CartVO;
 
-@Service
 @Transactional
+@Service
 public class CartServiceImpl implements CartService{
 	@Autowired
 	private CartMapper cartMapper;
 	
 	@Override
-	public List<CartVO> selectList(Map<String, Object> map) {
-		return cartMapper.selectList(map);
-	}
-
-	@Override
-	public int selectRowCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void insertCart(CartVO cart) {
+	public int insertCart(CartVO cart) throws Exception {
 		cartMapper.insertCart(cart);
+		if(cart != null) {
+			return 2;
+		}
+		try {
+			return cartMapper.insertCart(cart);
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 
 	@Override
-	public int getTotalByMem_num(int mem_num) {
+	public List<CartVO> selectList(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
 
 	@Override
 	public CartVO selectCart(int cart_num) {
-		return cartMapper.selectCart(cart_num);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public void updateCart(CartVO cart) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void updateCartByStore_num(CartVO cart) {
 		// TODO Auto-generated method stub
 		
 	}
