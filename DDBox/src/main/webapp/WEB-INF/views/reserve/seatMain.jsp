@@ -349,11 +349,11 @@ li {
 	<div class="right-container" style=" width:40%; display:inline-block; ">
             <div class="movie-container" style="width:80%; height:600px;">
 				<div class="title-area">
-                    <p class="tit">영화제목 : ${movie.movie_title}</p>
+                    <p class="tit" style="font-size:18pt;">${movie.movie_title}</p>
                 </div>
                   <br>
                 <div class="movie-detail-area" style="height:240px;">
-                    <p class="place">상영관 이름 : ${screen.scr_name}</p>
+                    <p class="place" style="width:150px;">상영관 이름 : ${screen.scr_name}</p>
                     <p class="date">
                     	<span>
                     		상영 날짜 : ${param.choice_date}
@@ -397,18 +397,17 @@ li {
             </div>
         </div>	
       </div>  
-      
-      <form action="payMain" style="border:none;" class="align-center" id="pay_form">
-            	<input type="hidden" name="choice_num" value="${movie.movie_num}" id="choice_num">
-            	<input type="hidden" name="choice_screen" value="${screen.scr_num}" id="choice_screen">
-            	<input type="hidden" name="choice_date" value="${param.choice_date}" id="choice_date">
-            	<input type="hidden" name="choice_time" value="${show.shw_num}" id="choice_time">
-            	<input type="hidden" name="choice_people" id="choice_people">
-            	<input type="hidden" name="choice_price" id="choice_price">
-            	<input type="submit" value="티켓결제">
-      </form>
+                      <form action="payMain" style="border:none;" id="pay_form" style="width: 100px;">
+           				 <input type="hidden" name="choice_num" value="${movie.movie_num}" id="choice_num">
+           				 <input type="hidden" name="choice_screen" value="${screen.scr_num}" id="choice_screen">
+            			 <input type="hidden" name="choice_date" value="${param.choice_date}" id="choice_date">
+            			 <input type="hidden" name="choice_time" value="${show.shw_num}" id="choice_time">
+            			 <input type="hidden" name="choice_people" id="choice_people">
+            			 <input type="hidden" name="choice_price" id="choice_price">
+            			 <input type="submit" value="티켓결제">
+      				  </form>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 			let choice_people;
 			let choice_price;
 			

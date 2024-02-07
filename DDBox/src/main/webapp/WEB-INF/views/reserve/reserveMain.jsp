@@ -34,10 +34,6 @@
       <div class="v-line" style="border-right: 3px solid #ccc; height:650px; left: 50%;">
          <div class="left-one">
             <h3 class="align-center" style="width:100%; height:40px; background-color:black; color:white;">영화</h3>
-            <div class="col-head align-center" >
-               <a href="#" onclick="sortMovieByRank();return false;" id="movieSortRank-btn">예매율순</a> 
-               <a href="#" onclick="sortMovieByName();return false;" id="movieSortName-btn">가나다순</a>
-            </div>
             <div class="col-body" style="overflow-y: hidden; height:560px;" >
                <ul>
                <c:forEach var="reserve" items="${list}">

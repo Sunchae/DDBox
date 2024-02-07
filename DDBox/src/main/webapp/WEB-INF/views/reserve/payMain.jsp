@@ -90,7 +90,7 @@ s               <p class="screen-location">상영관 이름 : ${screen.scr_name}
                     <a class="btn-pre" href="javascript:history.back();">이전</a>
                     <c:choose>
                     <c:when test="${user.mem_auth == 1}">
-                    	 <button id="check_module" type="button">구매</button>
+                    	 <button id="check_module" class="btn-pay" type="button">구매</button>
 							<script>
 								$("#check_module").click(function() {
 									var IMP = window.IMP; // 생략가능
@@ -106,11 +106,11 @@ s               <p class="screen-location">상영관 이름 : ${screen.scr_name}
 										 *  https://docs.iamport.kr/implementation/payment
 										 *  위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
 										 */
-										name : '주문명 : ${store.store_title}',
+										name : '영화 제목 : ${movie.movie_title}',
 										// 결제창에서 보여질 이름
 										// name: '주문명 : ${auction.a_title}',
 										// 위와같이 model에 담은 정보를 넣어 쓸수도 있습니다.
-										amount : ${store.store_price},
+										amount : ${param.choice_price},
 										// amount: ${bid.b_bid},
 										// 가격 
 										buyer_name : '${member.mem_id}',
@@ -121,7 +121,9 @@ s               <p class="screen-location">상영관 이름 : ${screen.scr_name}
 										console.log(rsp);
 										if (rsp.success) {
 											var msg = '결제가 완료되었습니다.';
-											msg += '결제 금액 : ${store.store_price}' + rsp.paid_amount;
+											msg += '결제 금액 : ${param.choice_price}' + rsp.paid_amount;
+											
+											window.location.href = '/reserve/payConfirm';
 											// success.submit();
 											// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
 											// 자세한 설명은 구글링으로 보시는게 좋습니다.
@@ -135,13 +137,28 @@ s               <p class="screen-location">상영관 이름 : ${screen.scr_name}
 							</script>
                     </c:when>
                     <c:otherwise>
-                     	<button class="btn-pay" type="button" disabled="disabled" onclick="location.href='KakaoPay'">결제</button>
+                     	<button class="btn-pay" type="button" onclick="location.href='payConfirm'">확인</button>
                     </c:otherwise>
                     </c:choose>
                 </div>
+                
+                <button class="btn-pay" type="button" onclick="location.href='payConfirm'">확인</button>
             </div>
         </div>
     </div>
+    <div>
+    	<%-- <form action="payConfirm" style="border:none;" class="align-center" id="pay_confirm">
+            <input type="hidden" name="choice_num" value="${movie.movie_num}" id="choice_num">
+            <input type="hidden" name="choice_screen" value="${screen.scr_num}" id="choice_screen">
+            <input type="hidden" name="choice_date" value="${param.choice_date}" id="choice_date">
+            <input type="hidden" name="choice_time" value="${show.shw_num}" id="choice_time">
+            <input type="hidden" name="choice_people" id="choice_people">
+            <input type="hidden" name="choice_price" id="choice_price">
+            <input type="submit" value="결제확인">
+      </form> --%>
+      
+    </div>
+    
     <div id="point-modal">
         <div class="point-modal">
             <div class="point-modal-header">
@@ -196,7 +213,7 @@ s               <p class="screen-location">상영관 이름 : ${screen.scr_name}
                     </c:choose>
                     </div>
                 </div>
-                <div class="button-list">
+                <div class="button-list align-center">
                     <!--적용시 금액 할인되도록-->
                     <button type="button" class="btn-discount-pay" id="btn-point-close">닫기</button>
                     <!--취소시 style의 display값을 none으로 -->
@@ -294,7 +311,7 @@ s               <p class="screen-location">상영관 이름 : ${screen.scr_name}
                            -->
                     </div>
                 </div>
-                <div class="button-list">
+                <div class="button-list align-center">
                     <!--적용시 금액 할인되도록-->
                     <button type="button" class="btn-discount-pay" id="btn-vipcoupon-close">닫기</button>
                     <!--취소시 style의 display값을 none으로 -->
@@ -308,13 +325,14 @@ s               <p class="screen-location">상영관 이름 : ${screen.scr_name}
 
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
-	$(function(){
+	/* $(function(){
 		   $(".btn-pay").click(function(){
 				if(!$('#userPhone')==null) {
 					if(!$('#userBirth')==null){
 						$('button.button-request').attr('disabled','false');
 					}
 				}
+				 
 		        let IMP = window.IMP; // 생략가능
 				IMP.init('imp28206043'); 
 				IMP.request_pay({ //param
@@ -329,7 +347,8 @@ s               <p class="screen-location">상영관 이름 : ${screen.scr_name}
 					buyer_email: '${LOGIN_USER.email}', //User이메일
 					buyer_tel:'${LOGIN_USER.phoneNumber}'//User전화번호
 					
-					}, function (rsp){//콜백함수
+					}, 
+					function (rsp){//콜백함수
 					if(rsp.success){ //결제 성공시: 결제 승인시 
 						$.ajax({
 							url:"/rest/ticketing/complete", //가맹점 서버
@@ -354,9 +373,10 @@ s               <p class="screen-location">상영관 이름 : ${screen.scr_name}
 						 })
 					} else {
 				alert("결제에 실패하였습니다. 에러내용 :" +rsp.error_msg);   
-		   }
-		  })
-		   });
+		   		}
+		  		})
+		   });  */
+		   
 		   $('#point-modal-show').click(function(){
 			   $('#point-modal').css("display","flex");
 		   });

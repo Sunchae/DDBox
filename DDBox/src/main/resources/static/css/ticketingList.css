@@ -408,14 +408,14 @@ a#pagePrevious{
     color: white;
     border: 1px solid rgb(61, 61, 61);
 }
-a#pageNext{
+#pageNext{
     float: right;
    	border-radius: 0 0 10px 0;
     background-color: #028487;
     color: white;
     border: 1px solid #028487;
 }
-a#pageNext-1{
+#pageNext-1{
 	float: right;
    	border-radius: 0 0 10px 0;
     background-color: #028487;

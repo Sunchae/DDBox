@@ -48,6 +48,11 @@ public class TicketController {
 	/*====================
 	 * 	  예매 정보 읽어오기
 	 ====================*/
+	@RequestMapping("/reserve/payConfirm")
+	public String confirm(Model model,HttpSession session) {
+		
+		return "payMain";
+	}
 	
 	
 	/*====================
@@ -56,11 +61,6 @@ public class TicketController {
 	@RequestMapping("/reserve/seatMain")
 	public String seat(Model model,int choice_num, int choice_screen,int choice_time, HttpSession session) {
 		
-		/*
-		 * model.addAttribute("choice_num", movie.getMovie_title());
-		 * model.addAttribute("choice_screen", screen.getScr_name());
-		 * model.addAttribute("choice_time", show.getShw_time());
-		 */
 		ShowVO show = null;
 		show = ticketService.selectedShow(choice_time);
 		

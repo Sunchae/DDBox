@@ -31,6 +31,11 @@
     	<put-attribute name="body" value="/WEB-INF/views/reserve/payMain.jsp"/>                                           
     </definition>
     
+    <definition name="payConfirm" extends="main">
+    	<put-attribute name="title" value="결제확인"/>
+    	<put-attribute name="body" value="/WEB-INF/views/reserve/payConfirm.jsp"/>                                           
+    </definition>
+    
 </tiles-definitions>
 
 
