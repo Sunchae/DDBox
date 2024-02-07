@@ -15,10 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.spring.movie.service.MovieService;
 import kr.spring.movie.vo.MovieVO;
+import kr.spring.reserve.dao.ShowMapper;
 import kr.spring.reserve.service.ReserveService;
 import kr.spring.reserve.service.ShowService;
+import kr.spring.reserve.service.TicketService;
 import kr.spring.reserve.vo.ScreenVO;
 import kr.spring.reserve.vo.ShowVO;
+import kr.spring.reserve.vo.TicketVO;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller 
@@ -30,6 +33,8 @@ public class TicketController {
 	private MovieService movieService;
 	@Autowired
 	private ReserveService reserveService;
+	@Autowired
+	private TicketService ticketService;
 
 	/*====================
 	 * 	  상영 정보 등록
@@ -49,11 +54,26 @@ public class TicketController {
 	 * 	  좌석 선택
 	 ====================*/
 	@RequestMapping("/reserve/seatMain")
-	public String seat(Model model,MovieVO movie, ShowVO show, ScreenVO screen, HttpSession session) {
+	public String seat(Model model,int choice_num, int choice_screen,int choice_time, HttpSession session) {
 		
-		model.addAttribute("choice_num", movie.getMovie_title());
-		model.addAttribute("choice_screen", screen.getScr_name());
-		model.addAttribute("choice_time", show.getShw_time());
+		/*
+		 * model.addAttribute("choice_num", movie.getMovie_title());
+		 * model.addAttribute("choice_screen", screen.getScr_name());
+		 * model.addAttribute("choice_time", show.getShw_time());
+		 */
+		ShowVO show = null;
+		show = ticketService.selectedShow(choice_time);
+		
+		ScreenVO screen = null;
+		screen = ticketService.selectedScreen(choice_screen);
+		
+		MovieVO movie = null;
+		movie = ticketService.selectedMoive(choice_num);
+		
+		model.addAttribute("movie",movie);
+		model.addAttribute("screen",screen);
+		model.addAttribute("show",show);
+		
 		return "seatMain";
 	}
 
@@ -61,7 +81,23 @@ public class TicketController {
 	 * 	  	  결제
 	 ====================*/
 	@RequestMapping("reserve/payMain")
-	public String pay(Model model, HttpSession session) {
+	public String pay(Model model,int choice_num, int choice_screen,int choice_time, int choice_people, int choice_price, HttpSession session) {
+		
+		ShowVO show = null;
+		show = ticketService.selectedShow(choice_time);
+		
+		ScreenVO screen = null;
+		screen = ticketService.selectedScreen(choice_screen);
+		
+		MovieVO movie = null;
+		movie = ticketService.selectedMoive(choice_num);
+		
+		//TicketVO ticket = null;
+		//ticket = ticketService.
+		
+		model.addAttribute("movie",movie);
+		model.addAttribute("screen",screen);
+		model.addAttribute("show",show);
 		
 		return "payMain";
 	}

@@ -26,9 +26,9 @@
             <h5>관람권 및 할인적용</h5>
             <div class="sale-ticket">
                  <span>메가박스 포인트/쿠폰</span>
-                     <button type="button" id="point-modal-show" class="btn-modal-show">메가박스 멤버십 포인트</button>
-                     <button type="button" id="coupon-modal-show" class="btn-modal-show">메가박스 할인 쿠폰</button>
-                     <button type="button" id="vipcoupon-modal-show" class="btn-modal-show">메가박스 VIP영화쿠폰</button>
+                     <button type="button" id="point-modal-show" class="btn-modal-show">DD박스 멤버십 포인트</button>
+                     <button type="button" id="coupon-modal-show" class="btn-modal-show">DD박스 할인 쿠폰</button>
+                     <button type="button" id="vipcoupon-modal-show" class="btn-modal-show">DD박스 VIP영화쿠폰</button>
             </div>
             <div class="pay-kakao" >
                 <h5>결제수단 선택</h5>
@@ -50,15 +50,15 @@
         </div>
         <div class="right-container">
             <div class="title-name">
-                <p class="title-text">영화 제목 : ${movie.movieName}</p>
-s               <p class="screen-location">상영관 이름 : ${theater.name }${screen.name }</p>
-                <p class="screen-day">상영 날짜 : ${showTime.name }</p>
+                <p class="title-text">영화 제목 : ${movie.movie_title}</p>
+s               <p class="screen-location">상영관 이름 : ${screen.scr_name}</p>
+                <p class="screen-day">상영 날짜 : ${param.choice_date}</p>
             </div>
             
             <div class="pay-container">
                 <div class="total">
                     <p class="total-title">금액</p>
-                    <p class="total-pay"><span>${ticketingPay }</span>원</p>
+                    <p class="total-pay"><span>${param.choice_price}</span>원</p>
                 </div>
                 <i class="fas fa-minus-circle"></i>
                 <div class="discount-total">
@@ -73,13 +73,13 @@ s               <p class="screen-location">상영관 이름 : ${theater.name }${
                     <div class="point">
                     <br>
                         <p class="use-point">포인트 적립</p>
-                        <p class="point-discount"><span>${cost}*0.01</span>원</p>
+                        <p class="point-discount"><span>${(param.choice_price * 0.01)}</span>원</p>
                     </div>
                 </div>
                 <br>
                 <div class="final-pay">
                     <p class="final-title">최종결제금액</p>
-                    <p class="final-total"><span>${costs}</span>원</p>
+                    <p class="final-total"><span>${param.choice_price}</span>원</p>
                 </div>
                 <br>
                 <div class="way-pay">

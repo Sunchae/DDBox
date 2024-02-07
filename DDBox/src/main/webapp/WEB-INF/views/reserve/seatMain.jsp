@@ -349,11 +349,11 @@ li {
 	<div class="right-container" style=" width:40%; display:inline-block; ">
             <div class="movie-container" style="width:80%; height:600px;">
 				<div class="title-area">
-                    <p class="tit">영화제목 : ${param.choice_num}</p>
+                    <p class="tit">영화제목 : ${movie.movie_title}</p>
                 </div>
                   <br>
                 <div class="movie-detail-area" style="height:240px;">
-                    <p class="place">상영관 이름 : ${param.choice_screen}</p>
+                    <p class="place">상영관 이름 : ${screen.scr_name}</p>
                     <p class="date">
                     	<span>
                     		상영 날짜 : ${param.choice_date}
@@ -361,14 +361,14 @@ li {
                     </p>
                     <p class="time">
                     	<span>
-                    		상영 시간 : ${param.choice_time}
+                    		상영 시간 : ${show.shw_time}
                     	</span>
                     </p>
                 </div>
                 <div>
                     <div class="kind-seat align-center" style="width:200px;">
                         <p class="tit-seat" style="font-size:15pt;">관람인원</p>
-                         <span id="count" style="font-size:12pt;">${reserve.res_mem_total}</span>명      
+                         <span id="count" style="font-size:12pt;">0</span>명      
                     </div>
                 </div>
                 <div class="pay-area">
@@ -379,7 +379,7 @@ li {
                         <p class="tit-pay" style="font-size:10pt;">최종결제금액 </p>
                     </div>   
                     <div class="money">
-                        <span id="costs" style="font-size:10pt;">${reserve.res_pay}</span>원
+                        <span id="costs" style="font-size:10pt;">0</span>원
                     </div>
                 </div>
                 <div class="btn-group" style="height:150px;">
@@ -399,12 +399,12 @@ li {
       </div>  
       
       <form action="payMain" style="border:none;" class="align-center" id="pay_form">
-            	<input type="hidden" name="choice_num" value="${reserve.movie_title}" id="choice_num">
-            	<input type="hidden" name="choice_screen" value="${reserve.scr_name}" id="choice_screen">
-            	<input type="hidden" name="choice_date" value="${reserve.date}" id="choice_date">
-            	<input type="hidden" name="choice_time" value="${reserve.shw_time}" id="choice_time">
-            	<input type="hidden" name="choice_people" value="${reserve.res_mem_total}" id="choice_people">
-            	<input type="hidden" name="choice_price" value="${reserve.res_pay}" id="choice_price">
+            	<input type="hidden" name="choice_num" value="${movie.movie_num}" id="choice_num">
+            	<input type="hidden" name="choice_screen" value="${screen.scr_num}" id="choice_screen">
+            	<input type="hidden" name="choice_date" value="${param.choice_date}" id="choice_date">
+            	<input type="hidden" name="choice_time" value="${show.shw_num}" id="choice_time">
+            	<input type="hidden" name="choice_people" id="choice_people">
+            	<input type="hidden" name="choice_price" id="choice_price">
             	<input type="submit" value="티켓결제">
       </form>
 
@@ -414,26 +414,24 @@ li {
 			
 		document.addEventListener('DOMContentLoaded', () =>{
 		
-		const seatContainer = document.querySelector('.seatContainer');
+		let seatContainer = document.querySelector('.seatContainer');
 		
-		const movie = document.getElementById('movie'); // 선택할 영화
-		let moviePrice = Number(people.value); // 영화가격 
+		let moviePrice = 15000; // 영화가격 
 		let count = document.querySelector('#count'); // 인원수
-		/* choice_people = count;
-		$('#count').val(choice_people); */
 		let costs = document.querySelector('#costs'); // 가격
-		/* choice_price = costs;
-		$('#costs').val(choice_price); */
+		
 		
 		// 선택한 좌석수 텍스트 변경해주기
 		function countSeatPrice(){
-		    const selectedSeatCount = document.querySelectorAll('.selectedSeat').length;
-		
+		    let selectedSeatCount = document.querySelectorAll('.selectedSeat').length;
 		    choice_people = selectedSeatCount;
 		    choice_price = selectedSeatCount * moviePrice;
 		    
-		    count.textContent = choice_people;
+		   	count.textContent = choice_people;
 		    costs.textContent = choice_price;
+		    
+		    document.getElementById('choice_people').value = choice_people;
+		    document.getElementById('choice_price').value = choice_price;
 		}
 		
 		
