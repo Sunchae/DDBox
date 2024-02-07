@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.spring.movie.service.MovieService;
 import kr.spring.movie.vo.MovieVO;
@@ -22,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller 
 @Slf4j
-public class SeatController {
+public class TicketController {
 	@Autowired
 	private ShowService showService;
 	@Autowired
@@ -44,13 +45,15 @@ public class SeatController {
 	 ====================*/
 	
 	
-	
 	/*====================
 	 * 	  좌석 선택
 	 ====================*/
 	@RequestMapping("/reserve/seatMain")
-	public String seat(Model model, HttpSession session) {
+	public String seat(Model model,MovieVO movie, ShowVO show, ScreenVO screen, HttpSession session) {
 		
+		model.addAttribute("choice_num", movie.getMovie_title());
+		model.addAttribute("choice_screen", screen.getScr_name());
+		model.addAttribute("choice_time", show.getShw_time());
 		return "seatMain";
 	}
 

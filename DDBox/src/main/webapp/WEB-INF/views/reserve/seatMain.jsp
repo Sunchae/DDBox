@@ -348,7 +348,7 @@ li {
 		
 	<div class="right-container" style=" width:40%; display:inline-block; ">
             <div class="movie-container" style="width:80%; height:600px;">
-                <div class="title-area">
+				<div class="title-area">
                     <p class="tit">영화제목 : ${param.choice_num}</p>
                 </div>
                   <br>
@@ -368,7 +368,7 @@ li {
                 <div>
                     <div class="kind-seat align-center" style="width:200px;">
                         <p class="tit-seat" style="font-size:15pt;">관람인원</p>
-                         <span id="count" style="font-size:12pt;">0</span>명      
+                         <span id="count" style="font-size:12pt;">${reserve.res_mem_total}</span>명      
                     </div>
                 </div>
                 <div class="pay-area">
@@ -379,7 +379,7 @@ li {
                         <p class="tit-pay" style="font-size:10pt;">최종결제금액 </p>
                     </div>   
                     <div class="money">
-                        <span id="costs" style="font-size:10pt;">0</span>원
+                        <span id="costs" style="font-size:10pt;">${reserve.res_pay}</span>원
                     </div>
                 </div>
                 <div class="btn-group" style="height:150px;">
@@ -403,8 +403,8 @@ li {
             	<input type="hidden" name="choice_screen" value="${reserve.scr_name}" id="choice_screen">
             	<input type="hidden" name="choice_date" value="${reserve.date}" id="choice_date">
             	<input type="hidden" name="choice_time" value="${reserve.shw_time}" id="choice_time">
-            	<input type="hidden" name="choice_people" value="${count}" id="choice_people">
-            	<input type="hidden" name="choice_price" value="${costs}" id="choice_price">
+            	<input type="hidden" name="choice_people" value="${reserve.res_mem_total}" id="choice_people">
+            	<input type="hidden" name="choice_price" value="${reserve.res_pay}" id="choice_price">
             	<input type="submit" value="티켓결제">
       </form>
 
@@ -414,16 +414,18 @@ li {
 			
 		document.addEventListener('DOMContentLoaded', () =>{
 		
-			const seatContainer = document.querySelector('.seatContainer');
+		const seatContainer = document.querySelector('.seatContainer');
 		
-			const movie = document.getElementById('movie'); // 선택할 영화
-			let moviePrice = Number(people.value); // 영화가격 
-		
+		const movie = document.getElementById('movie'); // 선택할 영화
+		let moviePrice = Number(people.value); // 영화가격 
 		let count = document.querySelector('#count'); // 인원수
+		/* choice_people = count;
+		$('#count').val(choice_people); */
 		let costs = document.querySelector('#costs'); // 가격
+		/* choice_price = costs;
+		$('#costs').val(choice_price); */
 		
 		// 선택한 좌석수 텍스트 변경해주기
-		
 		function countSeatPrice(){
 		    const selectedSeatCount = document.querySelectorAll('.selectedSeat').length;
 		
@@ -436,19 +438,44 @@ li {
 		
 		
 		//좌석 클릭했을때
-		
 		seatContainer.addEventListener('click', (e) => {
-		
 		    if(e.target.className === 'seat'){
 		        e.target.className = 'selectedSeat';
 		    } else if(e.target.className === 'selectedSeat'){
 		        e.target.className = 'seat';
 		    }
-		
 		    countSeatPrice();
-		})
+		});
 		
-		})
+		/* const payForm = document.getElementById('pay_form');
+        payForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // 기존의 폼 전송 동작을 막음
+
+            // hidden input 요소를 생성하여 값을 설정
+            const hiddenCount = document.createElement('input');
+            hiddenCount.type = 'hidden';
+            hiddenCount.name = 'choice_people';
+            hiddenCount.value = ${reserve.res_mem_total};
+
+            const hiddenPrice = document.createElement('input');
+            hiddenPrice.type = 'hidden';
+            hiddenPrice.name = 'choice_price';
+            hiddenPrice.value = ${reserve.res_pay};
+
+            // 생성한 hidden input을 폼에 추가
+            payForm.appendChild(hiddenCount);
+            payForm.appendChild(hiddenPrice);
+
+            // 이미 존재하는 hidden input에도 값을 설정
+            document.getElementById('choice_people').value = choice_people;
+            document.getElementById('choice_price').value = choice_price;
+
+            // 폼을 서버로 제출
+            payForm.submit();
+        }); */
+		
+		
+		});
    </script>
 </body>
 

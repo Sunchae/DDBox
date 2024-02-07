@@ -116,22 +116,4 @@ public class ShowController {
 		return mav;
 	}
 
-
-	/*
-	 * @RequestMapping("/reserve/reserveMain") public String moive(Model model,
-	 * HttpSession session) {
-	 * 
-	 * Map<String,Object> map = new HashMap<String,Object>();
-	 * 
-	 * List<MovieVO> list =null; list = movieService.selectList(map);
-	 * log.debug("개봉 영화 list : " + list);
-	 * 
-	 * 
-	 * ScreenVO screen = (ScreenVO)session.getAttribute("screen"); List<ScreenVO>
-	 * list3 = null; list3 = reserveService.selectSeoulList(map);
-	 * 
-	 * model.addAttribute("list", list); model.addAttribute("list3", list3);
-	 * 
-	 * return "reserveMain"; }
-	 */
 }
