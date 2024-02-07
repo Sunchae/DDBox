@@ -5,7 +5,7 @@
 
 <style>
     .mem-birth-select {
-        width: 85px; /* 적절한 넓이 값으로 조절하세요 */
+        width: 85px; 
     }
 </style>
 		
@@ -65,7 +65,21 @@
     });
     
     $(document).ready(function() {
-        var currentYear = new Date().getFullYear();
+    	let tyear = '${memberVO.mem_birth_year}';
+    	if(tyear){
+    		 $("#birthYear").prepend("<option value='"+tyear+"' selected>" + tyear + "년</option>");
+    	}
+    	let tmonth = '${memberVO.mem_birth_month}';
+    	if(tmonth){
+    		 $("#birthMonth").prepend("<option value='"+tmonth+"' selected>" + tmonth + "월</option>");
+    	}
+    	let tday = '${memberVO.mem_birth_day}';
+    	if(tday){
+    		 $("#birthDay").prepend("<option value='"+tday+"' selected>" + tday + "일</option>");
+    	}
+    	
+    	
+    	var currentYear = new Date().getFullYear();
         var endYear = currentYear - 100; // 100년 전까지의 연도
 
         for (var year = currentYear; year >= endYear; year--) {
