@@ -13,7 +13,7 @@ import kr.spring.store.vo.StoreVO;
 @Mapper
 public interface StoreMapper {
 	@Select("SELECT * FROM (SELECT store_num,store_title,store_content,store_price,store_photo,store_name FROM store JOIN member USING(mem_num))")
-	public List<StoreVO> selectList(Map<String, Object> map);
+	public List<StoreVO> selectList(Map<String, Object> map);			//0:등록실패, 1:등록성공, 2:중복데이터 5:로그인 필요
 	@Select("SELECT COUNT(*) FROM store JOIN member USING(mem_num)")
 	public int selectRowCount(Map<String, Object> map);
 	public void insertStore(StoreVO store);							//xml

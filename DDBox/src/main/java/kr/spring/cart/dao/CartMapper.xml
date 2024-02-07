@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.cart.dao.CartMapper">
-	<insert id="insertCart" parameterType="cartVO">
+	<!-- <insert id="insertCart" parameterType="cartVO">
 		INSERT INTO pcart(
 			cart_num,
 			store_num,
@@ -15,5 +15,5 @@
 			#{order_quantity},
 			#{reg_date},
 			#{mem_num})
-	</insert>
+	</insert> -->
 </mapper>

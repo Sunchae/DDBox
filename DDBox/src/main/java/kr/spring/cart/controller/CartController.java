@@ -1,6 +1,5 @@
 package kr.spring.cart.controller;
 
-import java.lang.reflect.Member;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -9,6 +8,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -24,8 +25,7 @@ public class CartController {
 	@Autowired
 	private CartService cartService;
 	
-	@PostMapping("/cart/insert")
-	@ResponseBody
+	@PostMapping("/cart/cartList")
 	public String insertCart(@Valid CartVO cart, HttpSession session, HttpServletRequest request,Model model) throws Exception {
 		
 		log.debug("<<장바구니 등록>> : " + cart);
@@ -42,5 +42,13 @@ public class CartController {
 		model.addAttribute("url", request.getContextPath() + "/cart/cartList");
 		
 		return "common/resultAlert";
+	}
+	
+	//카트
+	@GetMapping("/cart/cartDetail")
+	public String cartPageGet(@PathVariable("mem_num") int mem_num, Model model) {
+		model.addAttribute("cartDetail", cartService.selectList(mem_num));
+		
+		return "/cart/cartDetail";
 	}
 }

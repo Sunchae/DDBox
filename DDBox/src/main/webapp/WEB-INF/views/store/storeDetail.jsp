@@ -83,7 +83,7 @@
 				</div>
 										<%-- type end --%>
 				<div>
-					<!-- ::before -->
+					<!-- ::before  submit 으로 감싸기-->
 					<input type="button" value="장바구니담기" id="btn_cart" onclick="location.href='${pageContext.request.contextPath}/cart/cartList'">
 					<a href="${pageContext.request.contextPath}/kakaoPay/kakaoPay" id="btn-kakao-pay" class="button purple large" w-data="500" h-data="400" title="구매">구매</a>
 					<!-- ::after -->

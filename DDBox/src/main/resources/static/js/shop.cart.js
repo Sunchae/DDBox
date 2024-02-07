@@ -57,6 +57,7 @@
 	
 	
 });*/
+//수량 -+설정
 $(function(){
 	let quantity = $(".quantity_input").val();
 	$(".btn_plus").on("click",function(){
@@ -67,16 +68,18 @@ $(function(){
 			$(".quantity_input").val(--quantity);
 		}
 	});
+	//전송할 데이터
 	const form = {
 			memberId : '${mem.mem_num}',
 			store_num : '${store.store_num}',
 			sub_total : ''
 	}
+	//장바구니 추가 버튼
 	$(".btn_cart").on("click", function(e){
 		form.sub_total= $("quantity_input").val();
 		$.ajax({
 			url : "/cart/insert",
-			type : "POST",
+			type : "post",
 			data : form,
 			dataType : 'json',
 			success : function(result){

@@ -31,6 +31,7 @@ create table pcart(
 	order_quantity number(5) not null,
 	reg_date date default sysdate not null,
 	mem_num number not null,
+	sub_total number(5) not null
 	constraint pcart_pk primary key (cart_num),
 	constraint pcart_fk1 foreign key (store_num) references store (store_num),
 	constraint pcart_fk2 foreign key (mem_num) references member (mem_num)
