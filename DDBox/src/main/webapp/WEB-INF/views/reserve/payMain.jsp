@@ -284,7 +284,7 @@ s               <p class="screen-location">상영관 이름 : ${screen.scr_name}
                         </div>
                     </div>
                     <div class="vipcoupon-content">
-                        <div class="coupon-content"> 
+                        <div class="coupon-content">  
                            <!--  
                            <div id="coupon-list">왈왈이 영화 무료 이용권</div>
                              <div id="coupon-date">2022년12월01일</div>
