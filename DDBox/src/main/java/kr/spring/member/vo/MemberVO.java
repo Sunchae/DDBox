@@ -63,7 +63,6 @@ public class MemberVO {
 	private Date mem_modifydate;
 	@NotBlank(message = "성별을 선택해주세요.")
 	private String mem_gender;
-	@NotNull(message = "연령대를 선택해주세요.")
 	private String mem_age;
 	private int mem_grade;
 	

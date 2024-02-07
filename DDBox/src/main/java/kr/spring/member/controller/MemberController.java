@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
@@ -62,17 +63,10 @@ public class MemberController {
 	public String submitCheck(@Valid MemberVO memberVO,
 			BindingResult result,
 			Model model,
-			HttpServletRequest request) {
+			HttpServletRequest request,
+			RedirectAttributes redirect) {
 		log.debug("<<회원가입 여부>> : " + memberVO);
-
-		String month = Integer.parseInt(memberVO.getMem_birth_month()) < 10 ? "0"+memberVO.getMem_birth_month() : memberVO.getMem_birth_month() ;
-		String day = Integer.parseInt(memberVO.getMem_birth_day()) < 10 ? "0"+memberVO.getMem_birth_day() : memberVO.getMem_birth_day() ;
-
-		memberVO.setMem_birth(memberVO.getMem_birth_year()+"-"+month+"-"+day);
-
-		// 디버깅 메시지 추가
-		log.debug("<<mem_birth>> : " + memberVO.getMem_birth());
-
+		
 		// 유효성 체크 결과 오류 있으면 폼 호출
 		if(result.hasFieldErrors("mem_name") || result.hasFieldErrors("mem_birth") || result.hasFieldErrors("mem_phone")) {
 			List<FieldError> list =  result.getFieldErrors();
@@ -81,6 +75,15 @@ public class MemberController {
 			}
 			return formCheck();
 		}
+		String month = Integer.parseInt(memberVO.getMem_birth_month()) < 10 ? "0"+memberVO.getMem_birth_month() : memberVO.getMem_birth_month() ;
+		String day = Integer.parseInt(memberVO.getMem_birth_day()) < 10 ? "0"+memberVO.getMem_birth_day() : memberVO.getMem_birth_day() ;
+
+		memberVO.setMem_birth(memberVO.getMem_birth_year()+"-"+month+"-"+day);
+
+		// 디버깅 메시지 추가
+		log.debug("<<mem_birth>> : " + memberVO.getMem_birth());
+
+		
 		// 회원가입 여부  
 		if (memberService.selectCheckMemberRegistered(memberVO) >= 1) {
 			// 회원 DB에 이미 가입한 전적이 있는 회원(신규가입 불가한 회원)
@@ -89,9 +92,12 @@ public class MemberController {
 			model.addAttribute("accessUrl",request.getContextPath()+"/member/login");
 			return "common/resultView";
 		}
+		
+		redirect.addFlashAttribute("memberVO", memberVO);
+		
 		//회원 가입 이력 없는 사람이면 다음 절차로 통과
 		// 타일스 설정명
-		return "memberRegister";
+		return "redirect:/member/registerUser";
 	}
 
 
@@ -107,6 +113,9 @@ public class MemberController {
 
 		//유효성 체크 결과 오류 있으면 폼 호출
 		if(result.hasErrors()) {
+			for(FieldError error : result.getFieldErrors()) {
+				log.debug("<<에러 필드>> : " + error.getField());
+			}
 			return form();
 		}
 		//한자리수 월이나 일 앞에 0 붙여줘서 yyyy-mm-dd 형식 맞추기 위한 부분
