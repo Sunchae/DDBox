@@ -194,7 +194,7 @@ li {
 <body>
 	<h2 style="color:black;">빠른예매</h2>	
 	<div style="display:flex;">	
-	<div class="left-container" style="display:inline-block; align-items:center; width:100%; padding: 80px; background-color:lightgray;">
+	<div class="left-container" style="display:inline-block; align-items:center; width:100%; padding: 10px; background-color:lightgray;">
 		<div class="align-center">
 			<label for="movie"> 관람인원선택 : </label> 
 			<select name="pickType" id="people">
@@ -347,19 +347,19 @@ li {
 	</div>	
 		
 	<div class="right-container" style=" width:40%; display:inline-block; ">
-            <div class="movie-container" style="width:80%; height:600px;">
+            <div class="movie-container" style="width:55%; height:600px;">
 				<div class="title-area">
                     <p class="tit" style="font-size:18pt;">${movie.movie_title}</p>
                 </div>
                   <br>
-                <div class="movie-detail-area" style="height:240px;">
-                    <p class="place" style="width:150px;">상영관 이름 : ${screen.scr_name}</p>
-                    <p class="date">
+                <div class="movie-detail-area" style="height:220px;">
+                    <p  style="width:150px;">상영관 이름 : ${screen.scr_name}</p>
+                    <p style="width:150px;">
                     	<span>
                     		상영 날짜 : ${param.choice_date}
                     	</span>
                     </p>
-                    <p class="time">
+                    <p>
                     	<span>
                     		상영 시간 : ${show.shw_time}
                     	</span>
@@ -382,30 +382,21 @@ li {
                         <span id="costs" style="font-size:10pt;">0</span>원
                     </div>
                 </div>
-                <div class="btn-group" style="height:150px;">
-                    <a href="javascript:history.back();" class="button" id="pagePrevious" title="이전">이전</a>
-                      <c:choose>
-	                    <c:when test="${empty LOGIN_USER }">
-	                    	<a href="#" class="button" id="pageNext-1" data-bs-toggle="modal" data-bs-target="#modal-login-form">
-	                    	다음</a>
-	                     </c:when>
-	                     <c:otherwise>
-	                     <input type="submit" value="다음" class="button" id="pageNext" title="다음">
-	                      </c:otherwise>
-                    </c:choose> 
+                <hr size="1" style="color:white;">
+                <div class="btn-group">
+	                    	<form action="payMain" style="border:none;" id="pay_form" style="width: 50px;">
+	           					<input type="hidden" name="choice_num" value="${movie.movie_num}" id="choice_num">
+	           					<input type="hidden" name="choice_screen" value="${screen.scr_num}" id="choice_screen">
+	            				<input type="hidden" name="choice_date" value="${param.choice_date}" id="choice_date">
+	            				<input type="hidden" name="choice_time" value="${show.shw_num}" id="choice_time">
+	            				<input type="hidden" name="choice_people" id="choice_people">
+	            				<input type="hidden" name="choice_price" id="choice_price">
+	            				<input type="submit" value="결제선택" id="pagePrevious" style="float:right;width:60px;">
+	      					</form>
                 </div>
             </div>
         </div>	
       </div>  
-                      <form action="payMain" style="border:none;" id="pay_form" style="width: 100px;">
-           				 <input type="hidden" name="choice_num" value="${movie.movie_num}" id="choice_num">
-           				 <input type="hidden" name="choice_screen" value="${screen.scr_num}" id="choice_screen">
-            			 <input type="hidden" name="choice_date" value="${param.choice_date}" id="choice_date">
-            			 <input type="hidden" name="choice_time" value="${show.shw_num}" id="choice_time">
-            			 <input type="hidden" name="choice_people" id="choice_people">
-            			 <input type="hidden" name="choice_price" id="choice_price">
-            			 <input type="submit" value="티켓결제">
-      				  </form>
 
 	<script type="text/javascript">
 			let choice_people;

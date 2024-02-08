@@ -53,6 +53,11 @@ public class TicketServiceImpl implements TicketService{
 		return ticketMapper.selectedPrice(choice_price);
 	}
 
+	@Override
+	public TicketVO selectTicketInfo(int res_num) {
+		return ticketMapper.selectTicketInfo(res_num);
+	}
+
 	
 	
 

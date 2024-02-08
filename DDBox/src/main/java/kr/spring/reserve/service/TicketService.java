@@ -21,4 +21,6 @@ public interface TicketService {
 	public TicketVO selectedPPL(int choice_people);
 	
 	public TicketVO selectedPrice(int choice_price);
+	
+	public TicketVO selectTicketInfo(int res_num);
 }

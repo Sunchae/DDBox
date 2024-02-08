@@ -1,8 +1,7 @@
 h2{
-    margin-left: 10%;
-    width: 90%;
+    width: 81%;
     border-bottom: 1px solid black;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
 }
 .box{
     width: 70%;
@@ -174,7 +173,7 @@ li{
     font-size: 12px;
 
 }
-.title-area{
+.title-area,.btn-group{
     height: 60px;
     border-bottom: 1px solid rgb(180, 179, 179);
     padding: 3px;
@@ -389,10 +388,10 @@ ul{
 .btn-group{
     padding-top: 70px;
     height: 10px;
-    width: 110%;
+    width: 100%;
     padding-right: 13px;
 }
-a.button{
+.button{
     color: white;
     border: 1px solid white;
     display: block;
@@ -401,8 +400,16 @@ a.button{
     height: 30px;
     width: 50%;
 }
-a#pagePrevious{
+#pagePrevious{
     float: left;
+    border-radius: 0 0 0 10px;
+    background-color: rgb(53, 47, 47);
+    color: white;
+    border: 1px solid rgb(53, 47, 47);
+}
+#pagePrevious1{
+    float: left;
+    width:100px;
     border-radius: 0 0 0 10px;
     background-color: rgb(61, 61, 61);
     color: white;
@@ -410,6 +417,7 @@ a#pagePrevious{
 }
 #pageNext{
     float: right;
+    width:150px;
    	border-radius: 0 0 10px 0;
     background-color: #028487;
     color: white;
@@ -417,6 +425,7 @@ a#pagePrevious{
 }
 #pageNext-1{
 	float: right;
+	width:50%;
    	border-radius: 0 0 10px 0;
     background-color: #028487;
     color: white;
