@@ -17,18 +17,9 @@ public class CartServiceImpl implements CartService{
 	private CartMapper cartMapper;
 	
 	@Override
-	public int insertCart(CartVO cart) throws Exception {
-		cartMapper.insertCart(cart);
-		if(cart != null) {
-			return 2;
-		}
-		try {
-			return cartMapper.insertCart(cart);
-		} catch (Exception e) {
-			return 0;
-		}
+	public int insertCart(CartVO cart, Map<String, Object> map) throws Exception {
+		return cartMapper.insertCart(cart);
 	}
-
 	@Override
 	public List<CartVO> selectList(int mem_num) {
 		List<CartVO> cart = cartMapper.selectList(mem_num);
@@ -38,8 +29,7 @@ public class CartServiceImpl implements CartService{
 
 	@Override
 	public CartVO selectCart(int cart_num) {
-		// TODO Auto-generated method stub
-		return null;
+		return cartMapper.selectCart(cart_num);
 	}
 
 	@Override
@@ -63,5 +53,6 @@ public class CartServiceImpl implements CartService{
 	public void updateCartByStore_num(CartVO cart) throws Exception {
 		cartMapper.updateCartByStore_num(cart);
 	}
+
 
 }

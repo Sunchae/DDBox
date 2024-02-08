@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!-- 내용 시작 -->
 <div class="page-main">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
@@ -14,7 +17,17 @@
 			</c:if>
 		</div>
 	</div>
+	<c:if test="${store.store_status == 1}">
+		<div class="result-display">
+			<div class="align-center">
+				본 상품은 판매 중지 되었습니다.
+				<p>
+				<input type="button" value="판매상품 보기" onclick="location.href='store/storeMainTest'">
+			</div>
+		</div>
+	</c:if>
 										<%-- contents --%>
+	<c:if test="${store.store_status == 2}">										
 	<div id="contents">
 		<div class="inner-wrap">
 			<!-- ::before -->
@@ -63,34 +76,38 @@
 				</div>
 										<%-- goods-info end --%>
 										<%-- type --%>
-				<form>
 				<div class="type">
+				<form id="store_cart">
 					<input type="hidden" name="store_num" value="${store.store_num}" id="store_num">
 					<input type="hidden" name="store_price" value="${store.store_price}" id="store_price">
-					<input type="hidden" name="quantity" value="${quantity}" id="quantity">
-					<div class="receipt">
-						<div class="line">
-							<p class="tit">
-								<span class="line32">수량/금액</span>
-							</p>
-							<div>
-								<button class="btn_minus" title="수량감소">-</button>
-								<input type="text" title="수량 입력" class="quantity_input" value="1">
-								<button class="btn_plus" title="수량증가">+</button>
-								<div class="money">
-									<em id="prdSumAmt">${store.store_price}</em>
-									<span>원</span>
-								</div>
-							</div>
-						</div>
-					</div>
+					<input type="hidden" name="quantity" value="${store.quantity}" id="quantity">
+					<p class="tit">
+						<span class="line32">수량/금액</span>
+					</p>
+					<ul>
+						<li>가격 : <b><fmt:formatNumber value="${store.store_price}"/>원</b></li>
+						<li>재고 : <span><fmt:formatNumber value="${store.quantity}"/></span></li>
+						<c:if test="${store.quantity > 0}">
+						<li>
+							<label for="order_quantity">구매수량</label>
+							<input type="number" name="order_quantity" min="1" max="${quantity}" autocomplete="off" id="order_quantity" class="quantity-width">
+						</li>
+						<li>
+							<span id="item_total_txt">총주문 금액 : 0원</span>
+						</li>
+						<li>
+							<input type="submit" value="구매">
+						</li>
+						</c:if>
+						<c:if test="${quantity <= 0}">
+						<li class="align-center">
+							<span class="sold-out">품절</span>
+						</li>
+						</c:if>
+					</ul>
+				</form>
 				</div>
 										<%-- type end --%>
-					<!-- ::before  submit바꾸고 폼으로 감싸기-->
-					<input type="submit" value="장바구니담기">
-					<a href="${pageContext.request.contextPath}/kakaoPay/kakaoPay" id="btn-kakao-pay" class="button purple large" w-data="500" h-data="400" title="구매">구매</a>
-					<!-- ::after -->
-				</form>						
 			</div>
 										<%-- right end --%>
 			</div>
@@ -160,6 +177,7 @@
 			<!-- ::after -->
 		</div>
 	</div>
+	</c:if>
 										<%-- contents end --%>
 	<hr size="1" width="100%">
 	<div class="align-right">

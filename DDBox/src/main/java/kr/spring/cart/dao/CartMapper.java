@@ -24,7 +24,7 @@ public interface CartMapper {
 	@Select("SELECT a.cart_num, a.mem_num, a.store_num, a.order_quantity, b.store_price FROM pcart a LEFT OUTER JOIN store b on a.store_num = b.store_num where a.mem_num = #{mem_num};")
 	public List<CartVO> selectList(int mem_num);
 	
-	//카트 확인
+	//카트 상세
 	@Select("SELECT * FROM pcart WHERE store_num=#{store_num} AND mem_num=#{mem_num}")
 	public CartVO selectCart(int cart_num);
 	

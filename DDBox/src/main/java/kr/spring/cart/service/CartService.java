@@ -7,7 +7,7 @@ import kr.spring.cart.vo.CartVO;
 
 public interface CartService {
 		//카트 추가
-		public int insertCart(CartVO cart) throws Exception;
+		public int insertCart(CartVO cart, Map<String, Object> map) throws Exception;
 		
 		//회원별 총 구매액
 		public int getTotalByMem_num(int mem_num)throws Exception;
