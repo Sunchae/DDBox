@@ -46,18 +46,17 @@
 		</c:if>
 	</div>
 	<div class="align-left">
-		<c:if test="${!empty user && user.mem_num == rental.mem_num}">
-			<input type="button" value="삭제" id="delete_btn">
-			<script type="text/javascript">
-				let delete_btn = document.getElementById('delete_btn');
-				delete_btn.onclick=function(){
-					let choice = confirm('삭제하시겠습니까?');
-					if(choice){
-						location.href='delete?rental_num=${rental.rental_num}'
-					}
-				};
-			</script>
-		</c:if>
+		<input type="button" value="수정" onclick="location.href='update?rental_num=${rental.rental_num}'">
+		<input type="button" value="삭제" id="delete_btn">
+		<script type="text/javascript">
+			let delete_btn = document.getElementById('delete_btn');
+			delete_btn.onclick=function(){
+				let choice = confirm('삭제하시겠습니까?');
+				if(choice){
+					location.href='delete?rental_num=${rental.rental_num}'
+				}
+			};
+		</script>
 	</div>
 	<div class="align-right">
 	<input type="button" value="목록" onclick="location.href='${pageContext.request.contextPath}/faq/rental'">

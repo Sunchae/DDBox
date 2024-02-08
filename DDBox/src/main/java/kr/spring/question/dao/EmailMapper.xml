@@ -31,7 +31,7 @@
 	<sql id="emailSearch">
 		<where>
 			<if test="keyword != null and keyword != ''">
-				qna_title LIKE '%' || #{keyword} || '%' OR
+				AND qna_title LIKE '%' || #{keyword} || '%' OR
 				question_content LIKE '%' || #{keyword} || '%' 
 			</if>
 		</where>
@@ -42,7 +42,7 @@
 	<select id="selectRowCount" parameterType="map" resultType="integer">
 		SELECT
 			COUNT(*)
-		FROM email_faq JOIN member USING (mem_num)
+		FROM email_faq JOIN member USING (mem_num) WHERE mem_num=#{mem_num}
 		<include refid="emailSearch"></include>
 	</select>
 	
@@ -63,6 +63,7 @@
 					  ask_content
 				    FROM email_faq
 				    JOIN member USING(mem_num)
+				    WHERE mem_num=#{mem_num}
 					<include refid="emailSearch"></include>
 					ORDER BY question_regdate DESC)a)
 		<![CDATA[

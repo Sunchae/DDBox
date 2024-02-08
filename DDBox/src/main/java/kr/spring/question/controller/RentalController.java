@@ -84,10 +84,14 @@ public class RentalController {
 	@RequestMapping("/faq/rental")
 	public ModelAndView process(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
 								@RequestParam(value="order",defaultValue="1") int order,
+								HttpSession session,
 								String keyword) {
 		Map<String,Object> map = new HashMap<String,Object>();
+		//회원
+		MemberVO user = (MemberVO)session.getAttribute("user");
 		
 		map.put("keyword", keyword);
+		map.put("mem_num", user.getMem_num());
 		
 		//전체,검색 레코드 수
 		int count = rentalService.selectRowCount(map);
@@ -149,6 +153,24 @@ public class RentalController {
 		
 		model.addAttribute("rentalVO", rentalVO);
 		return "rental_update";
+	}
+	
+	@PostMapping("faq/rental/update")
+	public String submitUpdate(@Valid RentalVO rentalVO, BindingResult result,
+								HttpServletRequest request, Model model) {
+		log.debug("<<글 수정>> : " + rentalVO);
+		
+		if(result.hasFieldErrors("scr_num") || result.hasFieldErrors("rental_per") || result.hasFieldErrors("rental_content") || result.hasFieldErrors("rental_name") 
+				|| result.hasFieldErrors("rental_phone") || result.hasFieldErrors("rental_email") || result.hasFieldErrors("rental_date")) {
+			return "rental_update";
+		}
+		
+		rentalService.updateRental(rentalVO);
+		
+		model.addAttribute("message", "수정 완료되었습니다.");
+		model.addAttribute("url", request.getContextPath()+"/faq/rental/detail?rental_num"+rentalVO.getRental_num());
+		
+		return "redirect:/faq/rental/detail?rental_num="+rentalVO.getRental_num();
 	}
 	
 	@RequestMapping("/faq/rental/updateStatus")

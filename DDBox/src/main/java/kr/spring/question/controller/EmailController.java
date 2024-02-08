@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,10 +45,14 @@ public class EmailController {
 	@RequestMapping("/faq/email")
 	public ModelAndView process(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
 								@RequestParam(value="order",defaultValue="1") int order,
+								HttpSession session,
 								String keyword) {
 		Map<String,Object> map = new HashMap<String,Object>();
+		//회원
+		MemberVO user = (MemberVO)session.getAttribute("user");
 		
 		map.put("keyword", keyword);
+		map.put("mem_num", user.getMem_num());
 		
 		//전체,검색 레코드 수
 		int count = emailService.selectRowCount(map);
@@ -55,6 +60,7 @@ public class EmailController {
 		
 		//페이지처리
 		PageUtil page = new PageUtil(null, keyword, currentPage, count, 20, 10, "list","&order="+order);
+		
 		
 		List<EmailVO> list = null;
 		List<ScreenVO> screenList = null;
@@ -111,6 +117,10 @@ public class EmailController {
 		
 		//유효성 체크 
 		if(result.hasErrors()) {
+			for(FieldError error : result.getFieldErrors()) {
+				log.debug("<<에러 필드>> : " + error.getField());
+			}
+			
 			model.addAttribute("emailVO", emailVO); // 입력된 데이터를 다시 전달
 	        model.addAttribute("list", list); // 영화관 정보를 다시 전달
 	        return "email_write";

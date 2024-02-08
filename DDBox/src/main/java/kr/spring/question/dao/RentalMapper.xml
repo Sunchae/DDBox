@@ -7,29 +7,29 @@
 			rental_num,
 			mem_num,
 			scr_num,
-			rental_date,
 			rental_per,
 			rental_content,
 			rental_name,
 			rental_phone,
-			rental_email)
+			rental_email,
+			rental_date)
 		VALUES (
 			rental_seq.nextval,
 			#{mem_num},
 			#{scr_num},
-			#{rental_date},
 			#{rental_per},
 			#{rental_content},
 			#{rental_name},
 			#{rental_phone},
-			#{rental_email})
+			#{rental_email},
+			#{rental_date})
 	</insert>
-	
+
 	<!-- 검색 기능 -->
 	<sql id="rentalSearch">
 		<where>
 			<if test="keyword != null and keyword != ''">
-				rental_name LIKE '%' || #{keyword} || '%' OR
+				AND rental_name LIKE '%' || #{keyword} || '%' OR
 				rental_content LIKE '%' || #{keyword} || '%' 
 			</if>
 		</where>
@@ -39,7 +39,7 @@
 	<select id="selectRowCount" parameterType="map" resultType="integer">
 		SELECT
 			COUNT(*)
-		FROM rental JOIN member USING (mem_num)
+		FROM rental JOIN member USING (mem_num) WHERE mem_num=#{mem_num}
 		<include refid="rentalSearch"></include>
 	</select>
 	
@@ -59,6 +59,7 @@
 					rental_status
 				  FROM rental
 				  JOIN member USING(mem_num)
+				  WHERE mem_num=#{mem_num}
 				  <include refid="rentalSearch"></include>
 				  ORDER BY rental_regdate DESC)a)
 		<![CDATA[
@@ -77,7 +78,19 @@
 	</select>
 	
 	
-	
+	<!-- 대관 문의 수정 -->
+	<update id="updateRental" parameterType="rentalVO">
+		UPDATE rental SET
+			scr_num=#{scr_num},
+			rental_modifydate=SYSDATE,
+			rental_per=#{rental_per},
+			rental_content=#{rental_content},
+			rental_name=#{rental_name},
+			rental_phone=#{rental_phone},
+			rental_email=#{rental_email},
+			rental_date=#{rental_date}
+		WHERE rental_num=#{rental_num}
+	</update>
 	
 	
 	

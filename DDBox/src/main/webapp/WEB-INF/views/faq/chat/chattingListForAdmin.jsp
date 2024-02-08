@@ -16,7 +16,7 @@
 			<tr>
 				<td style="text-align:left;">
 					<a href="chatUserRoom_detail?chatroom_num=${chat.chatroom_num}">
-						<b>${chat.mem_id}</b>
+						<b>${chat.mem_id} 님의 문의입니다</b>
 						<br>
 					</a>
 				</td>
