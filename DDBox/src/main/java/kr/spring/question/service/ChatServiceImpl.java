@@ -69,8 +69,7 @@ public class ChatServiceImpl implements ChatService{
 	}
 
 	@Override
-	public List<ChatVO> getChat(int chatroom_num, int mem_num) {
-		// TODO Auto-generated method stub
+	public List<ChatVO> getChattingListForAdmin(int chatroom_num, int mem_num) {
 		return null;
 	}
 
@@ -83,6 +82,8 @@ public class ChatServiceImpl implements ChatService{
 	public List<ChatVO> selectChatDetail(Map<String, Integer> map) {
 		return chatMapper.selectChatDetail(map);
 	}
+
+
 
 
 }

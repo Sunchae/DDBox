@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import kr.spring.question.vo.ChatVO;
 import kr.spring.question.vo.ChatroomVO;
@@ -42,7 +43,9 @@ public interface ChatMapper {
 	@Select("SELECT * FROM faq_chatroom WHERE chatroom_num=#{chatroom_num}")
 	public ChatroomVO getChatroomInfo(int chatroom_num);
 	//채팅 목록 불러오기 (관리자)
-	public List<ChatVO> getChat(int chatroom_num, int mem_num);
+	public List<ChatVO> getChattingListForAdmin(int chatroom_num, int mem_num);
 	
-	
+	//read check
+	@Update("UPDATE read_check=0 FROM faq_chat WHERE read_check=1 AND chatroom_num=#{chatroom_num} AND mem_num!=#{mem_num}")
+	public void updateReadCheck(int chatroom_num, int mem_num);
 }

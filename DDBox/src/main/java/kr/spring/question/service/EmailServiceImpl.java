@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.question.dao.EmailMapper;
 import kr.spring.question.vo.EmailVO;
+import kr.spring.reserve.vo.ScreenVO;
 
 @Service
 @Transactional
@@ -49,6 +50,13 @@ public class EmailServiceImpl implements EmailService{
 	@Override
 	public void deleteFile(int qna_num) {
 		emailMapper.deleteFile(qna_num);
+	}
+
+	/*-------영화관 정보---------*/
+	
+	@Override
+	public List<ScreenVO> getAllScreens() {
+		return emailMapper.getAllScreens();
 	}
 
 }

@@ -39,8 +39,12 @@ public class ChatController {
 		return "chatUser";
 	}
 	
-	//채팅방 목록 (관리자)
-
+	/*채팅방 목록 (관리자)
+	@GetMapping("faq/chat/chattingListForAdmin")
+	public String insertChatrr(HttpSession session) {
+		
+		return "";
+	}*/
 	
 	
 	/*==================================
@@ -121,6 +125,8 @@ public class ChatController {
 			map.put("chatroom_num", chatroom_num);
 			map.put("mem_num", user.getMem_num());
 			List<ChatVO> list = chatService.selectChatDetail(map);
+			
+			log.debug("<<ChatVO 리스트 >>" + list);
 			
 			mapAjax.put("result", "success");
 			mapAjax.put("list", list);

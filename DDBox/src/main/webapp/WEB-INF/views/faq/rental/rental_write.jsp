@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 내용 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <div class="page-main">
@@ -9,12 +10,16 @@
 		<form:errors element="div" cssClass="error-color"/>
 		<ul>
 			<li>
-				<form:label path="scr_num">영화관 선택(*) (일단 ticket 임의값 넣고 1로 입력해서 해보기)</form:label>
-				<form:input path="scr_num"/>
-				<form:errors path="scr_num" cssClass="error-color"/>
+				<form:label path="scr_num">해당 영화관(*) </form:label>
+				<form:select path="scr_num">
+		            <form:option value="scr_num">영화관 선택</form:option>
+		            <c:forEach var="screen" items="${list}">
+      				  <form:option value="${screen.scr_num}">${screen.scr_name}</form:option>
+    				</c:forEach>
+       			</form:select>
 			</li>
 			<li>
-				<form:label path="rental_date">관람 희망일(*) (기본 날짜 입력해서 test)</form:label>
+				<form:label path="rental_date">관람 희망일(*)</form:label>
 				<input type="date" id="rental_date" name="rental_date">
 				<form:errors path="rental_date" cssClass="error-color"/>
 			</li>

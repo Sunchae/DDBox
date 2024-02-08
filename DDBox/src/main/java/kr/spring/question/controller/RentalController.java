@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.question.service.RentalService;
 import kr.spring.question.vo.RentalVO;
+import kr.spring.reserve.vo.ScreenVO;
 import kr.spring.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,7 +44,11 @@ public class RentalController {
 	
 	//등록폼 호출
 	@GetMapping("faq/rental/write")
-	public String form() {
+	public String form(Model model) {
+		List<ScreenVO> list = rentalService.getAllScreens();
+		model.addAttribute("list", list);
+		
+		log.debug("<<영화관 list>> : " + list);
 		return "rental_write";
 	}
 	
@@ -54,7 +59,7 @@ public class RentalController {
 		log.debug("<<단체/대관 문의 작성>> : " + rentalVO);
 		
 		if(result.hasErrors()) {
-			return form();
+			return "rental_write";
 		}
 		
 		//회원번호
