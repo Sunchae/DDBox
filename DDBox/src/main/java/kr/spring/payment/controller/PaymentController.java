@@ -4,16 +4,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.spring.payment.service.KakaoPayService;
+import kr.spring.reserve.vo.TicketVO;
 import lombok.Setter;
 import lombok.extern.java.Log;
 
 @Log
 @Controller
 public class PaymentController{
+	
+	@ModelAttribute
+	public TicketVO initCommand() {
+		return new TicketVO();
+	}
 	
 	@Setter(onMethod_=@Autowired)
 	private KakaoPayService kakaopay;

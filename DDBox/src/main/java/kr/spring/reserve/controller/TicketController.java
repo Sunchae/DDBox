@@ -49,9 +49,30 @@ public class TicketController {
 	 * 	  예매 정보 읽어오기
 	 ====================*/
 	@RequestMapping("/reserve/payConfirm")
-	public String confirm(Model model,HttpSession session) {
+	public String confirm(Model model,int choice_num, int choice_screen,int choice_time,int choice_people, int choice_price,HttpSession session) {
 		
-		return "payMain";
+		ShowVO show = null;
+		show = ticketService.selectedShow(choice_time);
+		
+		ScreenVO screen = null;
+		screen = ticketService.selectedScreen(choice_screen);
+		
+		MovieVO movie = null;
+		movie = ticketService.selectedMoive(choice_num);
+		
+		TicketVO ticket = null;
+		ticket = ticketService.selectedPPL(choice_people);
+		
+		TicketVO ticket2 = null;
+		ticket2 = ticketService.selectedPrice(choice_price);
+		
+		model.addAttribute("movie",movie);
+		model.addAttribute("screen",screen);
+		model.addAttribute("show",show);
+		model.addAttribute("ticket",ticket);
+		model.addAttribute("ticket2",ticket2);
+		
+		return "payConfirm";
 	}
 	
 	

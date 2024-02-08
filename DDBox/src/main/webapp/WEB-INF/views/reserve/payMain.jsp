@@ -91,6 +91,17 @@ s               <p class="screen-location">상영관 이름 : ${screen.scr_name}
                     <c:choose>
                     <c:when test="${user.mem_auth == 1}">
                     	 <button id="check_module" class="btn-pay" type="button">구매</button>
+                    	 
+                    	 <form action="payConfirm" style="border:none;" class="align-center" id="pay_confirm">
+							<input type="hidden" name="choice_num" value="${movie.movie_num}" id="choice_num">
+							<input type="hidden" name="choice_screen" value="${screen.scr_num}" id="choice_screen">
+							<input type="hidden" name="choice_date" value="${param.choice_date}" id="choice_date">
+							<input type="hidden" name="choice_time" value="${show.shw_num}" id="choice_time">
+							<input type="hidden" name="choice_people" id="choice_people">
+							<input type="hidden" name="choice_price" id="choice_price">
+							<input type="submit" value="결제확인">
+						</form>
+						
 							<script>
 								$("#check_module").click(function() {
 									var IMP = window.IMP; // 생략가능
@@ -121,9 +132,11 @@ s               <p class="screen-location">상영관 이름 : ${screen.scr_name}
 										console.log(rsp);
 										if (rsp.success) {
 											var msg = '결제가 완료되었습니다.';
-											msg += '결제 금액 : ${param.choice_price}' + rsp.paid_amount;
+											msg += '결제 금액 : ' + rsp.paid_amount + '원';
 											
-											window.location.href = '/reserve/payConfirm';
+											window.location.href = '/main/main';
+											
+										
 											// success.submit();
 											// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
 											// 자세한 설명은 구글링으로 보시는게 좋습니다.
@@ -142,7 +155,6 @@ s               <p class="screen-location">상영관 이름 : ${screen.scr_name}
                     </c:choose>
                 </div>
                 
-                <button class="btn-pay" type="button" onclick="location.href='payConfirm'">확인</button>
             </div>
         </div>
     </div>
