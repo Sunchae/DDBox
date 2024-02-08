@@ -73,11 +73,13 @@ public class MemberVO {
 	 * 비밀번호 일치 여부 체크
 	 *=========================*/
 	public boolean isCheckedPassword(String userPasswd) {
-		if(mem_auth >= 1 && mem_pw.equals(userPasswd)) {
-			return true;
-		}
-		return false;
+	    // mem_pw가 null이면 비밀번호가 일치하지 않는 것으로 처리
+	    if (mem_pw == null || mem_auth < 1 || !mem_pw.equals(userPasswd)) {
+	        return false;
+	    }
+	    return true;
 	}
+
 	
 	/*=========================
 	 * 이미지 BLOB 처리
