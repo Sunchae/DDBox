@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -66,7 +67,7 @@ public class MemberController {
 			HttpServletRequest request,
 			RedirectAttributes redirect) {
 		log.debug("<<회원가입 여부>> : " + memberVO);
-		
+
 		// 유효성 체크 결과 오류 있으면 폼 호출
 		if(result.hasFieldErrors("mem_name") || result.hasFieldErrors("mem_birth") || result.hasFieldErrors("mem_phone")) {
 			List<FieldError> list =  result.getFieldErrors();
@@ -83,7 +84,7 @@ public class MemberController {
 		// 디버깅 메시지 추가
 		log.debug("<<mem_birth>> : " + memberVO.getMem_birth());
 
-		
+
 		// 회원가입 여부  
 		if (memberService.selectCheckMemberRegistered(memberVO) >= 1) {
 			// 회원 DB에 이미 가입한 전적이 있는 회원(신규가입 불가한 회원)
@@ -92,9 +93,9 @@ public class MemberController {
 			model.addAttribute("accessUrl",request.getContextPath()+"/member/login");
 			return "common/resultView";
 		}
-		
+
 		redirect.addFlashAttribute("memberVO", memberVO);
-		
+
 		//회원 가입 이력 없는 사람이면 다음 절차로 통과
 		// 타일스 설정명
 		return "redirect:/member/registerUser";
@@ -174,7 +175,7 @@ public class MemberController {
 		model.addAttribute("accessMsg","회원가입이 완료되었습니다.");
 		model.addAttribute("accessUrl",request.getContextPath()+"/main/main");
 		return "common/resultView";
-		
+
 	}
 
 	public String calculateAgeGroup(long age) {
@@ -232,6 +233,7 @@ public class MemberController {
 			boolean check = false;
 
 			if(member!=null) {
+				
 				//비밀번호 일치 여부 체크
 				check = member.isCheckedPassword(memberVO.getMem_pw());
 			}
@@ -284,6 +286,8 @@ public class MemberController {
 			//인증 실패로 로그인 폼 호출
 			if(member!=null && member.getMem_auth()==2) {//정지회원 메시지 표시
 				result.reject("noAuthority");
+			}else if(member!=null && member.getMem_auth()==3){
+				result.reject("withdrawnMember");
 			}else {
 				result.reject("invalidIdOrPassword");
 			}
@@ -310,46 +314,97 @@ public class MemberController {
 		response.addCookie(auto_cookie);
 		return "redirect:/main/main";
 	}
-	
-	
+
+
 
 	/*==============================
 	 * 	회원 탈퇴
 	 *==============================*/
+
+	@GetMapping("/member/get_random")
+	@ResponseBody
+	public Map<String,Object> getRadomNum(HttpSession session) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			map.put("result", "logout");
+		}else {
+			Math.floor(1000 + Math.random() * 9000);
+			int randomNumber = (int)(1000 + Math.random() * 9000);
+			map.put("result", "success");
+			map.put("randomNumber", randomNumber);
+			session.setAttribute("randomNumber", randomNumber);
+		}
+		return map;
+	}
 	
-	  // 회원 탈퇴 폼 호출
-	  @GetMapping("/member/withdraw") 
-	  public String withdrawForm() { 
-		  return "withdrawForm"; 
-	  }
-	  
-	  // 회원 탈퇴 처리
-	  @PostMapping("/member/withdraw")
-	  public String withdraw(HttpSession session){
-		  
-		  MemberVO member = (MemberVO)session.getAttribute("user");
-	  
-		  if(member != null) { //로그인 되어 있는 상태 
-			  int mem_num = member.getMem_num(); 
-			  
-			  //회원 탈퇴 처리
-			  memberService.withdrawMember(mem_num);
-			  
-			  //세션에서 사용자 정보 삭제 
-			  session.removeAttribute("user");
-			  
-			  //세션 무효화
-			  session.invalidate();
-			  
-			  return "redirect:/main/main";
-			  
-		  }else{ //로그인 되지 않은 상태 
-				  
-			  return "redirect:/member/login"; 
-		  }
-	  
-	  }	  
-	  
+	// 회원 탈퇴 폼 호출
+	@GetMapping("/member/withdraw") 
+	public String withdrawForm() { 
+		return "withdrawForm"; 
+	}
+
+	// 회원 탈퇴 처리
+	@PostMapping("/member/withdraw")
+	public String withdraw(HttpSession session, Model model, HttpServletRequest request,
+			@RequestParam("mem_pw") String password,
+			@RequestParam("verification") String verification){
+
+		MemberVO member = (MemberVO)session.getAttribute("user");
+
+		if(member != null) { //로그인 되어 있는 상태 
+			//회원 정보에서 비밀번호 가져오기
+			String storedPassword = member.getMem_pw();
+			Integer randomNumber = (Integer) session.getAttribute("randomNumber");
+
+			log.debug("입력한 비밀번호 :" + password);
+			log.debug("디비 비밀번호 :" + storedPassword);
+			log.debug("전달된 인증번호 : " + verification);
+			log.debug("생성 인증번호 : " + randomNumber);
+
+			//비밀번호가 일치하고 난수 입력이 유효한지 확인
+			if(password.equals(storedPassword) && verification.equals(String.valueOf(randomNumber))) {
+				//비밀번호 일치 + 난수 정상 입력 -> 회원 탈퇴처리
+
+				int mem_num = member.getMem_num();
+
+				log.debug("<<mem_num>> : " + mem_num);
+				log.debug("<<입력한? 난수 verification>> : " + verification);
+				log.debug("<<storedPassword>> : " + storedPassword);
+
+				//회원 탈퇴 처리
+				memberService.withdrawMember(mem_num);
+
+				//세션에서 사용자 정보 삭제 
+				session.removeAttribute("user");
+				//난수 정보 삭제
+				session.removeAttribute("verification");
+
+				//세션 무효화
+				session.invalidate();
+
+
+				model.addAttribute("accessTitle","탈퇴 절차 성공");
+				model.addAttribute("accessMsg","탈퇴 처리가 완료되었습니다..");
+				model.addAttribute("accessUrl",request.getContextPath()+"/main/main");
+				return "common/resultView";
+			}else {
+				//비밀번호나 난수 입력이 유효하지 않은 경우 에러메시지 출력
+
+				model.addAttribute("accessTitle","탈퇴 절차 실패");
+				model.addAttribute("accessMsg","비밀번호 또는 난수 입력이 올바르지 않습니다.");
+				model.addAttribute("accessUrl",request.getContextPath()+"/member/withdraw");
+				return "common/resultView";
+
+			}
+		}else{ //로그인 되지 않은 상태 
+
+			return "redirect:/member/login"; 
+		}
+
+	}	  
+
 
 
 

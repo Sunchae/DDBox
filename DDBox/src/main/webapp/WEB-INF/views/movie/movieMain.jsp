@@ -8,6 +8,7 @@
 <style>
 /* 추가적인 스타일링을 위한 부분 */
 .movie-lists {
+	margin-top: 20px;
     margin-bottom: 20px;
     position: relative;
     overflow: hidden;
@@ -15,6 +16,7 @@
 
 .movie-poster {
     transition: filter 0.3s ease-in-out;
+    height: 530px;
 }
 
 .movie-lists .movie-summary {
@@ -29,7 +31,7 @@
     text-align: center;
 }
 
-.movie-lists:hover .movie-poster {
+.movie-lists:hover .movie-poster:hover {
     filter: blur(10px);
 }
 
@@ -63,6 +65,7 @@
 .like-button {
     display: inline-block; /* 항상 표시됨 */
 }
+
 </style>
 
 <div class="container">
@@ -95,7 +98,7 @@
                             <!-- 좋아요 기능 추가 필요 -->
                             <button class="btn  btn-sm">좋아요</button>
                             <!-- 예매페이지로 링크 필요 -->
-                            <button class="btn btn-primary btn-sm">예매하기</button>
+                            <a href="/reserve/reserveMain" class="btn btn-dark rounded-pill btn-sm" style="color: white;">예매하기</a>
                         </div>
                     </div>
             </div>

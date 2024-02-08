@@ -27,6 +27,10 @@ public interface TicketMapper {
 	@Select("SELECT shw_num, shw_time FROM show WHERE shw_num=#{choice_time}")
 	public ShowVO selectedShow(int choice_time);
 	
-	//public TicketVO selectedPPL(int choice_people);
+	@Select("SELECT res_num, res_mem_total FROM ticket WHERE res_mem_total=#{choice_people}")
+	public TicketVO selectedPPL(int choice_people);
+	
+	@Select("SELECT res_num, res_pay FROM ticket WHERE res_pay=#{choice_price}")
+	public TicketVO selectedPrice(int choice_price);
 	
 }

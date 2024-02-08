@@ -17,4 +17,8 @@ public interface TicketService {
 	public ScreenVO selectedScreen(int choice_screen);
 	
 	public ShowVO selectedShow(int choice_time);
+	
+	public TicketVO selectedPPL(int choice_people);
+	
+	public TicketVO selectedPrice(int choice_price);
 }
