@@ -99,6 +99,34 @@ public class EventServiceImpl implements EventService {
 		return eventMapper.selectEntryList(map);
 	}
 
+	@Override
+	public void updateEntryAdmin(Entry_listVO entry) {
+		eventMapper.updateEntryAdmin(entry);
+	}
+
+	@Override
+	public List<Entry_listVO> winnerEntry(Integer entry_num) {
+		return eventMapper.winnerEntry(entry_num);
+	}
+
+	@Override
+	public void updateEventStatus(int event_num) {
+		eventMapper.updateEventStatus(event_num);
+		
+	}
+
+	@Override
+	public void updateWinType(int event_num, int mem_num) {
+		eventMapper.updateWinType(event_num, mem_num);
+		
+	}
+
+	@Override
+	public Entry_listVO selectEntryEvent(int event_num, int mem_num) {
+		return eventMapper.selectEntryEvent(event_num, mem_num);
+	}
+
+	
 	
 	
 

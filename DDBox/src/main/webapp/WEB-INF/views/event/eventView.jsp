@@ -5,6 +5,7 @@
 <!-- 내용 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <div class="page-main">
+	<form>
 	<h2>${event_list.event_title}</h2>
 	<div class="detail-info">
 		<p>기간 ${event_list.event_start}~${event_list.event_end}</p>
@@ -27,11 +28,10 @@
 	</c:if>
 	<div>
 	<c:if test="${event_list.event_type == 2}">
-		<fieldset id='btn_fieldset_${event_list.event_num}'>
-                <input type="button" class="entry_btn" value="응모하기" onclick='entryButtonClick("${event_list.event_num}")' data-event_num="${event_list.event_num}">
-            </fieldset>
+    	<input type="button" class="entry_btn" value="응모하기" onclick='entryButtonClick("${event_list.event_num}")' data-event_num="${event_list.event_num}">
 	</c:if>		
 	</div>
+	</form>
 </div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/event_entry.js"></script>
