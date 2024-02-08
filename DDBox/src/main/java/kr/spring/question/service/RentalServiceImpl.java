@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.question.dao.RentalMapper;
 import kr.spring.question.vo.RentalVO;
+import kr.spring.reserve.vo.ScreenVO;
 
 @Service
 @Transactional
@@ -49,6 +50,12 @@ public class RentalServiceImpl implements RentalService{
 	@Override
 	public void updateRentalStatus(int rental_status, int rental_num) {
 		rentalMapper.updateRentalStatus(rental_status, rental_num);
+	}
+	
+	/*-------영화관 정보---------*/
+	@Override
+	public List<ScreenVO> getAllScreens() {
+		return rentalMapper.getAllScreens();
 	}
 
 }

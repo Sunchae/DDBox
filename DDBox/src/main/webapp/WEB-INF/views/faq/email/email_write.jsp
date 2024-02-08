@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 내용 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <div class="page-main">
@@ -28,12 +29,20 @@
 				<form:errors path="qna_type" cssClass="error-color"/>
 			</li>
 	 		<li>
-				<form:label path="scr_num">영화관 선택</form:label>
-				<form:radiobutton path="scr_num" value="0"/>선택하지않음
-				<form:radiobutton path="scr_num" value="1"/>선택함 <!-- 선택하면 영화관 정보 드롭박스 -->
-				<form:errors path="scr_num" cssClass="error-color"/>
+				<form:label path="qna_scr">영화관 선택</form:label>
+				<form:radiobutton path="qna_scr" value="0"/>선택하지않음
+				<form:radiobutton path="qna_scr" value="1"/>선택함 <!-- 선택하면 영화관 정보 드롭박스 -->
+				<form:errors path="qna_scr" cssClass="error-color"/>
 			</li>
-			<li>영화관 선택 부분 res_num</li>
+			<li>
+				<form:label path="scr_num">해당 영화관</form:label>
+				<form:select path="scr_num">
+		            <form:option value="scr_num">영화관 선택</form:option>
+		            <c:forEach var="screen" items="${list}">
+      				  <form:option value="${screen.scr_num}">${screen.scr_name}</form:option>
+    				</c:forEach>
+       			</form:select>
+			</li>
 			<li>
 				<form:label path="qna_title">제목</form:label>
 				<form:input path="qna_title"/>

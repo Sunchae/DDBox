@@ -33,7 +33,7 @@ public interface MemberMapper {
 	public void updateMemberAuthByWithdraw(int mem_num);
 	@Delete("DELETE FROM member_detail WHERE mem_num=#{mem_num}") 
 	public void deleteMember_detail(int mem_num);
-
+	public boolean checkPassword(String inputPassword, String storedPassword);
 
 	//자동 로그인
 	@Update("UPDATE member_detail SET mem_autoid=#{mem_autoid} WHERE mem_num=#{mem_num}")

@@ -15,7 +15,7 @@ import lombok.ToString;
 public class RentalVO {
 	private int rental_num;
 	private int mem_num;
-	private Integer res_num; //영화관
+	private Integer scr_num; //영화관
 	private Date rental_regdate;
 	private Date rental_date;
 	private Date rental_modifydate;

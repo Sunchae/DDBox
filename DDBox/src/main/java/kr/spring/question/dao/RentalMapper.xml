@@ -6,7 +6,7 @@
 		INSERT INTO rental(
 			rental_num,
 			mem_num,
-			res_num,
+			scr_num,
 			rental_date,
 			rental_per,
 			rental_content,
@@ -16,7 +16,7 @@
 		VALUES (
 			rental_seq.nextval,
 			#{mem_num},
-			#{res_num},
+			#{scr_num},
 			#{rental_date},
 			#{rental_per},
 			#{rental_content},
@@ -52,7 +52,7 @@
 				rownum rnum
 			FROM (SELECT
 					rental_num,
-					res_num,
+					scr_num,
 					rental_name,
 					rental_date,
 					rental_regdate,

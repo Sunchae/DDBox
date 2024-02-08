@@ -7,6 +7,7 @@ import javax.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.spring.reserve.vo.ScreenVO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -23,7 +24,7 @@ public class EmailVO {
 	private int qna_type;
 	@Range(min=0,max=1)
 	private int qna_scr; //해당 영화관 선택 유무
-	private Integer res_num; //영화관
+	private Integer scr_num; //영화관 (외래키)
 	@NotBlank
 	private String question_content;
 	private String question_file;
@@ -33,6 +34,8 @@ public class EmailVO {
 	private Date ask_regdate;
 	
 	private String mem_name;
+	
+	private ScreenVO screen;
 	
 	//member_detail
 //	private String mem_name;

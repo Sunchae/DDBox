@@ -43,6 +43,21 @@ public class TicketServiceImpl implements TicketService{
 		return ticketMapper.selectedShow(choice_time);
 	}
 
+	@Override
+	public TicketVO selectedPPL(int choice_people) {
+		return ticketMapper.selectedPPL(choice_people);
+	}
+
+	@Override
+	public TicketVO selectedPrice(int choice_price) {
+		return ticketMapper.selectedPrice(choice_price);
+	}
+
+	@Override
+	public TicketVO selectTicketInfo(int res_num) {
+		return ticketMapper.selectTicketInfo(res_num);
+	}
+
 	
 	
 

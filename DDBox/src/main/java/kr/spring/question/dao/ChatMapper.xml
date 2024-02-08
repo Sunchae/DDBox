@@ -12,14 +12,7 @@
 			#{user_num},
 			#{admin_num})
 	</insert>
-	
-	<!-- sub sql -->
-	<sql id="read_check">
-		<if test="">
-		
-		</if>
-	</sql>
-	
+
 	<!-- 채팅 메시지 읽기 -->
 	<select id="selectChatDetail" parameterType="integer" resultType="chatVO">
 		SELECT
@@ -32,7 +25,7 @@
 			reg_date,
 			read_check
 		FROM faq_chat
-		WHERE chat_num = #{chat_num}
+		WHERE chatroom_num = #{chatroom_num}
 		ORDER BY reg_date ASC
 	</select>
 	
@@ -48,6 +41,45 @@
 			#{mem_num},
 			#{message})
 	</insert>
+	
+	
+	<!-- 관리자 채팅방 목록 / 개수 -->
+	<select id="selectRowCount" parameterType="map" resultType="integer">
+		SELECT 
+			COUNT(*)
+	     FROM faq_chatroom c 
+		 JOIN (SELECT 
+			     chatroom_num 
+		       FROM faq_chat 
+		       GROUP BY chatroom_num) USING (chatroom_num)
+	</select>
+	
+	<!-- 목록 -->
+	<select id="selectChatRoomList" parameterType="map" resultType="chatroomVO">
+		SELECT
+			*
+		FROM (SELECT
+				a.*,
+				rownum rnum
+			 FROM (SELECT 
+			          * 
+			        FROM faq_chatroom c 
+			        JOIN (SELECT 
+			                 chatroom_num 
+			              FROM faq_chat 
+			              GROUP BY chatroom_num) USING (chatroom_num)
+                    LEFT OUTER JOIN (SELECT 
+                                        COUNT(*) cnt, 
+                                        chatroom_num 
+                                     FROM faq_chat 
+                                     WHERE read_check=1 AND mem_num!=2 
+                                     GROUP BY chatroom_num) USING (chatroom_num) 
+                    JOIN member m on c.user_num=m.mem_num 
+                    ORDER BY cnt DESC NULLS LAST)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
 	
 	
 </mapper>

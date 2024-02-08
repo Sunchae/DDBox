@@ -45,7 +45,7 @@
 			</script>
 		</c:if>
 	</div>
-	<div class="align-right">
+	<div class="align-left">
 		<c:if test="${!empty user && user.mem_num == rental.mem_num}">
 			<input type="button" value="삭제" id="delete_btn">
 			<script type="text/javascript">
@@ -59,8 +59,9 @@
 			</script>
 		</c:if>
 	</div>
+	<div class="align-right">
 	<input type="button" value="목록" onclick="location.href='${pageContext.request.contextPath}/faq/rental'">
 	</div>
+	</div>
 	<hr size="1" width="100%">
-</div>
 <!-- 내용 끝 -->

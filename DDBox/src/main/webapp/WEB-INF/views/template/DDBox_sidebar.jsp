@@ -81,7 +81,7 @@
         
         <c:if test="${!empty user}">
 			<img id="myPage-profile" src="${pageContext.request.contextPath}/member/photoView" 
-	                              width="32" height="32" class="rounded-circle me-2 my-photo">
+	                              width="80" height="80" class="rounded-circle me-2 my-photo">
 		</c:if>
         <c:if test="${!empty user && !empty user.mem_nickname}">
 			[<span class="user_name">${user.mem_nickname}</span>]

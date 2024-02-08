@@ -36,7 +36,9 @@ create table entry_list(
 entry_num number not null,
 event_num number not null,
 mem_num number not null,
-entry_date date default sysdate not null,
+entry_date date default sysdate not null,--참여일
+win_type number default 0 not null,--추첨상태(0-미추첨,1-당첨,2-미당첨)
+win_date date,--추첨일
 constraint entry_list_pk primary key (entry_num),
 constraint entry_list_fk1 foreign key (mem_num) references member(mem_num),
 constraint entry_list_fk2 foreign key (event_num) references event_list(event_num)

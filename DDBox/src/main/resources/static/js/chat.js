@@ -1,6 +1,11 @@
 $(function(){
 	let message_socket; //웹소켓 식별자
 	
+	if($('#chatDetail').length>0){ //채팅 페이지
+		//웹소켓 연결 후 코드 입력 (웹소켓 인식 후 데이터 넣어주는 과정 추가)
+		connectWebSocket(); //아래 function 호출 (웹소켓 생성)
+	}
+	
 	/*--------------------------
 	*	웹소켓 연결
 	* --------------------------*/
@@ -44,7 +49,6 @@ $(function(){
 					alert('로그인 후 사용하세요');
 					message_socket.close();
 				}else if(param.result == 'success'){
-					
 					/*----- UI 넣기 시작------*/
 					$('#chatting_message').empty();
 					
@@ -52,28 +56,27 @@ $(function(){
 					$(param.list).each(function(index,item){
 						let output = '';
 						//날짜 추출
-						if(chat_date != item.chat_date.split(' ')[0]){
-							chat_date = item.chat_date.split(' ')[0];
+						if(chat_date != item.reg_date.split(' ')[0]){
+							chat_date = item.reg_date.split(' ')[0];
 							output += '<div class="date-position"><span>'+chat_date+'</span></div>';
 						}
 						
 						//메시지 포지션
 						if(item.mem_num == param.user_num){
-							output += '<div class="from-position">'+item.id;
+							output += '<div class="from-position">';
 							output += '<div>';
 						}else{
 							output += '<div class="to-position">';
 							output += '<div class="space-photo">';
-							output += '</div><div class="space-message">';
-							output += item.id;
+							output += '</div><div class="space-message">관리자';
 						}
 						if(item.read_check==1){
 							output += '<div class="read"><span>1</span></div>';
 						}
 						
 						output += '<div class="item">';
-						output += item.read_check + '<span>' + item.message.replace(/\r\n/g,'<br>').replace(/\r/g,'<br>').replace(/\n/g,'<br>') + '</span>';
-						output += '<div class="align-right">' + item.chat_date.split(' ')[1] + '</div>';
+						output += '<span>' + item.message.replace(/\r\n/g,'<br>').replace(/\r/g,'<br>').replace(/\n/g,'<br>') + '</span>';
+						output += '<div class="align-right">' + item.reg_date.split(' ')[1] + '</div>';
 						output += '</div>';
 						output += '</div><div class="space-clear"></div>';
 						output += '</div>';
@@ -146,5 +149,7 @@ $(function(){
 		});
 		event.preventDefault();
 	});
+	
+	
 	
 });

@@ -27,7 +27,14 @@ public interface EventMapper {
 	public Rentry_listVO selectRentry(int rentry_num);//참여자 등록 상세
 	
 	//응모권 참여자
-	public List<Entry_listVO> selectEntryList(Map<String,Object> map);
+	public List<Entry_listVO> selectEntryList(Map<String,Object> map);//맴버별 참여 이벤트 목록
 	public void insertEntry(Entry_listVO entry);//응모권 이벤트 참여자 등록
+	public void updateEntryAdmin(Entry_listVO entry);//관리자 이벤트 참여타입 변경
+	public List<Entry_listVO> winnerEntry(int entry_num);//당첨자 리스트
 	public List<Entry_listVO> selectEntry(Map<String,Object> map,int event_num);//응모권 이벤트 참여자 상세
+	public Entry_listVO selectEntryEvent(int event_num,int mem_num);//이벤트 참여했는지 
+	
+	//이벤트 추첨 후 처리
+	public void updateEventStatus(int evnet_num);//이벤트 스테이터스 값 변경
+	public void updateWinType(int event_num,int mem_num);//담청자 타입 변경
 }

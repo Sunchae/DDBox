@@ -5,9 +5,11 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.question.vo.RentalVO;
+import kr.spring.reserve.vo.ScreenVO;
 
 @Mapper
 public interface RentalMapper {
@@ -23,4 +25,8 @@ public interface RentalMapper {
 	//상태 변경
 	@Update("UPDATE rental SET rental_status=#{rental_status} WHERE rental_num=#{rental_num}")
 	public void updateRentalStatus(int rental_status, int rental_num);
+	
+	//영화관
+	@Select("SELECT * FROM screen")
+	public List<ScreenVO> getAllScreens();
 }

@@ -5,9 +5,11 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.question.vo.EmailVO;
+import kr.spring.reserve.vo.ScreenVO;
 
 @Mapper
 public interface EmailMapper {
@@ -21,4 +23,8 @@ public interface EmailMapper {
 	public void deleteEmail(int qna_num);
 	@Update("UPDATE email_faq SET question_file='' WHERE qna_num=#{qna_num}")
 	public void deleteFile(int qna_num);
+	
+	//영화관 
+	@Select("SELECT * FROM screen")
+	public List<ScreenVO> getAllScreens();
 }

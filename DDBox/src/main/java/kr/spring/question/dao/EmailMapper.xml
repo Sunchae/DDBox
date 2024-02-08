@@ -9,7 +9,7 @@
 			qna_title,
 			qna_type,
 			qna_scr,
-			res_num,
+			scr_num,
 			question_content,
 			question_file,
 			ask_content,
@@ -20,7 +20,7 @@
 			#{qna_title},
 			#{qna_type},
 			#{qna_scr},
-			#{res_num,jdbcType=VARCHAR},
+			#{scr_num,jdbcType=VARCHAR},
 			#{question_content},
 			#{question_file,jdbcType=VARCHAR},
 			#{ask_content,jdbcType=VARCHAR},
@@ -94,8 +94,6 @@ WHERE rnum>=1 AND rnum<=100 -->
 			ask_regdate=SYSDATE
 		WHERE qna_num=#{qna_num}
 	</update>
-	
-	
 	
 	
 	

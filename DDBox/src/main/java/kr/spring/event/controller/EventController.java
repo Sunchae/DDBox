@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.spring.event.service.EventService;
 import kr.spring.event.vo.Rentry_listVO;
@@ -363,6 +364,7 @@ public class EventController {
 		mav.setViewName("entryEventList");//타일즈 설정명으로 호출
 		mav.addObject("count", count);
 		mav.addObject("list", list);
+		log.debug("event_num", list);
 		mav.addObject("page", page.getPage());
 		
 		
@@ -422,18 +424,38 @@ public class EventController {
 	 *========================*/
 	@RequestMapping("/event/entryinsertAjax")//ajax통신따로 만들어줌
 	@ResponseBody
-	public Map<String,Object> entryinsert(@RequestParam int event_num,Entry_listVO entry_listVO,HttpSession session) {
+	public Map<String,Object> entryinsert(@RequestParam int event_num,Entry_listVO entry_listVO, HttpSession session) {
 		Map<String,Object> mapJson = new HashMap<String,Object>();
 		
 		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+				
+		
+		
 		if(user == null) {
 			//로그인이 안됨
 			mapJson.put("result", "logout");
 		}else {
-			//회원번호 등록
 			entry_listVO.setMem_num(user.getMem_num());
-			eventService.insertEntry(entry_listVO);
-			mapJson.put("result", "success");
+			entry_listVO.setEvent_num(event_num);
+			entry_listVO.setWin_type(0);
+			
+			
+			//중복 방지 mem_num/event_num으로 조회하는 로직 추가
+			int mem_num = user.getMem_num();
+			Entry_listVO entry_list = eventService.selectEntryEvent(event_num,mem_num);
+			log.debug("<<entry_list>> : " + entry_list);
+			
+			//만약에 값이 존재하면 참여 방지하고 값이 없으면 이벤트 등록
+			if(entry_list  == null) {
+				eventService.insertEntry(entry_listVO);
+				mapJson.put("result", "success");
+			}else {
+				mapJson.put("result", "already");
+				
+			}
+			
+			
 		}
 		
 		return mapJson;
@@ -442,34 +464,110 @@ public class EventController {
 	 * 응모권 이벤트 참여자 상세
 	 *========================*/
 	@RequestMapping("/event/entryName")
-	   public ModelAndView entryprocess(@RequestParam int event_num,@RequestParam(value="pageNum",defaultValue="1") int currentPage,
-	                           String keyword, String keyfield) {
-	      Map<String,Object> map = new HashMap<String,Object>();
-	      map.put("keyfield", keyfield);
-	      map.put("keyword", keyword);
-	      log.debug("<<응모자 상세 event_num>> : " + event_num);
-	      //전체,검색 레코드 수
-	      int count = eventService.selectRowCount(map);
-	      //페이지처리
-	      PageUtil page = new PageUtil(null, keyword, currentPage, count, 20, 10, "entryName");
-	      
-	      List<Entry_listVO> entry_list = null;
-	      if(count > 0) {
-	         map.put("start", page.getStartRow());
-	         map.put("end", page.getEndRow());      
-	         entry_list = eventService.selectEntry(map, event_num);
-	      }
-	      
-	      ModelAndView mav = new ModelAndView();
-	      mav.setViewName("entryName");//타일즈 설정명으로 호출
-	      mav.addObject("count", count);
-	      mav.addObject("list", entry_list);
-	      mav.addObject("page", page.getPage());
-	      
-	      
-	                        //타일스 설정명,속성명   ,속성값
-	      return new ModelAndView("entryName","list",entry_list);
-	   }
-	   
+	public ModelAndView entryprocess(@RequestParam int event_num,@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+                           String keyword, String keyfield) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		log.debug("<<응모자 상세 event_num>> : " + event_num);
+		//전체,검색 레코드 수
+		int count = eventService.selectRowCount(map);
+		//페이지처리
+		PageUtil page = new PageUtil(null, keyword, currentPage, count, 20, 10, "entryName");
+      
+		List<Entry_listVO> entry_list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());      
+			entry_list = eventService.selectEntry(map, event_num);
+		}
+		//event_list 에서 해당 이벤트의 event_status 값 불러오기 (추첨전이면 진행, 추첨후면 기존 결과 반환)
+		 Event_listVO event_list = eventService.selectEvent(event_num);//이벤트 리스트 VO에 담아줌
+		
+		 int event_status = event_list.getEvent_status();
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("entryName");//타일즈 설정명으로 호출
+		mav.addObject("count", count);
+		mav.addObject("list", entry_list);
+		mav.addObject("event_num", event_num);
+		mav.addObject("page", page.getPage());
+        mav.addObject("event_status", event_status);
+      
+		return mav;
+	}
+	/*========================
+	 * 당첨자
+	 *========================*/
 	
+	 @RequestMapping("/event/winnerEntry") 
+	 public ModelAndView entryWinner(@RequestParam("entry_num") List<Integer> list,@RequestParam("mem_num") List<Integer> list2, int event_num) { 
+		  
+	 //log.debug("<<당첨자 entry_num>> : " + entry_num); 
+	 //List<Entry_listVO> list = null; 
+	 //list = eventService.winnerEntry(entry_num);
+	 //log.debug("list size : " + list.size());
+	 log.debug("<<event_num >> : " +event_num);
+
+	 
+	 int ran = (int)(Math.random()*list.size());	 
+	 int winner = list.get(ran);
+	 
+	 //event_list 에서 해당 이벤트의 event_status 값 불러오기 (추첨전이면 진행, 추첨후면 기존 결과 반환)
+	 Event_listVO event_list = eventService.selectEvent(event_num);//이벤트 리스트 VO에 담아줌
+	
+	 int event_status = event_list.getEvent_status();
+	 
+	 
+	 
+	 //event status 1?
+	 
+		//event_list 에서 해당 이벤트의 event_status 값 변경 (추첨전->추첨후)
+		 event_list.setEvent_status(event_status);
+		 eventService.updateEventStatus(event_num);
+		 
+		 //지금 불러온 winner의 값은 당첨자의 mem_num, 이 mem_num으로 당첨자의 정보 불러오기
+		 //Entry_listVO entry_list = new Entry_listVO();
+		 
+		 //entry_list.setEvent_num(event_num);
+		 //entry_list.setMem_num(winner);
+		 eventService.updateWinType(event_num,list2.get(ran));
+	 
+	 //event status 0?
+		 
+	 
+	 
+	 
+	 ModelAndView mav = new ModelAndView(); 
+	 mav.setViewName("winnerEntry");
+	 mav.addObject("list", event_list);
+	 mav.addObject("event_status", event_status);
+	 mav.addObject("winner", winner);
+	 return mav; 
+	  
+	 }
+	 
+	
+	/*========================
+	 * 응모권 이벤트 참여자update
+	 *========================*/
+	@RequestMapping("/event/winnerUpdateAjax")//ajax통신따로 만들어줌
+	@ResponseBody
+	public Map<String,Object> winnerAdmin(Entry_listVO entry,HttpSession session,HttpServletRequest request) {
+		log.debug("<<win_type 수정>> : " + entry);
+		
+		Map<String,Object> mapJson = new HashMap<String,Object>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user == null) {
+			//로그인이 안됨
+			mapJson.put("result", "logout");
+		}else {
+			eventService.updateEntryAdmin(entry);
+			mapJson.put("result", "success");
+		}
+		
+		return mapJson;
+	}
 }

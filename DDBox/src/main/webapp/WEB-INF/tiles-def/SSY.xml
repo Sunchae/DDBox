@@ -83,6 +83,10 @@
     	<put-attribute name="title" value="참여자리스트"/>
     	<put-attribute name="body" value="/WEB-INF/views/event/entryEventList.jsp"/>
     </definition>
+    <definition name="winnerEntry" extends="admin">
+    	<put-attribute name="title" value="당첨자"/>
+    	<put-attribute name="body" value="/WEB-INF/views/event/winnerEntry.jsp"/>
+    </definition>
    
 </tiles-definitions>
 

@@ -31,10 +31,10 @@
    
       <!------------------------------ 양화 ------------------------------>
       <div style="width:30%; height:850px;">
-      <div class="v-line" style="border-right: 3px solid #ccc; height:650px; left: 50%;">
+      <div class="v-line" style="border-right: 3px solid #ccc; height:650px; left:40%;">
          <div class="left-one">
             <h3 class="align-center" style="width:100%; height:40px; background-color:black; color:white;">영화</h3>
-            <div class="col-body" style="overflow-y: hidden; height:560px;" >
+            <div class="col-body" style="overflow-y: hidden; height:585px;" >
                <ul>
                <c:forEach var="reserve" items="${list}">
                   <li class="movie-choice" data-num="${reserve.movie_num}">${reserve.movie_title}</li>
@@ -43,8 +43,8 @@
             </div>
             <p></p>
                <div class="movie-img">
-                  <div class="choice-list" id="choiceMovieList-0" style="border:dotted;">
-                     <img id="picture" src="${pageContext.request.contextPath}/images/noimage.png" width="75">
+                  <div class="choice-list" id="choiceMovieList-0" style="border:dotted; height:100px;">
+                     <img id="picture" src="${pageContext.request.contextPath}/images/noimage.png" width="75" height="99">
                       <b id="picture-name">영화를 클릭하세요</b>
                   </div>
                </div>
@@ -302,7 +302,7 @@
       
       <!------------------------------ 극장 ------------------------------>
       <div style="width:37%; height:700px;">
-         <div class="v-line" style="border-right: 3px solid #ccc; height:100%; left: 50%;">
+         <div class="v-line" style="border-right: 3px solid #ccc; height:650px; left: 50%;">
          <div class="center-one" style="height:650px;">
             <h3 class="align-center" style="width:100%; height:40px; background-color:black; color:white;">극장</h3>
                <div class="all-theater-list">

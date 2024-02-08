@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -45,13 +46,28 @@ public class TicketController {
 		return new ShowVO();
 	}
 	
+	
 	/*====================
 	 * 	  예매 정보 읽어오기
 	 ====================*/
 	@RequestMapping("/reserve/payConfirm")
-	public String confirm(Model model,HttpSession session) {
+	public String confirm(Model model,int choice_num, int choice_screen,int choice_time,HttpSession session) {
 		
-		return "payMain";
+		ShowVO show = null;
+		show = ticketService.selectedShow(choice_time);
+		
+		ScreenVO screen = null;
+		screen = ticketService.selectedScreen(choice_screen);
+		
+		MovieVO movie = null;
+		movie = ticketService.selectedMoive(choice_num);
+		
+		
+		model.addAttribute("movie",movie);
+		model.addAttribute("screen",screen);
+		model.addAttribute("show",show);
+		
+		return "payConfirm";
 	}
 	
 	
@@ -92,8 +108,6 @@ public class TicketController {
 		MovieVO movie = null;
 		movie = ticketService.selectedMoive(choice_num);
 		
-		//TicketVO ticket = null;
-		//ticket = ticketService.
 		
 		model.addAttribute("movie",movie);
 		model.addAttribute("screen",screen);

@@ -14,6 +14,6 @@ public class ChatVO {
 	private int chatroom_num;
 	private int mem_num;
 	private String message;
-	private Date reg_date;
+	private String reg_date;
 	private int read_check;
 }
