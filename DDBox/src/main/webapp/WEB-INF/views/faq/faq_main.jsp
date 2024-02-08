@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/SSH.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <!-- 내용 시작 -->
 <div class="page-main">
 	<div class="align-center">
@@ -29,9 +30,8 @@
 			<div class="quick_chat" style="cursor:pointer;">
 				<b class="c_tit">상담톡 이용</b><br>
 				<span>상담 톡을 이용해보세요.</span><br>
-				<input type="button" value="문의하기" onclick="location.href='${pageContext.request.contextPath}/faq/chat/chatUser'">
+				<input type="button" id="chatButton" value="문의하기" onclick="location.href='${pageContext.request.contextPath}/faq/chat/chatUser'">
 			</div>
-			
 			<div class="quick_email"  style="cursor:pointer;">
 				<b class="c_tit">이메일 문의</b><br>
 				<span>24시간 365일 언제든지 문의해주세요.</span><br>

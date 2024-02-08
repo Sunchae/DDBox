@@ -19,14 +19,12 @@ public class ChatServiceImpl implements ChatService{
 
 	@Override
 	public List<ChatroomVO> selectChatRoomList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		return chatMapper.selectChatRoomList(map);
 	}
 
 	@Override
 	public int selectRowCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		return chatMapper.selectRowCount(map);
 	}
 
 	@Override
@@ -80,6 +78,9 @@ public class ChatServiceImpl implements ChatService{
 
 	@Override
 	public List<ChatVO> selectChatDetail(Map<String, Integer> map) {
+		
+		chatMapper.updateReadCheck(map);
+		
 		return chatMapper.selectChatDetail(map);
 	}
 

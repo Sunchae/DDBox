@@ -46,6 +46,6 @@ public interface ChatMapper {
 	public List<ChatVO> getChattingListForAdmin(int chatroom_num, int mem_num);
 	
 	//read check
-	@Update("UPDATE read_check=0 FROM faq_chat WHERE read_check=1 AND chatroom_num=#{chatroom_num} AND mem_num!=#{mem_num}")
-	public void updateReadCheck(int chatroom_num, int mem_num);
+	@Update("UPDATE faq_chat SET read_check=0 WHERE read_check=1 AND chatroom_num=#{chatroom_num} AND mem_num!=#{mem_num}")
+	public void updateReadCheck(Map<String,Integer> map);
 }

@@ -58,7 +58,11 @@
           이벤트
         </a>
       </li>
-     
+     <li>
+        <a href="${pageContext.request.contextPath}/faq/chat/chattingListForAdmin" class="nav-link link-dark">
+          상담톡 보기
+        </a>
+      </li>
     </ul>
     <hr>
    

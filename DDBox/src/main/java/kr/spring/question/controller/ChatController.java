@@ -20,6 +20,7 @@ import kr.spring.member.vo.MemberVO;
 import kr.spring.question.service.ChatService;
 import kr.spring.question.vo.ChatVO;
 import kr.spring.question.vo.ChatroomVO;
+import kr.spring.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -39,17 +40,40 @@ public class ChatController {
 		return "chatUser";
 	}
 	
-	/*채팅방 목록 (관리자)
-	@GetMapping("faq/chat/chattingListForAdmin")
-	public String insertChatrr(HttpSession session) {
+	//채팅방 목록 (관리자)
+	@RequestMapping("/faq/chat/chattingListForAdmin")
+	public String chatList(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+							String keyword, HttpSession session, Model model) {
 		
-		return "";
-	}*/
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyword", keyword);
+		map.put("mem_num", user.getMem_num()); //관리자 인증
+		
+		int count = chatService.selectRowCount(map);
+		
+		PageUtil page = new PageUtil(null,keyword,currentPage,count,30,10,"chattingListForAdmin");
+		
+		List<ChatroomVO> list = null;
+		if(count>0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			list = chatService.selectChatRoomList(map);
+		}
+		
+		model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
+		
+		return "chattingListForAdmin";
+	}
 	
 	
 	/*==================================
 	 * 채팅방 생성
 	 *================================== */
+	
 	//채팅방 생성  
 	@GetMapping("/faq/chat/chattingListForUser")
 	public String insertChatRoom(HttpSession session) {
@@ -72,12 +96,18 @@ public class ChatController {
 	
 	//채팅방 진입
 	@RequestMapping("/faq/chat/chatUserRoom_detail")
-	public String chatUserRoomDetail(@RequestParam("chatroom_num") int chatroom_num, Model model) {
+	public String chatUserRoomDetail(@RequestParam("chatroom_num") int chatroom_num, Model model,HttpSession session) {
 		
 		ChatroomVO chatroomVO = chatService.getChatroomInfo(chatroom_num);
 		model.addAttribute("chatroomVO", chatroomVO);
 		
-		return "chatUserRoom_detail";
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user.getMem_auth()==9) {
+			return "chatUserRoom_detailForAdmin";
+		}else {
+			return "chatUserRoom_detailForUser";
+		}
 	}
 	
 	
