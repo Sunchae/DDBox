@@ -83,17 +83,20 @@
 			#{mem_num},
 			SYSDATE)
 	</insert>
-	<insert id="insertEntry" parameterType="Entry_listVO">
+	<!-- 응모권 참여자 등록 -->
+	<insert id="insertEntry" parameterType="map">
 		INSERT INTO entry_list(
 			entry_num,
 			event_num,
 			mem_num,
-			entry_date)
+			entry_date,
+			win_type)
 		VALUES (
 			entrylist_seq.nextval,
 			#{event_num},
 			#{mem_num},
-			SYSDATE)
+			SYSDATE,
+			#{win_type})
 	</insert>
 	<!-- <sql id="entrySub">
 		FROM entry_list JOIN member USING (mem_num)
@@ -130,13 +133,46 @@
 		WHERE rnum >= #{start} AND rnum <= #{end} AND mem_num=#{mem_num}
 		]]>
 	</select>
-
+	
+	<!-- 참여자 상세 -->
 	<select id="selectEntry" parameterType="integer" resultType="Entry_listVO">
 		SELECT
 			*
 		FROM entry_list						
 		JOIN member USING(mem_num)
 		WHERE event_num=#{event_num}
+	</select>
+	<!-- 당첨자 -->
+	<select id="winnerEntry" parameterType="integer" resultType="Entry_listVO">
+		SELECT
+			*
+		FROM entry_list						
+		JOIN member USING(mem_num)
+        JOIN event_list USING(event_num)
+		WHERE entry_num=#{entry_num}
+	</select>
+	<update id="updateEntryAdmin" parameterType="Entry_listVO">
+		UPDATE entry_list SET
+			win_date=SYSDATE,
+			win_type=#{win_type}
+		WHERE entry_num=#{entry_num}
+	</update>
+	<update id="updateEventStatus" parameterType="integer">
+		UPDATE event_list SET
+			event_status=0
+		WHERE event_num=#{event_num}
+	</update>
+	<update id="updateWinType" parameterType="integer">
+		UPDATE entry_list SET
+			win_type=1
+		WHERE event_num=#{event_num} AND mem_num=#{mem_num}
+	</update>
+	<!-- 응모이벤트 참여 했는지 알기 위해 -->
+	<select id="selectEntryEvent" parameterType="integer" resultType="Entry_listVO">
+		SELECT
+			*
+		FROM entry_list
+		WHERE event_num=#{event_num} AND mem_num=#{mem_num}
 	</select>
 </mapper>
  

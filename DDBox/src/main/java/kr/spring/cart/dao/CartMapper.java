@@ -21,7 +21,7 @@ public interface CartMapper {
 	public int getTotalByMem_num(int mem_num)throws Exception;
 	
 	//카트 목록
-	@Select("SELECT * FROM pcart JOIN store USING(store_num) WHERE mem_num=#{mem_num} ORDER BY store_num ASC")
+	@Select("SELECT a.cart_num, a.mem_num, a.store_num, a.order_quantity, b.store_price FROM pcart a LEFT OUTER JOIN store b on a.store_num = b.store_num where a.mem_num = #{mem_num};")
 	public List<CartVO> selectList(int mem_num);
 	
 	//카트 확인

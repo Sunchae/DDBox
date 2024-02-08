@@ -18,7 +18,7 @@
 			</tr>
 			<c:forEach var="list" items="${list}">
 			<tr>
-				<c:if test="${list.event_type == 2">
+				<c:if test="${list.event_type == 2}">
 				<td class="align-center">${list.event_num}</td>
 				<td><a href="detail?event_num=${list.event_num}">${list.event_title}</a></td>
 																														<!-- 이벤트넘으로 넘겨줌 -->

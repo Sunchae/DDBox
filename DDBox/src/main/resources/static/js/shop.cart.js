@@ -78,7 +78,7 @@ $(function(){
 	$(".btn_cart").on("click", function(e){
 		form.sub_total= $("quantity_input").val();
 		$.ajax({
-			url : "/cart/insert",
+			url : "${pageContext.request.contextPath}/cart/cartList",
 			type : "post",
 			data : form,
 			dataType : 'json',

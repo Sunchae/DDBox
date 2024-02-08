@@ -63,8 +63,11 @@
 				</div>
 										<%-- goods-info end --%>
 										<%-- type --%>
-										
+				<form>
 				<div class="type">
+					<input type="hidden" name="store_num" value="${store.store_num}" id="store_num">
+					<input type="hidden" name="store_price" value="${store.store_price}" id="store_price">
+					<input type="hidden" name="quantity" value="${quantity}" id="quantity">
 					<div class="receipt">
 						<div class="line">
 							<p class="tit">
@@ -83,12 +86,11 @@
 					</div>
 				</div>
 										<%-- type end --%>
-				<div>
 					<!-- ::before  submit바꾸고 폼으로 감싸기-->
-					<input type="button" value="장바구니담기" id="btn_cart" onclick="location.href='${pageContext.request.contextPath}/cart/cartList'">
+					<input type="submit" value="장바구니담기">
 					<a href="${pageContext.request.contextPath}/kakaoPay/kakaoPay" id="btn-kakao-pay" class="button purple large" w-data="500" h-data="400" title="구매">구매</a>
 					<!-- ::after -->
-				</div>
+				</form>						
 			</div>
 										<%-- right end --%>
 			</div>
