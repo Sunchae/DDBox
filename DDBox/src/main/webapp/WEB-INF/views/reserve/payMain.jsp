@@ -55,7 +55,7 @@ s               <p class="screen-location">상영관 이름 : ${screen.scr_name}
                 <p class="screen-day">상영 날짜 : ${param.choice_date}</p>
             </div>
             
-            <div class="pay-container">
+            <div class="pay-container" style="margin:0;">
                 <div class="total">
                     <p class="total-title">금액</p>
                     <p class="total-pay"><span>${param.choice_price}</span>원</p>
