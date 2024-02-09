@@ -112,6 +112,12 @@ strong{
 	list-style:none; 
 	margin-left: 10%;
 }
+
+.selected-screen:hover, .movie-choice:hover, .screen-choice:hover, .each-screen:hover, .each-time:hover, .selected-time:hover{
+	cursor: pointer;
+	background-color:#403F95;
+	color:white;
+}
 h2{
     width: 90%;
     border-bottom: 1px solid black;

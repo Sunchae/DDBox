@@ -14,14 +14,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
 <style type="text/css">
-
 #container{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 800px;
-
 }
 
 .movieContainer{
@@ -194,7 +192,7 @@ li {
 <body>
 	<h2 style="color:black;">빠른예매</h2>	
 	<div style="display:flex;">	
-	<div class="left-container" style="display:inline-block; align-items:center; width:100%; padding: 10px; background-color:lightgray;">
+	<div class="left-container" style="display:inline-block; align-items:center; width:100%; padding-top: 5%; background-color:lightgray;">
 		<div class="align-center">
 			<label for="movie"> 관람인원선택 : </label> 
 			<select name="pickType" id="people">
