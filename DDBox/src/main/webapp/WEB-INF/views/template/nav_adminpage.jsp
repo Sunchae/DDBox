@@ -49,8 +49,13 @@
         </a>
       </li>
       <li>
-        <a  href="${pageContext.request.contextPath}/member/admin" class="nav-link link-dark">
-          문의내역
+        <a href="${pageContext.request.contextPath}/faq/email/email_admin" class="nav-link link-dark">
+          이메일문의
+        </a>
+      </li>
+      <li>
+        <a href="${pageContext.request.contextPath}/faq/rental/rental_admin" class="nav-link link-dark">
+          대관문의
         </a>
       </li>
       <li>
