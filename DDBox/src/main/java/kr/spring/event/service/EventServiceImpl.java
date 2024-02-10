@@ -126,6 +126,25 @@ public class EventServiceImpl implements EventService {
 		return eventMapper.selectEntryEvent(event_num, mem_num);
 	}
 
+	@Override
+	public void updateHit(int event_num) {
+		eventMapper.updateHit(event_num);
+	}
+
+	@Override
+	public List<Event_listVO> selectMainEvent() {
+		
+		return eventMapper.selectMainEvent();
+	}
+
+	@Override
+	public Rentry_listVO selectRentryEvent(int mem_num) {
+		return eventMapper.selectRentryEvent(mem_num);
+	}
+
+	
+
+	
 	
 	
 	

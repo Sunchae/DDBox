@@ -8,7 +8,9 @@
 	<form>
 	<h2>${event_list.event_title}</h2>
 	<div class="detail-info">
-		<p>기간 ${event_list.event_start}~${event_list.event_end}</p>
+		<p>기간 ${event_list.event_start}~${event_list.event_end}<br>
+		조회 ${event_list.hit}
+		</p>
 	</div>
 	<div class="detail-content">
 		${event_list.event_content}

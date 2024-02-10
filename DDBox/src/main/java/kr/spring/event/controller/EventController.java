@@ -38,6 +38,21 @@ import lombok.extern.slf4j.Slf4j;
 public class EventController {
 	@Autowired
 	private EventService eventService;
+	/*========================
+	 * Main Page 이벤트
+	 *========================*/
+	@RequestMapping("/main/eventMain")
+	public ModelAndView mainprosess() {
+		List<Event_listVO> list = eventService.selectMainEvent();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("eventMain");
+		mav.addObject("list", list);
+		
+		
+		
+		return mav;
+	}
 	
 	/*========================
 	 * 이벤트 글등록
@@ -86,6 +101,9 @@ public class EventController {
 	@RequestMapping("/event/detail")
 	public ModelAndView process(@RequestParam int event_num) {
 		log.debug("<<게시판 글 상세 event_num>> : " + event_num);
+		
+		//해당글의 조회수 증가
+		eventService.updateHit(event_num);
 		
 		Event_listVO event_list = eventService.selectEvent(event_num);
 		
@@ -325,8 +343,20 @@ public class EventController {
 		}else {
 			//회원번호 등록
 			rentry_listVO.setMem_num(user.getMem_num());
-			eventService.insertRentry(rentry_listVO);
-			mapJson.put("result", "success");
+			
+			int mem_num = user.getMem_num();
+			Rentry_listVO rentry_list = eventService.selectRentryEvent(mem_num);
+			log.debug("<<rentry_list>> : " + rentry_list);
+			
+			if(rentry_list == null) {
+				eventService.insertRentry(rentry_listVO);
+				mapJson.put("result", "success");
+			}else {
+				mapJson.put("result", "already");
+			}
+			
+			
+			
 		}
 		
 		return mapJson;
@@ -375,21 +405,9 @@ public class EventController {
 	 * 응모권 참여자 리스트 목록
 	 *========================*/
 	@RequestMapping("/event/memberEntryList")
-	public ModelAndView memberEntrytList(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
-								String keyword, String keyfield,HttpServletRequest request) {
-		
-		 // 로그인된 사용자 정보 가져오기
-	    HttpSession session = request.getSession();
-	    MemberVO user = (MemberVO) session.getAttribute("user");
-	    
-	 // 로그인 체크
-	    if (user == null) {
-	        // 로그인되지 않은 경우 처리
-	        // 예를 들어 로그인 페이지로 리다이렉트
-	        return new ModelAndView("redirect:/member/login");
-	    }
-	    
-		
+	public ModelAndView mentryEventList(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+								@RequestParam(value="order",defaultValue="1") int order,
+								String keyword, String keyfield) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
@@ -399,23 +417,23 @@ public class EventController {
 		log.debug("<<이벤트 참여 글 목록 count>> : " + count);
 		
 		//페이지처리
-		PageUtil page = new PageUtil(null, keyword, currentPage, count, 20, 10, "memberEntryList");
+		PageUtil page = new PageUtil(null, keyword, currentPage, count, 20, 10, "list","&order="+order);
 		
-		List<Entry_listVO> list = null;
+		List<Event_listVO> list = null;
 		if(count > 0) {
+			map.put("order", order);
 			map.put("start", page.getStartRow());
-			map.put("end", page.getEndRow());
-			map.put("mem_num", user.getMem_num());
-			list = eventService.selectEntryList(map);
-			log.debug("<<이벤트 참여 글 목록 >> : " + list);
+			map.put("end", page.getEndRow());		
+			list = eventService.selectList(map);
 		}
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("memberEntryList");//타일즈 설정명으로 호출
 		mav.addObject("count", count);
 		mav.addObject("list", list);
+		log.debug("event_num", list);
 		mav.addObject("page", page.getPage());
-		//mav.addObject("user", user.getMem_num());
+		
 		
 		return mav;
 	}
@@ -489,6 +507,43 @@ public class EventController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("entryName");//타일즈 설정명으로 호출
+		mav.addObject("count", count);
+		mav.addObject("list", entry_list);
+		mav.addObject("event_num", event_num);
+		mav.addObject("page", page.getPage());
+        mav.addObject("event_status", event_status);
+      
+		return mav;
+	}
+	/*========================
+	 * 응모권 이벤트 회원 상세
+	 *========================*/
+	@RequestMapping("/event/winName")
+	public ModelAndView winprocess(@RequestParam int event_num,@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+                           String keyword, String keyfield) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		log.debug("<<응모자 상세 event_num>> : " + event_num);
+		//전체,검색 레코드 수
+		int count = eventService.selectRowCount(map);
+		//페이지처리
+		PageUtil page = new PageUtil(null, keyword, currentPage, count, 20, 10, "winName");
+      
+		List<Entry_listVO> entry_list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());      
+			entry_list = eventService.selectEntry(map, event_num);
+		}
+		//event_list 에서 해당 이벤트의 event_status 값 불러오기 (추첨전이면 진행, 추첨후면 기존 결과 반환)
+		 Event_listVO event_list = eventService.selectEvent(event_num);//이벤트 리스트 VO에 담아줌
+		
+		 int event_status = event_list.getEvent_status();
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("winName");//타일즈 설정명으로 호출
 		mav.addObject("count", count);
 		mav.addObject("list", entry_list);
 		mav.addObject("event_num", event_num);

@@ -9,7 +9,7 @@
 </style>
 <div class="page-main">
 	<div class="tit-util">
-		<h3>응모자 리스트</h3>
+		<h3>당첨자 리스트</h3>
 		<c:if test="${count == 0}">
 		<div class="result-display">표시할 게시물이 없습니다.</div>
 		</c:if>
@@ -19,15 +19,13 @@
 				<th>응모자 번호</th>
 				<th>응모자 아이디</th>
 				<th>응모자 참여 날짜</th>
-				<th>추첨 타입</th>
-				<th>추첨 날짜</th>
+				<th>당첨 날짜</th>
 			</tr>
 			<c:forEach var="list" items="${list}">
 			<tr id="entry_table">
 				<td class="align-center" id="entryNum">${list.entry_num}</td>
 				<td class="align-center" id="memId">${list.mem_id}</td>
 				<td class="align-center" id="entryDate">${list.entry_date}</td>
-				<td class="align-center" id="winnerType">${list.win_type}</td>
 				<td class="align-center" id="winDate">${list.win_date}</td>
 			</tr>
 			</c:forEach>
@@ -42,7 +40,6 @@
 			<c:forEach var="item" items="${list}">
 				<input type="hidden" name="mem_num" value="${item.mem_num}"> 			
 			</c:forEach>
-			<input type="submit" value="추첨">
 		</form>
 		</c:if>
 		<hr size="1" width="100%">

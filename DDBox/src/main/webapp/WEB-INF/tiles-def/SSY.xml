@@ -28,8 +28,12 @@
     </definition>
     <!-- 수정 -->
     <definition name="memberEntryList" extends="myPageEvent">
+    	<put-attribute name="title" value="응모한 첨이벤트 리스트"/>
+    	<put-attribute name="body" value="/WEB-INF/views/event/member_entryList.jsp"/>
+    </definition>
+    <definition name="winName" extends="myPageEvent">
     	<put-attribute name="title" value="응모권 당첨 내역"/>
-    	<put-attribute name="body" value="/WEB-INF/views/event/member_entrywin.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/event/winName.jsp"/>
     </definition>
     
     <!-- 글쓰기 -->
@@ -45,7 +49,7 @@
     </definition>
     <!--응모권 리스트 글상세 -->
     <definition name="entryName" extends="admin">
-    	<put-attribute name="title" value="응모권 글 상세"/>
+    	<put-attribute name="title" value="응모한 회원 리스트"/>
     	<put-attribute name="body" value="/WEB-INF/views/event/entryName.jsp"/>
     </definition>
     

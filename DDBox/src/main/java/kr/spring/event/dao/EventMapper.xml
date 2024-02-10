@@ -151,12 +151,12 @@
         JOIN event_list USING(event_num)
 		WHERE entry_num=#{entry_num}
 	</select>
-	<update id="updateEntryAdmin" parameterType="Entry_listVO">
+	<!-- <update id="updateEntryAdmin" parameterType="Entry_listVO">
 		UPDATE entry_list SET
 			win_date=SYSDATE,
 			win_type=#{win_type}
 		WHERE entry_num=#{entry_num}
-	</update>
+	</update> -->
 	<update id="updateEventStatus" parameterType="integer">
 		UPDATE event_list SET
 			event_status=0
@@ -164,15 +164,31 @@
 	</update>
 	<update id="updateWinType" parameterType="integer">
 		UPDATE entry_list SET
-			win_type=1
+			win_type=1,
+			win_date=SYSDATE
 		WHERE event_num=#{event_num} AND mem_num=#{mem_num}
 	</update>
+	<!-- 응모이벤트 참여 했는지 알기 위해 -->
+	<select id="selectRentryEvent" parameterType="integer" resultType="Entry_listVO">
+		SELECT
+			*
+		FROM rentry_list
+		WHERE mem_num=#{mem_num}
+	</select>
 	<!-- 응모이벤트 참여 했는지 알기 위해 -->
 	<select id="selectEntryEvent" parameterType="integer" resultType="Entry_listVO">
 		SELECT
 			*
 		FROM entry_list
 		WHERE event_num=#{event_num} AND mem_num=#{mem_num}
+	</select>
+	<select id="selectWin" parameterType="integer" resultType="Entry_listVO">
+		SELECT
+				*
+		FROM entry_list						
+		JOIN member USING(mem_num)
+        JOIN event_list USING(event_num)
+		WHERE win_type=#{win_type}
 	</select>
 </mapper>
  

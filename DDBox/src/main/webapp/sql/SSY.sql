@@ -10,6 +10,7 @@ event_status number(1) not null,
 event_start varchar2(10) not null,
 event_end varchar2(10) not null,
 mem_num number not null,
+hit number(8) default 0 not null,
 scr_num number,
 constraint event_list_pk primary key (event_num),
 constraint event_list_fk1 foreign key (mem_num) references member(mem_num),
@@ -17,7 +18,7 @@ constraint event_list_fk2 foreign key (scr_num) references screen(scr_num)
 );
 create sequence eventlist_seq;
 
---당첨자 리스트
+--당첨자 리스트 보류
 create table win_list(
 event_num number not null,
 point_num number not null,

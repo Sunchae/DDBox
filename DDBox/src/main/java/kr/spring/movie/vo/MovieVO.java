@@ -27,4 +27,9 @@ public class MovieVO {
 	private int movie_runtime;
 	private String movie_status;
 	
+	private int event_num;
+	private String event_photo1;
+	private String event_title;
+	private String event_start;
+	private String event_end;
 }

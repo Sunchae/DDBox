@@ -23,6 +23,7 @@ public class Event_listVO {
 	private int event_type;			//이벤트 타입
 	private int scr_num;			//상영관 번호
 	private int event_status;		//이벤트 종료여부
+	private int hit;
 	@NotBlank
 	private String event_start;		//이벤트 시작 날짜
 	@NotBlank
