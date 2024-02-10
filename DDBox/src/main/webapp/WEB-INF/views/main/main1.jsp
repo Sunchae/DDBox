@@ -73,7 +73,7 @@
 		<div class="row mt-5">
 
 			<%-- 영화 목록 반복 출력 --%>
-			<c:forEach var="movie" items="${list}">
+			<c:forEach var="movie" items="${movieList}">
 				<div class="col-md-4 mb-4">
 					<div class="card">
 						<div class="poster">

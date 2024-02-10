@@ -10,4 +10,5 @@ import lombok.ToString;
 public class MovieFavVO {
 	private int movie_num;
 	private int mem_num;
+	private int fav_cnt;
 }

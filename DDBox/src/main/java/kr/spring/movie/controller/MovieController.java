@@ -31,7 +31,7 @@ public class MovieController {
 	    	
 	    	ModelAndView mav = new ModelAndView();
 	    	mav.setViewName("mainpage");
-	    	mav.addObject("list",movieList);
+	    	mav.addObject("movieList",movieList);
 	    	
 	    	return mav;
 	    	
