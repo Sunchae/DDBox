@@ -42,21 +42,21 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public void updateEvent(Event_listVO event) {
-		// TODO Auto-generated method stub
+		eventMapper.updateEvent(event);
 		
 	}
 
-	@Override
-	public void deleteEvent(int event_num) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteFile(int event_num) {
-		// TODO Auto-generated method stub
-		
-	}
+	/*
+	 * @Override public void deleteEvent(int event_num) { // TODO Auto-generated
+	 * method stub
+	 * 
+	 * }
+	 * 
+	 * @Override public void deleteFile(int event_num) { // TODO Auto-generated
+	 * method stub
+	 * 
+	 * }
+	 */
 
 	@Override
 	public List<Rentry_listVO> selectRentryList(Map<String, Object> map) {

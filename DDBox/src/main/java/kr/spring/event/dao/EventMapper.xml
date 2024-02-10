@@ -62,6 +62,18 @@
 		]]>
 	</select>
 	
+	<!-- 글 수정 -->
+	<update id="updateEvent" parameterType="event_listVO">
+		UPDATE event_list SET
+			event_title=#{event_title},
+			event_content=#{event_content},
+			event_photo1=#{event_photo1,jdbcType=VARCHAR},
+			event_photo2=#{event_photo2,jdbcType=VARCHAR},
+			event_start=#{event_start},
+			event_end=#{event_end}
+		WHERE event_num=#{event_num}
+	</update>
+	
 	<!-- 글 상세 -->
 	<select id="selectEvent" parameterType="integer">
 		SELECT

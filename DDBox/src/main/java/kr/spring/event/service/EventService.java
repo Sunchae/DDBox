@@ -14,8 +14,8 @@ public interface EventService {
 	public void insertEvent(Event_listVO event);//이벤트 글등록
 	public Event_listVO selectEvent(int event_num);//이벤트 글상세
 	public void updateEvent(Event_listVO event);//이벤트 글수정
-	public void deleteEvent(int event_num);//이벤트 글 삭제
-	public void deleteFile(int event_num);//특정 경로의 파일 올렸을때 삭제(filename을 event_photo1,2)
+	//public void deleteEvent(int event_num);//이벤트 글 삭제
+	//public void deleteFile(int event_num);//특정 경로의 파일 올렸을때 삭제(filename을 event_photo1,2)
 	public void updateHit(int event_num);//조회수
 	
 	//메인페이지

@@ -38,6 +38,16 @@ import lombok.extern.slf4j.Slf4j;
 public class EventController {
 	@Autowired
 	private EventService eventService;
+	
+	/*
+	 * @RequestMapping("/main/main") public ModelAndView mainpageprosess() {
+	 * List<Event_listVO> list = eventService.selectMainEvent();
+	 * 
+	 * ModelAndView mav = new ModelAndView(); mav.setViewName("eventMain");
+	 * mav.addObject("list", list);
+	 * 
+	 * return mav; }
+	 */
 	/*========================
 	 * Main Page 이벤트
 	 *========================*/
@@ -112,6 +122,57 @@ public class EventController {
 								//타일스 설정명,속성명	,속성값
 		return new ModelAndView("eventView","event_list",event_list);
 	}
+	/*========================
+	 * 이벤트 글 수정
+	 *========================*/
+	//수정 폼 호출
+	@GetMapping("/event/update")
+	public String formUpdate(@RequestParam int event_num,Model model) {
+		Event_listVO event_listVO = eventService.selectEvent(event_num);
+		
+		model.addAttribute("event_listVO", event_listVO);
+		
+		return "eventModify";
+	}
+	
+	//전송된 데이터 처리
+	@PostMapping("/event/update")
+	public String submitUpdate(@RequestParam int event_num,@Valid Event_listVO event_listVO,BindingResult result,
+			 HttpSession session, HttpServletRequest request, Model model) throws IllegalStateException, IOException {
+		log.debug("<<게시판 글 저장>> : " + event_listVO);
+		//유효성 체크
+		if(result.hasErrors()) {
+			Event_listVO vo = eventService.selectEvent(event_listVO.getEvent_num());
+			event_listVO.setEvent_photo1(vo.getEvent_photo1());
+			event_listVO.setEvent_photo2(vo.getEvent_photo2());
+			return "eventModify";
+		}
+		
+		//DB에 저장된 파일 정보 구하기
+		Event_listVO db_event = eventService.selectEvent(event_listVO.getEvent_num());
+		
+		//파일명 셋팅
+		event_listVO.setEvent_photo1(FileUtil.createFile(request, event_listVO.getUpload1()));
+		event_listVO.setEvent_photo2(FileUtil.createFile(request, event_listVO.getUpload2()));
+		
+		//글 수정
+		eventService.updateEvent(event_listVO);
+		
+		//전송된 파일이 있을 경우 이전 파일 삭제
+		if(event_listVO.getUpload1() != null && !event_listVO.getUpload1().isEmpty()) {
+			FileUtil.removeFile(request, db_event.getEvent_photo1());
+		}
+		if(event_listVO.getUpload2() != null && !event_listVO.getUpload2().isEmpty()) {
+			FileUtil.removeFile(request, db_event.getEvent_photo2());
+		}
+		
+		//View에 표시할 메시지
+		model.addAttribute("message", "글수정 완료");
+		model.addAttribute("url", request.getContextPath() + "/event/detail?event_num=" + event_listVO.getEvent_num());
+		
+		return "common/resultAlert";
+	}
+	
 	
 	/*========================
 	 * 이벤트 main
@@ -330,7 +391,7 @@ public class EventController {
 	
 	/*========================
 	 * roulette 참여자 리스트 등록
-	 *========================*/
+	 *========================*///하루에 한번만 돌릴수 있도록 
 	@RequestMapping("/event/rouletteinsertAjax")//ajax통신따로 만들어줌
 	@ResponseBody
 	public Map<String,Object> rouletteinsert(Rentry_listVO rentry_listVO,HttpSession session) {
