@@ -77,10 +77,12 @@
 										<%-- goods-info end --%>
 										<%-- type --%>
 				<div class="type">
-				<form id="store_cart">
+				<form id="store_cart" action="storePay">
 					<input type="hidden" name="store_num" value="${store.store_num}" id="store_num">
 					<input type="hidden" name="store_price" value="${store.store_price}" id="store_price">
 					<input type="hidden" name="quantity" value="${store.quantity}" id="quantity">
+					<input type="hidden" name="total_price" value="" id="total_price">
+					<input type="hidden" name="store_photo" value="${store.store_photo}" id="store_photo">
 					<p class="tit">
 						<span class="line32">수량/금액</span>
 					</p>
@@ -90,10 +92,10 @@
 						<c:if test="${store.quantity > 0}">
 						<li>
 							<label for="order_quantity">구매수량</label>
-							<input type="number" name="order_quantity" min="1" max="${quantity}" autocomplete="off" id="order_quantity" class="quantity-width">
+							<input type="number" name="order_quantity" value="1" min="1" max="${quantity}" autocomplete="off" id="order_quantity" class="quantity-width">
 						</li>
 						<li>
-							<span id="item_total_txt">총주문 금액 : 0원</span>
+							<span>총 주문 금액 :<span id="item_total_txt">0</span>원</span>
 						</li>
 						<li>
 							<input type="submit" value="구매">
@@ -195,7 +197,7 @@
 		</script>
 		</c:if>
 
-		<button id="check_module" type="button">구매</button>
+		<!-- <button id="check_module" type="button">구매</button>
 		<script>
 			$("#check_module").click(function() {
 				var IMP = window.IMP; // 생략가능
@@ -211,11 +213,11 @@
 					 *  https://docs.iamport.kr/implementation/payment
 					 *  위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
 					 */
-					name : '주문명 : ${store.store_title}',
+					name : '${store.store_title}',
 					// 결제창에서 보여질 이름
 					// name: '주문명 : ${auction.a_title}',
 					// 위와같이 model에 담은 정보를 넣어 쓸수도 있습니다.
-					amount : ${store.store_price},
+					amount : $('#total_price').val(),
 					// amount: ${bid.b_bid},
 					// 가격 
 					buyer_name : '${member.mem_id}',
@@ -226,8 +228,9 @@
 					console.log(rsp);
 					if (rsp.success) {
 						var msg = '결제가 완료되었습니다.';
-						msg += '결제 금액 : ${store.store_price}' + rsp.paid_amount;
-						// success.submit();
+						msg += '결제 금액 : ' + rsp.paid_amount;
+						$('#pay_uid').val(rsp.merchant_uid);
+						$('#store_cart').submit();
 						// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
 						// 자세한 설명은 구글링으로 보시는게 좋습니다.
 					} else {
@@ -237,7 +240,7 @@
 					alert(msg);
 				});
 			});
-		</script>
+		</script> -->
 
 		<input type="button" value="목록" onclick="location.href='storeMainTest'">
 	</div>

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -43,7 +44,7 @@ public class StoreController {
 		return new StoreVO();
 	}
 	
-	@RequestMapping("/store/storeMainTest")
+	@RequestMapping(value="/store/storeMainTest", method={RequestMethod.POST, RequestMethod.GET})
 	public String storeMain(HttpSession session, Model model) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -67,7 +68,7 @@ public class StoreController {
 		return "storeWrite";	//타일스 설정명
 	}
 	@PostMapping("/store/write")
-	public String submit(@Valid StoreVO storeVO, BindingResult result,HttpServletRequest request, HttpSession session, Model model) throws IllegalStateException, IOException {
+	public String submit(@Valid StoreVO storeVO, BindingResult result, HttpServletRequest request, HttpSession session, Model model) throws IllegalStateException, IOException {
 		log.debug("<<스토어 글 저장>> : " + storeVO);
 
 		//유효성 체크

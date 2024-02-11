@@ -14,7 +14,7 @@ import kr.spring.cart.vo.CartVO;
 public interface CartMapper {
 	//카트 추가
 	@Insert("INSERT INTO pcart (cart_num,store_num,order_quantity,mem_num) VALUES (pcart_seq.nextval,#{store_num},#{order_quantity},#{mem_num})")
-	public int insertCart(CartVO cart) throws Exception;
+	public int insertCart(CartVO cart, Map<String, Object> map) throws Exception;
 	
 	//회원별(mem_num) 총구매액
 	@Select("SELECT SUM(sub_total) FROM (SELECT mem_num, order_quantity * store_price sub_total FROM pcart JOIN store USING(store_num)) WHERE mem_num=#{mem_num}")

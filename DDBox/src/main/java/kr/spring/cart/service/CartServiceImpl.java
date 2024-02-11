@@ -18,7 +18,7 @@ public class CartServiceImpl implements CartService{
 	
 	@Override
 	public int insertCart(CartVO cart, Map<String, Object> map) throws Exception {
-		return cartMapper.insertCart(cart);
+		return cartMapper.getTotalByMem_num(0);
 	}
 	@Override
 	public List<CartVO> selectList(int mem_num) {

@@ -42,10 +42,13 @@ create table pay(
 	pay_id number not null,
 	pay_status number(1) not null,		--결제 상태(0:결제진행중, 1:결제완료,2: 결제취소)
 	pay_uid varchar2(150) not null,
-	store_price number(12) not null,
+	total_price number(12) not null,
+	pay_date date default sysdate not null,
+	store_num number not null,
 	mem_num number not null,
 	constraint pay_pk primary key (pay_id),
-	constraint pay_fk foreign key (mem_num) references member (mem_num)
+	constraint pay_fk foreign key (mem_num) references member (mem_num),
+	constraint pay_fk1 foreign key (store_num) references member (store_num),
 );
 create sequence pay_seq;
 

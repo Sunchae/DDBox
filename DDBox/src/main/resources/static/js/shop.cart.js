@@ -1,4 +1,5 @@
 $(function(){
+	// 수량변경
 	$('#order_quantity').on('keyup mouseup',function(){
 		if($('#order_quantity').val()==''){
 			$('#item_total_txt').text('총 주문 금액 : 0원');
@@ -14,12 +15,20 @@ $(function(){
 			$('#item_total_txt').text('총 주문 금액 : 0원');
 			return;
 		}
-		
 		let total = $('#store_price').val() * $('#order_quantity').val();
-		$('#item_total_txt').text('총 주문 금액 : ' + total.toLocaleString()+'원');
+		$('#item_total_txt').text(total.toLocaleString());
+		$('#total_price').val(total);
 	}); //end of on
 	
-	//장바구니 담기 이벤트 연결
+	// total price
+	$(function(){
+		let total = $('#store_price').val() * $('#order_quantity').val();
+		$('#total_price').val(total);
+		$('#item_total_txt').text(total.toLocaleString());
+	});
+
+
+/*	//장바구니 담기 이벤트 연결
 	$('#store_cart').submit(function(event){
 		if($('#order_quantity').val() == ''){
 			alert('수량을 입력하세요');
@@ -27,19 +36,20 @@ $(function(){
 			return false;
 		}
 		let form_data = $(this).serialize();
-	
 		//서버와 통신
 		$.ajax({
-			url:'../cart/cartInsert',
+			
+			url:'../pay/payInsert',
 			type:'post',
 			data:form_data,
 			dataType:'json',
+
 			success:function(param){
 				if(param.result == 'logout'){
 					alert('로그인 후 사용하세요');
 				}else if(param.result == 'success'){
 					alert('장바구니에 담았습니다.');
-					location.href='${pageContext.request.contextPath}/cart/cartDetail';
+					location.href='${pageContext.request.contextPath}/pay/payDetail';
 				}else if(param.result == 'overquantity'){
 					alert('기존의 주문한 상품입니다. 개수를 추가하면 재고가 부족합니다.');
 				}else{
@@ -53,7 +63,7 @@ $(function(){
 		//기본 이벤트 제거
 		event.preventDefault();
 		
-	});
+	});*/
 	
 });
 	/*	===========================================

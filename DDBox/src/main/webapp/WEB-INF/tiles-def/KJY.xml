@@ -42,11 +42,22 @@
     	<put-attribute name="title" value="팝콘/음료/굿즈"/>
     	<put-attribute name="body" value="/WEB-INF/views/store/storePopcorn.jsp"/>                                           
     </definition>
-    <definition name="cartDetail" extends="storeMainTest">
-    	<put-attribute name="title" value="장바구니상세"/>
-    	<put-attribute name="body" value="/WEB-INF/views/cart/cartDetail.jsp"/>                                           
+    <definition name="payDetail" extends="storeMainTest">
+    	<put-attribute name="title" value="결제상세"/>
+    	<put-attribute name="body" value="/WEB-INF/views/pay/payDetail.jsp"/>                                           
     </definition>
-    
+    <definition name="storePay" extends="storeMainTest">
+    	<put-attribute name="title" value="결제상세" />
+    	<put-attribute name="body" value="/WEB-INF/views/store/storePay.jsp" />
+    </definition>
+    <definition name="insertPay" extends="storeMainTest">
+    	<put-attribute name="title" value="결제상세" />
+    	<put-attribute name="body" value="/WEB-INF/views/store/storePay.jsp" />
+    </definition>
+    <definition name="storePayMain" extends="myPage">
+    	<put-attribute name="title" value="결제상세" />
+    	<put-attribute name="body" value="/WEB-INF/views/store/storePayMain.jsp" />
+    </definition>
     
 </tiles-definitions>
 
