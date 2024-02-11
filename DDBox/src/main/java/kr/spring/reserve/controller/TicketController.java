@@ -116,4 +116,23 @@ public class TicketController {
 		return "payMain";
 	}
 	
+	@RequestMapping("member/MypageTicket")
+	public String ticket(int choice_num, int choice_screen,int choice_time,Model model,HttpSession session) {
+		ShowVO show = null;
+		show = ticketService.selectedShow(choice_time);
+		
+		ScreenVO screen = null;
+		screen = ticketService.selectedScreen(choice_screen);
+		
+		MovieVO movie = null;
+		movie = ticketService.selectedMoive(choice_num);
+		
+		
+		model.addAttribute("movie",movie);
+		model.addAttribute("screen",screen);
+		model.addAttribute("show",show);
+		
+		return "MypageTicket";
+	}
+	
 }
