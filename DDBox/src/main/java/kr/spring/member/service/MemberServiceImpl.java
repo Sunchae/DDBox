@@ -30,16 +30,11 @@ public class MemberServiceImpl implements MemberService{
 		return memberMapper.selectMember(mem_num);
 	}
 
-	@Override
-	public void updateMember(MemberVO member) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	public void updateMember_detail(MemberVO member) {
-		// TODO Auto-generated method stub
-		
+		memberMapper.updateMember_detail(member);
 	}
 
 	@Override
@@ -80,6 +75,11 @@ public class MemberServiceImpl implements MemberService{
 	public void withdrawMember(int mem_num) {
 		memberMapper.deleteMember_detail(mem_num);
 		memberMapper.updateMemberAuthByWithdraw(mem_num);
+	}
+
+	@Override
+	public void changeNickname(MemberVO member) {
+		memberMapper.changeNickname(member);
 	}
 
 	

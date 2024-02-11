@@ -5,19 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>${accessTitle}</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/resultView.css"> 
 </head>
 <body>
-<div class="page-one">
-	<h2>${accessTitle}</h2>
-	<div class="result-display">
-		<div class="align-center">
-			${accessMsg}
-			<p>
-			<input type="button" value="이동"
-			  onclick="location.href='${accessUrl}'">
-		</div>
-	</div>
-</div>
+    <div class="container">
+        <h2>${accessTitle}</h2>
+        <div class="message-box">
+            <p>${accessMsg}</p>
+            <button onclick="location.href='${accessUrl}'">이동</button>
+        </div>
+    </div>
 </body>
 </html>

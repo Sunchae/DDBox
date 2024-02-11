@@ -1,9 +1,6 @@
 package kr.spring.member.service;
 
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Update;
-
 import kr.spring.member.vo.MemberVO;
 
 public interface MemberService {
@@ -11,7 +8,6 @@ public interface MemberService {
 	public void insertMember(MemberVO member);
 	public MemberVO selectCheckMember(String mem_id);
 	public MemberVO selectMember(int mem_num);
-	public void updateMember(MemberVO member);
 	public void updateMember_detail(MemberVO member);
 	public void updatePassword(MemberVO member);
 	
@@ -29,6 +25,10 @@ public interface MemberService {
 
 	//프로필 이미지 업데이트
 	public void updateProfile(MemberVO member);
+	
+	//닉네임 변경
+	public void changeNickname(MemberVO member);
+	
 	//회원관리 - 관리자
 		
 }

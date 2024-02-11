@@ -46,6 +46,8 @@ public class MemberVO {
 	private String mem_autoid;	//아이디 저장 기능 
 	@Pattern(regexp="^[A-Za-z0-9]{4,12}$")
 	private String mem_pw;
+	@Pattern(regexp="^[A-Za-z0-9]{4,12}$")
+	private String confirm_password;
 	private String mem_nowpw;	//비밀번호 일치여부 체크 
 	@NotBlank
 	@Pattern(regexp = "^\\d{3}-\\d{3,4}-\\d{4}$", message = "유효한 휴대폰 번호를 입력해주세요.")

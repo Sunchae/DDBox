@@ -24,16 +24,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.question.service.EmailService;
-import kr.spring.question.vo.EmailVO;
 import kr.spring.util.AuthCheckException;
 import kr.spring.util.FileUtil;
-import kr.spring.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -41,8 +38,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
-	@Autowired
-	private EmailService emailService;
+	
 
 	/*==============================
 	 * 자바빈(VO) 초기화
@@ -129,23 +125,13 @@ public class MemberController {
 		//나이 계산
 		LocalDate birthDate = LocalDate.parse(memberVO.getMem_birth());
 
-		System.out.println("----------------------");
-		System.out.println(birthDate);
-
+	
 		LocalDate currentDate = LocalDate.now();
 
-		System.out.println("----------------------");
-		System.out.println(currentDate);
-
 		long age = ChronoUnit.YEARS.between(birthDate, currentDate);
-
-		System.out.println("----------------------");
-		System.out.println(age);
+		
 		//연령대 계산
 		String ageGroup = calculateAgeGroup(age);
-
-		System.out.println("----------------------");
-		System.out.println(ageGroup);
 
 		//연령대 MemberVO에 저장
 		memberVO.setMem_age(ageGroup);
@@ -153,19 +139,7 @@ public class MemberController {
 		// 디버깅 메시지 추가
 		log.debug("<<mem_birth>> : " + memberVO.getMem_birth());
 
-
-		/* if(result.hasFieldErrors("mem_name") || result.hasFieldErrors("mem_birth_year")|| result.hasFieldErrors("mem_birth_month") || result.hasFieldErrors("mem_birth_day")
-		  		|| result.hasFieldErrors("mem_phone") 
-	    		|| result.hasFieldErrors("mem_zipcode") || result.hasFieldErrors("mem_address1") 
-	    		|| result.hasFieldErrors("mem_address2") || result.hasFieldErrors("mem_email") 
-	    		|| result.hasFieldErrors("mem_gender") || result.hasFieldErrors("mem_pw")) {
-	    	List<FieldError> list =  result.getFieldErrors();
-	    	for(FieldError error : list) {
-	    		log.debug("<<에러 필드>> : " + error.getField());
-	    	}
-	        return form();
-	    }
-		 */
+		
 		log.debug("생년월일에 의한 연령대 계산 : " + ageGroup);
 
 		//회원가입
@@ -199,8 +173,64 @@ public class MemberController {
 
 	}
 
+	/*==============================
+	 * 회원 정보 수정
+	 *==============================*/
 
+	//회원정보 수정 폼 호출
+	@GetMapping("/member/updateUser")
+	public String editForm(HttpSession session, Model model, HttpServletRequest request) {
+	    // HttpSession에서 "user" 속성명으로 저장된 회원 정보를 가져옵니다.
+	    MemberVO user = (MemberVO) session.getAttribute("user");
+	   
+	    MemberVO memberVO = (MemberVO) memberService.selectMember(user.getMem_num());
+	    
+	    log.debug("<<memberVO 회원정보수정 폼>> : " + memberVO);
+	    // 가져온 회원 정보가 null이 아닌 경우, 모델에 추가합니다.
+	    if (memberVO != null) {
+	        model.addAttribute("memberVO", memberVO);
+	    } else {
+	        // 로그인한 사용자 정보가 없는 경우(예: 세션이 만료된 경우), 로그인 페이지로 리디렉션하거나 적절한 메시지를 표시할 수 있습니다.
+	        model.addAttribute("accessTitle", "세션 만료");
+	        model.addAttribute("accessMsg", "로그인 세션이 만료되었습니다. 다시 로그인해 주세요.");
+	        model.addAttribute("accessUrl", request.getContextPath()+"/member/login"); // 로그인 페이지 URL로 변경하세요.
+	        return "common/resultView"; // 또는 로그인 페이지로 리디렉션하는 코드
+	    }
+	    	
+	    // 회원 정보 수정 폼으로 이동합니다.
+	    return "memberUpdate";
+	}
+	@PostMapping("/member/updateUser")
+	public String editSubmit(@Valid MemberVO memberVO, BindingResult result, Model model, HttpServletRequest request, HttpSession session) {
+		// 현재 로그인한 사용자의 세션 정보 가져오기
+		MemberVO loggedInUser = (MemberVO) session.getAttribute("user");
+		if (loggedInUser == null) {
+			// 세션에 로그인 정보가 없는 경우 (로그아웃 상태)
+			return "redirect:/member/login"; // 로그인 페이지로 리디렉션
+		}
 
+		// MemberVO 객체에 현재 로그인한 사용자의 mem_num 설정
+		memberVO.setMem_num(loggedInUser.getMem_num());
+		if (result.hasFieldErrors("mem_phone") || result.hasFieldErrors("mem_email")
+				|| result.hasFieldErrors("mem_zipcode") || result.hasFieldErrors("mem_address1")
+				|| result.hasFieldErrors("mem_address2")) {
+			List<FieldError> list = result.getFieldErrors();
+			for (FieldError error : list) {
+				log.debug("<<에러 필드>> : " + error.getField());
+			}
+			return "memberUpdate";
+		}
+
+	    // 회원 정보 수정 로직을 실행합니다.
+		log.debug("<<회원정보 수정 폼 제출 memberVO>> : " + memberVO);
+		
+	    memberService.updateMember_detail(memberVO);
+
+	    model.addAttribute("accessTitle", "회원 정보 수정");
+	    model.addAttribute("accessMsg", "회원 정보가 성공적으로 수정되었습니다.");
+	    model.addAttribute("accessUrl", request.getContextPath() + "/member/myPage"); // 회원 정보 조회 페이지 또는 메인 페이지로 변경 가능
+	    return "common/resultView";
+	}
 
 
 	/*==============================
@@ -296,6 +326,8 @@ public class MemberController {
 			return formLogin();
 		}
 	}
+	
+	
 	/*==============================
 	 * 로그아웃
 	 *==============================*/

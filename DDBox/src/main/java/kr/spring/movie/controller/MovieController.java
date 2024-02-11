@@ -59,7 +59,7 @@ public class MovieController {
 		  log.debug("<<영화 상세 페이지>> : " + movie_num);
 		  
 		  MovieVO movie = movieService.selectMovie(movie_num);
-		  
+		  log.debug("<<영화 상세페이지 데이터>>" + movie);
 		  return new ModelAndView("movieDetail","movie",movie);
 	
 	  

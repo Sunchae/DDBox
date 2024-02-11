@@ -96,7 +96,7 @@
         
       </a>
       <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-        <li><a class="dropdown-item" href="/member/myPageInfo">회원정보</a></li>
+        <li><a class="dropdown-item" href="/member/updateUser">회원정보 수정</a></li>
         <li><a class="dropdown-item" href="/member/myPageProfile">프로필 관리</a></li>
         <li><a class="dropdown-item" href="/member/withdraw">회원탈퇴</a></li>
         
