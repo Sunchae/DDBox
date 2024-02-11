@@ -13,10 +13,6 @@ a {
     font-weight: 500px;
 }
 
-.container{
-	min-width: 1250px;
-}
-
 /* navbar */
 #header {
 	border-bottom: 2px solid #000;

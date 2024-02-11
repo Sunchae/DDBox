@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 내용 시작 -->
 <style>
     .mem-birth-select {
@@ -9,66 +10,44 @@
 </style>
 		
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/member.register.js"></script>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/YSC.css">
 <div class="page-main">
-	<h2>회원가입</h2>
-	<form:form action="registerUser" id="member_register" modelAttribute="memberVO">
+	<h2>회원 정보 수정</h2>
+	<form:form action="updateUser" id="member_register" modelAttribute="memberVO">
 		<form:errors element="div" cssClass="error-color"/>
 		<ul>
 			<li>
+				 <input type="hidden" name="mem_id" value="${memberVO.mem_id}" />
 				<form:label path="mem_id">아이디</form:label>
 				<form:input path="mem_id" 
-				  placeholder="영문,숫자만 4~12자" autocomplete="off"/>
-				<input type="button" id="confirmId" value="ID중복체크" class="default-btn">  
-				<span id="message_id"></span>
-				<form:errors path="mem_id" cssClass="error-color"/>
+				  placeholder="영문,숫자만 4~12자" autocomplete="off" disabled="disabled"/>
+				
 			</li>
 			<li>
+				<input type="hidden" name="mem_name" value="${memberVO.mem_name}" />
 				<form:label path="mem_name">이름</form:label>
-				<form:input path="mem_name"/>
-				<form:errors path="mem_name" cssClass="error-color"/>
+				<form:input path="mem_name" disabled="disabled"/>
 			</li>
 			<li>
-                <form:label path="mem_birth">생년월일</form:label>
-                <form:input path="mem_birth" type="hidden"/>
-                <!-- Select2 사용 -->
-                <select class="mem-birth-select" name="mem_birth_year" id="birthYear">
-                    <option value="">년</option>
-                </select>
-                <form:errors path="mem_birth_year" cssClass="error-color" />
-                <select class="mem-birth-select" name="mem_birth_month" id="birthMonth">
-                    <option value="">월</option>
-                </select>
-                <form:errors path="mem_birth_month" cssClass="error-color" />
-                <select class="mem-birth-select" name="mem_birth_day" id="birthDay">
-                    <option value="">일</option>
-                </select>
-                <form:errors path="mem_birth_day" cssClass="error-color" />
-            </li>
-            
+			<form:label path="mem_birth">생년월일</form:label> 
+			 <input type="hidden" name="mem_birth" value="${memberVO.mem_birth}" />
+			<form:input
+					type="text" path="mem_birth" name="mem_birth"
+					value="${memberVO.mem_birth}" readonly="readonly" />
+			</li>
 
 			<li>
-				<form:label path="mem_gender">성별</form:label> 
-				<div class="radio-group">
-				<form:radiobutton path="mem_gender" value="Male" label="Male" /> 
-				<form:radiobutton path="mem_gender"	value="Female" label="Female" />
-				<form:errors path="mem_gender" cssClass="error-color" />
+			 <input type="hidden" name="mem_gender" value="${memberVO.mem_gender}" />
+			 <form:label path="mem_gender">성별</form:label>
+			    <div class="radio-group">
+			    <input type="radio" id="male" name="mem_gender" value="1" <c:if test="${memberVO.mem_gender == '1'}">checked="checked"</c:if> disabled="disabled" />
+			    <label for="male">Male</label>
+			    <input type="radio" id="female" name="mem_gender" value="2" <c:if test="${memberVO.mem_gender == '2'}">checked="checked"</c:if> disabled="disabled" />
+			    <label for="female">Female</label>
 				</div>
+				
 				<div class="divider"></div>
-			</li>
-			
-			
-			<li>
-				<form:label path="mem_pw">비밀번호</form:label>
-				<form:password path="mem_pw" placeholder="영문,숫자만 4~12자"/>
-				<form:errors path="mem_pw" cssClass="error-color"/>
-			</li>
-			<li>
-			    <label for="confirm_password">비밀번호 확인</label>
-			    <input type="password" id="confirm_password" placeholder="비밀번호 확인" autocomplete="off"/>
-			    <span id="password_error_message" class="error-color"></span>
 			</li>
 			<li>
 				<form:label path="mem_phone">휴대폰 번호</form:label> 
@@ -99,7 +78,7 @@
 			</li>
 		</ul> 
 		<div class="align-center">
-			<form:button class="default-btn">회원가입</form:button>
+			<form:button class="default-btn">회원 정보 수정</form:button>
 			<input type="button" value="홈으로" class="default-btn"
 			    onclick="location.href='${pageContext.request.contextPath}/main/main'">
 		</div>                                  
@@ -119,58 +98,15 @@
 
 
 <script type="text/javascript">
-$(document).ready(function() {
-    // Select2 초기화
-    $(".mem-birth-select").select2();
-});
+
+
 
 $(document).ready(function() {
-	let tyear = '${memberVO.mem_birth_year}';
-	if(tyear){
-		 $("#birthYear").prepend("<option value='"+tyear+"' selected>" + tyear + "년</option>");
-	}
-	let tmonth = '${memberVO.mem_birth_month}';
-	if(tmonth){
-		 $("#birthMonth").prepend("<option value='"+tmonth+"' selected>" + tmonth + "월</option>");
-	}
-	let tday = '${memberVO.mem_birth_day}';
-	if(tday){
-		 $("#birthDay").prepend("<option value='"+tday+"' selected>" + tday + "일</option>");
-	}
-	
-    var currentYear = new Date().getFullYear();
-    var endYear = currentYear - 100; // 100년 전까지의 연도
-
-    for (var year = currentYear; year >= endYear; year--) {
-        $("#birthYear").append("<option value='" + year + "'>" + year + "년</option>");
-    }
- // 월의 일수를 계산하는 함수
-    function getDaysInMonth(month, year) {
-        return new Date(year, month, 0).getDate();
-    }
-
-    // 월 옵션 동적 생성
-    for (var month = 1; month <= 12; month++) {
-        $("#birthMonth").append("<option value='" + month + "'>" + month + "월</option>");
-    }
-
-    // 월이 변경될 때 일 옵션 업데이트
-    $("#birthMonth").change(function() {
-        var selectedMonth = $(this).val();
-        var selectedYear = $("#birthYear").val(); // 연도 선택 필요
-
-        if (selectedMonth !== "" && selectedYear !== "") {
-            $("#birthDay").empty();
-            var daysInMonth = getDaysInMonth(selectedMonth, selectedYear);
-
-            for (var day = 1; day <= daysInMonth; day++) {
-                $("#birthDay").append("<option value='" + day + "'>" + day + "일</option>");
-            }
-        }
-    });
-    $(".mem-birth-select").select2();
+    $('#mem_id').prop('disabled', true);
+    $('#mem_name').prop('disabled', true);
+    $('#mem_birth').prop('disabled', true);
+    // 기타 필드에 대해서도 동일하게 적용
 });
-
 
 </script>
 

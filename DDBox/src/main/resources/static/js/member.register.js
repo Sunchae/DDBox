@@ -2,9 +2,11 @@ $(function () {
 	/*----------------------------
 	 *          회원가입
 	 *----------------------------*/
-	//아이지 중복 여부 저장 변수 : 0은 아이지 중복 또는 중복 체크 미실행, 1은 아이디 미중복
+	//아이디 중복 여부 저장 변수 : 0은 아이지 중복 또는 중복 체크 미실행, 1은 아이디 미중복
 	let checkId = 0;
-	
+	// 비밀번호 일치 여부 저장 변수 : 0은 비밀번호 불일치 또는 검증 미실행, 1은 비밀번호 일치
+    let checkPasswordMatch = 0;
+
 	//아이디 중복 체크
 	$('#confirmId').click(function(){
 		if($('#mem_id').val().trim()==''){
@@ -43,6 +45,23 @@ $(function () {
 		});//end of ajax
 	});//end of click
 	
+	// 비밀번호 일치 여부 검증
+    function validatePassword() {
+        var password = $('#mem_pw').val();
+        var confirmPassword = $('#confirm_password').val();
+
+        if(password !== confirmPassword) {
+            $('#password_error_message').css('color', 'red').text('비밀번호가 일치하지 않습니다.');
+            checkPasswordMatch = 0;
+        } else {
+            $('#password_error_message').css('color', 'green').text('비밀번호가 일치합니다.');
+            checkPasswordMatch = 1;
+        }
+    }
+
+    // 비밀번호 입력 및 비밀번호 확인 입력란의 변경 감지
+    $('#mem_pw, #confirm_password').keyup(validatePassword);
+	
 	//아이디 중복 안내 메시지 초기화 및 아이디 중복 값 초기화
 	$('#member_register #mem_id').keydown(function(){
 		checkId=0;
@@ -58,18 +77,15 @@ $(function () {
 			}
 			return false;
 		}
-	});//end of submit
+		 // 비밀번호 일치 여부 검증
+        if(checkPasswordMatch == 0) {
+            $('#password_error_message').css('color', 'red').text('비밀번호 확인이 필요합니다.');
+            $('#confirm_password').focus();
+            return false; // 폼 제출 중단
+        }
+        // 모든 검증을 통과한 경우 폼 제출 계속
+    });
+		
+});//end of submit
 	
-	$(document).ready(function() {
-    	$("#datepicker").datepicker();
-	});
 	
-	
-	 $("#datepicker").datepicker({
-            dateFormat: 'yy-mm-dd', // 날짜 형식 설정
-            changeMonth: true,
-            changeYear: true,
-            yearRange: '1900:' + new Date().getFullYear() // 연도 범위 설정
-        });
-});
-

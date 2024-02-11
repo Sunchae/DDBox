@@ -3,71 +3,57 @@
     
 <!-- 내용 시작 -->
     <title>영화 상세 페이지</title>
-    <!-- 부트스트랩 CDN 추가 -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- 커스텀 CSS 추가 -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/movieDetail.css">
 
 
-    <!-- 1번 영역 -->
-    <div class="container-fluid movie-header">
-        <div class="row">
-            <div class="col-md-4">
-                <img src="https://image.tmdb.org/t/p/w500/${movie.movie_poster}" alt="영화 포스터" class="img-fluid">
-            </div>
-            <div class="col-md-8">
-                <div class="movie-info">
-                    <h1>${movie.movie_title }</h1>
-                    <p>${movie.movie_original_title}</p>
-                    <p>좋아요 수: 100</p>
-                    <p>예매율: 80%</p>
-                    <p>누적 관객수: 1,000,000명</p>
-                </div>
-            </div>
+    <!-- 영화 상세 페이지 컨테이너 -->
+<div class="movie-detail-page">
+
+    <!-- 1번 영역: 영화 제목, 좋아요 버튼, 포스터, 예매 버튼 -->
+    
+    <div class="movie-content-area">
+        <div class="movie-texts">
+            <h1 class="movie-title-kr">${movie.movie_title}</h1>
+            <h2 class="movie-title-en">${movie.movie_original_title}</h2>
+            <button class="like-button">❤ 좋아요 0</button>
+        </div>
+        <div class="movie-booking-area">
+            <img src="https://image.tmdb.org/t/p/w500/${movie.movie_poster}" alt="영화 포스터" class="movie-poster">
+            <div></div>
+            <button class="booking-button">예매하기</button>
         </div>
     </div>
 
-    <!-- 2번 영역 -->
-    <div class="container movie-details">
-        <h2>영화에 대한 상세 정보</h2>
-        <p>${movie.movie_overview }</p>
-        <p>감독: 감독의 이름</p>
-        <p>장르: 액션, 드라마</p>
-        <p>등급: 15세 관람가</p>
-        <p>${movie.movie_opendate }</p>
-        <p>출연진: 배우1, 배우2, 배우3</p>
-        <!-- 기타 필요한 상세 정보 추가 -->
-    </div>
-
-    <!-- 3번 영역 -->
-    <div class="container movie-graphs">
-        <h2>각종 데이터 그래프</h2>
-        <!-- 방사형 그래프, 성비 퍼센트 그래프 등 추가 -->
-    </div>
-
-    <!-- 4번 영역 -->
-    <div class="container user-reviews">
-        <h2>사용자 리뷰 및 평가</h2>
-        <!-- 사용자가 남긴 관람평과 평가 점수 표시 -->
-        <div class="row">
-            <div class="col-md-6">
-                <div class="user-review">
-                    <p>사용자1의 평가: 4.5/5</p>
-                    <p>관람평: 영화가 정말 좋았어요!</p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="user-review">
-                    <p>사용자2의 평가: 3.8/5</p>
-                    <p>관람평: 기대 이상이었습니다.</p>
-                </div>
-            </div>
+	<!-- 2번 영역: 영화 tagline, 줄거리, 감독, 장르, 등급, 개봉일, 출연진 -->
+    <div class="movie-info-area">
+        <p class="tagline">${movie.movie_tagline}</p>
+        <p class="summary">${movie.movie_overview } <button class="more-button">더보기</button></p>
+        <div class="additional-info">
+            <p>감독: Director Name</p>
+            <p>장르: Genre</p>
+            <p>등급: Rating</p>
+            <p>개봉일: ${movie.movie_opendate }</p>
+            <p>출연진: Cast Members</p>
         </div>
-        <!-- 기타 사용자 리뷰 추가 -->
     </div>
 
-    <!-- 부트스트랩 JS 및 기타 스크립트 추가 -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- 3번 영역: 차트/그래프 예매자 남녀비율, 연령대 등 -->
+    <div class="audience-stats-area">
+        <p>예매자 남녀비율, 연령대 차트(예시)</p>
+    </div>
 
+    <!-- 4번 영역: 사용자 리뷰 및 평점 -->
+    <div class="user-reviews-area">
+        <h3>사용자 리뷰 및 평점</h3>
+        <div class="review-form">
+            <!-- AJAX로 처리될 리뷰 폼 -->
+        </div>
+        <div class="reviews-list">
+            <!-- 사용자 리뷰 목록 -->
+        </div>
+    </div>
+
+</div>
+
+    

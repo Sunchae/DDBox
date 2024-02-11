@@ -45,7 +45,12 @@ public interface MemberMapper {
 	//프로필 이미지 업데이트
 	@Update("UPDATE member_detail SET mem_photo=#{mem_photo},mem_photoname=#{mem_photoname} WHERE mem_num=#{mem_num}")
 	public void updateProfile(MemberVO member);
-
+	
+	//닉네임 업데이트
+	@Update("UPDATE member_detail SET mem_nickname=#{mem_nickname} WHERE mem_num=#{mem_num}")
+	public void changeNickname(MemberVO member);
+	
+	
 	//회원관리 - 관리자
 
 }

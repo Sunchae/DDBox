@@ -1,0 +1,84 @@
+@charset "UTF-8";
+
+.movie-detail-page {
+    font-family: Arial, sans-serif;
+}
+
+
+
+.movie-titles h1 {
+    margin: 0;
+    color: #333;
+}
+
+.movie-titles h2 {
+    margin: 5px 0;
+    color: #666;
+}
+
+.like-button, .booking-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    margin-top: 10px;
+}
+
+.movie-poster {
+    width: 250px;
+    height: 400px;
+    margin-bottom: 10px;
+}
+
+.movie-info-area, .audience-stats-area, .user-reviews-area {
+    margin-top: 20px;
+}
+
+.more-button {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.additional-info p {
+    margin: 5px 0;
+}
+
+
+
+
+.movie-content-area {
+    position: relative;
+    height: 500px;
+     width: 100%;
+    z-index: 1; /* 내용을 배경 위로 보내기 */
+    display: flex;
+    justify-content: space-between;
+    padding: 20px; /* 적절한 패딩으로 내용 정렬 */
+    color: white; /* 텍스트 색상 */
+    background-color: rgba(0, 0, 0, 0.5); /* 배경에 어두운 오버레이 추가 */
+}
+
+
+.movie-texts {
+    margin-left: 20px;
+    color: white;
+}
+
+.movie-booking-area {
+    margin-right: 20px;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+  
