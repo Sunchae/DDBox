@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <!-- 내용 시작 -->
-<h1>영화 메인 페이지</h1>
+<h1>전체 영화</h1>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style>
@@ -66,6 +66,15 @@
     display: inline-block; /* 항상 표시됨 */
 }
 
+.heart-icon {
+    width: 30px; /* 아이콘의 너비 */
+    height: 30px; /* 아이콘의 높이 */
+    margin-right: 2px; /* 텍스트와의 간격 */
+    vertical-align: middle; /* 버튼 내에서 중앙 정렬 */
+}
+.heart-icon:hover {
+    opacity: 0.8; /* 마우스를 올렸을 때 아이콘의 투명도 변경 */
+}
 </style>
 
 <div class="container">
@@ -96,7 +105,7 @@
                         </div>
                         <div>
                             <!-- 좋아요 기능 추가 필요 -->
-                            <button class="btn  btn-sm">좋아요</button>
+                            <button class="btn  btn-sm"><img src="${pageContext.request.contextPath}/images/movie/빈하트.png" class="heart-icon" alt="좋아요"> ${movie.likesCount}</button>
                             <!-- 예매페이지로 링크 필요 -->
                             <a href="/reserve/reserveMain" class="btn btn-dark rounded-pill btn-sm" style="color: white;">예매하기</a>
                         </div>

@@ -3,10 +3,12 @@ package kr.spring.movie.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
-import kr.spring.movie.vo.MovieFavVO;
+import kr.spring.movie.vo.MovieLikeVO;
 import kr.spring.movie.vo.MovieVO;
 
 @Mapper
@@ -37,20 +39,22 @@ public interface MovieMapper {
 	@Select("SELECT * FROM movie WHERE movie_num=#{movie_num}")
 	public MovieVO selectMovie(int movie_num);
 	
-	
+	public List<MovieVO> selectMovieListWithLikes();
 	
 	
 	
 	
 	
 	//영화 좋아요 삽입 
-	public MovieFavVO selectFav(MovieFavVO fav);
-	//영화 좋아요 삭제
-	//영화 좋아요 개수
-	public int selectFavCount(int movie_num);
-	public void insertFav(MovieFavVO fav);
-	public void deleteFav(MovieFavVO fav);
-	public void deleteFavByMovieNum(int Movie_num);
+
+	@Select("SELECT count(*) FROM movie_fav WHERE mem_num=#{mem_num} AND movie_num=#{movie_num}")
+	public int checkLike(int mem_num, int movie_num);
+	@Insert("INSERT INTO movie_fav (mem_num, movie_num) VALUES (#{mem_num},#{movie_num})")
+	public void insertLike(int mem_num, int movie_num);
+	@Delete("DELETE FROM movie_fav WHERE mem_num=#{mem_num} AND movie_num=#{movie_num}")
+	public void deleteLike(int mem_num, int movie_num);
+	@Select("SELECT count(*) FROM movie_fav WHERE movie_num=#{movie_num}")
+	public int countLikes(int movie_num);
 	//====영화 상세정보====
 	//영화 상세 정보들 호출
 		

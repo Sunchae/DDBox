@@ -61,7 +61,8 @@ public class AppConfig implements WebMvcConfigurer, WebSocketConfigurer{
 		        .addPathPatterns("/faq/rental")
 		        .addPathPatterns("/faq/rental/write")
 		        .addPathPatterns("/reserve/seatMain")
-		        .addPathPatterns("/reserve/payMain");
+		        .addPathPatterns("/reserve/payMain")
+				.addPathPatterns("/movie/toggleLike");
 	}
 	
 	@Bean

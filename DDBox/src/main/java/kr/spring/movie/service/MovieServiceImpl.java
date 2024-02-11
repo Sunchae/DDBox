@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.movie.dao.MovieMapper;
-import kr.spring.movie.vo.MovieFavVO;
+import kr.spring.movie.vo.MovieLikeVO;
 import kr.spring.movie.vo.MovieVO;
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,7 +24,12 @@ public class MovieServiceImpl implements MovieService{
 		return movieMapper.selectList(map);
 	}
 
-	
+	@Override
+	public List<MovieVO> selectMovieListWithLikes() {
+		return movieMapper.selectMovieListWithLikes();
+	}
+
+
 
 	@Override
 	public MovieVO selectMovie(int movie_num) {
@@ -66,31 +71,37 @@ public class MovieServiceImpl implements MovieService{
 	/*==================================
 	 * 영화 좋아요 PART
 	 ===================================*/
-	@Override
-	public MovieFavVO selectFav(MovieFavVO fav) {
-		return null;
-	}
+	 @Override
+	    public boolean toggleLike(int mem_num, int movie_num) {
+	        // 이미 좋아요를 눌렀는지 확인
+	        int result = movieMapper.checkLike(mem_num, movie_num);
+			log.debug("<<좋아요 토글 result>>" + result);
+			if (result > 0) {
+				// 좋아요를 이미 누른 상태 -> 삭제
+				movieMapper.deleteLike(mem_num, movie_num);
+				return false; // 좋아요 해제 상태로 변경
+			} else {
+				// 좋아요를 누르지 않았다면 추가
+				movieMapper.insertLike(mem_num, movie_num);
+				return true; // 좋아요 상태로 변경됨
+			}
+		}
 
-	@Override
-	public int selectFavCount(int movie_num) {
-		return 0;
-	}
+	    @Override
+	    public int countLikes(int movie_num) {
+	        return movieMapper.countLikes(movie_num);
+	    }
 
-	@Override
-	public void insertFav(MovieFavVO fav) {
+
+
+		@Override
+		public int checkLike(int mem_num, int movie_num) {
+			return movieMapper.checkLike(mem_num, movie_num);
+		}
+
+
+
 		
-	}
-
-	@Override
-	public void deleteFav(MovieFavVO fav) {
-		
-	}
-
-	@Override
-	public void deleteFavByMovieNum(int Movie_num) {
-		
-	}
-
 
 
 	

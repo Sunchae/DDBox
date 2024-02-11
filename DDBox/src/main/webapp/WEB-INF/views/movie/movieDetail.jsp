@@ -3,25 +3,26 @@
     
 <!-- 내용 시작 -->
     <title>영화 상세 페이지</title>
-    <!-- 커스텀 CSS 추가 -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/movieDetail.css">
-
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 
     <!-- 영화 상세 페이지 컨테이너 -->
 <div class="movie-detail-page">
 
     <!-- 1번 영역: 영화 제목, 좋아요 버튼, 포스터, 예매 버튼 -->
-    
     <div class="movie-content-area">
         <div class="movie-texts">
             <h1 class="movie-title-kr">${movie.movie_title}</h1>
             <h2 class="movie-title-en">${movie.movie_original_title}</h2>
-            <button class="like-button">❤ 좋아요 0</button>
-        </div>
+			<button class="like-button" data-num="${movie.movie_num}">
+				<img src="" class="heart-icon" alt="좋아요">
+				<span class="likes-count">${likesCount}</span>
+			</button>
+		</div>
         <div class="movie-booking-area">
             <img src="https://image.tmdb.org/t/p/w500/${movie.movie_poster}" alt="영화 포스터" class="movie-poster">
             <div></div>
-            <button class="booking-button">예매하기</button>
+            <a href="/reserve/reserveMain" ><button class="booking-button">예매하기</button></a>
         </div>
     </div>
 
@@ -55,5 +56,69 @@
     </div>
 
 </div>
+<script>
+$(document).ready(function() {
+    var movieNum = $('.like-button').data('num'); // 영화 번호를 변수에 저장
+
+    // 페이지 로드 시 좋아요 상태 확인
+    checkLikeStatus(movieNum);
+
+    // 좋아요 버튼 클릭 이벤트
+    $('.like-button').on('click', function() {
+        var $this = $(this); // 현재 클릭된 버튼을 $this 변수에 할당
+
+        // 좋아요 토글 요청
+        $.ajax({
+            url: '/movie/toggleLike',
+            type: 'POST',
+            dataType: 'json',
+            data: { movie_num: movieNum },
+            success: function(param) {
+               if(param.status == "logout"){
+            	   alert(param.message);
+            	   window.location.href="/member/login";//로그인 페이지로 이동
+               }else{
+            	
+            	var heartIcon = $this.find('.heart-icon');
+                var likesCountSpan = $this.find('.likes-count');
+
+                if(param.liked) {
+                    heartIcon.attr('src', '${pageContext.request.contextPath}/images/movie/채워진하트.png'); // 채워진 하트 이미지로 변경
+                } else {
+                    heartIcon.attr('src', '${pageContext.request.contextPath}/images/movie/빈하트.png'); // 빈 하트 이미지로 변경
+                }
+                likesCountSpan.text(param.likesCount); // 좋아요 개수 업데이트
+               }
+            },
+            error: function() {
+                alert('좋아요 처리 중 오류가 발생했습니다.');
+            }
+        });
+    });
+});
+
+// 페이지 로드 시 현재 사용자의 좋아요 상태 확인 함수
+function checkLikeStatus(movieNum) {
+    $.ajax({
+        url: '/movie/checkLikeStatus',
+        type: 'POST',
+        dataType: 'json',
+        data: { movie_num: movieNum },
+        success: function(response) {
+            var heartIcon = $('.like-button').find('.heart-icon');
+            if(response.status === "liked") {
+                heartIcon.attr('src', '${pageContext.request.contextPath}/images/movie/채워진하트.png');
+            } else {
+                heartIcon.attr('src', '${pageContext.request.contextPath}/images/movie/빈하트.png');
+            }
+        },
+        error: function() {
+            console.error('좋아요 상태 확인 중 오류 발생');
+        }
+    });
+}
+
+
+</script>
 
     
