@@ -24,4 +24,5 @@
 	</table>
 	<div class="align-center">${page}</div>
 </div>
+
 <!-- 내용 끝 -->
