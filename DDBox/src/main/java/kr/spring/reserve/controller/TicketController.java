@@ -143,7 +143,7 @@ public class TicketController {
 		log.debug("<<페이메인23>>");
 		
 		TicketVO ticket = null;
-		//ticket = ticketService.insertTicket(ticket);
+		//ticket = ticketService.insertTicket(ticket); 
 		
 	 return "payConfirm";
 	}
