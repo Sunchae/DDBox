@@ -52,7 +52,7 @@
 	</update>
 	
 	<select id="selectMoviesByDate" parameterType="String">
-		SELECT DISTINCT m.movie_title, m.movie_num
+		SELECT DISTINCT m.movie_title, m.movie_num, m.movie_gradeNm
 		FROM movie m
 		JOIN show s ON m.movie_num = s.movie_num
 		WHERE
