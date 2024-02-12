@@ -97,7 +97,7 @@
 			<!-- #{point_num}, -->
 			SYSDATE)
 	</insert>
-	<!-- 응모권 참여자 등록 -->
+	<!-- 응모권 참여자 등록 --> 
 	<insert id="insertEntry" parameterType="map">
 		INSERT INTO entry_list(
 			entry_num,
