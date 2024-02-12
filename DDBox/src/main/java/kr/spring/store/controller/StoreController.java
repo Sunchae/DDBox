@@ -49,8 +49,7 @@ public class StoreController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		List<StoreVO> list = null;
-		list = storeService.selectList(map);
+		List<StoreVO> list = storeService.selectList(map);
 		
 		
 		model.addAttribute("list", list);

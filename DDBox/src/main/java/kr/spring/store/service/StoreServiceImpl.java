@@ -51,4 +51,9 @@ public class StoreServiceImpl implements StoreService{
 		storeMapper.deleteFile(store_num);
 	}
 
+	@Override
+	public List<StoreVO> selectMainList() {
+		return storeMapper.selectMainList();
+	}
+
 }

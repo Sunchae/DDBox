@@ -24,4 +24,7 @@ public interface StoreMapper {
 	public void deleteStore(int store_num);
 	@Update("UPDATE store SET store_photo='' WHERE store_num=#{store_num}")
 	public void deleteFile(int store_num);
+	@Select("SELECT * FROM (SELECT * FROM store ORDER BY store_num DESC) WHERE ROWNUM <= 3")
+	public List<StoreVO> selectMainList();
+	
 }

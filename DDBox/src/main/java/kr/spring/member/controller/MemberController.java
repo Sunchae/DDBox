@@ -28,6 +28,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.payment.service.PayService;
+import kr.spring.payment.vo.PayVO;
 import kr.spring.question.service.EmailService;
 import kr.spring.util.AuthCheckException;
 import kr.spring.util.FileUtil;
@@ -38,7 +40,8 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
-	
+	@Autowired
+	private PayService payService;
 
 	/*==============================
 	 * 자바빈(VO) 초기화
@@ -538,10 +541,15 @@ public class MemberController {
 	}
 
 	@RequestMapping("/member/myPageGiftshop")
-	public String process5() {
+	public String sotrePayMain(@RequestParam(value="pageNum",defaultValue = "1") int currentPage, HttpSession session, Model model) {
+		MemberVO vo = (MemberVO)session.getAttribute("user");
+		
+		List<PayVO> list = payService.selectList(vo.getMem_num());
+		log.debug("<<스토어 결제 저장리스트>>");
+		
+		model.addAttribute("list", list);
 
-
-		return "myPageGiftshop";
+		return "storePayMain";
 	}
 	@RequestMapping("/member/myPageInfo")
 	public String process6() {

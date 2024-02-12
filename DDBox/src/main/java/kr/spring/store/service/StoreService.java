@@ -13,4 +13,5 @@ public interface StoreService {
 	public void updateStore(StoreVO store);
 	public void deleteStore(int store_num);
 	public void deleteFile(int store_num);
+	public List<StoreVO> selectMainList();
 }
