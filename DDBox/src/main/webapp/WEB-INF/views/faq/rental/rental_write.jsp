@@ -32,7 +32,22 @@
 				<form:textarea path="rental_per"/>
 				<form:errors path="rental_per" cssClass="error-color"/>
 			</li>
-	 		<li><b>내용</b></li>
+	 		<li>
+				<form:label path="rental_name">문의자명(*)</form:label>
+				<form:textarea path="rental_name"/>
+				<form:errors path="rental_name" cssClass="error-color"/>
+			</li>
+			<li>
+				<form:label path="rental_phone">연락처(*)</form:label>
+				<form:textarea path="rental_phone"/>
+				<form:errors path="rental_phone" cssClass="error-color"/>
+			</li>
+			<li>
+				<form:label path="rental_email">이메일(*)</form:label>
+				<form:textarea path="rental_email"/>
+				<form:errors path="rental_email" cssClass="error-color"/>
+			</li>
+			<li><b>내용</b></li>
 	 		<li>
 				<form:textarea path="rental_content"/>
 				<form:errors path="rental_content" cssClass="error-color"/>
@@ -55,21 +70,6 @@
 						console.error(error);
 					});
 			</script>
-			</li>
-	 		<li>
-				<form:label path="rental_name">문의자명(*)</form:label>
-				<form:textarea path="rental_name"/>
-				<form:errors path="rental_name" cssClass="error-color"/>
-			</li>
-			<li>
-				<form:label path="rental_phone">연락처(*)</form:label>
-				<form:textarea path="rental_phone"/>
-				<form:errors path="rental_phone" cssClass="error-color"/>
-			</li>
-			<li>
-				<form:label path="rental_email">이메일(*)</form:label>
-				<form:textarea path="rental_email"/>
-				<form:errors path="rental_email" cssClass="error-color"/>
 			</li>
 		</ul>
 		<!-- 개인정보 수집 동의란 -->

@@ -19,15 +19,18 @@
 			</li>
 		</ul>
 		<div class="align-right">
-			<c:if test="${!empty user}">
-				<input type="button" value="글쓰기" onclick="location.href='rental/write'">
-			</c:if>
+			<select id="order" name="order">
+				<option value="1" <c:if test="${param.order == 1}">selected</c:if>>목록순</option>
+				<option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회수</option>
+				<option value="3" <c:if test="${param.order == 3}">selected</c:if>>최신순</option>
+			</select>
 		</div>
 	</form>
 	
 	<c:if test="${count==0}">
 	<div class="result-display">신청한 예약건이 없습니다</div>
 	</c:if>
+	
 	<c:if test="${count>0}">
 	<table class="striped-table">
 		<tr>
@@ -39,11 +42,11 @@
 		</tr>
 		<c:forEach var="rental" items="${list}"> 
 		<tr>
-			<td class="align-center"><a href="rental/detail?rental_num=${rental.rental_num}">${rental.rental_num}</a></td>
-			<td class="align-center"><a href="rental/detail?rental_num=${rental.rental_num}"><c:set var="dateString" value="${rental.rental_date}" />
+			<td class="align-center"><a href="detail?rental_num=${rental.rental_num}">${rental.rental_num}</a></td>
+			<td class="align-center"><a href="detail?rental_num=${rental.rental_num}"><c:set var="dateString" value="${rental.rental_date}" />
         ${fn:substring(dateString, 0, 10)}</a></td>
-			<td class="align-center"><a href="rental/detail?rental_num=${rental.rental_num}">${rental.rental_name}</a></td>
-			<td class="align-center"><a href="rental/detail?rental_num=${rental.rental_num}">${rental.rental_regdate}</a></td>
+			<td class="align-center"><a href="detail?rental_num=${rental.rental_num}">${rental.rental_name}</a></td>
+			<td class="align-center"><a href="detail?rental_num=${rental.rental_num}">${rental.rental_regdate}</a></td>
 			<td class="align-center">
 				<c:if test="${rental.rental_status==1}">접수중</c:if>
 				<c:if test="${rental.rental_status==2}">접수완료</c:if>

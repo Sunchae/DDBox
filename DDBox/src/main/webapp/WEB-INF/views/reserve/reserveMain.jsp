@@ -34,14 +34,31 @@
       <div class="v-line" style="border-right: 3px solid #ccc; height:650px; left:40%;">
          <div class="left-one">
             <h3 class="align-center" style="width:100%; height:40px; background-color:black; color:white;">영화</h3>
-            <div class="col-body" style="overflow-y: hidden; height:585px;" >
-               <ul>
-               <c:forEach var="reserve" items="${list}">
-                  <li class="movie-choice" data-num="${reserve.movie_num}">${reserve.movie_title}</li>
-               </c:forEach>
-               </ul>
-            </div>
-            <p></p>
+					<div class="col-body" style="overflow-y: hidden; height: 585px;">
+						<ul>
+							<c:forEach var="reserve" items="${list}">
+
+								<li class="movie-choice" data-num="${reserve.movie_num}"><c:choose>
+										<c:when test="${reserve.movie_gradeNm == 1}">
+											<img
+												src="${pageContext.request.contextPath}/images/movie/12.png"
+												alt="12세 이용가" width="30" height="30"/>
+										</c:when>
+										<c:when test="${reserve.movie_gradeNm == 2}">
+											<img
+												src="${pageContext.request.contextPath}/images/movie/15.png"
+												alt="15세 이용가"  width="30" height="30"/>
+										</c:when>
+										<c:when test="${reserve.movie_gradeNm == 0}">
+											<img
+												src="${pageContext.request.contextPath}/images/movie/all.png"
+												alt="전체 이용가"  width="30" height="30"/>
+										</c:when>
+									</c:choose> ${reserve.movie_title}</li>
+							</c:forEach>
+						</ul>
+					</div>
+					<p></p>
                <div class="movie-img">
                   <div class="choice-list" id="choiceMovieList-0" style="border:dotted; height:100px;">
                      <img id="picture" src="${pageContext.request.contextPath}/images/noimage.png" width="75" height="99">
@@ -79,7 +96,6 @@
             $('#choice_screen').val(choice_screen);
             selectScreen(scr_num);
             getMovieSchedule(choice_num,choice_screen,choice_date);
-            
          });
          //시간 클릭
          $(document).on('click','.each-time',function(){
@@ -257,6 +273,7 @@
          function displayMovieItem(movie) {
                let movieListContainer = $('.col-body');
            
+              
                let output = '<li class="movie-choice" data-num="' + movie.movie_num + '">';
                output += movie.movie_title;
                //output += '<h3>' + movie.title + '</h3>';
@@ -294,8 +311,8 @@
            
            $(document).on('click','.screen-choice',function(){
                 alert('영화를 먼저 선택하세요');
-                
             });
+           
       
       </script>
       <!-- li 클릭시 영화 제목+포스터 출력& 해당 영화가 상영되고 있는 극장 -->

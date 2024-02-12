@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/SSH.css">
 <!-- 내용 시작 -->
 <div class="page-main">
 	<h6>VIP FAQ</h6>
@@ -11,9 +12,11 @@
 			<input type="button" value="글쓰기" onclick="location.href='vip/write'">
 		</c:if>
 	</div>
+	
 	<c:if test="${count==0}">
 	<div class="result-display">표시할 게시물이 없습니다.</div>
 	</c:if>
+	
 	<c:if test="${count>0}">
 	<table class="striped-table">
 		<tr>

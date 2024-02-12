@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/SSH.css">
 <!-- 내용 시작 -->
 <div class="page-main">
 	<h6>공지/뉴스</h6>
@@ -63,7 +64,7 @@
 		<tr>
 			<td class="align-center"><a href="news/detail?news_num=${news.news_num}">${news.news_num}</a></td>
 			<td class="align-center">
-				<c:if test="${news.news_category==1}">[예매]</c:if>
+				<c:if test="${news.news_category==1}">[시스템점검]</c:if>
 				<c:if test="${news.news_category==2}">[극장]</c:if>
 				<c:if test="${news.news_category==3}">[행사/이벤트]</c:if>
 				<c:if test="${news.news_category==4}">[기타]</c:if>

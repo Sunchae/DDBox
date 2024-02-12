@@ -23,10 +23,29 @@
 			<form:radiobutton path="news_category" value="5"/>기타
 			<form:errors path="news_category" cssClass="error-color"/>
 		</li>
+		<li><b>내용</b></li>
 		<li>
-			<form:label path="news_content">내용</form:label>
 			<form:textarea path="news_content"/>
 			<form:errors path="news_content" cssClass="error-color"/>
+			<script>
+				function MyCustomUploadAdapterPlugin(editor){
+					editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+						return new UploadAdapter(loader);
+					}
+				}
+				
+				//데이터를 넣어야하기 때문에 #content를 찾음 (에러 발생시 console에 찍기)
+				ClassicEditor
+					.create(document.querySelector('#news_content'),{
+						extraPlugins:[MyCustomUploadAdapterPlugin]
+					})
+					.then(editor => {
+						window.editor = editor;
+					})
+					.catch(error => {
+						console.error(error);
+					});
+			</script>		
 		</li>
 	</ul>
 	<div>

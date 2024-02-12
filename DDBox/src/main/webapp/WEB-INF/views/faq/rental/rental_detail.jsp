@@ -46,7 +46,6 @@
 		</c:if>
 	</div>
 	<div class="align-left">
-		<input type="button" value="수정" onclick="location.href='update?rental_num=${rental.rental_num}'">
 		<input type="button" value="삭제" id="delete_btn">
 		<script type="text/javascript">
 			let delete_btn = document.getElementById('delete_btn');

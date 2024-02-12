@@ -13,7 +13,7 @@
 
 /*검색*/
 .check_warp .box.qna_search{
-	width:200px;
+	width:250px;
 	background-color: rgba(75,0,132,0.83);
 	color: white;
     background-size: 50px;
@@ -45,7 +45,7 @@
 .check_warp .quick_chat{
     float: left;
     display: block;
-    width: 199px;
+    width: 250px;
     height: 260px;
     text-align: center;
     border-right: 1px solid #dedace;
@@ -55,7 +55,7 @@
 .check_warp .quick_email{
     float: left;
     display: block;
-    width: 199px;
+    width: 250px;
     height: 260px;
     text-align: center;
     border-right: 1px solid #dedace;
@@ -65,7 +65,7 @@
 .check_warp .quick_mypage{
     float: left;
     display: block;
-    width: 199px;
+    width: 250px;
     height: 260px;
     text-align: center;
     border-right: 1px solid #dedace;
@@ -75,8 +75,48 @@
 
 
 /*======================
- *    자주묻는질문 카테고리
+ *    자주묻는질문 칸 맞추기
  ======================*/
+ div.page-main{
+  margin-left: 40px;
+  margin-top: 20px;
+ }
+ 
+ div{
+ justify-content: space-between;
+ }
+ 
+ 
+#topMenu{
+	height: 30px;
+	width: 50px;
+}
+
+#topMenu ul li {
+	list-style: none;
+	color:white;
+	background-color: #2d2d2d;
+	float:left;
+	line-height: 30px;
+	vertical-align: middle;
+	text-align: center; 
+}
+#topMenu .menuLink {                        
+    text-decoration:none;                   
+    color: white;                           
+    display: block;                         
+    width: 150px;                           
+    font-size: 12px;                        
+    font-weight: bold;                      
+}
+#topMenu .menuLink:hover {            
+        color: red;                   
+        background-color: #4d4d4d;    
+} 
+
+
+
+
  .search_area ul li{
  	float:left;
  }

@@ -32,4 +32,6 @@ public class MovieVO {
 	private String event_title;
 	private String event_start;
 	private String event_end;
+	
+	private int likesCount;
 }

@@ -24,12 +24,23 @@
 			#{rental_email},
 			#{rental_date})
 	</insert>
+	
 
 	<!-- 검색 기능 -->
 	<sql id="rentalSearch">
 		<where>
 			<if test="keyword != null and keyword != ''">
 				AND rental_name LIKE '%' || #{keyword} || '%' OR
+				rental_content LIKE '%' || #{keyword} || '%' 
+			</if>
+		</where>
+	</sql>
+	
+	<!-- 검색 기능 -->
+	<sql id="rentalSearchForAdmin">
+		<where>
+			<if test="keyword != null and keyword != ''">
+				rental_name LIKE '%' || #{keyword} || '%' OR
 				rental_content LIKE '%' || #{keyword} || '%' 
 			</if>
 		</where>
@@ -61,6 +72,38 @@
 				  JOIN member USING(mem_num)
 				  WHERE mem_num=#{mem_num}
 				  <include refid="rentalSearch"></include>
+				  ORDER BY rental_regdate DESC)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	
+	<!-- 관리자 -->
+	<!-- 총 개수/ 검색 개수 -->
+	<select id="selectRowCountForAdmin" parameterType="map" resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM rental JOIN member USING (mem_num)
+		<include refid="rentalSearchForAdmin"></include>
+	</select>
+	
+	<!-- 전체 목록/ 검색 목록 -->
+	<select id="selectListForAdmin" parameterType="map" resultType="rentalVO">
+		SELECT
+			*
+		FROM(SELECT
+				a.*,
+				rownum rnum
+			FROM (SELECT
+					rental_num,
+					scr_num,
+					rental_name,
+					rental_date,
+					rental_regdate,
+					rental_status
+				  FROM rental
+				  JOIN member USING(mem_num)
+				  <include refid="rentalSearchForAdmin"></include>
 				  ORDER BY rental_regdate DESC)a)
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}

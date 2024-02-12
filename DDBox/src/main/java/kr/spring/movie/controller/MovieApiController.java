@@ -41,7 +41,7 @@ public class MovieApiController {
 				.method("GET", HttpRequest.BodyPublishers.noBody())
 				.build();
 		HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-		//System.out.println(response.body());
+		
 
 		// json형태의 string일 경우
 		String jsonData = response.body();
@@ -73,7 +73,7 @@ public class MovieApiController {
 				movie.setMovie_overview((String)jsonObj.get("overview"));
 				movie.setMovie_popularity((Double) jsonObj.get("popularity"));
 				
-				// Example: release_date를 파싱하여 Date 형태로 변환
+				//release_date를 파싱하여 Date 형태로 변환
 				String releaseDateStr = (String) jsonObj.get("release_date");
 				Date releaseDate = Date.valueOf(releaseDateStr);
 				movie.setMovie_opendate(releaseDate);

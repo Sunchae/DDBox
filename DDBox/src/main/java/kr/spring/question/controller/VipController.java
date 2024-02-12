@@ -46,7 +46,7 @@ public class VipController {
 		log.debug("<<vip 글목록 count>> : " + count);
 		
 		//페이지 처리
-		PageUtil page = new PageUtil(currentPage,count,20,10,"list");
+		PageUtil page = new PageUtil(currentPage,count,10, 5,"list");
 		
 		List<VipVO> list = null;
 		

@@ -2,13 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="page-main">
-	<form action="main" id="event_form" method="get">
+	<!-- <form action="main" id="event_form" method="get"> -->
 		<div class="tit-util">
 			<h3 class="tit">멤버쉽</h3>
 		</div>
+		<div class="event-list">
 		<c:forEach var="list" items="${list}">
 		<c:if test="${list.event_type == 3}">
-		<div class="event-list">
+		
 			<ul>
 				<li class="list-card">
 					<a href="detail?event_num=${list.event_num}">
@@ -20,9 +21,10 @@
 					</a>
 				</li>
 			</ul>
-		</div>
+		
 	</c:if>
 	</c:forEach>
-	</form>
+	</div>
+	<!-- </form> -->
 </div>
 <!-- 내용 끝 -->

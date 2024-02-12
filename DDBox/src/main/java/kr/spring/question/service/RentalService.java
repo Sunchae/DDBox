@@ -12,6 +12,10 @@ public interface RentalService {
 	public List<RentalVO> selectList(Map<String,Object> map);
 	public int selectRowCount(Map<String,Object> map);
 	
+	//관리자
+	public List<RentalVO> selectListForAdmin(Map<String,Object> map);
+	public int selectRowCountForAdmin(Map<String,Object> map);
+	
 	public void insertRental(RentalVO rental);
 	public RentalVO selectRental(int rental_num);
 	public void updateRental(RentalVO rental);

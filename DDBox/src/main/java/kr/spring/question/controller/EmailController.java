@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,12 +28,15 @@ import kr.spring.question.service.EmailService;
 import kr.spring.question.vo.EmailVO;
 import kr.spring.reserve.vo.ScreenVO;
 import kr.spring.util.FileUtil;
+import kr.spring.util.MailUtil;
 import kr.spring.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
 public class EmailController {
+	@Autowired
+    private JavaMailSender javaMailSender;
 	@Autowired
 	private EmailService emailService;
 	@Autowired
@@ -59,7 +63,7 @@ public class EmailController {
 		log.debug("<<이메일 글목록 count>> : " + count);
 		
 		//페이지처리
-		PageUtil page = new PageUtil(null, keyword, currentPage, count, 20, 10, "list","&order="+order);
+		PageUtil page = new PageUtil(null, keyword, currentPage, count, 10, 5, "list","&order="+order);
 		
 		
 		List<EmailVO> list = null;
@@ -83,6 +87,44 @@ public class EmailController {
 		
 		return mav;
 		}
+	
+	
+	//이메일 목록 (관리자)
+	@RequestMapping("/faq/email/email_admin")
+	public String adminProcess(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+						       @RequestParam(value="order",defaultValue="1") int order,
+						       String keyword, HttpSession session, Model model) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("keyword", keyword);
+		map.put("mem_num", user.getMem_num()); //관리자 인증
+		
+		//전체,검색 레코드 수
+		int count = emailService.selectRowCountForAdmin(map);
+		log.debug("<<대관 글목록 count>>" + count);
+		
+		//페이지 처리
+		PageUtil page = new PageUtil(null, keyword, currentPage, count, 10, 5, "list");
+		
+		List<EmailVO> list = null;
+		if(count > 0) {
+		map.put("order", order);
+		map.put("start", page.getStartRow());
+		map.put("end", page.getEndRow());
+		
+			list = emailService.selectListForAdmin(map);
+		}
+		
+		model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
+		
+		return "email_admin";
+	}
+
+	
+	
 	
 	
 	/*==========================
@@ -199,7 +241,7 @@ public class EmailController {
 	public String submitUpdate(@Valid EmailVO emailVO, BindingResult result,
 							   HttpServletRequest request, Model model) {
 		log.debug("<<글 수정>> : " + emailVO);
-	
+		
 		//유효성 체크 결과 오류가 있으면 폼 재호출
 		if(result.hasFieldErrors("ask_content")) {
 			return "email_update";
@@ -207,10 +249,14 @@ public class EmailController {
 		
 		emailService.updateEmail(emailVO);
 
+		MemberVO member = memberService.selectMember(emailVO.getMem_num());
+    	log.debug("<<이메일>> : " + member.getMem_email());
+    	MailUtil.send(javaMailSender, member.getMem_email(), "[DDBOX] 문의하신 글에 답변이 등록되었습니다.","안녕하세요, 고객님 :)\n문의하신 글에 답변이 등록되었습니다.\n홈페이지에서 확인 부탁드립니다.");
+
 		model.addAttribute("message", "답변이 등록되었습니다");
 		model.addAttribute("url", request.getContextPath()+"/faq/email/detail?qna_num="+emailVO.getQna_num());
 		
-		return "redirect:/send";
+		return "redirect:/faq/email/email_admin";
 	}
 	
 	

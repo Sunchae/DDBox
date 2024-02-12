@@ -142,11 +142,9 @@ s               <p class="screen-location">상영관 이름 : ${screen.scr_name}
 											
 											window.location.href = '/main/main';
 											
-										
 											//success.submit();
 											
 											document.getElementById('ticket_confirm').submit();
-											//document.getElementById('ticket_list').submit();
 											// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
 											// 자세한 설명은 구글링으로 보시는게 좋습니다.
 										} else {
