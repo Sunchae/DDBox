@@ -31,8 +31,10 @@ import kr.spring.member.vo.MemberVO;
 import kr.spring.payment.service.PayService;
 import kr.spring.payment.vo.PayVO;
 import kr.spring.question.service.EmailService;
+import kr.spring.store.vo.StoreVO;
 import kr.spring.util.AuthCheckException;
 import kr.spring.util.FileUtil;
+import kr.spring.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -543,11 +545,23 @@ public class MemberController {
 	@RequestMapping("/member/myPageGiftshop")
 	public String sotrePayMain(@RequestParam(value="pageNum",defaultValue = "1") int currentPage, HttpSession session, Model model) {
 		MemberVO vo = (MemberVO)session.getAttribute("user");
+		Map<String, Object> map = new HashMap<String, Object>();
+		int count = payService.selectRowCount(map);
 		
-		List<PayVO> list = payService.selectList(vo.getMem_num());
-		log.debug("<<스토어 결제 저장리스트>>");
+		PageUtil page = new PageUtil(currentPage, count, 5,10,"list");
 		
+		List<PayVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			map.put("mem_num", vo.getMem_num());
+			
+			list = payService.selectList(map);
+		}
+		model.addAttribute("count", count);
 		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
+		log.debug("<<팝콘 글 목록 list>> : " + list);
 
 		return "storePayMain";
 	}

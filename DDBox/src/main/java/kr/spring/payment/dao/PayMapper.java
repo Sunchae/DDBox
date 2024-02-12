@@ -16,10 +16,11 @@ public interface PayMapper {
 	//결제상세
 	public PayVO selectPay(int pay_id);
 	
-	@Select("SELECT pay_id, store_title, total_price, pay_date FROM pay WHERE mem_num=#{mem_num}")
-	public List<PayVO> selectList(int mem_num);
+	public List<PayVO> selectList(Map<String, Object> map);
 	//
-	@Select("SELECT store_num, store_title, store_photo, store_price FROM store WHERE store_num=#{store_num}")
+	@Select("SELECT store_num, store_content, store_title, store_photo, store_price FROM store WHERE store_num=#{store_num}")
 	public StoreVO selectStore(int store_num);
 	
+	@Select("SELECT COUNT(*) FROM pay JOIN member USING(mem_num)")
+	public int selectRowCount(Map<String, Object> map);
 }

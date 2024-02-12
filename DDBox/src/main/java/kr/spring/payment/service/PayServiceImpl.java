@@ -34,9 +34,14 @@ public class PayServiceImpl implements PayService{
 	}
 
 	@Override
-	public List<PayVO> selectList(int mem_num) {
+	public List<PayVO> selectList(Map<String, Object> map) {
 		
-		return payMapper.selectList(mem_num);
+		return payMapper.selectList(map);
+	}
+
+	@Override
+	public int selectRowCount(Map<String, Object> map) {
+		return payMapper.selectRowCount(map);
 	}
 
 }

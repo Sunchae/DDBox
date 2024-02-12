@@ -12,19 +12,36 @@ import kr.spring.store.vo.StoreVO;
 
 @Mapper
 public interface StoreMapper {
-	@Select("SELECT * FROM (SELECT store_num,store_title,store_content,store_price,store_photo,store_name FROM store JOIN member USING(mem_num))")
-	public List<StoreVO> selectList(Map<String, Object> map);			//0:등록실패, 1:등록성공, 2:중복데이터 5:로그인 필요
+	@Select("SELECT store_num,store_title,store_content,store_price,store_photo FROM store")
+	public List<StoreVO> selectList(Map<String, Object> map);
+	
 	@Select("SELECT COUNT(*) FROM store JOIN member USING(mem_num)")
 	public int selectRowCount(Map<String, Object> map);
+	
 	public void insertStore(StoreVO store);							//xml
 	@Select("SELECT * FROM store JOIN member USING(mem_num) WHERE store_num=#{store_num}")
 	public StoreVO selectStore(int store_num);						
+	
 	public void updateStore(StoreVO store);							//xml
+	
 	@Delete("DELETE FROM store WHERE store_num=#{store_num}")
 	public void deleteStore(int store_num);
+	
 	@Update("UPDATE store SET store_photo='' WHERE store_num=#{store_num}")
 	public void deleteFile(int store_num);
+	
 	@Select("SELECT * FROM (SELECT * FROM store ORDER BY store_num DESC) WHERE ROWNUM <= 3")
 	public List<StoreVO> selectMainList();
+	
+	public List<StoreVO> selectTicketList(Map<String, Object> map);
+	
+	public List<StoreVO> selectPopcornList(Map<String, Object> map);
+	
+	@Select("SELECT store_num,store_title,store_content,store_price,store_photo FROM (SELECT * FROM store WHERE store_type=0 ORDER BY store_num DESC) WHERE ROWNUM <= 4")
+	public List<StoreVO> selectMainTicketList();
+	
+	@Select("SELECT store_num,store_title,store_content,store_price,store_photo FROM (SELECT * FROM store WHERE store_type=1 ORDER BY store_num DESC) WHERE ROWNUM <= 4")
+	public List<StoreVO> selectMainPopcornList();
+	
 	
 }

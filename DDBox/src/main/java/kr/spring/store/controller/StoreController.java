@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,6 +25,7 @@ import kr.spring.member.vo.MemberVO;
 import kr.spring.store.service.StoreService;
 import kr.spring.store.vo.StoreVO;
 import kr.spring.util.FileUtil;
+import kr.spring.util.PageUtil;
 import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -44,16 +44,31 @@ public class StoreController {
 		return new StoreVO();
 	}
 	
-	@RequestMapping(value="/store/storeMainTest", method={RequestMethod.POST, RequestMethod.GET})
-	public String storeMain(HttpSession session, Model model) {
+	/*
+	 * @RequestMapping(value="/store/storeMainTest", method={RequestMethod.POST,
+	 * RequestMethod.GET}) public String storeMain(HttpSession session, Model model)
+	 * {
+	 * 
+	 * Map<String, Object> map = new HashMap<String, Object>();
+	 * 
+	 * List<StoreVO> list = storeService.selectList(map);
+	 * 
+	 * 
+	 * model.addAttribute("list", list);
+	 * 
+	 * return "storeMainTest"; }
+	 */
+	
+	@RequestMapping("/store/storeMainTest")
+	public String storeMain(Model model) {
+		List<StoreVO> ticketlist = storeService.selectMainTicketList();
+		log.debug("<<스토어 메인 티켓 리스트>>");
+		List<StoreVO> popcornlist = storeService.selectMainPopcornList();
 		
-		Map<String, Object> map = new HashMap<String, Object>();
+		model.addAttribute("ticketlist", ticketlist);
+		model.addAttribute("popcornlist", popcornlist);
 		
-		List<StoreVO> list = storeService.selectList(map);
-		
-		
-		model.addAttribute("list", list);
-		
+
 		return "storeMainTest";
 	}
 	
@@ -104,7 +119,6 @@ public class StoreController {
 		
 		//제목,상품이름에 태그를 허용하지 않음
 		store.setStore_title(StringUtil.useNoHtml(store.getStore_title()));
-		store.setStore_name(StringUtil.useNoHtml(store.getStore_name()));
 		
 		return new ModelAndView("storeDetail","store",store);
 	}
@@ -117,27 +131,47 @@ public class StoreController {
 	public String ticket(@RequestParam(value="pagenum",defaultValue="1") int currentPage, HttpSession session, Model model) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		List<StoreVO> list = null;
-		list = storeService.selectList(map);
-		log.debug("<<스토어 티켓 글 목록 list>> : " + list);
+		int count = storeService.selectRowCount(map);
 		
+		PageUtil page = new PageUtil(currentPage, count, 10,10,"list");
+		
+		List<StoreVO> list = null;
+		
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = storeService.selectTicketList(map);
+		}
+		model.addAttribute("count", count);
 		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
+		log.debug("<<스토어 티켓 글 목록 list>> : " + list);
 		
 		return "storeTicketList";
 	}
 	
 	/*=================================
-	 *	스토어 메뉴 목록
+	 *	팝콘 메뉴 목록
 	 *=================================*/
-	@RequestMapping("/store/popcorn")
+	@RequestMapping("/store/storePopcorn")
 	public String popcorn(@RequestParam(value="pagenum",defaultValue="1") int currentPage, HttpSession session, Model model) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		int count = storeService.selectRowCount(map);
+		
+		PageUtil page = new PageUtil(currentPage, count, 10,10,"list");
 		
 		List<StoreVO> list = null;
-		list = storeService.selectList(map);
-		log.debug("<<스토어 티켓 글 목록 list>> : " + list);
-		
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = storeService.selectPopcornList(map);
+		}
+		model.addAttribute("count", count);
 		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
+		log.debug("<<팝콘 글 목록 list>> : " + list);
 		
 		return "storePopcorn";
 	}

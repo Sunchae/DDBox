@@ -13,49 +13,72 @@
 		<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 	</head>
 	<body>
-		<div class="page-main">
-			<div class="content-main">
-				<h2>상품구매</h2>
-					<table>
-						<tr>
-							<th>상품명</th>
-							<th>수량</th>
-							<th>상품가격</th>
-							<th>합계</th>
-						</tr>
-						
-					
-					<tr>
-						<td>
-							<a href="${pageContext.request.contextPath}/store/storeDetail?store_num=${store.store_num}">
-								<img src="${pageContext.request.contextPath}/upload/${store.store_photo}" width="50">
-								${store.store_title}
-							</a>
-						</td>
-						<td class="align-center">
-							${param.order_quantity}
-						</td>
-						<td>${store.store_price}</td>		
-						<td>${param.total_price}</td>
-					</tr>	
-					<%-- <tr>
-						<td colspan="3" class="align-right"><b>총구매금액</b></td>
-						<td class="align-center"><fmt:formatNumber value="${param.total_price}" />원</td>
-						<td class="align-center"><fmt:formatNumber value="${param.order_quantity}" />개</td>
-						<td class="align-center">${store.store_num}</td>
-					</tr> --%>
-				</table>
-				<div class="align-center cart-submit">
-					<form action="insertPay" id="payForm" >
-						<input type="text" name="store_title" value="${store.store_title}"  id="store_title">
-						<input type="text" name="order_quantity" value="${param.order_quantity}"  id="order_quantity">
-						<input type="text" name="total_price" value="${param.total_price}"  id="">
-						<input type="text" name="store_num" value="${store.store_num}" id="store_num">
-						<input type="date" name="pay_date" value="" id="pay_date" readonly="readonly">
-					</form>
-					<button id="check_module" type="button">구매</button>
+		<div class="container">
+			<div id="storePay">
+				<div class="contents">
+					<div class="inner-wrap">
+						<div class="store-payment">
+							<h2 class="tit">상품구매</h2>
+							<h3 class="tit">주문상품정보</h3>
+							<div class="table-wrap">
+								<table class="board-list">
+									<colgroup>
+				                        <col style="width:180px;">
+				                        <col>
+				                        <col style="width:150px;">
+				                        <col style="width:80px;">
+				                        <col style="width:200px;">
+				                    </colgroup>
+				                    <thead>
+										<tr>
+											<th scope="colgroup" colspan="2">주문상품</th>
+											<th scope="col">수량</th>
+											<th scope="col">상품가격</th>
+											<th scope="col">합계</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="a-c">
+												<div class="goods-info">
+													<p class="img">
+													<a href="${pageContext.request.contextPath}/store/detail?store_num=${store.store_num}">
+														<img src="${pageContext.request.contextPath}/upload/${store.store_photo}" width="50">
+													</a>
+													</p>
+												</div>
+											</td>
+											<th scope="row">
+												<div class="goods-info">
+													<p class="name">
+														<a href="${pageContext.request.contextPath}/store/detail?store_num=${store.store_num}">${store.store_title}</a>
+													</p>
+													<p class="bundle">
+														${store.store_content}
+													</p>
+												</div>
+											</th>
+											<td>${param.order_quantity}</td>
+											<td>${store.store_price}</td>
+											<td>${param.total_price}</td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="align-center cart-submit">
+									<form action="insertPay" id="payForm" style="border:none">
+										<input type="hidden" name="store_title" value="${store.store_title}" id="store_title">
+										<input type="hidden" name="order_quantity" value="${param.order_quantity}"  id="order_quantity">
+										<input type="hidden" name="total_price" value="${param.total_price}" id="">
+										<input type="hidden" name="store_num" value="${store.store_num}" id="store_num">
+										<input type="hidden" name="pay_date" value="" id="pay_date" readonly="readonly">
+									</form>
+									<button id="check_module" type="button">구매</button>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-				</div>
+			</div>
 		</div>
 		<script>
 		

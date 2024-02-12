@@ -22,7 +22,6 @@ public class StoreVO {
 	private int store_price;
 	private MultipartFile upload;
 	private String store_photo;
-	private String store_name;
 	private int store_type;				//상품 분류 번호 0:디디티켓 1:팝콘/음료/굿즈
 	private Date store_reg_date;
 	private Date store_modify_date;

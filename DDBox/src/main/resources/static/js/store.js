@@ -1,14 +1,14 @@
 
 // Tab Index
-var prdtClCd = '';
+/*var prdtClCd = '';
 
-$(function(){
+$(function(){*/
     /*스토어 메인 상품정보 조회*/
-    fn_storeMainSerach();
-});
+/*    fn_storeMainSerach();
+});*/
 
 /*스토어 메인 상품정보 조회*/
-function fn_storeMainSerach(){
+/*function fn_storeMainSerach(){
     var paramData = {'prdtClCd' : prdtClCd};
 
     if (prdtClCd == null || prdtClCd == '')
@@ -48,10 +48,10 @@ function fn_storeMainSerach(){
         });
     }
 
-}
+}*/
 
 //상세페이지 이동
-function fn_storeDetail(prdtNo){
+/*function fn_storeDetail(prdtNo){
 
 	var contentUrl = "/store/detail?prdtClCd="+prdtClCd+"&prdtNo="+prdtNo;
 
@@ -62,11 +62,11 @@ function fn_storeDetail(prdtNo){
     //$("#storeForm").submit();
 	//넷퍼넬 적용
     $("#storeForm").submit();
-}
+}*/
 
 
 /* 스토어 타이틀 */
-function fn_chgStoreTab(cdId){
+/*function fn_chgStoreTab(cdId){
 
 	$(".tab-list ul li").attr('class','');
 
@@ -86,4 +86,15 @@ function fn_chgStoreTab(cdId){
         $('#divCategoryPrdtArea_'+cdId).show();
         $('#storeTab_'+cdId).attr('class','on');
     }
-}
+}*/
+
+$(document).on('click', '.box-pulldown .tit .btn-toggle', function(){
+        $(this).closest('.box-pulldown').toggleClass('on');
+
+        if( $(this).closest('.box-pulldown').hasClass('on') ){
+            $(this).find('.ico-arr-toggle-down').innerHTML('<span class="material-symbols-outlined">expand_less</span>');
+        }
+        else {
+            $(this).find('.ico-arr-toggle-down').innerHTML('<span class="material-symbols-outlined">expand_more</span>');
+        }
+    });

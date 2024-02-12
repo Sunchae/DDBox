@@ -14,4 +14,8 @@ public interface StoreService {
 	public void deleteStore(int store_num);
 	public void deleteFile(int store_num);
 	public List<StoreVO> selectMainList();
+	public List<StoreVO> selectTicketList(Map<String, Object> map);
+	public List<StoreVO> selectPopcornList(Map<String, Object> map);
+	public List<StoreVO> selectMainTicketList();
+	public List<StoreVO> selectMainPopcornList();
 }

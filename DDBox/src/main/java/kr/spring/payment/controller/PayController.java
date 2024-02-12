@@ -80,16 +80,18 @@ public class PayController {
 	}
 	
 	//process5
-	@RequestMapping("/store/storePayMain")
-	public String sotrePayMain(@RequestParam(value="pageNum",defaultValue = "1") int currentPage, HttpSession session, Model model) {
-		MemberVO vo = (MemberVO)session.getAttribute("user");
-		
-		List<PayVO> list = payService.selectList(vo.getMem_num());
-		log.debug("<<스토어 결제 저장리스트>>");
-		
-		model.addAttribute("list", list);
-
-		return "storePayMain";
-	}
+	/*
+	 * @RequestMapping("/store/storePayMain") public String
+	 * sotrePayMain(@RequestParam(value="pageNum",defaultValue = "1") int
+	 * currentPage, HttpSession session, Model model) { MemberVO vo =
+	 * (MemberVO)session.getAttribute("user");
+	 * 
+	 * List<PayVO> list = payService.selectList(vo.getMem_num());
+	 * log.debug("<<스토어 결제 저장리스트>>");
+	 * 
+	 * model.addAttribute("list", list);
+	 * 
+	 * return "storePayMain"; }
+	 */
 	
 }

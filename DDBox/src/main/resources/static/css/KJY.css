@@ -101,6 +101,29 @@
  *------------------------
 */
 
+/*-----------body태그-----------*/
+
+.body-wrap {
+    width: 100%;
+    height: 100%;
+    padding: 0
+}
+.body-wrap.no-padding {
+    padding-top: 0
+}
+
+.inner-wrap {
+    width: 1100px;
+    margin: 0 auto
+}
+.inner-wrap:after,.inner-wrap:before {
+    content: '';
+    display: table
+}
+
+.inner-wrap:after {
+    clear: both
+}
 /*-----------h태그-----------*/
 h2.tit {
     padding: 0 0 26px 0;
@@ -220,6 +243,17 @@ h6.tit {
     float: none
 }
 
+.mt70 {
+    margin-top: 70px!important
+}
+
+.mb15 {
+    margin-bottom: 15px!important
+}
+
+.mt30 {
+    margin-top: 30px!important
+}
 
 /*-----------tab태그-----------*/
 .tab {
@@ -769,3 +803,674 @@ body.no-scroll .tab-list.fixed {
     display: none
 }
 
+/*-----------store-list태그-----------*/
+.store-list {
+    overflow: hidden
+}
+.store-list p {
+    padding: 0;
+    margin: 0
+}
+
+.store-list .list {
+    margin: 0 0 0 -40px
+}
+
+.store-list .list li {
+    position: relative;
+    float: left;
+    width: 245px;
+    margin: 0 0 0 20px;
+    border-radius: 10px
+}
+.store-list .list li:nth-child(4)~li {
+    margin-top: 40px
+}
+
+.store-list .list li a {
+    position: relative;
+    display: block;
+    height: 435px;
+    text-decoration: none;
+    border: 1px solid #e4e4e4;
+    border-radius: 10px
+}
+
+.store-list .list li a:focus,.store-list .list li a:hover {
+    border-color: #503396
+}
+.store-list .list li .label {
+    overflow: hidden;
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    height: 24px;
+    padding: 0 10px;
+    line-height: 27px;
+    color: #fff;
+    font-size: .8667em
+}
+
+.store-list .list li .label.event {
+    background-color: #ed4c57
+}
+
+.store-list .list li .label.best {
+    background-color: #503396
+}
+
+.store-list .list li .label.new {
+    background-color: #329eb1
+}
+
+.store-list .list li .label.push {
+    background-color: #237aca
+}
+
+.store-list .list li .label.hot {
+    background-color: #000
+}
+
+.store-list .list li .img {
+    height: 243px;
+    font-size: 0;
+    line-height: 243px;
+    text-align: center;
+    background: #eee;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden
+}
+
+.store-list .list li .img img {
+    width: 100%;
+    vertical-align: middle
+}
+
+.store-list .list li .info {
+    padding: 0 19px;
+    border-top: 1px solid #e4e4e4;
+    line-height: 1.3
+}
+
+.store-list .list li .info .tit {
+    height: 115px;
+    padding-top: 20px;
+    border-bottom: 1px solid #e4e4e4
+}
+
+.store-list .list li .info .tit .name {
+    overflow: hidden;
+    height: 39px;
+    margin: 0 0 10px 0;
+    color: #222;
+    font-weight: 700
+}
+
+.store-list .list li .info .tit .bundle {
+    font-size: .8667em;
+    color: #666;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical
+}
+
+.store-list .list li .info .price {
+    position: relative;
+    padding: 35px 0 0 0;
+    line-height: 1.1
+}
+
+.store-list .list li .info .price .original {
+    position: absolute;
+    left: 0;
+    top: 15px;
+    color: #666;
+}
+
+/*-----------store-list태그-----------*/
+.store-view {
+    margin: 0 0 40px 0
+}
+
+.store-view p {
+    margin: 0;
+    padding: 0
+}
+
+.store-view select[disabled] {
+    color: #666;
+    background-color: #f2f4f5
+}
+
+.store-view .input-text[disabled] {
+    color: #666;
+    background-color: #f2f4f5
+}
+
+.store-view h2.tit {
+    padding: 0 0 5px 0
+}
+
+.store-view h2.tit span {
+    display: block;
+    padding: 0 0 5px 0;
+    line-height: 1.1;
+    color: #503396;
+    font-size: .7857em
+}
+
+.store-view h2.tit em {
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 1.1
+}
+
+.store-view .sub-info {
+    overflow: hidden
+}
+
+.store-view .sub-info .bundle {
+    float: left
+}
+
+.store-view .box-store-view {
+    overflow: hidden;
+    position: relative;
+    margin: 10px 0 0 0;
+    border-top: 1px solid #555;
+    border-bottom: 1px solid #d8d9db
+}
+
+.store-view .box-store-view:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 479px;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background-color: #d8d9db
+}
+
+.store-view .box-store-view .left {
+    float: left;
+    width: 480px;
+    padding: 0 0 30px 0
+}
+
+.store-view .box-store-view .left .img {
+    display: table;
+    table-layout: fixed;
+    width: 100%
+}
+
+.store-view .box-store-view .left .img p {
+    display: table-cell;
+    height: 400px;
+    text-align: center;
+    vertical-align: middle
+}
+
+.store-view .box-store-view .left .img p img {
+    max-width: 400px;
+    max-height: 400px
+}
+
+.store-view .box-store-view .left .origin {
+    padding: 10px 0 0 0;
+    text-align: center
+}
+
+.store-view .box-store-view .right {
+    float: left;
+    width: calc(100% - 480px);
+    padding: 15px 0 30px 40px
+}
+
+.store-view .box-store-view .right .goods-info .line {
+    display: table;
+    table-layout: fixed;
+    width: 100%
+}
+
+.store-view .box-store-view .right .goods-info .line .tit {
+    display: table-cell;
+    width: 100px;
+    padding-top: 15px;
+    color: #222;
+    vertical-align: top
+}
+
+.store-view .box-store-view .right .goods-info .line .cont {
+    display: table-cell;
+    width: calc(100% - 100px);
+    padding-top: 15px;
+    vertical-align: top
+}
+
+.store-view .box-store-view .right .goods-info .line .cont .limit {
+    color: #666
+}
+
+.store-view .box-store-view .right .goods-info .line .cont .alert {
+    color: #e81003
+}
+
+.store-view .box-store-view .right .goods-info .line .cont .sale-count em {
+    color: #01738b
+}
+
+.store-view .box-store-view .right .type {
+    margin: 15px 0 0 0;
+    border-top: 1px solid #ebebeb
+}
+
+.store-view .box-store-view .right .type .tit {
+    display: table-cell;
+    width: 100px;
+    padding-top: 20px;
+    color: #222;
+    vertical-align: top
+}
+
+.store-view .box-store-view .right .type .cont {
+    overflow: hidden;
+    display: table-cell;
+    width: calc(100% - 100px);
+    padding-top: 20px;
+    vertical-align: top
+}
+
+.store-view .box-store-view .right .type .amount {
+    display: table;
+    table-layout: fixed;
+    width: 100%
+}
+
+.store-view .box-store-view .right .type .amount .cont .btn {
+    display: block;
+    float: left;
+    width: 32px;
+    height: 32px;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ccc;
+    background-color: #fff
+}
+
+.store-view .box-store-view .right .type .amount .cont .input-text {
+    display: block;
+    float: left;
+    width: 42px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-width: 1px 0
+}
+
+.store-view .box-store-view .right .type .amount .cont .money {
+    float: right;
+    color: #351f66;
+    line-height: 32px
+}
+
+.store-view .box-store-view .right .type .amount .cont .money em {
+    float: left;
+    font-family: Roboto;
+    font-weight: 400;
+    font-size: 2em
+}
+
+.store-view .box-store-view .right .type .amount .cont .money span {
+    float: left;
+    margin-left: 3px;
+    font-size: 1.3333em
+}
+
+.store-view .box-store-view .right .type .charge {
+    display: table;
+    table-layout: fixed;
+    width: 100%
+}
+
+.store-view .box-store-view .right .type .charge select {
+    width: 250px;
+    height: 32px;
+    border-radius: 0
+}
+
+.store-view .box-store-view .right .type .receipt .line {
+    display: table;
+    table-layout: fixed;
+    width: 100%
+}
+
+.store-view .box-store-view .right .type .receipt .line select {
+    width: 250px;
+    height: 32px;
+    border-radius: 0
+}
+
+.store-view .box-store-view .right .type .receipt .line .btn {
+    display: block;
+    float: left;
+    width: 32px;
+    height: 32px;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ccc;
+    background-color: #fff
+}
+
+.store-view .box-store-view .right .type .receipt .line .input-text {
+    display: block;
+    float: left;
+    width: 42px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-width: 1px 0
+}
+
+.store-view .box-store-view .right .type .receipt .line .money {
+    float: right;
+    color: #351f66;
+    line-height: 32px
+}
+
+.store-view .box-store-view .right .type .receipt .line .money em {
+    float: left;
+    font-family: Roboto;
+    font-weight: 400;
+    font-size: 2em
+}
+
+.store-view .box-store-view .right .type .receipt .line .money span {
+    float: left;
+    margin-left: 3px;
+    font-size: 1.3333em
+}
+
+.store-view .box-store-view .right .btn-group {
+    overflow: hidden;
+    margin: 20px 0 0 0;
+    padding: 20px 0 0 0;
+    border-top: 1px solid #ebebeb
+}
+
+.store-view .box-store-view .right .btn-group .button {
+    display: block;
+    float: left;
+    width: calc(50% - 5px);
+    margin: 0
+}
+
+.store-view .box-store-view .right .btn-group .button.purple {
+    float: right
+}
+
+.store-view .box-store-view .right .btn-group .button.gray {
+    width: 100%;
+    margin: 0
+}
+
+.store-view .box-store-view .right .btn-group .button.gray[disabled] {
+    opacity: 1;
+    cursor: default
+}
+
+.store-view .box-store-view .line .txt.min {
+    font-size: 14px;
+    display: block;
+    color: #ccc
+}
+
+.store-view .store_alert {
+    margin-top: 5px;
+    color: #e81002;
+    font-size: .9333em
+}
+
+.line32 {
+    line-height: 32px
+}
+
+.btn-group {
+    padding: 20px 0 30px 0;
+    margin: 0;
+    text-align: center
+}
+
+.button.purple {
+    color: #fff;
+    line-height: 36px;
+    border: 0;
+    background: #503396
+}
+
+.button.purple.large {
+    line-height: 46px
+}
+
+/*-----------box-pulldown태그-----------*/
+.box-pulldown {
+    overflow: hidden
+}
+
+.box-pulldown .tit {
+    overflow: hidden;
+    border-radius: 5px;
+    border: 1px solid #d8d9db
+}
+
+.box-pulldown .tit .btn-toggle {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 39px;
+    margin: 0;
+    padding: 0 20px;
+    border: 0;
+    text-align: left;
+    background-color: #fff
+}
+
+.box-pulldown .tit .btn-toggle .iconset {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    margin-top: -4px
+}
+
+.box-pulldown .cont {
+    display: none;
+    margin: 0;
+    padding: 20px
+}
+
+.box-pulldown .dotList02 {
+    display: none;
+    margin: 0;
+    padding: 20px
+}
+
+.box-pulldown.on .tit {
+    border: 1px solid #f3f4f6
+}
+
+.box-pulldown.on .tit .btn-toggle {
+    background-color: #f3f4f6
+}
+
+.box-pulldown.on .cont {
+    display: block
+}
+
+.box-pulldown.on .dotList02 {
+    display: block
+}
+
+.box-pulldown.on .tit .btn-toggle .iconset {
+    transform: rotate(180deg)
+}
+
+.box-pulldown+.box-pulldown {
+    margin-top: 20px
+}
+
+.box-pulldown .cont table tr td {
+    width: 100%!important
+}
+
+.box-pulldown .cont tr td p {
+    margin: 0
+}
+
+.box-pulldown .cont tr td p {
+    position: relative;
+    padding: 0 0 0 8px;
+    font-size: .9333em
+}
+
+.box-pulldown .cont tr td p:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 7px;
+    left: 0;
+    background-color: #57a5ae;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%
+}
+
+.box-pulldown .cont tr td p+p {
+    margin-top: 5px
+}
+
+.box-pulldown .cont>div,.box-pulldown .cont>p {
+    position: relative;
+    padding: 0 0 0 8px;
+    font-size: .9333em
+}
+
+.box-pulldown .cont>div:before,.box-pulldown .cont>p:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 7px;
+    left: 0;
+    background-color: #57a5ae;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%
+}
+
+/*-----------store-payment태그-----------*/
+.store-payment p {
+    margin: 0;
+    padding: 0
+}
+
+.store-payment .goods-info .img {
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    font-size: 0;
+    line-height: 0
+}
+
+.store-payment .goods-info .img img {
+    width: 100%;
+    height: 100%
+}
+
+.store-payment .goods-info .name {
+    padding: 0 0 10px 0;
+    font-size: 1.2em
+}
+
+.store-payment .goods-info .price {
+    margin: 0 4px 0 0;
+    color: #503396;
+    font-family: Roboto;
+    font-weight: 700;
+    font-size: 1.4666em;
+    vertical-align: middle
+}
+
+.board-list {
+    line-height: 1.3
+}
+
+.board-list p {
+    margin: 0;
+    padding: 0
+}
+
+.board-list p.code {
+    display: inline-block;
+    font-size: 13px;
+    color: #999
+}
+
+.board-list>thead>tr>th {
+    height: 45px;
+    padding: 3px 10px;
+    color: #222;
+    border: 1px solid #eaeaea;
+    border-width: 0 0 1px 0;
+    background-color: #f2f4f5;
+    text-align: center;
+}
+
+.board-list>tbody>tr>td,.board-list>tbody>tr>th {
+    height: 45px;
+    padding: 10px;
+    border: 1px solid #eaeaea;
+    border-width: 0 0 1px 0;
+    text-align: center
+}
+
+.board-list>tbody>tr>th {
+    text-align: left;
+    font-weight: 400
+}
+
+.board-list>tbody>tr>td>a,.board-list>tbody>tr>th>a {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle
+}
+
+.board-list>tbody>tr>td>a.ellipsis {
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.board-list.line>thead>tr>th {
+    border-width: 0 1px 1px 0
+}
+
+.board-list.line>thead>tr>th:last-child {
+    border-width: 0 0 1px 0
+}
+
+.board-list.line>tbody>tr>td,.board-list.line>tbody>tr>th {
+    border-width: 0 1px 1px 0
+}
+
+.board-list.line>tbody>tr>td:last-child,.board-list.line>tbody>tr>th:last-child {
+    border-width: 0 0 1px 0
+}
+
+col {
+    display: table-column;
+}

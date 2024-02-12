@@ -56,4 +56,24 @@ public class StoreServiceImpl implements StoreService{
 		return storeMapper.selectMainList();
 	}
 
+	@Override
+	public List<StoreVO> selectTicketList(Map<String, Object> map) {
+		return storeMapper.selectTicketList(map);
+	}
+
+	@Override
+	public List<StoreVO> selectPopcornList(Map<String, Object> map) {
+		return storeMapper.selectPopcornList(map);
+	}
+
+	@Override
+	public List<StoreVO> selectMainTicketList() {
+		return storeMapper.selectMainTicketList();
+	}
+
+	@Override
+	public List<StoreVO> selectMainPopcornList() {
+		return storeMapper.selectMainPopcornList();
+	}
+
 }

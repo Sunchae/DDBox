@@ -5,24 +5,44 @@
 <div class="page-main">
 <h2>마이페이지 기프트샵</h2>
 </div>
-<div class="result-display">
-	<table class="striped-table">
-		<tr>
-			<th>주문번호</th>
-			<th width="300">상품명</th>
-			<th>총 구매금액</th>
-			<th>주문날짜</th>
-		</tr>
-		<c:forEach var="storePay" items="${list}">
-		<tr>
-			<td>${storePay.pay_id}</td>
-			<td><a href="">${storePay.store_title}</a></td>
-			<td>${storePay.total_price}</td>
-			<td>${storePay.pay_date}</td>
-		</tr>
-		</c:forEach>
-	</table>
-	<div class="align-center">${page}</div>
+<div class="result-display" style="border:none">
+	<table class="board-list">
+			<colgroup>
+                      <col style="width:180px;">
+                      <col style="width:150px;">
+                      <col style="width:80px;">
+                      <col style="width:200px;">
+                  </colgroup>
+                  <thead>
+				<tr>
+					<th scope="colgroup">주문번호</th>
+					<th scope="col">상품명</th>
+					<th scope="col">총 주문금액</th>
+					<th scope="col">주문날짜</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="storePay" items="${list}">
+					<tr>
+						<td class="a-c">
+							<div class="goods-info">
+								${storePay.pay_id}
+							</div>
+						</td>
+						<th scope="row">
+							<div class="goods-info">
+								<p class="name">
+									<a href="${pageContext.request.contextPath}/store/detail?store_num=${storePay.store_num}">${storePay.store_title}</a>
+								</p>
+							</div>
+						</th>
+						<td>${storePay.total_price}</td>
+						<td>${storePay.pay_date}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 </div>
+<div class="align-center">${page}</div>
 
 <!-- 내용 끝 -->
