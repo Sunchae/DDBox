@@ -51,13 +51,16 @@
 						<input type="text" name="order_quantity" value="${param.order_quantity}"  id="order_quantity">
 						<input type="text" name="total_price" value="${param.total_price}"  id="">
 						<input type="text" name="store_num" value="${store.store_num}" id="store_num">
+						<input type="date" name="pay_date" value="" id="pay_date" readonly="readonly">
 					</form>
 					<button id="check_module" type="button">구매</button>
 				</div>
 				</div>
 		</div>
 		<script>
+		
 			$("#check_module").click(function() {
+				$('#pay_date').val(new Date().toISOString().substring(0,10));
 				var IMP = window.IMP; // 생략가능
 				IMP.init('imp66004703');
 				// i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드

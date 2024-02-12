@@ -2,10 +2,9 @@
     pageEncoding="UTF-8"%>
 <!-- 메뉴 시작 -->
 <div class="top-bar">
-	<h2>스토어</h2>
+	<h4>홈</h4>
 	<ul>
-		<li><a href="${pageContext.request.contextPath}/store/ticketList">디디티켓</a></li>		
-		<li><a href="${pageContext.request.contextPath}/store/popcorn">팝콘/음료/굿즈</a></li>
+		<li><a href="${pageContext.request.contextPath}/store/storeMainTest">>스토어</a></li>		
 	</ul>
 </div>
 <!-- 메뉴 끝 -->
