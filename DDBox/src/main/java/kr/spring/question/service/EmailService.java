@@ -15,5 +15,9 @@ public interface EmailService {
 	public void deleteEmail(int qna_num);
 	public void deleteFile(int qna_num); //쓰레기파일 삭제
 	
+	//관리자
+	public List<EmailVO> selectListForAdmin(Map<String,Object> map);
+	public int selectRowCountForAdmin(Map<String,Object> map);
+	
 	public List<ScreenVO> getAllScreens();
 }

@@ -58,4 +58,14 @@ public class RentalServiceImpl implements RentalService{
 		return rentalMapper.getAllScreens();
 	}
 
+	@Override
+	public List<RentalVO> selectListForAdmin(Map<String, Object> map) {
+		return rentalMapper.selectListForAdmin(map);
+	}
+
+	@Override
+	public int selectRowCountForAdmin(Map<String, Object> map) {
+		return rentalMapper.selectRowCountForAdmin(map);
+	}
+
 }

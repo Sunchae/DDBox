@@ -80,7 +80,7 @@ public class RentalController {
 	/*===========================
 	 * 글 목록
 	 * ==========================*/
-	
+	//회원
 	@RequestMapping("/faq/rental")
 	public ModelAndView process(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
 								@RequestParam(value="order",defaultValue="1") int order,
@@ -117,6 +117,42 @@ public class RentalController {
 		
 		return mav;
 	}
+	
+	//대관 목록 (관리자)
+	@RequestMapping("/faq/rental/rental_admin")
+	public String adminProcess(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+									 @RequestParam(value="order",defaultValue="1") int order,
+									 String keyword, HttpSession session, Model model) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("keyword", keyword);
+		map.put("mem_num", user.getMem_num()); //관리자 인증
+		
+		//전체,검색 레코드 수
+		int count = rentalService.selectRowCountForAdmin(map);
+		log.debug("<<대관 글목록 count>>" + count);
+		
+		//페이지 처리
+		PageUtil page = new PageUtil(null, keyword, currentPage, count, 20, 10, "list");
+		
+		List<RentalVO> list = null;
+		if(count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = rentalService.selectListForAdmin(map);
+		}
+		
+		model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
+		
+		return "rental_admin";
+	}
+	
+	
 	
 	/*==========================
 	 * 글상세

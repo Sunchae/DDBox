@@ -59,4 +59,14 @@ public class EmailServiceImpl implements EmailService{
 		return emailMapper.getAllScreens();
 	}
 
+	@Override
+	public List<EmailVO> selectListForAdmin(Map<String, Object> map) {
+		return emailMapper.selectListForAdmin(map);
+	}
+
+	@Override
+	public int selectRowCountForAdmin(Map<String, Object> map) {
+		return emailMapper.selectRowCountForAdmin(map);
+	}
+
 }

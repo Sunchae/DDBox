@@ -85,6 +85,44 @@ public class EmailController {
 		}
 	
 	
+	//이메일 목록 (관리자)
+	@RequestMapping("/faq/email/email_admin")
+	public String adminProcess(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+						       @RequestParam(value="order",defaultValue="1") int order,
+						       String keyword, HttpSession session, Model model) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("keyword", keyword);
+		map.put("mem_num", user.getMem_num()); //관리자 인증
+		
+		//전체,검색 레코드 수
+		int count = emailService.selectRowCountForAdmin(map);
+		log.debug("<<대관 글목록 count>>" + count);
+		
+		//페이지 처리
+		PageUtil page = new PageUtil(null, keyword, currentPage, count, 20, 10, "list");
+		
+		List<EmailVO> list = null;
+		if(count > 0) {
+		map.put("order", order);
+		map.put("start", page.getStartRow());
+		map.put("end", page.getEndRow());
+		
+			list = emailService.selectListForAdmin(map);
+		}
+		
+		model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
+		
+		return "email_admin";
+	}
+
+	
+	
+	
+	
 	/*==========================
 	 * 이메일 문의 글등록
 	 *==========================*/

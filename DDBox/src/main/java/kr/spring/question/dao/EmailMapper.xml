@@ -37,6 +37,17 @@
 		</where>
 	</sql>
 	
+	<!-- 검색 기능 -->
+	<sql id="emailSearchForAdmin">
+		<where>
+			<if test="keyword != null and keyword != ''">
+				qna_title LIKE '%' || #{keyword} || '%' OR
+				question_content LIKE '%' || #{keyword} || '%' 
+			</if>
+		</where>
+	</sql>
+	
+	
 	
 	<!-- 총 개수/ 검색 개수 -->
 	<select id="selectRowCount" parameterType="map" resultType="integer">
@@ -96,8 +107,34 @@ WHERE rnum>=1 AND rnum<=100 -->
 		WHERE qna_num=#{qna_num}
 	</update>
 	
+	<!-- 관리자 -->
+	<!-- 총 개수/ 검색 개수 -->
+	<select id="selectRowCountForAdmin" parameterType="map" resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM email_faq JOIN member USING (mem_num)
+		<include refid="emailSearchForAdmin"></include>
+	</select>
 	
 	
+	<!-- 전체 목록/검색 목록 -->
+	<select id="selectListForAdmin" parameterType="map" resultType="emailVO">
+		SELECT
+		  *
+		FROM (SELECT
+				a.*,
+				rownum rnum
+			  FROM (SELECT
+					  *
+				    FROM email_faq e
+       		        JOIN member m ON e.mem_num = m.mem_num
+					<include refid="emailSearchForAdmin"></include>
+					ORDER BY question_regdate DESC)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+
 	
 	
 	
