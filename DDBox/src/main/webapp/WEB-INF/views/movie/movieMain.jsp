@@ -47,7 +47,6 @@
                             </p>
                             
                             
-                            <p>예매율: ${movie.movie_popularity}</p>
                             <p>개봉일: ${movie.movie_opendate}</p>
                         </div>
                         <div>

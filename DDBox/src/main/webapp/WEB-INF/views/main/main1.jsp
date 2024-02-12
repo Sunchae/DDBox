@@ -12,30 +12,32 @@
 }
 
 .btn-container {
-	display: none; /* 초기에 버튼을 숨김 */
-	position: absolute; /* 절대 위치 */
-	top: 50%; /* 포스터 중앙에 배치 */
-	left: 50%; /* 포스터 중앙에 배치 */
-	transform: translate(-50%, -50%); /* 포스터 중앙에 배치 */
-	z-index: 1; /* 포스터 위에 표시 */
+    display: none; /* 기본적으로 버튼 컨테이너 숨김 */
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    justify-content: center;
 }
-
+.poster {
+    position: relative;
+}
 .poster:hover .btn-container {
-	display: block; /* 마우스가 영화 포스터 위에 있을 때 버튼 표시 */
+    display: flex; /* 포스터 위에 마우스를 올렸을 때만 버튼 컨테이너 표시 */
 }
-
 .movie-poster:hover {
 	filter: blur(1.5px);
 }
 .carousel-control-prev, .carousel-control-next {
     display: block;
 }
+
 </style>
 <body>
 	<div class="container mt-5">
 
 		<!-- 캐러셀 영역 -->
-		<div id="movieCarousel" class="carousel slide" data-ride="carousel">
+		<div id="movieCarousel" class="carousel slide mx-auto d-block" data-ride="carousel" style="max-width: 800px;">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
 					<!-- YouTube 임베드 코드 -->
@@ -51,7 +53,7 @@
 				<div class="carousel-item">
 					<!-- 다른 YouTube 비디오를 삽입하려면 여기에 삽입 -->
 					<iframe width="800" height="400"
-						src="https://www.youtube.com/embed/EqRPpz7vt4I?si=PJCZpDKXo3mDTUvK" 
+						src="https://www.youtube.com/embed/Bldf9SWRPFM?si=7GSq_KDvUknQezY2" 
 						frameborder="0" allowfullscreen>
 					</iframe>
 					<div class="carousel-caption d-none d-md-block">
@@ -79,11 +81,11 @@
 						<div class="poster">
 							<img src="https://image.tmdb.org/t/p/w500/${movie.movie_poster}"
 								class="card-img-top movie-poster" alt="Movie Poster"
-								style="width: 100%; height: 550px; object-fit: contain;">
+								style="width: 100%; height: 550px; object-fit: cover; object-position: center;">
 							<div class="btn-container">
 								<a href="/movie/movieDetail?movie_num=${movie.movie_num}"
-									class="btn btn-light">상세 정보</a> <a
-									href="/reserve/reserveMain?movie_num=${movie.movie_num}"
+									class="btn btn-light" style="margin-right: 5px;">상세정보</a> 
+								<a	href="/reserve/reserveMain?movie_num=${movie.movie_num}"
 									class="btn btn-light">예매하기</a>
 							</div>
 						</div>

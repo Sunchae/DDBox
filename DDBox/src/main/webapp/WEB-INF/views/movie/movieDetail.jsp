@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
     
 <!-- 내용 시작 -->
     <title>영화 상세 페이지</title>
@@ -29,13 +30,32 @@
 	<!-- 2번 영역: 영화 tagline, 줄거리, 감독, 장르, 등급, 개봉일, 출연진 -->
     <div class="movie-info-area">
         <p class="tagline">${movie.movie_tagline}</p>
-        <p class="summary">${movie.movie_overview } <button class="more-button">더보기</button></p>
+        <div class="summary">
+        	<span class="summary-test">${movie.movie_overview }</span> 
+       		 <button class="more-button">더보기</button>
+       	</div>
         <div class="additional-info">
-            <p>감독: Director Name</p>
-            <p>장르: Genre</p>
-            <p>등급: Rating</p>
+            <p id="director">감독 : Director Name</p>
+            <p id="genres">장르: Genre</p>
+            <p>
+				이용등급:
+
+				<c:choose>
+					<c:when test="${movie.movie_gradeNm == 1}">
+						12세 이용가
+					</c:when>
+					<c:when test="${movie.movie_gradeNm == 2}">
+						15세 이용가
+					</c:when>
+					<c:when test="${movie.movie_gradeNm == 0}">
+						전체 이용가
+					</c:when>
+				</c:choose>
+
+
+			</p>
             <p>개봉일: ${movie.movie_opendate }</p>
-            <p>출연진: Cast Members</p>
+            <p id="cast-list">출연진: Cast Members</p>
         </div>
     </div>
 
@@ -118,6 +138,83 @@ function checkLikeStatus(movieNum) {
     });
 }
 
+function getQueryStringParam(param) {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    return urlParams.get(param);
+}
+
+// movieNum 변수에 'movie_num' 쿼리 파라미터 값을 할당
+let movieNum = getQueryStringParam('movie_num');
+
+console.log(movieNum); // 콘솔에서 movie_num 값 확인
+
+//영화 상세 정보를 가져오는 함수
+function fetchMovieDetails(movieNum) {
+    let apiKey = "fa44f7ba22e7b7a5a7d41d6feaf39cea";
+    const url = "https://api.themoviedb.org/3/movie/" +movieNum+ "?api_key=" +apiKey+ "&language=ko-KR";
+    const creditsUrl = "https://api.themoviedb.org/3/movie/"+movieNum+"/credits?api_key="+apiKey+"&language=ko-KR";
+    
+    console.log(url);
+    console.log(creditsUrl);
+    
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        // 장르 정보 표시
+        const genres = data.genres.map(genre => genre.name).join(', ');
+        document.getElementById('genres').textContent = genres;
+    })
+    .catch(error => console.log('Error:', error));
+    
+    // 영화 크레딧 정보 가져오기
+    fetch(creditsUrl)
+    .then(response => response.json())
+    .then(data => {
+        // 감독 정보 찾기
+        const director = data.crew.find(member => member.job === "Director");
+        const directorName = director.name;
+        console.log(director);
+        console.log(directorName);
+        if(director) {
+            // 감독의 이름만 표시
+            document.getElementById('director').textContent = `감독: `+directorName;
+        } else {
+            document.getElementById('director').textContent = '감독: 정보 없음';
+        }
+        
+	     // 상위 4명의 배우 이름 추출 및 표시
+	     const topFourCastNames = data.cast.slice(0, 4).map(actor => actor.name).join(', ');
+	     console.log(topFourCastNames);
+	     document.getElementById('cast-list').textContent = '출연진 : ' +topFourCastNames ;
+	       
+    })
+    .catch(error => console.log('Error:', error));
+    
+}
+
+// 페이지 로드 시 영화 상세 정보 가져오기
+document.addEventListener('DOMContentLoaded', function() {
+    fetchMovieDetails(movieNum);
+});
+
+//줄거리 파트
+document.addEventListener('DOMContentLoaded', function() {
+	 const moreButton = document.querySelector('.more-button');
+	    const summaryText = document.querySelector('.summary-test'); 
+	
+    console.log(moreButton);
+    $('.more-button').on('click', function() {
+    	console.log('버튼 클릭됨'); // 클릭 이벤트 발생 확인용
+        if (summaryText.style.display === 'block') {
+            summaryText.style.display = '-webkit-box';
+            moreButton.textContent = '더보기';
+        } else {
+            summaryText.style.display = 'block';
+            moreButton.textContent = '접기';
+        }
+    });
+});
 
 </script>
 
