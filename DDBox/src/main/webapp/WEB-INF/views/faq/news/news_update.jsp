@@ -3,8 +3,18 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 내용 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/SSH.css">
 <div class="page-main">
-	<h2>공지 수정</h2>
+	<h5>공지/뉴스</h5>
+	<span>DDBOX의 주요한 이슈 및 여러가지 소식들을 확인하실 수 있습니다.</span>	
+		
+	<br>
+		
+	<hr style="border-width:1px 0 0 0; border-color:#ccc;">
+	
 	<form:form action="update" modelAttribute="newsVO" id="update_form">
 	<form:hidden path="news_num"/>
 	<form:errors element="div" cssClass="error-color"/>
@@ -13,7 +23,7 @@
 			<form:label path="news_title">제목</form:label>
 			<form:input path="news_title"/>
 			<form:errors path="news_title" cssClass="error-color"/>
-		</li>
+		</li><br>
  		<li>
 			<form:label path="news_category">유형</form:label>
 			<form:radiobutton path="news_category" value="1"/>시스템점검
@@ -22,8 +32,8 @@
 			<form:radiobutton path="news_category" value="4"/>제휴이벤트
 			<form:radiobutton path="news_category" value="5"/>기타
 			<form:errors path="news_category" cssClass="error-color"/>
-		</li>
-		<li><b>내용</b></li>
+		</li><br>
+		<li><b>내용</b></li><br>
 		<li>
 			<form:textarea path="news_content"/>
 			<form:errors path="news_content" cssClass="error-color"/>

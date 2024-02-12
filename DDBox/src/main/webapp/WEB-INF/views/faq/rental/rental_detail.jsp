@@ -3,27 +3,30 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- 내용 시작 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/SSH.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-	<div class="page-main">
-	<h2>단체/대관 문의 조회</h2> 
+<div class="page-main">
+	<h5>단체/대관 문의</h5>
+	<span>단체 및 대관 예약 문의입니다.</span>
+	
+	<br>
+	
+	<hr style="border-width:1px 0 0 0; border-color:#ccc;">
 	<ul class="detail-info">
 		<li>
-			희망 영화관 : ${rental.scr_name}
+			희망 영화관: ${rental.scr_name} (<c:set var="dateString" value="${rental.rental_date}" />${fn:substring(dateString, 0, 10)})
 		</li>
 		<br><li>
-			관람 희망일 : ${rental.rental_date}
+			문의자명: ${rental.rental_name} (${rental.rental_email})<br>
 		</li>
 		<br><li>
-			문의자명 : ${rental.rental_name} (${rental.rental_email})<br>
+			연락처: ${rental.rental_phone}<br>
 		</li>
 		<br><li>
-			연락처 : ${rental.rental_phone}<br>
-		</li>
-		<br><li>
-			${rental.rental_content}<br>
+			내용: ${rental.rental_content}
 		</li>
 	</ul>
-	<hr size="1" width="100%">
+	<hr style="border-width:1px 0 0 0; border-color:#ccc;">
 	
 	<div class="align-right">
 		<c:if test="${!empty user && user.mem_auth == 9}">

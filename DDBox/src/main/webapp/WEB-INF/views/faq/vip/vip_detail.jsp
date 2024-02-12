@@ -4,13 +4,23 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- 내용 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-	<div class="page-main">
-		<h2>${vip.vip_title}</h2>
-		<hr size="1" width="100%">
-		<div class="detail-content">
-			${vip.vip_content}
-		</div>
-		<hr size="1" width="100%">
+<div class="page-main">
+	<h5>VIP FAQ</h5>
+	<span>고객님께서 궁금하신 내용을 먼저 확인해주세요.</span>
+
+	<br>
+	
+	<hr style="border-width:1px 0 0 0; border-color:#ccc;">
+	<ul class="detail-info">
+		<li>${vip.vip_title}</li>
+	</ul>
+		<br>
+
+	<div class="detail-content">
+		${vip.vip_content}
+	</div>
+	<br>
+	<hr style="border-width:1px 0 0 0; border-color:#ccc;">
 		<div class="align-right">
 			<c:if test="${!empty user && user.mem_auth == 9}">
 				<input type="button" value="수정" onclick="location.href='update?vip_num=${vip.vip_num}'">

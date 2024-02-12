@@ -8,15 +8,22 @@
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/SSH.css">
 <div class="page-main">
-	<h2>문의 답변하기</h2>
+	<h5>문의글 답변</h5>
+	<span>회원 문의글에 답변을 남겨주세요.</span><br>
+	
+	<br>
+	
+	<hr style="border-width:1px 0 0 0; border-color:#ccc;">	
+	
 	<form:form action="update" modelAttribute="emailVO" id="update_form" enctype="multipart/form-data">
 	<form:hidden path="qna_num"/>
 	<form:hidden path="mem_num"/>
 	<form:errors element="div" cssClass="error-color" />
 	<ul>
 		<li>
-			<form:label path="question_content">문의글</form:label>
+			<form:label path="question_content"><b>문의글</b></form:label><br>
 		</li>
 		<li>
 			<c:if test="${fn:endsWith(emailVO.question_file, '.jpg') ||
@@ -32,8 +39,8 @@
 			</div>
 			</c:if>
 			<textarea rows="5" cols="30" readonly="readonly">${emailVO.question_content}</textarea>
-		</li>
-		<li><b>답변 내용</b></li>
+		</li><br>
+		<li><b>답변 내용</b></li><br>
 			<li>
 			<form:textarea path="ask_content"/>
 			<form:errors path="ask_content" cssClass="error-color"/>

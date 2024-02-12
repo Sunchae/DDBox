@@ -6,8 +6,11 @@
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/SSH.css">
 <div class="page-main">
-	<h2>공지 수정</h2>
+	<h5>VIP FAQ</h5>
+	<span>VIP 문의글 수정</span><br>
+	
 	<form:form action="update" modelAttribute="vipVO" id="update_form">
 	<form:hidden path="vip_num"/>
 	<form:errors element="div" cssClass="error-color"/>
@@ -17,7 +20,7 @@
 			<form:input path="vip_title"/>
 			<form:errors path="vip_title" cssClass="error-color"/>
 		</li>
-		<li><b>내용</b></li>
+		<br><li><b>내용</b></li>
 		<li>
 			<form:textarea path="vip_content"/>
 			<form:errors path="vip_content" cssClass="error-color"/>

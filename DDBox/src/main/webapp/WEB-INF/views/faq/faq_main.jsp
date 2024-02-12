@@ -43,7 +43,13 @@
 				<span>문의하신 내용을 확인하실 수 있습니다.</span><br>
 				<input type="button" onclick="location.href='${pageContext.request.contextPath}/member/myPage'" value="문의내역 조회">
 			</div>
+		<div class="align-left">
+		<span>
+			<a onclick="location.href='${pageContext.request.contextPath}/faq/email'" style="cursor:pointer;"><img src="${pageContext.request.contextPath}/images/faq/자주묻는질문.png"></a>
+		</span>
+		</div>		
 		</div>
 	</div>
+
 </div>
 <!-- 내용 끝 -->

@@ -7,9 +7,14 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <!-- 내용 시작 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/SSH.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <div class="page-main">
-	<h2>단체/대관 문의</h2>
+	<h5>단체/대관 문의</h5>
+	<span>단체 및 대관 예약 문의입니다.</span><br>
+	<br>
+	
+	<hr style="border-width:1px 0 0 0; border-color:#ccc;">
 	<form:form action="write" modelAttribute="rentalVO" id="register_form" enctype="multipart/form-data">
 		<form:errors element="div" cssClass="error-color"/>
 		<ul>
@@ -91,7 +96,7 @@
 		</ul>
 		</div>
 		<div class="align-center">
-			<form:button>등록하기</form:button>
+			<form:button>등록</form:button>
 			<input type="button" value="취소" onclick="location.href='${pageContext.request.contextPath}/faq/rental'">
 		</div>
 	</form:form>

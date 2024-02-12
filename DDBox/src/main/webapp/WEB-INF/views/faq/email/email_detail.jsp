@@ -4,18 +4,30 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- 내용 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/SSH.css">
 <div class="page-main">
-	<h2>${email.qna_title}</h2>
+	<h5>이메일 문의</h5>
+	<span>문의글을 남겨주시면 답변을 남겨드립니다.</span>
+	
+	<br>
+	
+	<hr style="border-width:1px 0 0 0; border-color:#ccc;">
 	<ul class="detail-info">
 		<li>
-			작성일 : ${email.question_regdate}
-		</li>
-		<br><li>
-		<c:if test="${!empty email.scr_num}">해당 영화관 : ${email.scr_name}</c:if>
+			<c:if test="${email.qna_type==1}">[문의]</c:if>
+				<c:if test="${email.qna_type==2}">[불만]</c:if>
+				<c:if test="${email.qna_type==3}">[칭찬]</c:if>
+				<c:if test="${email.qna_type==4}">[제안]</c:if>
+				<c:if test="${email.qna_type==5}">[분실물]</c:if>
+		${email.qna_title}</li>
+		<li>
+			작성일 ${email.question_regdate}
+			<c:if test="${!empty email.scr_num}">해당 영화관 ${email.scr_name}</c:if>
 		</li>
 	</ul>
-	<hr size="1" width="100%">
+		<br>
 	
+
 	<!-- 사진 -->
 	<c:if test="${fn:endsWith(email.question_file, '.jpg') ||
 				  fn:endsWith(email.question_file, '.JPG') ||
@@ -31,24 +43,30 @@
 	<div class="align-center">
 		<img src="${pageContext.request.contextPath}/upload/${email.question_file}" class="detail-img">
 	</div>
-	</c:if>
+	</c:if>		
+	
 	<!-- 질문글 -->
 	<div class="detail-content">
 		${email.question_content}
 	</div>
-	<hr size="1" width="100%">
+	<br>
+	<hr style="border-width:1px 0 0 0; border-color:#ccc;">
 	
 	<!-- 답글 -->
 	<c:if test="${email.ask_content!=null}">
 	
 	<div class="page-main">
-	<h2>${email.mem_id}님, 답변 드립니다.</h2> <!-- 여기 다시 한번 확인하기 -->
+	<br>
 	<ul class="detail-info">
 		<li>
-			답변 등록일 : ${email.ask_regdate}
+			${email.mem_id} 님, 답변 드립니다.
+		</li>
+		<br><li>
+			답변 등록일 ${email.ask_regdate}
 		</li>
 	</ul>
-	<hr size="1" width="100%">
+	<br>
+	 
 	<div class="detail-content">
 		${email.ask_content}
 	</div>

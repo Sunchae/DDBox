@@ -7,8 +7,14 @@
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
-<div class="page-main">
-	<h2>글 수정</h2>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/SSH.css">
+	<div class="page-main">
+	<h5>자주묻는 질문</h5>
+	<span>회원님들께서 가장 자주하시는 질문을 모았습니다.<br>궁금하신 내용에 대해 검색해보세요.</span>
+	
+	<br>
+	
+	<hr style="border-width:1px 0 0 0; border-color:#ccc;">
 	<form:form action="update" modelAttribute="questionVO" id="update_form">
 	<form:hidden path="board_num"/>
 	<form:errors element="div" cssClass="error-color"/>
@@ -17,7 +23,7 @@
 			<form:label path="board_title">제목</form:label>
 			<form:input path="board_title"/>
 			<form:errors path="board_title" cssClass="error-color"/>
-		</li>
+		</li><br>
  		<li>
 			<form:label path="board_category">유형</form:label>
 			<form:radiobutton path="board_category" value="1"/>예매
@@ -30,8 +36,8 @@
 			<form:radiobutton path="board_category" value="8"/>기프트샵
 			<form:radiobutton path="board_category" value="9"/>홈페이지/모바일
 			<form:errors path="board_category" cssClass="error-color"/>
-		</li>
-		<li><b>내용</b></li>
+		</li><br>
+		<li><b>내용</b></li><br>
 		<li>
 			<form:textarea path="board_content"/>
 			<form:errors path="board_content" cssClass="error-color"/>

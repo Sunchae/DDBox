@@ -7,8 +7,15 @@
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/SSH.css">
 <div class="page-main">
-	<h2>이메일 문의</h2>
+	<h5>이메일 문의</h5>
+	<span>문의글을 남겨주시면 답변을 남겨드립니다.</span><br>
+	
+	<br>
+	
+	<hr style="border-width:1px 0 0 0; border-color:#ccc;">
+	
 	<form:form action="write" modelAttribute="emailVO" id="register_form" enctype="multipart/form-data">
 		<form:errors element="div" cssClass="error-color"/>
 		<ul>
@@ -27,13 +34,13 @@
 				<form:radiobutton path="qna_type" value="4"/>제안
 				<form:radiobutton path="qna_type" value="5"/>분실물
 				<form:errors path="qna_type" cssClass="error-color"/>
-			</li>
+			</li><br>
 	 		<li>
 				<form:label path="qna_scr">영화관 선택</form:label>
 				<form:radiobutton path="qna_scr" value="0"/>선택하지않음
 				<form:radiobutton path="qna_scr" value="1"/>선택함 <!-- 선택하면 영화관 정보 드롭박스 -->
 				<form:errors path="qna_scr" cssClass="error-color"/>
-			</li>
+			</li><br>
 			<li>
 				<form:label path="scr_num">해당 영화관</form:label>
 				<form:select path="scr_num">
@@ -42,13 +49,13 @@
       				  <form:option value="${screen.scr_num}">${screen.scr_name}</form:option>
     				</c:forEach>
        			</form:select>
-			</li>
+			</li><br>
 			<li>
 				<form:label path="qna_title">제목</form:label>
 				<form:input path="qna_title"/>
 				<form:errors path="qna_title" cssClass="error-color"/>
-			</li>
-			<li><b>내용</b></li>
+			</li><br>
+			<li><b>내용</b></li><br>
 			<li>
 			<form:textarea path="question_content"/>
 			<form:errors path="question_content" cssClass="error-color"/>
@@ -71,7 +78,7 @@
 						console.error(error);
 					});
 			</script>		
-		</li>
+		</li><br>
 			<li>
 				<form:label path="upload">첨부파일</form:label>
 				<input type="file" name="upload" id="upload">
