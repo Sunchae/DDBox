@@ -133,7 +133,7 @@ public class TicketController {
 		
 		model.addAttribute("movie",movie);
 		model.addAttribute("screen",screen);
-		model.addAttribute("show",show);
+		model.addAttribute("show",show); 
 		
 		return "MypageTicket";
 	}

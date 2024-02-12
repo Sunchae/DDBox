@@ -33,7 +33,7 @@ public class TicketServiceImpl implements TicketService{
 		return ticketMapper.selectedMoive(choice_num);
 	}
 
-	@Override
+	@Override 
 	public ScreenVO selectedScreen(int choice_screen) {
 		return ticketMapper.selectedScreen(choice_screen);
 	}

@@ -11,7 +11,7 @@ import kr.spring.reserve.vo.TicketVO;
 
 @Mapper
 public interface TicketMapper {
-	//예매 인원 티켓 가격 insert
+	//예매 인원 티켓 가격 insert 
 	@Insert("INSERT INTO ticket (res_num,res_mem_total,res_pay,shw_num,scr_num,movie_num,res_regdate) VALUES (ticket_seq.nextval,#{choice_people},#{choice_price},#{choice_time},#{choice_screen},#{choice_num},SYSDATE)")
 	public void insertTicket(TicketVO ticket);
 	
