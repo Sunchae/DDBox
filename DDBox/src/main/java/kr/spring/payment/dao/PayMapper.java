@@ -14,7 +14,7 @@ public interface PayMapper {
 	//결제등록
 	public void insertPay(PayVO pay);			//xml
 	//결제상세
-	public PayVO selectPay(int pay_num);
+	public PayVO selectPay(int pay_id);
 	
 	@Select("SELECT pay_id, store_title, total_price, pay_date FROM pay WHERE mem_num=#{mem_num}")
 	public List<PayVO> selectList(int mem_num);

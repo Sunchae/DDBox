@@ -1,5 +1,7 @@
 package kr.spring.payment.controller;
 
+import java.sql.Date;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,7 +59,7 @@ public class PayController {
 	}
 	
 	@GetMapping("/store/insertPay")
-	public String insertPay(Model model, int store_num, int order_quantity, int total_price, String store_title, HttpSession session) {
+	public String insertPay(Model model, int store_num, int order_quantity, int total_price,Date pay_date, String store_title, HttpSession session) {
 		log.debug("<<페이메인2323>>");
 		log.debug("<<store_num>>" + store_num);
 		
@@ -69,14 +71,17 @@ public class PayController {
 		pay.setTotal_price(total_price);
 		pay.setStore_title(store_title);
 		pay.setMem_num(vo.getMem_num());
-		
 		payService.insertPay(pay);
+		pay.setPay_date(pay_date);
 		
-	 return "redirect:/store/storeMainTest";
+		model.addAttribute("storePay", pay);
+		
+	 return "storePayDetail";
 	}
 	
+	//process5
 	@RequestMapping("/store/storePayMain")
-	public String process5(@RequestParam(value="pageNum",defaultValue = "1") int currentPage, HttpSession session, Model model) {
+	public String sotrePayMain(@RequestParam(value="pageNum",defaultValue = "1") int currentPage, HttpSession session, Model model) {
 		MemberVO vo = (MemberVO)session.getAttribute("user");
 		
 		List<PayVO> list = payService.selectList(vo.getMem_num());
@@ -86,4 +91,5 @@ public class PayController {
 
 		return "storePayMain";
 	}
+	
 }
