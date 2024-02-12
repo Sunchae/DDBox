@@ -60,9 +60,10 @@
     </div>
 
     <!-- 3번 영역: 차트/그래프 예매자 남녀비율, 연령대 등 -->
-	<div id="age_group_chart" style="width: 500px; height: 500px;"></div>
-	<div id="gender_chart" style="width: 500px; height: 500px;"></div>
-
+	<div class="charts-container">
+	    <div id="age_group_chart" class="chart"></div>
+	    <div id="gender_chart" class="chart"></div>
+	</div>
 	<!-- 4번 영역: 사용자 리뷰 및 평점 -->
     <div class="user-reviews-area">
         <h3>사용자 리뷰 및 평점</h3>
@@ -255,18 +256,25 @@ function drawAgeGroupChart() {
 function drawAgeGroupChartWithData(data) {
     var dataTable = new google.visualization.DataTable();
     dataTable.addColumn('string', 'Age Group');
-    dataTable.addColumn('number', 'Likes');
-    
+    dataTable.addColumn('number', 'Percentage');
+
+    var totalLikes = Object.values(data).reduce((acc, cur) => acc + cur, 0); // 전체 '좋아요' 수 계산
+
     Object.keys(data).forEach(function(key) {
-        dataTable.addRow([key, data[key]]);
+        var percentage = (data[key] / totalLikes) * 100; // 각 항목의 비율을 퍼센테이지로 계산
+        dataTable.addRow([key, percentage]);
     });
 
     var options = {
         chart: {
             title: '연령대별 좋아요 분포',
-            subtitle: '각 연령대별 좋아요 수',
         },
-        bars: 'vertical'
+        bars: 'vertical',
+        vAxis: {
+            minValue: 0,
+            maxValue: 100, // 세로축의 최대값을 100%로 설정
+            format: '#\'%\'', // 세로축 레이블을 퍼센테이지 형식으로 표시
+        },
     };
 
     var chart = new google.charts.Bar(document.getElementById('age_group_chart'));

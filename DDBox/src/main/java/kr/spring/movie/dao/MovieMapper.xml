@@ -99,4 +99,12 @@
         WHERE
             mf.movie_num = #{movieNum}
     </select>
+    
+    
+    <!-- 영화 키워드 검색 -->
+    <select id="searchMoviesByKeyword" resultType="MovieVO">
+        SELECT movie_num, movie_title FROM movie
+        WHERE movie_title LIKE '%' || #{keyword} || '%'
+    </select>
+    
 </mapper>

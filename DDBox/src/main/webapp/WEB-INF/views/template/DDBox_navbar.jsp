@@ -5,9 +5,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/YSC.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
 
 <div id="header">
 	<div class="container-fluid">
@@ -34,24 +36,30 @@
 		<nav class="navbar navbar-expand-lg navbar-light" id="navbar-2">
 			<div class="collapse navbar-collapse justify-content-start">
 				<ul class="navbar-nav util-list">
-					<li class="nav-item">
-					<a class="nav-link" href="#"><img src="${pageContext.request.contextPath}/images/nav/ico-sitemap.png"></a>
+					<li class="nav-item"><a class="nav-link" href="#"><img
+							src="${pageContext.request.contextPath}/images/nav/ico-sitemap.png"></a>
 					</li>
-	
+
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdown" role="button" data-bs-toggle="dropdown"
 						aria-expanded="false"> <img
 							src="${pageContext.request.contextPath}/images/nav/ico-search.png">
 					</a>
-					 	<ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="">
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<div class="search-box p-3">
-								<form action="">
-		     		 				<input class="form-control" type="search" name="keyword" value="" placeholder="영화를 검색하세요!" aria-label="Search">
-		      						<button class="btn btn-sm" type="button"><img src="${pageContext.request.contextPath}/images/nav/ico-search.png"></button>
-		    					</form>
+								<form action="" onsubmit="return false;">
+									<input class="form-control" type="search" name="keyword"
+										placeholder="영화를 검색하세요!" aria-label="Search"
+										id="movieSearchInput">
+									<button class="btn btn-sm" type="button">
+										<img
+											src="${pageContext.request.contextPath}/images/nav/ico-search.png">
+									</button>
+								</form>
+								<ul id="searchResults" class="list-group"></ul>
+								<!-- 검색 결과를 동적으로 추가할 리스트 -->
 							</div>
-						</ul> 
-					</li>
+						</ul></li>
 				</ul>
 			</div>
 			<div class="collapse navbar-collapse justify-content-center" id="navbarNav">
@@ -79,3 +87,35 @@
 		</nav>
 	</div>
 </div>
+
+<script>
+$(document).ready(function() {
+    // 동적으로 생성되는 요소에 대한 이벤트 위임
+    $(document).on("keyup", "#movieSearchInput", function() {
+    	 console.log("키 입력 이벤트 발생");
+        let keyword = $(this).val();
+
+        if (keyword.length > 0) {
+            $.ajax({
+                url: '/movie/search', // 서버의 영화 검색 API URL
+                type: 'GET',
+                dataType: 'json',
+                data: { keyword: keyword },
+                success: function(movies) {
+                	console.log(movies);
+                    $("#searchResults").empty(); // 검색 결과 컨테이너를 비웁니다.
+                    $.each(movies, function(index, movie) {
+                        let movieLink = $('<a>').attr('href', `/movie/movieDetail?movie_num=${movie.movie_num}`).text(movie.movie_title);
+                        $("#searchResults").append($('<li>').append(movieLink));
+                    });
+                },
+                error: function() {
+                    console.error('검색 중 오류 발생');
+                }
+            });
+        } else {
+            $("#searchResults").empty(); // 검색창이 비었을 때 결과를 지웁니다.
+        }
+    });
+});
+</script>

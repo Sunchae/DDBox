@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -168,7 +167,15 @@ public class MovieController {
 	  }
 	  
 	  
-	  
+	  //영화 검색
+		@GetMapping("/movie/search")
+		@ResponseBody
+		public List<MovieVO> searchMovies(@RequestParam("keyword") String keyword) {
+			// 검색 서비스를 호출하여 검색 결과 목록을 조회
+			List<MovieVO> searchResults = movieService.searchMoviesByKeyword(keyword);
+			log.debug("<<searchResults>> : " + searchResults);
+			return searchResults; // 검색 결과를 JSON 형태로 반환
+		}
 	  
 	  
 }

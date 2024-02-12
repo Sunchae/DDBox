@@ -181,6 +181,52 @@ a:visited{
 	color:#000000;
 }
 
+.search-box {
+    padding: 10px; /* 내부 여백을 추가하여 검색창 주변에 공간을 만듭니다. */
+    display: flex; /* Flexbox 레이아웃을 적용합니다. */
+    align-items: center; /* 내부 항목들을 세로 중앙에 정렬합니다. */
+}
+
+.search-box input[type="search"] {
+    flex-grow: 1; /* 검색창이 가능한 많은 공간을 차지하도록 합니다. */
+    margin-right: 10px; /* 검색 버튼과의 간격을 설정합니다. */
+    padding: 5px 10px; /* 검색창 내부의 여백을 설정합니다. */
+}
+
+.search-box button {
+    padding: 5px 10px; /* 버튼의 내부 여백을 설정합니다. */
+    background-color: #007bff; /* 버튼의 배경 색상을 설정합니다. */
+    color: white; /* 버튼 내부 텍스트 색상을 설정합니다. */
+    border: none; /* 버튼의 테두리를 제거합니다. */
+    cursor: pointer; /* 마우스 오버 시 커서를 포인터로 변경합니다. */
+}
+
+.search-box button:hover {
+    background-color: #0056b3; /* 버튼 호버 시 배경 색상을 어둡게 변경합니다. */
+}
+
+/* 검색 결과 스타일 */
+#searchResults {
+    list-style: none;
+    margin-top: 5px;
+    padding-left: 0;
+    width: 100%; /* 검색 결과의 너비를 .search-box와 동일하게 설정합니다. */
+    background-color: #f8f9fa; /* 검색 결과 배경 색상을 설정합니다. */
+    border: 1px solid #ccc; /* 검색 결과의 테두리를 설정합니다. */
+    border-radius: 5px; /* 테두리의 둥근 모서리를 설정합니다. */
+}
+
+#searchResults li a {
+    display: block;
+    padding: 10px; /* 각 검색 결과 항목의 내부 여백을 설정합니다. */
+    color: #333; /* 검색 결과 텍스트 색상을 설정합니다. */
+    text-decoration: none; /* 텍스트 밑줄을 제거합니다. */
+}
+
+#searchResults li a:hover {
+    background-color: #e9ecef; /* 검색 결과 항목 호버 시 배경 색상을 변경합니다. */
+}
+
 /* 좌측 메뉴 레이아웃(Admin,MyPage)
 -------------------------*/
 #page_nav{

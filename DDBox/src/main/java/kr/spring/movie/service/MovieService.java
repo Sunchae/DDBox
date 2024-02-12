@@ -33,4 +33,7 @@ public interface MovieService {
     public Map<String, Object> countLikesByGender(int movie_num);
     // 연령대별 좋아요 수 조회
     public Map<String, Object> countLikesByAgeGroup(int movie_num);
+    
+  //영화검색
+    public List<MovieVO> searchMoviesByKeyword(String keyword);
 }

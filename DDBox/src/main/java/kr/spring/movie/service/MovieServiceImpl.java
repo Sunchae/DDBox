@@ -112,6 +112,13 @@ public class MovieServiceImpl implements MovieService{
 		public Map<String, Object> countLikesByAgeGroup(int movie_num) {
 			return movieMapper.countLikesByAgeGroup(movie_num);
 		}
+		/*==================================
+		 * 영화 키워드 검색 PART
+		 ===================================*/
+		@Override
+		public List<MovieVO> searchMoviesByKeyword(String keyword) {
+			return movieMapper.searchMoviesByKeyword(keyword);
+		}
 
 
 

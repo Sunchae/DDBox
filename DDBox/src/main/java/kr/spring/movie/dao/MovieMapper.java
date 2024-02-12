@@ -61,7 +61,10 @@ public interface MovieMapper {
     public Map<String, Object> countLikesByAgeGroup(int movie_num);
 		
 	
-	
+	//영화검색
+    public List<MovieVO> searchMoviesByKeyword(String keyword);
+    	
+    
 }
 
 

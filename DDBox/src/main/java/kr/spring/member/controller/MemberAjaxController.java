@@ -77,22 +77,34 @@ public class MemberAjaxController {
 	 * 닉네임 변경
 	 *==============================*/
 	@PostMapping("/member/changeNickname")
-	public void changeNickname(HttpSession session, HttpServletRequest request, HttpServletResponse response, @RequestParam("mem_nickname") String nickname) throws IOException {
-	    MemberVO user = (MemberVO) session.getAttribute("user");
-	    
+	@ResponseBody
+	public Map<String, Object> changeNickname(HttpSession session, @RequestParam("nickname") String nickname) {
+	    Map<String, Object> response = new HashMap<>();
 	    try {
-	        // 닉네임 변경 로직 구현: 사용자 객체에 새 닉네임 설정
-	        user.setMem_nickname(nickname); // 새 닉네임 적용
-	        memberService.changeNickname(user); // 서비스 메서드에 전달하여 DB에 저장
+	        // 현재 로그인된 사용자의 정보를 세션에서 가져옵니다.
+	        MemberVO currentUser = (MemberVO) session.getAttribute("member");
+	        log.debug("<<currentUser>> : " + currentUser);
+	        if (currentUser == null) {
+	            // 사용자가 로그인되어 있지 않은 경우
+	            response.put("success", false);
+	            response.put("message", "로그인이 필요한 기능입니다.");
+	            return response;
+	        }
+
+	        // 닉네임 변경을 위해 MemberVO 객체를 생성하거나, 현재 사용자 객체에 닉네임을 업데이트합니다.
+	        currentUser.setMem_nickname(nickname);
 	        
-	        response.setContentType("text/plain");
-	        response.setCharacterEncoding("UTF-8");
-	        response.getWriter().write("닉네임이 변경되었습니다."); // 성공 메시지 응답
-	    } catch (Exception e) {
-	        // 에러 처리
-	        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-	        response.getWriter().write("닉네임 변경에 실패했습니다."); // 실패 메시지 응답
+	        // 서비스 계층의 닉네임 변경 메소드 호출
+	        memberService.changeNickname(currentUser);
+
+	        response.put("success", true);
+	        response.put("message", "닉네임이 성공적으로 변경되었습니다.");
+	    } catch(Exception e) {
+	        e.printStackTrace();
+	        response.put("success", false);
+	        response.put("message", "서버 오류로 인한 닉네임 변경 실패.");
 	    }
+	    return response;
 	}
 	
 }

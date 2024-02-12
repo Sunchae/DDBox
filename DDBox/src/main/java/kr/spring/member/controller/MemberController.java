@@ -456,7 +456,7 @@ public class MemberController {
 
 		//회원정보
 		MemberVO member = memberService.selectMember(user.getMem_num());
-
+		session.setAttribute("member", member);
 		log.debug("<<회원 상세 정보>> : " + member);
 
 		model.addAttribute("member",member);
@@ -511,8 +511,8 @@ public class MemberController {
 	}
 
 
-
-
+	
+	
 
 
 
