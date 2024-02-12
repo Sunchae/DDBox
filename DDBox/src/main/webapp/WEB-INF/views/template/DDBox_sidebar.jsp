@@ -69,10 +69,6 @@
         <a href="/faq/email" class="nav-link link-dark">
           나의 문의내역
         </a>
-        <ul>
-			<li><a href="${pageContext.request.contextPath}/faq/email">이메일 문의</a></li>
-			<li><a href="${pageContext.request.contextPath}/faq/rental">단체/대관 문의</a></li>
-		</ul>
       </li>
     </ul>
     <hr>
