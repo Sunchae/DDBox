@@ -12,7 +12,7 @@ import kr.spring.reserve.vo.TicketVO;
 @Mapper
 public interface TicketMapper {
 	//예매 인원 티켓 가격 insert
-	@Insert("INSERT INTO ticket (res_num,res_mem_total,res_pay,shw_num,scr_num,res_regdate) VALUES (ticket_seq.nextval,#{choice_people},#{choice_price},#{choice_time},#{choice_screen},SYSDATE)")
+	@Insert("INSERT INTO ticket (res_num,res_mem_total,res_pay,shw_num,scr_num,movie_num,res_regdate) VALUES (ticket_seq.nextval,#{choice_people},#{choice_price},#{choice_time},#{choice_screen},#{choice_num},SYSDATE)")
 	public void insertTicket(TicketVO ticket);
 	
 	@Select("SELECT movie_title,scr_name,shw_time FROM show LEFT OUTER JOIN (SELECT * FROM screen) USING(scr_num) LEFT OUTER JOIN (SELECT * FROM movie) USING(movie_num)WHERE movie_num= #{choice_num} AND scr_num = #{choice_screen} AND shw_num=#{choice_time}")

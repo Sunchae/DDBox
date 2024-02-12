@@ -9,13 +9,16 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kr.spring.member.vo.MemberVO;
 import kr.spring.movie.service.MovieService;
 import kr.spring.movie.vo.MovieVO;
+import kr.spring.payment.vo.PayVO;
 import kr.spring.reserve.dao.ShowMapper;
 import kr.spring.reserve.service.ReserveService;
 import kr.spring.reserve.service.ShowService;
@@ -133,6 +136,16 @@ public class TicketController {
 		model.addAttribute("show",show);
 		
 		return "MypageTicket";
+	}
+	
+	@GetMapping("reserve/insertPay")
+	public String insertPay(Model model, int choice_num, int choice_screen, int choice_time, int choice_people, int choice_price, HttpSession session) {
+		log.debug("<<페이메인23>>");
+		
+		TicketVO ticket = null;
+		//ticket = ticketService.insertTicket(ticket);
+		
+	 return "payConfirm";
 	}
 	
 }

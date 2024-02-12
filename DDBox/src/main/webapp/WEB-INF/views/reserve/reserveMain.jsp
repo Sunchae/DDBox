@@ -277,11 +277,20 @@
                let output = '<li class="movie-choice" data-num="' + movie.movie_num + '">';
                output += movie.movie_title;
                //output += '<h3>' + movie.title + '</h3>';
-               // 추가적인 영화 정보 표시 로직 작성
+               // 영화 등급에 대한 로직 추가
+               if (movie.movie_gradeNm == 1) {
+                   output += '<img src="${pageContext.request.contextPath}/images/movie/12.png" alt="12세 이용가" width="30" height="30"/>';
+               } else if (movie.movie_gradeNm == 2) {
+                   output += '<img src="${pageContext.request.contextPath}/images/movie/15.png" alt="15세 이용가" width="30" height="30"/>';
+               } else if (movie.movie_gradeNm == 0) {
+                   output += '<img src="${pageContext.request.contextPath}/images/movie/all.png" alt="전체 이용가" width="30" height="30"/>';
+               }
+               
                output += '</li>';
                
                // movieListContainer에 영화 정보 추가
                movieListContainer.append(output);
+               
            }
          
          

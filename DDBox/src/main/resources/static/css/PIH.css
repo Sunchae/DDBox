@@ -109,6 +109,7 @@ strong{
 }
 .selected-screen, .movie-choice, .screen-choice, .each-screen, .each-time, .selected-time{
 	list-style:none; 
+	line-height:200%;
 	margin-left: 10%;
 }
 
