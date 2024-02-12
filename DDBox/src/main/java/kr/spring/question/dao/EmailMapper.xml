@@ -89,7 +89,7 @@ member_detail m ON e.mem_num=m.mem_num
 ORDER BY question_regdate  DESC)a) 
 WHERE rnum>=1 AND rnum<=100 -->
 	
-	<!-- 글 상세 -->
+	<!-- 글 상세 (기존)
 	<select id="selectEmail" parameterType="integer">
 		SELECT
 			*
@@ -97,7 +97,22 @@ WHERE rnum>=1 AND rnum<=100 -->
 		JOIN member USING(mem_num) 
 		LEFT OUTER JOIN member_detail USING(mem_num) 
 		WHERE qna_num=#{qna_num}
+	</select> -->
+	
+	<!-- 글 상세 // scr_name 포함 -->
+	<select id="selectEmail" parameterType="integer">
+		SELECT
+			e.*,
+			m.mem_id,
+			s.scr_name
+		FROM email_faq e
+		JOIN member m ON e.mem_num = m.mem_num
+		LEFT JOIN screen s ON e.scr_num = s.scr_num
+		WHERE qna_num=#{qna_num}
 	</select>
+	
+	
+	
 	
 	<!-- 글 수정 (답글 달기) -->
 	<update id="updateEmail" parameterType="emailVO">

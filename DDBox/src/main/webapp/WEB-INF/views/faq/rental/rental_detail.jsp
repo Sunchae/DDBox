@@ -8,18 +8,18 @@
 	<h2>단체/대관 문의 조회</h2> 
 	<ul class="detail-info">
 		<li>
-			희망 영화관 : ${rental.scr_num}<br>
+			희망 영화관 : ${rental.scr_name}
 		</li>
-		<li>
-			관람 희망일 : ${rental.rental_date}<br>
+		<br><li>
+			관람 희망일 : ${rental.rental_date}
 		</li>
-		<li>
+		<br><li>
 			문의자명 : ${rental.rental_name} (${rental.rental_email})<br>
 		</li>
-		<li>
+		<br><li>
 			연락처 : ${rental.rental_phone}<br>
 		</li>
-		<li>
+		<br><li>
 			${rental.rental_content}<br>
 		</li>
 	</ul>
@@ -58,7 +58,12 @@
 		</script>
 	</div>
 	<div class="align-right">
+	<c:if test="${user.mem_auth == 1}">
 	<input type="button" value="목록" onclick="location.href='${pageContext.request.contextPath}/faq/rental'">
+	</c:if>
+	<c:if test="${user.mem_auth == 9}">
+	<input type="button" value="목록" onclick="location.href='${pageContext.request.contextPath}/faq/rental/rental_admin'">	
+	</c:if>
 	</div>
 	</div>
 	<hr size="1" width="100%">

@@ -2,10 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/SSH.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <!-- 내용 시작 -->
 <div class="page-main">
-	<h2>대관 문의</h2>
+	<h5>단체/대관 문의</h5>
+	<span>단체 및 대관 예약 문의입니다.</span>
 
 	<!-- 검색 기능 -->
 	<form action="rental" id="search_form" method="get">
@@ -28,7 +30,10 @@
 	<c:if test="${count==0}">
 	<div class="result-display">신청한 예약건이 없습니다</div>
 	</c:if>
+	
+	
 	<c:if test="${count>0}">
+	<br><br><br>
 	<table class="striped-table">
 		<tr>
 			<th class="align-center">번호</th>

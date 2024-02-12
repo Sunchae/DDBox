@@ -82,9 +82,24 @@
   margin-top: 20px;
  }
  
- div{
- justify-content: space-between;
+ /*검색, 정렬*/
+ .search {
+  float: left;
+}
+.align-right {
+  float: right;
+}
+ 
+ /*카테고리 정렬 << 다시 작성*/
+ div ul > li .on{
+ width:110px;
  }
+ 
+ /*테이블 크기 조정*/
+ .striped-table {
+  width: 500px;
+}
+ 
  
  
 #topMenu{

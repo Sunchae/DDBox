@@ -10,6 +10,9 @@
 		<li>
 			작성일 : ${email.question_regdate}
 		</li>
+		<br><li>
+		<c:if test="${!empty email.scr_num}">해당 영화관 : ${email.scr_name}</c:if>
+		</li>
 	</ul>
 	<hr size="1" width="100%">
 	
@@ -39,7 +42,7 @@
 	<c:if test="${email.ask_content!=null}">
 	
 	<div class="page-main">
-	<h2>${member.mem_num}님, 답변 드립니다.</h2> <!-- 여기 다시 한번 확인하기 -->
+	<h2>${email.mem_id}님, 답변 드립니다.</h2> <!-- 여기 다시 한번 확인하기 -->
 	<ul class="detail-info">
 		<li>
 			답변 등록일 : ${email.ask_regdate}
@@ -54,8 +57,11 @@
 	</c:if>
 	
 	<div class="align-right">
-		<c:if test="${!empty user && user.mem_auth == 9}">
-			<input type="button" value="답글작성" onclick="location.href='update?qna_num=${email.qna_num}'">
+		<c:if test="${empty email.ask_content && user.mem_auth == 9}">
+			<input type="button" value="답변작성" onclick="location.href='update?qna_num=${email.qna_num}'">
+		</c:if>
+		<c:if test="${!empty email.ask_content && user.mem_auth == 9}">
+			<input type="button" value="답변수정" onclick="location.href='update?qna_num=${email.qna_num}'">
 		</c:if>
 		<c:if test="${!empty user && user.mem_num == email.mem_num}">
 			<input type="button" value="삭제" id="delete_btn">
@@ -69,7 +75,12 @@
 			};
 		</script>
 	</c:if>
+	<c:if test="${user.mem_auth == 1}">
 	<input type="button" value="목록" onclick="location.href='${pageContext.request.contextPath}/faq/email'">
+	</c:if>
+	<c:if test="${user.mem_auth == 9}">
+	<input type="button" value="목록" onclick="location.href='${pageContext.request.contextPath}/faq/email/email_admin'">	
+	</c:if>
 	</div>
 	<hr size="1" width="100%">
 </div>

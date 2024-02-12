@@ -37,6 +37,8 @@ public class EmailVO {
 	
 	private ScreenVO screen;
 	
+	private String scr_name;
+	
 	//member_detail
 //	private String mem_name;
 //	private String mem_email;

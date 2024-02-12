@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 내용 시작 -->
 <div class="page-main">
-	<h2>이메일 문의</h2>
+	<h5>이메일 문의</h5>
+	<span>문의글을 남겨주시면 답변을 남겨드립니다.</span>
 	
 	<!-- 검색 기능 -->
 	<form action="email" id="search_form" method="get">
@@ -27,15 +28,20 @@
 			</c:if>
 		</div>
 	</form>
+	
+	
 	<c:if test="${count==0}">
 	<div class="result-display">작성한 문의사항이 없습니다</div>
 	</c:if>
+	
+	
 	<c:if test="${count>0}">
+	<br><br><br>
 	<table class="striped-table">
 		<tr>
 			<th class="align-center">번호</th>
 			<th class="align-center">문의유형</th>
-			<th width="400" class="align-center">제목</th>
+			<th width="300" class="align-center">제목</th>
 			<th class="align-center">상태</th>
 		</tr>
 		<c:forEach var="email" items="${list}"> 
@@ -48,7 +54,7 @@
 				<c:if test="${email.qna_type==4}">제안</c:if>
 				<c:if test="${email.qna_type==5}">분실물</c:if>
 			</td>
-			<td class="align-center"><a href="email/detail?qna_num=${email.qna_num}">${email.qna_title}</a></td>
+			<td class="align-center" width="300" ><a href="email/detail?qna_num=${email.qna_num}">${email.qna_title}</a></td>
 			<td class="align-center">
 				<c:if test="${email.ask_content==null}">답변대기</c:if>
 				<c:if test="${email.ask_content!=null}">답변완료</c:if>

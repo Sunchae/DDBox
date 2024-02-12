@@ -39,4 +39,6 @@ public class RentalVO {
 	private String rental_email;
 	private int rental_status;
 	
+	private String scr_name;
+	
 }
