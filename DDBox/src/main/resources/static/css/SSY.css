@@ -22,6 +22,17 @@
 .more-btn {
     text-align:right;
 }
+.event-list {
+    display: flex; /* flexbox를 사용하여 가로 배치 */
+    flex-wrap: wrap; /* 요소들을 화면 크기에 맞게 자동으로 줄바꿈 */
+}
+.list-card {
+    flex: 0 0 33.33%; /* 각 요소의 너비를 33.33%로 설정하여 세 개의 요소가 한 줄에 배치될 수 있도록 함 */
+    padding: 0 10px; /* 각 요소의 좌우 여백 설정 */
+    box-sizing: border-box; /* 패딩과 테두리를 요소의 너비에 포함시킴 */
+    list-style: none; /* ul 태그의 기본 목록 스타일 제거 */
+}
+
 /*---------------------
 * 메인 타이틀
 *-----------------------*/
