@@ -39,13 +39,12 @@ strong{
     font-size: large;
 }
 .day{
-    border-top: 1px solid;
-    border-bottom: 1px solid rgb(207, 204, 204);
-    width:1000px;
+    width:1200px;
     box-sizing: border-box;
 }
 .now-day{
 	margin-top: 10px;
+	padding-left:7%;
 }
 
 .explain-button{
@@ -1117,4 +1116,11 @@ a#pageNext-1{
 	 color: white;
 	 border: 1px solid #743cf7;
 }
-	
+[type="submit"],[type="button"]{
+	height:33px;
+	background-color: #503396;
+	border-color: #503396;
+	color:white;
+	font-size:12pt;
+	width:150px;
+}	

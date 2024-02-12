@@ -96,7 +96,6 @@
             $('#choice_screen').val(choice_screen);
             selectScreen(scr_num);
             getMovieSchedule(choice_num,choice_screen,choice_date);
-            
          });
          //시간 클릭
          $(document).on('click','.each-time',function(){
@@ -274,6 +273,7 @@
          function displayMovieItem(movie) {
                let movieListContainer = $('.col-body');
            
+              
                let output = '<li class="movie-choice" data-num="' + movie.movie_num + '">';
                output += movie.movie_title;
                //output += '<h3>' + movie.title + '</h3>';
@@ -311,8 +311,8 @@
            
            $(document).on('click','.screen-choice',function(){
                 alert('영화를 먼저 선택하세요');
-                
             });
+           
       
       </script>
       <!-- li 클릭시 영화 제목+포스터 출력& 해당 영화가 상영되고 있는 극장 -->
