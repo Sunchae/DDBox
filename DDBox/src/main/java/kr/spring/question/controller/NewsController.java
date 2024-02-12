@@ -51,7 +51,7 @@ public class NewsController {
 		log.debug("<<글목록 count>> : " + count);
 		
 		//페이지처리
-		PageUtil page = new PageUtil(null, keyword, currentPage, count, 20, 10, "list","&order="+order+"&news_category="+news_category);
+		PageUtil page = new PageUtil(null, keyword, currentPage, count, 10, 5, "list","&order="+order+"&news_category="+news_category);
 		
 		List<NewsVO> list = null;
 		

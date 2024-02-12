@@ -53,7 +53,7 @@ public class ChatController {
 		
 		int count = chatService.selectRowCount(map);
 		
-		PageUtil page = new PageUtil(null,keyword,currentPage,count,30,10,"chattingListForAdmin");
+		PageUtil page = new PageUtil(null,keyword,currentPage,count,10,5,"chattingListForAdmin");
 		
 		List<ChatroomVO> list = null;
 		if(count>0) {

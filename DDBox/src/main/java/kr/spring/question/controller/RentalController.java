@@ -98,7 +98,7 @@ public class RentalController {
 		log.debug("<<대관 글목록 count>>" + count);
 		
 		//페이지 처리
-		PageUtil page = new PageUtil(null, keyword, currentPage, count, 20, 10, "list");
+		PageUtil page = new PageUtil(null, keyword, currentPage, count, 10, 5, "list");
 		
 		List<RentalVO> list = null;
 		if(count > 0) {
@@ -134,7 +134,7 @@ public class RentalController {
 		log.debug("<<대관 글목록 count>>" + count);
 		
 		//페이지 처리
-		PageUtil page = new PageUtil(null, keyword, currentPage, count, 20, 10, "list");
+		PageUtil page = new PageUtil(null, keyword, currentPage, count, 10, 5, "list");
 		
 		List<RentalVO> list = null;
 		if(count > 0) {
@@ -197,9 +197,9 @@ public class RentalController {
 		log.debug("<<글 수정>> : " + rentalVO);
 		
 		if(result.hasFieldErrors("scr_num") || result.hasFieldErrors("rental_per") || result.hasFieldErrors("rental_content") || result.hasFieldErrors("rental_name") 
-				|| result.hasFieldErrors("rental_phone") || result.hasFieldErrors("rental_email") || result.hasFieldErrors("rental_date")) {
-			return "rental_update";
-		}
+			    || result.hasFieldErrors("rental_phone") || result.hasFieldErrors("rental_email") || result.hasFieldErrors("rental_date")) {
+			    return "rental_update";
+			}
 		
 		rentalService.updateRental(rentalVO);
 		

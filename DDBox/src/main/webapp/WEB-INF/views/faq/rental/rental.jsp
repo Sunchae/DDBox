@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <!-- 내용 시작 -->
 <div class="page-main">
 	<h2>대관 문의</h2>
@@ -30,18 +32,17 @@
 	<table class="striped-table">
 		<tr>
 			<th class="align-center">번호</th>
-			<th class="align-center">희망영화관</th>
-			<th width="400" class="align-center">문의자명</th>
 			<th class="align-center">관람희망일</th>
+			<th class="align-center">문의자명</th>
 			<th class="align-center">등록일</th>
 			<th class="align-center">상태</th>
 		</tr>
 		<c:forEach var="rental" items="${list}"> 
 		<tr>
 			<td class="align-center"><a href="rental/detail?rental_num=${rental.rental_num}">${rental.rental_num}</a></td>
-			<td class="align-center"><a href="rental/detail?rental_num=${rental.rental_num}">${rental.scr_num}</a></td>
+			<td class="align-center"><a href="rental/detail?rental_num=${rental.rental_num}"><c:set var="dateString" value="${rental.rental_date}" />
+        ${fn:substring(dateString, 0, 10)}</a></td>
 			<td class="align-center"><a href="rental/detail?rental_num=${rental.rental_num}">${rental.rental_name}</a></td>
-			<td class="align-center"><a href="rental/detail?rental_num=${rental.rental_num}">${rental.rental_date}</a></td>
 			<td class="align-center"><a href="rental/detail?rental_num=${rental.rental_num}">${rental.rental_regdate}</a></td>
 			<td class="align-center">
 				<c:if test="${rental.rental_status==1}">접수중</c:if>

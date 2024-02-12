@@ -10,10 +10,7 @@
 		<form:errors element="div" cssClass="error-color"/>
 		<ul>
 			<li>
-				개인정보 들어가는 곳
-			</li>
-			<li>
-			※ 문의에 대한 따른 답변을 위해 회원 가입 시 입력하신 연락처를 확인해주세요. <input type="button" value="수정">
+			※ 문의에 대한 따른 답변을 위해 회원 가입 시 입력하신 연락처를 확인해주세요. <input type="button" value="수정" onclick="location.href='${pageContext.request.contextPath}/member/updateUser'">
 			</li>
 		</ul>
 		

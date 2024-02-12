@@ -24,6 +24,7 @@
 			#{rental_email},
 			#{rental_date})
 	</insert>
+	
 
 	<!-- 검색 기능 -->
 	<sql id="rentalSearch">
