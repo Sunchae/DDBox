@@ -42,8 +42,8 @@ public class StoreServiceImpl implements StoreService{
 	}
 
 	@Override
-	public int selectRowCount(Map<String, Object> map) {
-		return storeMapper.selectRowCount(map);
+	public int selectRowCount(Map<String, Object> map, int store_type) {
+		return storeMapper.selectRowCount(map, store_type);
 	}
 
 	@Override

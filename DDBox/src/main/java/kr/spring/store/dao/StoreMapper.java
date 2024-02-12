@@ -15,8 +15,8 @@ public interface StoreMapper {
 	@Select("SELECT store_num,store_title,store_content,store_price,store_photo FROM store")
 	public List<StoreVO> selectList(Map<String, Object> map);
 	
-	@Select("SELECT COUNT(*) FROM store JOIN member USING(mem_num)")
-	public int selectRowCount(Map<String, Object> map);
+	@Select("SELECT COUNT(*) FROM store WHERE store_type=#{store_type}")
+	public int selectRowCount(Map<String, Object> map, int store_type);
 	
 	public void insertStore(StoreVO store);							//xml
 	@Select("SELECT * FROM store JOIN member USING(mem_num) WHERE store_num=#{store_num}")

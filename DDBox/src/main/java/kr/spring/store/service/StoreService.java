@@ -7,7 +7,7 @@ import kr.spring.store.vo.StoreVO;
 
 public interface StoreService {
 	public List<StoreVO> selectList(Map<String, Object> map);
-	public int selectRowCount(Map<String, Object> map);
+	public int selectRowCount(Map<String, Object> map, int store_type);
 	public void insertStore(StoreVO store);
 	public StoreVO selectStore(int store_num);
 	public void updateStore(StoreVO store);

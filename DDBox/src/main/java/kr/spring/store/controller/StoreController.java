@@ -128,12 +128,12 @@ public class StoreController {
 	 *	스토어 티켓 글 목록 
 	 *=================================*/
 	@RequestMapping("/store/ticketList")
-	public String ticket(@RequestParam(value="pagenum",defaultValue="1") int currentPage, HttpSession session, Model model) {
+	public String ticket(@RequestParam(value="pageNum",defaultValue="1") int currentPage, HttpSession session, Model model) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		int count = storeService.selectRowCount(map);
+		int count = storeService.selectRowCount(map,0);
 		
-		PageUtil page = new PageUtil(currentPage, count, 10,10,"list");
+		PageUtil page = new PageUtil(currentPage, count, 4,10,"ticketList");
 		
 		List<StoreVO> list = null;
 		
@@ -155,11 +155,11 @@ public class StoreController {
 	 *	팝콘 메뉴 목록
 	 *=================================*/
 	@RequestMapping("/store/storePopcorn")
-	public String popcorn(@RequestParam(value="pagenum",defaultValue="1") int currentPage, HttpSession session, Model model) {
+	public String popcorn(@RequestParam (value="pageNum",defaultValue="1") int currentPage, HttpSession session, Model model) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		int count = storeService.selectRowCount(map);
-		
-		PageUtil page = new PageUtil(currentPage, count, 10,10,"list");
+		int count = storeService.selectRowCount(map,1);
+
+		PageUtil page = new PageUtil(currentPage, count, 4,10,"storePopcorn");
 		
 		List<StoreVO> list = null;
 		if(count > 0) {

@@ -548,7 +548,7 @@ public class MemberController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		int count = payService.selectRowCount(map);
 		
-		PageUtil page = new PageUtil(currentPage, count, 5,10,"list");
+		PageUtil page = new PageUtil(currentPage, count, 5,10,"myPageGiftshop");
 		
 		List<PayVO> list = null;
 		if(count > 0) {
