@@ -3,6 +3,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- 내용 시작 -->
+<style>
+	 form {
+            border: none;
+        }
+        .page-main{
+	width:20%;
+	margin:0 auto;/*중앙 정렬*/
+}
+</style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <div class="page-main">
 	<form>
