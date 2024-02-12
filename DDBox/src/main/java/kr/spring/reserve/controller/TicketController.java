@@ -145,7 +145,7 @@ public class TicketController {
 		TicketVO ticket = null;
 		//ticket = ticketService.insertTicket(ticket); 
 		
-	 return "payConfirm";
+	 return "payConfirm"; 
 	}
 	
 }
