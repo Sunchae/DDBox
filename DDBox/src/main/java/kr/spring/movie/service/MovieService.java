@@ -26,4 +26,11 @@ public interface MovieService {
 	public int checkLike(int mem_num, int movie_num);
 	public boolean toggleLike(int mem_num, int movie_num);
 	public int countLikes(int movie_num);
+	
+
+	//영화 데이터 차트
+	// 성별에 따른 좋아요 수 조회
+    public Map<String, Object> countLikesByGender(int movie_num);
+    // 연령대별 좋아요 수 조회
+    public Map<String, Object> countLikesByAgeGroup(int movie_num);
 }

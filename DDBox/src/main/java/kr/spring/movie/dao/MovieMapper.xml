@@ -73,4 +73,30 @@
 	</select>
 	
 	
+	<select id="countLikesByGender" parameterType="int" resultType="java.util.HashMap">
+
+	SELECT
+		SUM(CASE WHEN md.mem_gender = 1 THEN 1 ELSE 0 END) AS male_count,
+		SUM(CASE WHEN md.mem_gender = 2 THEN 1 ELSE 0 END) AS female_count
+	FROM
+		member_detail md
+	JOIN
+		movie_fav mf ON md.mem_num = mf.mem_num
+	WHERE
+		mf.movie_num = #{movie_num}
+    </select>
+	<select id="countLikesByAgeGroup" parameterType="int" resultType="java.util.HashMap">
+        SELECT
+            SUM(CASE WHEN md.mem_age = 1 THEN 1 ELSE 0 END) AS "10대",
+            SUM(CASE WHEN md.mem_age = 2 THEN 1 ELSE 0 END) AS "20대",
+            SUM(CASE WHEN md.mem_age = 3 THEN 1 ELSE 0 END) AS "30대",
+            SUM(CASE WHEN md.mem_age = 4 THEN 1 ELSE 0 END) AS "40대",
+            SUM(CASE WHEN md.mem_age = 5 THEN 1 ELSE 0 END) AS "50대이상"
+        FROM
+            member_detail md
+        JOIN
+            movie_fav mf ON md.mem_num = mf.mem_num
+        WHERE
+            mf.movie_num = #{movieNum}
+    </select>
 </mapper>

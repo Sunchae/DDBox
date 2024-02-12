@@ -99,6 +99,20 @@ public class MovieServiceImpl implements MovieService{
 			return movieMapper.checkLike(mem_num, movie_num);
 		}
 
+		
+		/*==================================
+		 * 영화 차트 PART
+		 ===================================*/
+		@Override
+		public Map<String, Object> countLikesByGender(int movie_num) {
+			return movieMapper.countLikesByGender(movie_num);
+		}
+
+		@Override
+		public Map<String, Object> countLikesByAgeGroup(int movie_num) {
+			return movieMapper.countLikesByAgeGroup(movie_num);
+		}
+
 
 
 		
