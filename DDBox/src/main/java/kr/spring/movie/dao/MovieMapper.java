@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import kr.spring.movie.vo.MovieLikeVO;
@@ -42,9 +43,6 @@ public interface MovieMapper {
 	public List<MovieVO> selectMovieListWithLikes();
 	
 	
-	
-	
-	
 	//영화 좋아요 삽입 
 
 	@Select("SELECT count(*) FROM movie_fav WHERE mem_num=#{mem_num} AND movie_num=#{movie_num}")
@@ -55,8 +53,12 @@ public interface MovieMapper {
 	public void deleteLike(int mem_num, int movie_num);
 	@Select("SELECT count(*) FROM movie_fav WHERE movie_num=#{movie_num}")
 	public int countLikes(int movie_num);
-	//====영화 상세정보====
-	//영화 상세 정보들 호출
+	
+	//영화 데이터 차트
+	// 성별에 따른 좋아요 수 조회
+    public Map<String, Object> countLikesByGender(int movie_num);
+    // 연령대별 좋아요 수 조회
+    public Map<String, Object> countLikesByAgeGroup(int movie_num);
 		
 	
 	

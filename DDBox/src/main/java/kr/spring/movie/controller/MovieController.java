@@ -1,5 +1,6 @@
 package kr.spring.movie.controller;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,6 +70,8 @@ public class MovieController {
 		    return "movieDetail";
 		}
 	  
+	  //좋아요 처리
+	  
 	  @PostMapping("/movie/checkLikeStatus")
 	  @ResponseBody
 	  public Map<String, Object> checkLikeStatus(@RequestParam("movie_num") int movie_num, HttpSession session) {
@@ -118,5 +121,54 @@ public class MovieController {
 
 	      return resultMap;
 	      }
+	  
+	  //차트 데이터 처리
+	  
+	  @GetMapping("/movie/likesByAgeGroup")
+	  @ResponseBody
+	  public Map<String, Object> getLikesByAgeGroup(@RequestParam("movie_num") int movieNum) {
+	      Map<String, Object> resultMap = new HashMap<>();
+	      try {
+	         Map<String, Object> likesByAgeGroupData = movieService.countLikesByAgeGroup(movieNum);
+	          resultMap.put("status", "success");
+	          resultMap.put("data", likesByAgeGroupData);
+	          
+	          
+	          log.debug("<<영화 데이터 차트 연령대>>" + likesByAgeGroupData);
+	      } catch (Exception e) {
+	          resultMap.put("status", "error");
+	          resultMap.put("message", "Failed to fetch likes by age group data");
+	          log.error("Error fetching likes by age group", e);
+	      }
+	      return resultMap;
+	  }
+	  
+	  @GetMapping("/movie/likesByGender")
+	  @ResponseBody
+	  public Map<String, Object> getLikesByGender(@RequestParam("movie_num") int movieNum) {
+	      Map<String, Object> resultMap = new HashMap<>();
+	      try {
+	          Map<String, Object> likesByGenderData = movieService.countLikesByGender(movieNum);
+	          resultMap.put("status", "success");
+	          resultMap.put("data", likesByGenderData);
+	       // 남성 좋아요, 여성 좋아요 추출 (BigDecimal에서 Integer로 변환)
+	          Integer maleCount = ((BigDecimal) likesByGenderData.get("MALE_COUNT")).intValue();
+	          Integer femaleCount = ((BigDecimal) likesByGenderData.get("FEMALE_COUNT")).intValue();
+	          resultMap.put("Male", maleCount);
+	          resultMap.put("Female", femaleCount);
+	          log.debug("<<영화 데이터 차트 성별>>" + likesByGenderData);
+	          log.debug("<<성별 데이터 남자 Male>>" + maleCount);
+	          log.debug("<<성별 데이터 여자 Female>>" + femaleCount);
+	      } catch (Exception e) {
+	          resultMap.put("status", "error");
+	          resultMap.put("message", "Failed to fetch likes by gender data");
+	          log.error("Error fetching likes by gender", e);
+	      }
+	      return resultMap;
+	  }
+	  
+	  
+	  
+	  
 	  
 }

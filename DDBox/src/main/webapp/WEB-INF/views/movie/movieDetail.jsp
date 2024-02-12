@@ -60,11 +60,10 @@
     </div>
 
     <!-- 3번 영역: 차트/그래프 예매자 남녀비율, 연령대 등 -->
-    <div class="audience-stats-area">
-        <p>예매자 남녀비율, 연령대 차트(예시)</p>
-    </div>
+	<div id="age_group_chart" style="width: 500px; height: 500px;"></div>
+	<div id="gender_chart" style="width: 500px; height: 500px;"></div>
 
-    <!-- 4번 영역: 사용자 리뷰 및 평점 -->
+	<!-- 4번 영역: 사용자 리뷰 및 평점 -->
     <div class="user-reviews-area">
         <h3>사용자 리뷰 및 평점</h3>
         <div class="review-form">
@@ -163,7 +162,7 @@ function fetchMovieDetails(movieNum) {
     .then(data => {
         // 장르 정보 표시
         const genres = data.genres.map(genre => genre.name).join(', ');
-        document.getElementById('genres').textContent = genres;
+        document.getElementById('genres').textContent = '장르: ' +genres;
     })
     .catch(error => console.log('Error:', error));
     
@@ -217,5 +216,103 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 </script>
+<!-- Google Charts 로드 -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+// Google Charts 라이브러리의 Bar Chart와 Pie Chart 패키지 로드
+google.charts.load('current', {'packages':['bar', 'corechart']});
 
+// 페이지가 로드될 때 실행될 콜백 함수 설정
+google.charts.setOnLoadCallback(loadChartData);
+
+function loadChartData() {
+	
+    drawAgeGroupChart();
+    drawGenderChart();
+}
+
+function drawAgeGroupChart() {
+    var movieNum = new URLSearchParams(window.location.search).get('movie_num');
+    
+    $.ajax({
+        url: '/movie/likesByAgeGroup',
+        type: 'GET',
+        data: { movie_num: movieNum },
+        dataType: 'json',
+        success: function(response) {
+            if(response.status === "success") {
+                drawAgeGroupChartWithData(response.data);
+            } else {
+                console.error("Failed to fetch likes by age group data:", response.message);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("An error occurred:", error);
+        }
+    });
+}
+
+function drawAgeGroupChartWithData(data) {
+    var dataTable = new google.visualization.DataTable();
+    dataTable.addColumn('string', 'Age Group');
+    dataTable.addColumn('number', 'Likes');
+    
+    Object.keys(data).forEach(function(key) {
+        dataTable.addRow([key, data[key]]);
+    });
+
+    var options = {
+        chart: {
+            title: '연령대별 좋아요 분포',
+            subtitle: '각 연령대별 좋아요 수',
+        },
+        bars: 'vertical'
+    };
+
+    var chart = new google.charts.Bar(document.getElementById('age_group_chart'));
+    chart.draw(dataTable, google.charts.Bar.convertOptions(options));
+}
+
+function drawGenderChart() {
+    var movieNum = new URLSearchParams(window.location.search).get('movie_num');
+    
+    $.ajax({
+        url: '/movie/likesByGender',
+        type: 'GET',
+        data: { movie_num: movieNum },
+        dataType: 'json',
+        success: function(response) {
+            if(response.status === "success") {
+                drawGenderChartWithData(response.data);
+            } else {
+                console.error("Failed to fetch likes by gender data:", response.message);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("An error occurred:", error);
+        }
+    });
+}
+
+function drawGenderChartWithData(data) {
+	console.log(data);
+    var dataTable = new google.visualization.DataTable();
+    dataTable.addColumn('string', 'Gender');
+    dataTable.addColumn('number', 'Likes');
+
+    // 서버로부터 받은 데이터를 차트 데이터로 변환
+  
+    dataTable.addRow(['Male', data.MALE_COUNT]);
+    dataTable.addRow(['Female', data.FEMALE_COUNT]);
+	console.log('남자 좋아요 숫자 : ' + data.MALE_COUNT);
+	console.log('여자 좋아요 숫자 : ' + data.FEMALE_COUNT);
+    var options = {
+        title: '성별 좋아요 분포',
+        pieHole: 0.4, // 도넛 차트 형태로 표시하기 위한 옵션
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('gender_chart'));
+    chart.draw(dataTable, options);
+}
+</script>
     
