@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.event.service.EventService;
+import kr.spring.event.vo.Event_listVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.movie.service.MovieService;
 import kr.spring.movie.vo.MovieVO;
@@ -27,17 +29,23 @@ import lombok.extern.slf4j.Slf4j;
 public class MovieController {
 	    @Autowired
 	    private MovieService movieService;
-
+	    @Autowired
+		private EventService eventService;
+	    
 	    @GetMapping("/main/main")
 	    public ModelAndView getMainMovieList() {
 	    	
 	    	List<MovieVO> movieList = movieService.selectMainMovieList();
-	    	log.debug("<<영화 목록 반환 >> + " + movieList);
+	    	log.debug("<<영화 목록 반환 >> : " + movieList);
+	    	List<Event_listVO> eventList = eventService.selectMainEvent();
+	    	log.debug("<<시작페이지 이벤트 목록 반환 >> : " + eventList);
+	    	
 	    	
 	    	
 	    	ModelAndView mav = new ModelAndView();
 	    	mav.setViewName("mainpage");
-	    	mav.addObject("movieList",movieList);
+	    	mav.addObject("movieList", movieList); // 영화 목록 추가
+	        mav.addObject("eventList", eventList); // 이벤트 목록 추가
 	    	
 	    	return mav;
 	    	

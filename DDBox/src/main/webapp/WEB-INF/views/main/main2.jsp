@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- Main2 내용 시작 -->
 <body>
-<div class="page-main">
+<%-- <div class="page-main">
 	<div>
 		<h2>이벤트 몇 가지 </h2>
 	  	<!-- 이벤트 목록 -->
@@ -26,6 +26,6 @@
             </c:forEach>
         	</div> 
 	</div>
-</div>
+</div> --%>
 <!-- Main2 내용 끝 -->
 </body>

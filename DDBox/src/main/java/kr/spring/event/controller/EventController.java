@@ -39,15 +39,8 @@ public class EventController {
 	@Autowired
 	private EventService eventService;
 	
-	/*
-	 * @RequestMapping("/main/main") public ModelAndView mainpageprosess() {
-	 * List<Event_listVO> list = eventService.selectMainEvent();
-	 * 
-	 * ModelAndView mav = new ModelAndView(); mav.setViewName("eventMain");
-	 * mav.addObject("list", list);
-	 * 
-	 * return mav; }
-	 */
+	
+	
 	/*========================
 	 * Main Page 이벤트
 	 *========================*/
