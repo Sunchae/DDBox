@@ -52,21 +52,28 @@ public class TicketController {
 	
 	
 	/*====================
-	 * 	  예매 정보 읽어오기
+	  	  예매 정보 읽어오기
 	 ====================*/
-	/*
-	 * @RequestMapping("/reserve/payConfirm") public String confirm(Model
-	 * model,TicketVO ticket,HttpSession session) {
-	 * 
-	 * ticketService.selectedMoive(ticket.getMem_num());
-	 * ticketService.selectedScreen(ticket.getScr_num());
-	 * ticketService.selectedShow(ticket.getShw_num());
-	 * 
-	 * 
-	 * model.addAttribute("ticketList", ticket);
-	 * 
-	 * return "payConfirm"; }
-	 */
+	
+	  @RequestMapping("/reserve/payConfirm") 
+	  public String confirm(Model model,int choice_num, int choice_screen,int choice_time, int choice_people, int choice_price,HttpSession session) {
+	  
+		ShowVO show = null;
+		show = ticketService.selectedShow(choice_time);
+			
+		ScreenVO screen = null;
+		screen = ticketService.selectedScreen(choice_screen);
+			
+		MovieVO movie = null;
+		movie = ticketService.selectedMoive(choice_num);
+			
+			
+		model.addAttribute("movie",movie);
+		model.addAttribute("screen",screen);
+		model.addAttribute("show",show);
+	  
+	  return "payConfirm"; }
+	 
 	
 	
 	/*====================
@@ -139,6 +146,12 @@ public class TicketController {
 		log.debug("<<티켓 구매>> : " + ticket);
 		
 		ticketService.insertTicket(ticket);
+		ticketService.selectedMoive(ticket.getMovie_num());
+		ticketService.selectedScreen(ticket.getScr_num());
+		ticketService.selectedShow(ticket.getShw_num());
+		ticketService.selectedPPL(ticket.getRes_mem_total());
+		ticketService.selectedPrice(ticket.getRes_pay());
+		
 		
 		model.addAttribute("ticketPay", ticket);
 		

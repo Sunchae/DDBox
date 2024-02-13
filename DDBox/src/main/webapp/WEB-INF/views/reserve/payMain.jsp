@@ -107,7 +107,6 @@ s               <p class="screen-location">상영관 이름 : ${screen.scr_name}
 							<input type="hidden" name="shw_num" value="${show.shw_num}" id="choice_time">
 							<input type="hidden" name="res_mem_total" value="${param.choice_people}" id="choice_people">
             				<input type="hidden" name="res_pay" value="${param.choice_price}" id="choice_price">
-            				<button id="check_module" class="btn-pay" type="submit">구매</button>
 						</form> 
 						
 							<script>
