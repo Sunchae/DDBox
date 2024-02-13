@@ -21,6 +21,6 @@ public interface PayMapper {
 	@Select("SELECT store_num, store_content, store_title, store_photo, store_price FROM store WHERE store_num=#{store_num}")
 	public StoreVO selectStore(int store_num);
 	
-	@Select("SELECT COUNT(*) FROM pay JOIN member USING(mem_num)")
-	public int selectRowCount(Map<String, Object> map);
+	@Select(" SELECT COUNT(*) FROM pay where mem_num = #{mem_num}")
+	public int selectRowCount(Map<String, Object> map, int mem_num);
 }

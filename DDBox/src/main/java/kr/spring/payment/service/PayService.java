@@ -15,5 +15,5 @@ public interface PayService {
 	//기프트샵에 표시될 구매완료된 목록
 	public List<PayVO> selectList(Map<String, Object> map);
 	
-	public int selectRowCount(Map<String, Object> map);
+	public int selectRowCount(Map<String, Object> map, int mem_num);
 }

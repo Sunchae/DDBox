@@ -40,8 +40,8 @@ public class PayServiceImpl implements PayService{
 	}
 
 	@Override
-	public int selectRowCount(Map<String, Object> map) {
-		return payMapper.selectRowCount(map);
+	public int selectRowCount(Map<String, Object> map, int mem_num) {
+		return payMapper.selectRowCount(map, mem_num);
 	}
 
 }

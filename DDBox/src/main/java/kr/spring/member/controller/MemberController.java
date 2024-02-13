@@ -525,7 +525,7 @@ public class MemberController {
 	public String process1(@RequestParam(value="pageNum",defaultValue = "1") int currentPage, HttpSession session, Model model) {
 		MemberVO vo = (MemberVO)session.getAttribute("user");
 		Map<String, Object> map = new HashMap<String, Object>();
-		int count = payService.selectRowCount(map);
+		int count = payService.selectRowCount(map, vo.getMem_num());
 		
 		PageUtil page = new PageUtil(currentPage, count, 10,10,"myPageTicket");
 		
@@ -566,7 +566,8 @@ public class MemberController {
 	public String sotrePayMain(@RequestParam(value="pageNum",defaultValue = "1") int currentPage, HttpSession session, Model model) {
 		MemberVO vo = (MemberVO)session.getAttribute("user");
 		Map<String, Object> map = new HashMap<String, Object>();
-		int count = payService.selectRowCount(map);
+		
+		int count = payService.selectRowCount(map, vo.getMem_num());
 		
 		PageUtil page = new PageUtil(currentPage, count, 5,10,"myPageGiftshop");
 		
@@ -581,7 +582,7 @@ public class MemberController {
 		model.addAttribute("count", count);
 		model.addAttribute("list", list);
 		model.addAttribute("page", page.getPage());
-		log.debug("<<팝콘 글 목록 list>> : " + list);
+		log.debug("<<myPageGiftshop 글 목록 list>> : " + list);
 
 		return "storePayMain";
 	}
