@@ -16,7 +16,7 @@
 		<nav class="navbar navbar-expand-lg navbar-light bg-top p-0" id="navbar-top">
 			<div class="collapse navbar-collapse">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a href="#" class="nav-link">VIP LOUNGE</a></li>
+					<li class="nav-item"><a href="${pageContext.request.contextPath}/faq/vip" class="nav-link">VIP LOUNGE</a></li>
 					<li class="nav-item"><a href="#" class="nav-link">멤버십</a></li>
 					<li class="nav-item"><a href="${pageContext.request.contextPath}/faq/main" class="nav-link">고객센터</a></li>
 				</ul>
