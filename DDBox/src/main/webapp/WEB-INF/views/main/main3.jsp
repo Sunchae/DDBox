@@ -9,7 +9,7 @@
 	 <div id="divNewPrdArea">
 				<div class="store-list mt30">
 					<ul class="list">
-						<c:forEach var="store" items="${list}">
+						<c:forEach var="store" items="${storeList}">
 							<li>
 								<a href="${pageContext.request.contextPath}/store/detail?store_num=${store.store_num}">
 									<div class="img">

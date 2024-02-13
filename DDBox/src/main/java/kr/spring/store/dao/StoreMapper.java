@@ -30,7 +30,7 @@ public interface StoreMapper {
 	@Update("UPDATE store SET store_photo='' WHERE store_num=#{store_num}")
 	public void deleteFile(int store_num);
 	
-	@Select("SELECT * FROM (SELECT * FROM store ORDER BY store_num DESC) WHERE ROWNUM <= 3")
+	@Select("SELECT * FROM (SELECT * FROM store ORDER BY store_num DESC) WHERE ROWNUM <= 4")
 	public List<StoreVO> selectMainList();
 	
 	public List<StoreVO> selectTicketList(Map<String, Object> map);

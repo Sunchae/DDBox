@@ -43,17 +43,15 @@ public class MovieController {
 	    	log.debug("<<영화 목록 반환 >> : " + movieList);
 	    	List<Event_listVO> eventList = eventService.selectMainEvent();
 	    	log.debug("<<시작페이지 이벤트 목록 반환 >> : " + eventList);
-	    	//List<StoreVO> ticketList = storeService.selectMainTicketList();
-	    	//log.debug("<<시작페이지 티켓 목록 반환>> : " + ticketList);
-	    	//List<StoreVO> popcornList = storeService.selectMainPopcornList();
-	    	//log.debug("<<시작페이지 팝콘 목록 반환>> : " + popcornList);
+	    	List<StoreVO> storeList = storeService.selectMainList();
+	    
 	    	
 	    	ModelAndView mav = new ModelAndView();
 	    	mav.setViewName("mainpage");
 	    	mav.addObject("movieList", movieList); // 영화 목록 추가
 	        mav.addObject("eventList", eventList); // 이벤트 목록 추가
-	        //mav.addObject("ticketList", eventList); // 티켓 목록 추가
-	        //mav.addObject("popcornList", eventList); // 팝콘 목록 추가
+	        mav.addObject("storeList", storeList); // 스토어 목록 추가
+	     
 	    	
 	    	return mav;
 	    	
