@@ -59,19 +59,18 @@ public class StoreController {
 	 * return "storeMainTest"; }
 	 */
 	
-	@RequestMapping("/store/storeMainTest")
-	public String storeMain(Model model) {
-		List<StoreVO> ticketlist = storeService.selectMainTicketList();
-		log.debug("<<스토어 메인 티켓 리스트>>");
-		List<StoreVO> popcornlist = storeService.selectMainPopcornList();
-		
-		model.addAttribute("ticketlist", ticketlist);
-		model.addAttribute("popcornlist", popcornlist);
-		
-
-		return "storeMainTest";
-	}
-	
+	/* <<메인페이지 호출 하는데에 써서 주석 처리 해놓습니다.>>
+	 * @RequestMapping("/store/storeMainTest") public String storeMain(Model model)
+	 * { List<StoreVO> ticketlist = storeService.selectMainTicketList();
+	 * log.debug("<<스토어 메인 티켓 리스트>>"); List<StoreVO> popcornlist =
+	 * storeService.selectMainPopcornList();
+	 * 
+	 * model.addAttribute("ticketlist", ticketlist);
+	 * model.addAttribute("popcornlist", popcornlist);
+	 * 
+	 * 
+	 * return "storeMainTest"; }
+	 */
 	/*=================================
 	 *	스토어 글 등록
 	 *=================================*/

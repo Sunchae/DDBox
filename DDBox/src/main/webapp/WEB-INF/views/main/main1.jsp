@@ -12,39 +12,42 @@
 }
 
 .btn-container {
-    display: none; /* 기본적으로 버튼 컨테이너 숨김 */
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    justify-content: center;
+	display: none; /* 기본적으로 버튼 컨테이너 숨김 */
+	position: absolute;
+	bottom: 10px;
+	left: 50%;
+	transform: translateX(-50%);
+	justify-content: center;
 }
+
 .poster {
-    position: relative;
+	position: relative;
 }
+
 .poster:hover .btn-container {
-    display: flex; /* 포스터 위에 마우스를 올렸을 때만 버튼 컨테이너 표시 */
+	display: flex; /* 포스터 위에 마우스를 올렸을 때만 버튼 컨테이너 표시 */
 }
+
 .movie-poster:hover {
 	filter: blur(1.5px);
 }
-.carousel-control-prev, .carousel-control-next {
-    display: block;
-}
 
+.carousel-control-prev, .carousel-control-next {
+	display: block;
+}
 </style>
 <body>
 	<div class="container mt-5">
 
 		<!-- 캐러셀 영역 -->
-		<div id="movieCarousel" class="carousel slide mx-auto d-block" data-ride="carousel" style="max-width: 800px;">
+		<div id="movieCarousel" class="carousel slide mx-auto d-block"
+			data-ride="carousel" style="max-width: 800px;">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
 					<!-- YouTube 임베드 코드 -->
 					<iframe width="800" height="400"
-						src="https://www.youtube.com/embed/EqRPpz7vt4I?si=PJCZpDKXo3mDTUvK" 
-						frameborder="0" allowfullscreen>
-					</iframe>
+						src="https://www.youtube.com/embed/EqRPpz7vt4I?si=PJCZpDKXo3mDTUvK"
+						frameborder="0" allowfullscreen> </iframe>
 					<div class="carousel-caption d-none d-md-block">
 						<!-- <h5>영화 제목 1</h5>
 						<p>영화 소개</p> -->
@@ -53,9 +56,8 @@
 				<div class="carousel-item">
 					<!-- 다른 YouTube 비디오를 삽입하려면 여기에 삽입 -->
 					<iframe width="800" height="400"
-						src="https://www.youtube.com/embed/Bldf9SWRPFM?si=7GSq_KDvUknQezY2" 
-						frameborder="0" allowfullscreen>
-					</iframe>
+						src="https://www.youtube.com/embed/Bldf9SWRPFM?si=7GSq_KDvUknQezY2"
+						frameborder="0" allowfullscreen> </iframe>
 					<div class="carousel-caption d-none d-md-block">
 						<!-- <h5>영화 제목 2</h5>
 						<p>영화 소개</p> -->
@@ -84,8 +86,8 @@
 								style="width: 100%; height: 550px; object-fit: cover; object-position: center;">
 							<div class="btn-container">
 								<a href="/movie/movieDetail?movie_num=${movie.movie_num}"
-									class="btn btn-light" style="margin-right: 5px;">상세정보</a> 
-								<a	href="/reserve/reserveMain?movie_num=${movie.movie_num}"
+									class="btn btn-light" style="margin-right: 5px;">상세정보</a> <a
+									href="/reserve/reserveMain?movie_num=${movie.movie_num}"
 									class="btn btn-light">예매하기</a>
 							</div>
 						</div>
@@ -99,33 +101,7 @@
 		</div>
 	</div>
 
-	<div>
-		<h2>이벤트 몇 가지 </h2>
-	  	<!-- 이벤트 목록 -->
-        	<div class="row mt-5">
-            <!-- 이벤트 목록 반복 출력 -->
-            <c:forEach var="event" items="${eventList}">
-            <div class="event_list">
-            	<ul>
-            		<li class="list-card">
-            			<a href="detail?event_num=${event.event_num}">
-            				<p>
-            					<img src="${pageContext.request.contextPath}/upload/${event.event_photo1}" class="list-img">
-            					</p>
-            					<p class="tit">${event.event_title}</p>
-            					<p class="date">${event.event_start}~${event.event_end}</p>
-            				
-            			</a>
-            		</li>
-            	</ul>
-            </div>
-            </c:forEach>
-        	</div> 
-	</div>
-
-
-
-
+	
 
 
 
@@ -135,8 +111,8 @@
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-		
-<script type="text/javascript">
+
+	<script type="text/javascript">
 $(document).ready(function(){
     // #movieCarousel의 carousel 요소를 찾고, slide.bs.carousel 이벤트 발생 시 자동 재생 설정
     $('#movieCarousel').carousel({ interval: 10000 });
@@ -153,5 +129,5 @@ $(document).ready(function(){
     });
 });
 
-</script>		
+</script>
 	<!-- Main1 내용 끝 -->

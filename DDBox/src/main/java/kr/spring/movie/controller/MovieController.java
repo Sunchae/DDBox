@@ -22,6 +22,8 @@ import kr.spring.event.vo.Event_listVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.movie.service.MovieService;
 import kr.spring.movie.vo.MovieVO;
+import kr.spring.store.service.StoreService;
+import kr.spring.store.vo.StoreVO;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -31,6 +33,8 @@ public class MovieController {
 	    private MovieService movieService;
 	    @Autowired
 		private EventService eventService;
+	    @Autowired
+		private StoreService storeService;
 	    
 	    @GetMapping("/main/main")
 	    public ModelAndView getMainMovieList() {
@@ -39,13 +43,17 @@ public class MovieController {
 	    	log.debug("<<영화 목록 반환 >> : " + movieList);
 	    	List<Event_listVO> eventList = eventService.selectMainEvent();
 	    	log.debug("<<시작페이지 이벤트 목록 반환 >> : " + eventList);
-	    	
-	    	
+	    	//List<StoreVO> ticketList = storeService.selectMainTicketList();
+	    	//log.debug("<<시작페이지 티켓 목록 반환>> : " + ticketList);
+	    	//List<StoreVO> popcornList = storeService.selectMainPopcornList();
+	    	//log.debug("<<시작페이지 팝콘 목록 반환>> : " + popcornList);
 	    	
 	    	ModelAndView mav = new ModelAndView();
 	    	mav.setViewName("mainpage");
 	    	mav.addObject("movieList", movieList); // 영화 목록 추가
 	        mav.addObject("eventList", eventList); // 이벤트 목록 추가
+	        //mav.addObject("ticketList", eventList); // 티켓 목록 추가
+	        //mav.addObject("popcornList", eventList); // 팝콘 목록 추가
 	    	
 	    	return mav;
 	    	
