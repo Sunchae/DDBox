@@ -10,19 +10,19 @@
 		<div class="check_warp">
 			<!-- 빠른검색 -->
 			<div class="box qna_search">
-				<b class="c_tit">자주찾는 질문 빠른 검색</b><br>
-				<form action="question" id="search_form" method="get">
+				<b class="c_tit" >자주찾는 질문 빠른 검색</b><br>
+				<form action="question" id="search_form" method="get" style="height: 65px;border-bottom-width: 10px;padding-bottom: 10px;">
 					<ul class="search">
 						<li>
 							<input type="search" name="keyword" id="keyword" value="${param.keyword}" placeholder="검색어를 입력해 주세요.">
 						</li>
 					</ul>
-					<div class="qu" >
-						<a href="/faq/question?keyword=현금영수증">현금영수증</a>
-						<a href="/faq/question?keyword=관람권">관람권</a>
-						<a href="/faq/question?keyword=예매">예매</a>
-						<a href="/faq/question?keyword=환불">환불</a>
-						<a href="/faq/question?keyword=취소">취소</a>
+					<div class="qu" style="height: 55px;">
+						<a href="/faq/question?keyword=현금영수증" style="color:white;">현금영수증</a>
+						<a href="/faq/question?keyword=관람권" style="color:white;">관람권</a>
+						<a href="/faq/question?keyword=예매" style="color:white;">예매</a>
+						<a href="/faq/question?keyword=환불" style="color:white;">환불</a>
+						<a href="/faq/question?keyword=취소" style="color:white;">취소</a>
 					</div>
 				</form>
 			</div>

@@ -19,22 +19,22 @@
 	<form:hidden path="news_num"/>
 	<form:errors element="div" cssClass="error-color"/>
 	<ul>
-		<li>
-			<form:label path="news_title">제목</form:label>
+		<li style="display: flex; align-items: center; height: 30px;">
+			<form:label path="news_title" style="padding-top: 0px;">제목</form:label>
 			<form:input path="news_title"/>
 			<form:errors path="news_title" cssClass="error-color"/>
-		</li><br>
- 		<li>
-			<form:label path="news_category">유형</form:label>
+		</li>
+ 		<li style="display: flex; align-items: center; height: 30px; margin-top:5px;">
+			<form:label path="news_category" style="padding-top: 0px;">유형</form:label>
 			<form:radiobutton path="news_category" value="1"/>시스템점검
 			<form:radiobutton path="news_category" value="2"/>극장
 			<form:radiobutton path="news_category" value="3"/>행사/이벤트
 			<form:radiobutton path="news_category" value="4"/>제휴이벤트
 			<form:radiobutton path="news_category" value="5"/>기타
 			<form:errors path="news_category" cssClass="error-color"/>
-		</li><br>
-		<li><b>내용</b></li><br>
-		<li>
+		</li>
+		<li style="margin-top: 5px;">내용</li>
+		<li style="margin-top: 10px;">
 			<form:textarea path="news_content"/>
 			<form:errors path="news_content" cssClass="error-color"/>
 			<script>

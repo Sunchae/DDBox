@@ -23,29 +23,29 @@
 			※ 문의에 대한 따른 답변을 위해 회원 가입 시 입력하신 연락처를 확인해주세요. <input type="button" value="수정" onclick="location.href='${pageContext.request.contextPath}/member/updateUser'">
 			</li>
 		</ul>
-		
+		<hr style="border-top: 1px dashed #ccc;">
 		<!-- 내용기입 -->	
 		<ul>
-	 		<li>
-				<form:label path="qna_type">문의유형(<span>*</span>)</form:label>
-				<form:radiobutton path="qna_type" value="1"/>문의
-				<form:radiobutton path="qna_type" value="2"/>불만
-				<form:radiobutton path="qna_type" value="3"/>칭찬
-				<form:radiobutton path="qna_type" value="4"/>제안
-				<form:radiobutton path="qna_type" value="5"/>분실물
+	 		<li style="display: flex; align-items: center; height: 30px;">
+				<form:label path="qna_type" style="margin-right: 10px; padding-top: 0px;">문의유형(<span>*</span>)</form:label>
+				<form:radiobutton path="qna_type" value="1" style="margin-right: 5px;"/>문의
+				<form:radiobutton path="qna_type" value="2" style="margin-right: 5px; margin-left: 8px;"/>불만
+				<form:radiobutton path="qna_type" value="3" style="margin-right: 5px; margin-left: 8px;"/>칭찬
+				<form:radiobutton path="qna_type" value="4" style="margin-right: 5px; margin-left: 8px;"/>제안
+				<form:radiobutton path="qna_type" value="5" style="margin-right: 5px; margin-left: 8px;"/>분실물
 				<form:errors path="qna_type" cssClass="error-color"/>
-			</li><br>
-			<li>
-				<form:label path="scr_num">해당 영화관</form:label>
+			</li>
+			<li style="display: flex; align-items: center; height: 30px;">
+				<form:label path="scr_num" style="margin-right: 10px; padding-top: 0px;">해당 영화관</form:label>
 				<form:select path="scr_num">
 		            <form:option value="0">영화관 선택</form:option>
 		            <c:forEach var="screen" items="${list}">
       				  <form:option value="${screen.scr_num}">${screen.scr_name}</form:option>
     				</c:forEach>
        			</form:select>
-			</li><br>
-			<li>
-				<form:label path="qna_title">제목(<span>*</span>)</form:label>
+			</li>
+			<li style="display: flex; align-items: center; height: 30px;  margin-top:10px;">
+				<form:label path="qna_title" style="margin-right: 10px; padding-top: 0px;">제목(<span>*</span>)</form:label>
 				<form:input path="qna_title"/>
 				<form:errors path="qna_title" cssClass="error-color"/>
 			</li><br>
@@ -73,8 +73,8 @@
 					});
 			</script>		
 		</li><br>
-			<li>
-				<form:label path="upload">첨부파일</form:label>
+			<li style="display: flex; align-items: center; height: 30px;  margin-top:10px;">
+				<form:label path="upload" style="margin-right: 10px; padding-top: 0px;">첨부파일</form:label>
 				<input type="file" name="upload" id="upload">
 			</li>
 		</ul>

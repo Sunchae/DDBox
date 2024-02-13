@@ -19,26 +19,26 @@
 	<form:hidden path="board_num"/>
 	<form:errors element="div" cssClass="error-color"/>
 	<ul>
-		<li>
-			<form:label path="board_title">제목</form:label>
+		<li style="display: flex; align-items: center; height: 30px;">
+			<form:label path="board_title" style="padding-top: 0px;">제목</form:label>
 			<form:input path="board_title"/>
 			<form:errors path="board_title" cssClass="error-color"/>
-		</li><br>
- 		<li>
-			<form:label path="board_category">유형</form:label>
-			<form:radiobutton path="board_category" value="1"/>예매
-			<form:radiobutton path="board_category" value="2"/>관람/결제수단
-			<form:radiobutton path="board_category" value="3"/>멤버십
-			<form:radiobutton path="board_category" value="4"/>VIP
-			<form:radiobutton path="board_category" value="5"/>할인/혜택
-			<form:radiobutton path="board_category" value="6"/>영화관
-			<form:radiobutton path="board_category" value="7"/>특별관
-			<form:radiobutton path="board_category" value="8"/>기프트샵
-			<form:radiobutton path="board_category" value="9"/>홈페이지/모바일
+		</li>
+ 		<li style="display: flex; align-items: center; height: 30px;">
+			<form:label path="board_category" style="padding-top: 0px;">유형</form:label>
+			<form:radiobutton path="board_category" value="1" style="margin-right: 2px;"/>예매
+			<form:radiobutton path="board_category" value="2" style="margin-right: 2px; margin-left: 2.5px;"/>관람/결제수단
+			<form:radiobutton path="board_category" value="3" style="margin-right: 2px; margin-left: 2.5px;"/>멤버십
+			<form:radiobutton path="board_category" value="4" style="margin-right: 2px; margin-left: 2.5px;"/>VIP
+			<form:radiobutton path="board_category" value="5" style="margin-right: 2px; margin-left: 2.5px;"/>할인/혜택
+			<form:radiobutton path="board_category" value="6" style="margin-right: 2px; margin-left: 2.5px;"/>영화관
+			<form:radiobutton path="board_category" value="7" style="margin-right: 2px; margin-left: 2.5px;"/>특별관
+			<form:radiobutton path="board_category" value="8" style="margin-right: 2px; margin-left: 2.5px;"/>기프트샵
+			<form:radiobutton path="board_category" value="9" style="margin-right: 2px; margin-left: 2.5px;"/>홈페이지/모바일
 			<form:errors path="board_category" cssClass="error-color"/>
-		</li><br>
-		<li><b>내용</b></li><br>
-		<li>
+		</li>
+		<li style="margin-top: 5px;">내용</li>
+		<li style="margin-top: 10px;">
 			<form:textarea path="board_content"/>
 			<form:errors path="board_content" cssClass="error-color"/>
 			<script>

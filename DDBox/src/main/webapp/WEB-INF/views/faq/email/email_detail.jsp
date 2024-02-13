@@ -42,7 +42,7 @@
 		<li>첨부파일 : <a href="file?qna_num=${email.qna_num}">${email.question_file}</a></li>
 	</ul>
 	<div class="align-center">
-		<img src="${pageContext.request.contextPath}/upload/${email.question_file}" class="detail-img">
+		<img src="${pageContext.request.contextPath}/upload/${email.question_file}" class="detail-img" width="800">
 	</div>
 	</c:if>		
 	

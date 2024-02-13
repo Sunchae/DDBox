@@ -8,8 +8,13 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <!-- 내용 시작 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/SSH.css">
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
+	$(document).ready(function () {
+		$("#register_form").submit(function () {
+			return validationForm();
+		});
+	});
+
 	function validationForm(){
 		var admitCheck1 = document.getElementById("admit1").checked;
 		var admitCheck2 = document.getElementById("admit2").checked;
@@ -34,8 +39,8 @@
 	<form:form action="write" modelAttribute="rentalVO" id="register_form" enctype="multipart/form-data">
 		<form:errors element="div" cssClass="error-color"/>
 		<ul>
-			<li>
-				<form:label path="scr_num">해당 영화관(<span>*</span>) </form:label>
+			<li style="display: flex; align-items: center; height: 30px;">
+				<form:label path="scr_num" style="padding-top: 0px;">해당 영화관(<span>*</span>) </form:label>
 				<form:select path="scr_num">
 		            <form:option value="scr_num">영화관 선택</form:option>
 		            <c:forEach var="screen" items="${list}">
@@ -43,12 +48,12 @@
     				</c:forEach>
        			</form:select>
 			</li>
-			<li >
-				<form:label path="rental_date">관람 희망일(<span>*</span>)</form:label>
+			<li style="display: flex; align-items: center; height: 30px; margin-top:5px;">
+				<form:label path="rental_date" style="padding-top: 0px;">관람 희망일(<span>*</span>)</form:label>
 				<input type="date" id="rental_date" name="rental_date">
 				<form:errors path="rental_date" cssClass="error-color"/>
 			</li>
-			<li>
+			<li style="margin-top:10px;">
 				<div class="hope">
 					<form:label path="rental_per">희망인원(<span>*</span>)</form:label>
 					<form:textarea path="rental_per"/>
@@ -70,8 +75,8 @@
 					<form:errors path="rental_email" cssClass="error-color"/>
 				</div>
 			</li>	
-			<li>내용(<span>*</span>)</li>
-	 		<li>
+			<li style="margin-bottom:10px;">내용(<span>*</span>)</li>
+	 		<li >
 				<form:textarea path="rental_content"/>
 				<form:errors path="rental_content" cssClass="error-color"/>
 				<script>
@@ -95,26 +100,28 @@
 			</script>
 			</li>
 		</ul>
+		<br>
+		<hr style="border-top: 1px dashed #ccc;">
 		<!-- 개인정보 수집 동의란 -->
 		<div>
 		<ul>
-			<li>
-			개인정보 수집 및 이용에 대한 동의
-			</li>
-			<li>
-				<label>동의여부(<span>*</span>)</label>
-				<input type="radio" name="admitCheck" id="admit1" value="1">동의함
-				<input type="radio" name="admitCheck" id="admit2" value="2">동의안함
-			</li>
+			<li class="align-center"><b>&lt;개인정보 수집 및 이용에 대한 동의&gt;</b></li><br>
 			<li>
 				정보주체는 개인정보의 수집 및 이용을 거부할 권리가 있으나,
-				문의 접수 및 회신을 위한 최소한의 개인정보만을 수집하기 때문에 이를 거부하실 경우에는 서비스 이용에 어려움이 있을 수 있습니다.
-				그 밖의 사항은 CJ CGV의 개인정보처리방침에 따릅니다.
+				문의 접수 및 회신을 위한 최소한의 개인정보만을 수집하기<br>때문에 이를 거부하실 경우에는 서비스 이용에 어려움이 있을 수 있습니다.
+				그 밖의 사항은 CJ CGV의 개인정보처리방침에<br>따릅니다.
+			</li><br>
+			
+			<li style="display: flex; align-items: center; height: 30px;">
+				<label style="margin-right: 10px; padding-top: 0px;">동의여부(<span>*</span>)</label>
+				<input type="radio" name="admitCheck" id="admit1" value="1" style="margin-right: 5px;">동의함
+				<span style="margin-right: 15px;"></span>
+				<input type="radio" name="admitCheck" id="admit2" value="2" style="margin-right: 5px;">동의안함
 			</li>
 		</ul>
 		</div>
 		<div class="align-center">
-			<form:button>등록</form:button>
+			<input type="submit" value="등록">
 			<input type="button" value="취소" onclick="location.href='${pageContext.request.contextPath}/faq/rental'">
 		</div>
 	</form:form>

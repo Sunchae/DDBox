@@ -38,7 +38,7 @@ public class NewsController {
 	@RequestMapping("/faq/news")
 	public ModelAndView questionprocess(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
 										@RequestParam(value="order",defaultValue="1") int order,
-										@RequestParam(value="news_category",defaultValue="") Integer news_category,
+										Integer news_category,
 										String keyword) {
 		
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -51,7 +51,12 @@ public class NewsController {
 		log.debug("<<글목록 count>> : " + count);
 		
 		//페이지처리
-		PageUtil page = new PageUtil(null, keyword, currentPage, count, 10, 5, "list","&order="+order+"&news_category="+news_category);
+		PageUtil page;
+		if(news_category != null) {
+			page = new PageUtil(null, keyword, currentPage, count, 10, 5, "news","&order="+order+"&news_category="+news_category);
+		}else {
+			page = new PageUtil(null, keyword, currentPage, count, 10, 5, "news","&order="+order);
+		}
 		
 		List<NewsVO> list = null;
 		
@@ -64,6 +69,7 @@ public class NewsController {
 		}
 		
 		ModelAndView mav = new ModelAndView();
+		
 		mav.setViewName("news");
 		mav.addObject("count", count);
 		mav.addObject("list", list);

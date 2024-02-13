@@ -68,7 +68,7 @@ $(function(){
 						}else{
 							output += '<div class="to-position">';
 							output += '<div class="space-photo">';
-							output += '</div><div class="space-message">관리자';
+							output += '</div><div class="space-message">';
 						}
 						if(item.read_check==1){
 							output += '<div class="read"><span>1</span></div>';
