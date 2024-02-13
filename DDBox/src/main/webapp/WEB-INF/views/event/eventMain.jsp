@@ -9,7 +9,7 @@
 			<div class="more-btn">
 				<c:if test="${!empty user && user.mem_auth == 9}">
 				<input type="button" value="글쓰기" onclick="location.href='write'">
-				<input type="button" value="수정" onclick="location.href='update?event_num=${event_num}'">
+				
 				</c:if>
 				<a href="${pageContext.request.contextPath}/event/special">더보기</a>
 			</div>

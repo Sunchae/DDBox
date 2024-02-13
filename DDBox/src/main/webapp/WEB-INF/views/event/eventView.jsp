@@ -16,6 +16,9 @@
 <div class="page-main">
 	<form>
 	<h2>${event_list.event_title}</h2>
+	<c:if test="${!empty user && user.mem_auth == 9}">
+	<input type="button" value="수정" onclick="location.href='update?event_num=${event_list.event_num}'">
+	</c:if>
 	<div class="detail-info">
 		<p>기간 ${event_list.event_start}~${event_list.event_end}<br>
 		조회 ${event_list.hit}

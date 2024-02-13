@@ -110,6 +110,7 @@ public class EventController {
 		
 		Event_listVO event_list = eventService.selectEvent(event_num);
 		
+		
 		//제목에 태그를 허용하지 않음
 		event_list.setEvent_title(StringUtil.useNoHtml(event_list.getEvent_title()));
 								//타일스 설정명,속성명	,속성값
@@ -130,8 +131,8 @@ public class EventController {
 	
 	//전송된 데이터 처리
 	@PostMapping("/event/update")
-	public String submitUpdate(@RequestParam int event_num,@Valid Event_listVO event_listVO,BindingResult result,
-			 HttpSession session, HttpServletRequest request, Model model) throws IllegalStateException, IOException {
+	public String submitUpdate(int event_num,@Valid Event_listVO event_listVO,BindingResult result,HttpSession session,
+			  HttpServletRequest request, Model model) throws IllegalStateException, IOException {
 		log.debug("<<게시판 글 저장>> : " + event_listVO);
 		//유효성 체크
 		if(result.hasErrors()) {
@@ -140,6 +141,10 @@ public class EventController {
 			event_listVO.setEvent_photo2(vo.getEvent_photo2());
 			return "eventModify";
 		}
+		
+		//회원번호
+		MemberVO vo = (MemberVO)session.getAttribute("user");
+		event_listVO.setMem_num(vo.getMem_num());
 		
 		//DB에 저장된 파일 정보 구하기
 		Event_listVO db_event = eventService.selectEvent(event_listVO.getEvent_num());
@@ -162,6 +167,7 @@ public class EventController {
 		//View에 표시할 메시지
 		model.addAttribute("message", "글수정 완료");
 		model.addAttribute("url", request.getContextPath() + "/event/detail?event_num=" + event_listVO.getEvent_num());
+		
 		
 		return "common/resultAlert";
 	}
