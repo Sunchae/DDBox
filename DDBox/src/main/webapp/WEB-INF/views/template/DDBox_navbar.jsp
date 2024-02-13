@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/YSC.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -91,7 +91,7 @@
 <script>
 $(document).ready(function() {
     // 동적으로 생성되는 요소에 대한 이벤트 위임
-    $(document).on("keyup", "#movieSearchInput", function() {
+     $(document).on("keyup", "#movieSearchInput", function() {
     	 console.log("키 입력 이벤트 발생");
         let keyword = $(this).val();
 
@@ -105,8 +105,9 @@ $(document).ready(function() {
                 	console.log(movies);
                     $("#searchResults").empty(); // 검색 결과 컨테이너를 비웁니다.
                     $.each(movies, function(index, movie) {
-                        let movieLink = $('<a>').attr('href', `/movie/movieDetail?movie_num=${movie.movie_num}`).text(movie.movie_title);
-                        $("#searchResults").append($('<li>').append(movieLink));
+                        let movieLink = $('<a>').attr('href', "/movie/movieDetail?movie_num=" + movie.movie_num).text(movie.movie_title);
+                        console.log(movie.movie_num)
+                        $("#searchResults").append($('<li class="list-group-item">').append(movieLink));
                     });
                 },
                 error: function() {
@@ -119,3 +120,41 @@ $(document).ready(function() {
     });
 });
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

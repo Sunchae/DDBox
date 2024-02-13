@@ -46,8 +46,8 @@
 						frameborder="0" allowfullscreen>
 					</iframe>
 					<div class="carousel-caption d-none d-md-block">
-						<h5>영화 제목 1</h5>
-						<p>영화 소개</p>
+						<!-- <h5>영화 제목 1</h5>
+						<p>영화 소개</p> -->
 					</div>
 				</div>
 				<div class="carousel-item">
@@ -57,8 +57,8 @@
 						frameborder="0" allowfullscreen>
 					</iframe>
 					<div class="carousel-caption d-none d-md-block">
-						<h5>영화 제목 2</h5>
-						<p>영화 소개</p>
+						<!-- <h5>영화 제목 2</h5>
+						<p>영화 소개</p> -->
 					</div>
 				</div>
 			</div>
