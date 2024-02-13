@@ -22,8 +22,6 @@ public class EmailVO {
 	private String qna_title;
 	@Range(min=1,max=5)
 	private int qna_type;
-	@Range(min=0,max=1)
-	private int qna_scr; //해당 영화관 선택 유무
 	private Integer scr_num; //영화관 (외래키)
 	@NotBlank
 	private String question_content;

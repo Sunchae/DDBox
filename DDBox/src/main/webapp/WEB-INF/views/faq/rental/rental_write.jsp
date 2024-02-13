@@ -19,7 +19,7 @@
 		<form:errors element="div" cssClass="error-color"/>
 		<ul>
 			<li>
-				<form:label path="scr_num">해당 영화관(*) </form:label>
+				<form:label path="scr_num">해당 영화관(<span>*</span>) </form:label>
 				<form:select path="scr_num">
 		            <form:option value="scr_num">영화관 선택</form:option>
 		            <c:forEach var="screen" items="${list}">
@@ -27,31 +27,33 @@
     				</c:forEach>
        			</form:select>
 			</li>
-			<li>
-				<form:label path="rental_date">관람 희망일(*)</form:label>
+			<li >
+				<form:label path="rental_date">관람 희망일(<span>*</span>)</form:label>
 				<input type="date" id="rental_date" name="rental_date">
 				<form:errors path="rental_date" cssClass="error-color"/>
 			</li>
 			<li>
-				<form:label path="rental_per">희망인원(*)</form:label>
-				<form:textarea path="rental_per"/>
-				<form:errors path="rental_per" cssClass="error-color"/>
-			</li>
-	 		<li>
-				<form:label path="rental_name">문의자명(*)</form:label>
-				<form:textarea path="rental_name"/>
-				<form:errors path="rental_name" cssClass="error-color"/>
-			</li>
-			<li>
-				<form:label path="rental_phone">연락처(*)</form:label>
-				<form:textarea path="rental_phone"/>
-				<form:errors path="rental_phone" cssClass="error-color"/>
-			</li>
-			<li>
-				<form:label path="rental_email">이메일(*)</form:label>
-				<form:textarea path="rental_email"/>
-				<form:errors path="rental_email" cssClass="error-color"/>
-			</li>
+				<div class="hope">
+					<form:label path="rental_per">희망인원(<span>*</span>)</form:label>
+					<form:textarea path="rental_per"/>
+					<form:errors path="rental_per" cssClass="error-color"/>
+				</div>
+				<div class="hope">
+					<form:label path="rental_name">문의자명(<span>*</span>)</form:label>
+					<form:textarea path="rental_name"/>
+					<form:errors path="rental_name" cssClass="error-color"/>
+				</div>
+				<div class="hope">
+					<form:label path="rental_phone">연락처(<span>*</span>)</form:label>
+					<form:textarea path="rental_phone"/>
+					<form:errors path="rental_phone" cssClass="error-color"/>
+				</div>
+				<div class="hope">
+					<form:label path="rental_email">이메일(<span>*</span>)</form:label>
+					<form:textarea path="rental_email"/>
+					<form:errors path="rental_email" cssClass="error-color"/>
+				</div>
+			</li>	
 			<li><b>내용</b></li>
 	 		<li>
 				<form:textarea path="rental_content"/>
