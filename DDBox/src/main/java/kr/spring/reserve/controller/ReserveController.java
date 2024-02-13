@@ -37,7 +37,7 @@ public class ReserveController {
 	private ShowService showService;
 
 	//자바빈 초기화
-	@ModelAttribute
+	@ModelAttribute 
 	public MovieVO initCommand() {
 		return new MovieVO();
 	}

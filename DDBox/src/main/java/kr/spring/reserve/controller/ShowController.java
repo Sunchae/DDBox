@@ -95,7 +95,7 @@ public class ShowController {
 		int count = showService.selectRowShowCount(map);
 
 		log.debug("<<count>> : " + count);
-
+ 
 		PageUtil page = new PageUtil(keyfield,keyword,currentPage,count,20,10,"list","&order="+order);
 
 		List<ShowVO> list = null;

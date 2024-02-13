@@ -150,7 +150,7 @@ public class TicketController {
 	       } else {
 	           // member가 null일 경우, 적절한 오류 처리 필요
 	           return "redirect:/login"; // 예: 로그인 페이지로 리다이렉트
-	       }
+	       } 
 
 	       log.debug("<<티켓 구매>> : " + ticket);
 

@@ -39,7 +39,7 @@ public class ReserveAjaxController {
    
    
    /*=============================
-    *       영화  
+    *       영화   
     ============================*/
    @RequestMapping("/reserve/getMovie")
    @ResponseBody
