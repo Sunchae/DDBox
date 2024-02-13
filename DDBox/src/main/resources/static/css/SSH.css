@@ -78,9 +78,9 @@
  *    자주묻는질문 칸 맞추기
  ======================*/
  div.page-main{
-  margin-left: 40px;
+  margin-left: 5px;
   margin-top: 20px;
-  padding: 2% 5%;
+  padding: 2% 5% 2% 0;
  }
  
  

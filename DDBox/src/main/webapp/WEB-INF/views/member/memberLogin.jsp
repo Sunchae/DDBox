@@ -5,22 +5,21 @@
 <div class="page-main">
     <h2 class="login-title">회원로그인</h2>
     <form:form id="member_login" action="login" modelAttribute="memberVO" class="login-form">
-        <form:errors element="div" cssClass="error-messages"/>
-        <div class="input-container">
-            <form:input path="mem_id" placeholder=" " cssClass="form-input" autocomplete="off"/>
-            <form:label path="mem_id" cssClass="form-label">아이디</form:label>
-            <form:errors path="mem_id" element="div" cssClass="error-color"/>
-        </div>
-        <div class="input-container">
-            <form:password path="mem_pw" placeholder=" " cssClass="form-input"/>
-            <form:label path="mem_pw" cssClass="form-label">비밀번호</form:label>
-            <form:errors path="mem_pw" element="div" cssClass="error-color"/>
-        </div>
-        <div class="stay-logged-in">
-            <input type="checkbox" id="auto" name="auto">
-            <label for="auto">로그인상태유지</label>
-        </div>
-        <div class="form-actions">
+		<form:errors element="div" cssClass="error-messages" />
+		<div class="input-container">
+			<input type="text" id="mem_id" name="mem_id" placeholder="아이디"
+				class="form-input" autocomplete="off" /> <label for="mem_id"
+				class="form-label">아이디</label>
+		</div>
+		<div class="input-container">
+			<input type="password" id="mem_pw" name="mem_pw" placeholder="비밀번호"
+				class="form-input" /> <label for="mem_pw" class="form-label">비밀번호</label>
+		</div>
+		<div class="stay-logged-in">
+			<input type="checkbox" id="auto" name="auto"> <label
+				for="auto">로그인상태유지</label>
+		</div>
+		<div class="form-actions">
             <form:button class="login-btn">로그인</form:button>
         </div>
     </form:form>
@@ -31,6 +30,8 @@
 
 <!-- 내용 끝 -->
 <style>
+
+
 body, html {
     font-family: 'Noto Sans KR', sans-serif;
     margin: 0;
@@ -61,6 +62,7 @@ body, html {
     margin-bottom: 20px;
 }
 
+
 .form-input {
     width: 100%;
     padding: 10px;
@@ -73,25 +75,32 @@ body, html {
 .form-input:focus {
     border-color: #007bff; /* 포커스 시 테두리 색상 변경 */
 }
+.form-input:not(:placeholder-shown) + .form-label,
+.form-input:focus + .form-label {
+    transform: translateY(-20px) scale(0.75);
+    color: #007bff;
+}
+
 
 .form-label {
     position: absolute;
-    top: 10px;
-    left: 10px;
-    background-color: #fff;
-    padding: 0 5px;
-    transition: transform 0.3s, font-size 0.3s;
-    transform-origin: left top;
-}
-
-.form-input:focus + .form-label,
-.form-input:not(:placeholder-shown) + .form-label {
-    transform: translateY(-20px) scale(0.75);
-    font-size: 0.75em;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    color: #6c757d;
 }
 
 .error-color {
     color: #d9534f; /* 오류 메시지 색상 */
+}
+
+.error-messages {
+    display: block; /* 에러 메시지를 블록 요소로 만들어 줄 바꿈 효과를 줍니다. */
+    color: #d9534f; /* 에러 메시지의 색상을 지정합니다. */
+    font-size: 0.8em; /* 에러 메시지의 글꼴 크기를 조정합니다. */
+    margin-top: 5px; /* 에러 메시지와 입력 필드 사이의 간격을 조정합니다. */
 }
 
 .stay-logged-in {
