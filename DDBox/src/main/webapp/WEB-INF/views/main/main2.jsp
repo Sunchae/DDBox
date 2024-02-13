@@ -5,7 +5,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/SSY.css">
 <body>
 	<div id="page-main">
-		<h2>이벤트 몇 가지</h2>
+		
+		<h2><a href="${pageContext.request.contextPath}/event/main">이벤트</a></h2>
+		
 		<!-- 이벤트 목록 -->
 		<div class="row mt-5">
 			<!-- 이벤트 목록 반복 출력 -->

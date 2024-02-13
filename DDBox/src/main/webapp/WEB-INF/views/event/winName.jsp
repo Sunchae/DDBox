@@ -9,7 +9,7 @@
 </style>
 <div class="page-main">
 	<div class="tit-util">
-		<h3>당첨자 리스트</h3>
+		<h3>응모자 리스트</h3>
 		<c:if test="${count == 0}">
 		<div class="result-display">표시할 게시물이 없습니다.</div>
 		</c:if>

@@ -484,6 +484,7 @@ public class EventController {
 			map.put("end", page.getEndRow());		
 			list = eventService.selectList(map);
 		}
+	
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("memberEntryList");//타일즈 설정명으로 호출
