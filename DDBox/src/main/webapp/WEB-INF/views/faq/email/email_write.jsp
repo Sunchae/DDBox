@@ -27,7 +27,7 @@
 		<!-- 내용기입 -->	
 		<ul>
 	 		<li>
-				<form:label path="qna_type">문의유형</form:label>
+				<form:label path="qna_type">문의유형(<span>*</span>)</form:label>
 				<form:radiobutton path="qna_type" value="1"/>문의
 				<form:radiobutton path="qna_type" value="2"/>불만
 				<form:radiobutton path="qna_type" value="3"/>칭찬
@@ -45,11 +45,11 @@
        			</form:select>
 			</li><br>
 			<li>
-				<form:label path="qna_title">제목</form:label>
+				<form:label path="qna_title">제목(<span>*</span>)</form:label>
 				<form:input path="qna_title"/>
 				<form:errors path="qna_title" cssClass="error-color"/>
 			</li><br>
-			<li><b>내용</b></li><br>
+			<li>내용(<span>*</span>)</li><br>
 			<li>
 			<form:textarea path="question_content"/>
 			<form:errors path="question_content" cssClass="error-color"/>

@@ -227,3 +227,22 @@ table th, table td {
 .detail-info li:last-child {
   float: right; /* 맨 오른쪽으로 배치 */
 }
+.detail-info li:first-child {
+  float: left; /* 맨 왼쪽으로 배치 */
+  font-weight: bold;
+  font-size: 1.2em; /* 폰트 크기를 1.2em으로 설정 */
+  align-items: center; /* 요소들을 수직으로 중앙 정렬 */
+}
+
+/*vip는 li가 하나라서 따로*/
+.detail-info li .vip {
+  float: left; /* 맨 왼쪽으로 배치 */
+  font-weight: bold;
+  font-size: 1.2em; /* 폰트 크기를 1.2em으로 설정 */
+  align-items: center; /* 요소들을 수직으로 중앙 정렬 */
+}
+
+/* 필수항목 */
+form ul li span {
+    color: red;
+}

@@ -9,6 +9,22 @@
 <!-- 내용 시작 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/SSH.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+	function validationForm(){
+		var admitCheck1 = document.getElementById("admit1").checked;
+		var admitCheck2 = document.getElementById("admit2").checked;
+		
+		if (!admitCheck1 && !admitCheck2){
+			alert("동의 여부를 체크하세요.");
+			return false;
+		}else if(admitCheck2){
+			alert("동의함을 체크하여야 작성 가능합니다.");
+			return false;
+		}else{
+			return true;
+		}
+	}
+</script>
 <div class="page-main">
 	<h5>단체/대관 문의</h5>
 	<span>단체 및 대관 예약 문의입니다.</span><br>
@@ -54,7 +70,7 @@
 					<form:errors path="rental_email" cssClass="error-color"/>
 				</div>
 			</li>	
-			<li><b>내용</b></li>
+			<li>내용(<span>*</span>)</li>
 	 		<li>
 				<form:textarea path="rental_content"/>
 				<form:errors path="rental_content" cssClass="error-color"/>
@@ -86,7 +102,7 @@
 			개인정보 수집 및 이용에 대한 동의
 			</li>
 			<li>
-				<label>동의여부</label>
+				<label>동의여부(<span>*</span>)</label>
 				<input type="radio" name="admitCheck" id="admit1" value="1">동의함
 				<input type="radio" name="admitCheck" id="admit2" value="2">동의안함
 			</li>
