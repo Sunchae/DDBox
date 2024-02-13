@@ -1,5 +1,8 @@
 package kr.spring.reserve.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,6 +59,11 @@ public class TicketServiceImpl implements TicketService{
 	@Override
 	public TicketVO selectTicketInfo(int res_num) {
 		return ticketMapper.selectTicketInfo(res_num);
+	}
+
+	@Override
+	public List<TicketVO> selectList(Map<String, Object> map) {
+		return ticketMapper.selectList(map);
 	}
 
 	

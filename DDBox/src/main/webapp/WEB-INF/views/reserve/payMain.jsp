@@ -92,21 +92,23 @@ s               <p class="screen-location">상영관 이름 : ${screen.scr_name}
                     <c:when test="${user.mem_auth == 1}">
                     	 <button id="check_module" class="btn-pay" type="button">구매</button>
                     	 
-                    	 <form action="payConfirm" style="border:none;" class="align-center" id="ticket_confirm">
+                    	<%--  <form action="payConfirm" style="border:none;" class="align-center" id="ticket_confirm">
 							<input type="hidden" name="choice_num" value="${movie.movie_num}" id="choice_num">
 							<input type="hidden" name="choice_screen" value="${screen.scr_num}" id="choice_screen">
 							<input type="hidden" name="choice_date" value="${param.choice_date}" id="choice_date">
 							<input type="hidden" name="choice_time" value="${show.shw_num}" id="choice_time">
 							<input type="hidden" name="choice_people" value="${param.choice_people}" id="choice_people">
             				<input type="hidden" name="choice_price" value="${param.choice_price}" id="choice_price">	
-						</form>
-						
-						<%-- <form action="MypageTicket" style="border:none;" class="align-center" id="ticket_list">
-							<input type="hidden" name="choice_num" value="${movie.movie_num}" id="choice_num">
-							<input type="hidden" name="choice_screen" value="${screen.scr_num}" id="choice_screen">
-							<input type="hidden" name="choice_date" value="${param.choice_date}" id="choice_date">
-							<input type="hidden" name="choice_time" value="${show.shw_num}" id="choice_time">
 						</form> --%>
+						
+						<form action="insertPay" method="post" style="border:none;" class="align-center" id="ticket_info">
+							<input type="hidden" name="movie_num" value="${movie.movie_num}" id="choice_num">
+							<input type="hidden" name="scr_num" value="${screen.scr_num}" id="choice_screen">
+							<input type="hidden" name="shw_num" value="${show.shw_num}" id="choice_time">
+							<input type="hidden" name="res_mem_total" value="${param.choice_people}" id="choice_people">
+            				<input type="hidden" name="res_pay" value="${param.choice_price}" id="choice_price">
+            				<button id="check_module" class="btn-pay" type="submit">구매</button>
+						</form> 
 						
 							<script>
 								$("#check_module").click(function() {
@@ -144,7 +146,7 @@ s               <p class="screen-location">상영관 이름 : ${screen.scr_name}
 											
 											//success.submit();
 											
-											document.getElementById('ticket_confirm').submit();
+											$('#ticket_info').submit();
 											// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
 											// 자세한 설명은 구글링으로 보시는게 좋습니다.
 										} else {

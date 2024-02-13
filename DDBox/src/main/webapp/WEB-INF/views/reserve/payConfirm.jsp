@@ -14,28 +14,28 @@
 	<table class="striped-table align-center" style="padding-bottom: 20px;">
 			<tr>
 				<th width="30%">영화제목</th>
-				<td class="align-center">${movie.movie_title}</td>
+				<td class="align-center">${insertPay.movie_num}</td>
 				
 			</tr>
 				<tr>
 					<th>상영관</th>
-					<td class="align-center">${screen.scr_name}</td>
+					<td class="align-center">${ticket.scr_num}</td>
 				</tr>
 				<tr>
 					<th>상영날짜</th>
-					<td class="align-center">${param.choice_date}</td>
+					<td class="align-center">${ticket.choice_date}</td>
 				</tr>
 				<tr>
 					<th>상영시간</th>
-					<td class="align-center">${show.shw_time}</td>
+					<td class="align-center">${ticket.shw_num}</td>
 				</tr>
 				<tr>
 					<th>상영인원</th>
-					<td class="align-center">${param.choice_people}명</td>
+					<td class="align-center">${ticket.res_mem_total}명</td>
 				</tr>
 				<tr>
 					<th>결제가격</th>
-					<td class="align-center">${param.choice_price}원</td>
+					<td class="align-center">${ticket.res_pay}원</td>
 				</tr>
 		</table>
 			<div class="align-center">
