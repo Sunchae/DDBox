@@ -122,16 +122,18 @@
     color: #222
 }
 form#register_form1, form#update_form{
-	/* padding:0 0 10px 0;
-	width:800px; */
-	align-items: center;
-	justify-content: center;
-	display: flex;
-	flex-direction: row;
-	margin-top: 5rem;
+	width:610px;
+	margin:0 auto;
+	border:1px solid #000;
+	padding:10px 10px 30px 10px;
 }
 form#register_form1 ul, form#update_form ul{
-	/* padding:20px; */
+	padding:20px;
+}
+textarea{
+	width:350px;
+	height:50px;
+	margin:10px 0px;
 }
 
 #contents {
@@ -1550,3 +1552,4 @@ body.no-scroll .tab-list.fixed {
 col {
     display: table-column;
 }
+
