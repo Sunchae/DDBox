@@ -15,7 +15,6 @@
 			<tr>
 				<th width="30%">영화제목</th>
 				<td class="align-center">${movie.movie_title}</td>
-				
 			</tr>
 				<tr>
 					<th>상영관</th>
@@ -27,15 +26,15 @@
 				</tr>
 				<tr>
 					<th>상영시간</th>
-					<td class="align-center">${show.shw_num}</td>
+					<td class="align-center">${show.shw_time}</td>
 				</tr>
 				<tr>
 					<th>상영인원</th>
-					<td class="align-center">${ticketPay.choice_peple}명</td>
+					<td class="align-center">${param.res_mem_total}명</td>
 				</tr>
 				<tr>
 					<th>결제가격</th>
-					<td class="align-center">${param.choice_price}원</td>
+					<td class="align-center">${param.res_pay}원</td>
 				</tr>
 		</table>
 			<div class="align-center">

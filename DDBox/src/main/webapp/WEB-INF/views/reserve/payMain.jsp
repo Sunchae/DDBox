@@ -105,6 +105,7 @@ s               <p class="screen-location">상영관 이름 : ${screen.scr_name}
 							<input type="hidden" name="movie_num" value="${movie.movie_num}" id="choice_num">
 							<input type="hidden" name="scr_num" value="${screen.scr_num}" id="choice_screen">
 							<input type="hidden" name="shw_num" value="${show.shw_num}" id="choice_time">
+							<input type="hidden" name="choice_date" value="${param.choice_date}" id="choice_date">
 							<input type="hidden" name="res_mem_total" value="${param.choice_people}" id="choice_people">
             				<input type="hidden" name="res_pay" value="${param.choice_price}" id="choice_price">
 						</form> 
@@ -141,7 +142,6 @@ s               <p class="screen-location">상영관 이름 : ${screen.scr_name}
 											var msg = '결제가 완료되었습니다.';
 											msg += '결제 금액 : ' + rsp.paid_amount + '원';
 											
-											window.location.href = '/main/main';
 											
 											//success.submit();
 											

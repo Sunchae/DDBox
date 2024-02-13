@@ -142,17 +142,37 @@ public class TicketController {
 	
 	@PostMapping("reserve/insertPay")
 	public String insertPay(TicketVO ticket,Model model, HttpSession session) {
-		log.debug("<<페이메인23>>");
 		log.debug("<<티켓 구매>> : " + ticket);
 		
+		
+		ShowVO show = null;
+		show = ticketService.selectedShow(ticket.getShw_num());
+		
+		ScreenVO screen = null;
+		screen = ticketService.selectedScreen(ticket.getScr_num());
+		
+		MovieVO movie = null;
+		movie = ticketService.selectedMoive(ticket.getMovie_num());
+		
 		ticketService.insertTicket(ticket);
-		ticketService.selectedMoive(ticket.getMovie_num());
-		ticketService.selectedScreen(ticket.getScr_num());
-		ticketService.selectedShow(ticket.getShw_num());
-		ticketService.selectedPPL(ticket.getRes_mem_total());
-		ticketService.selectedPrice(ticket.getRes_pay());
 		
+		/*
+		 * TicketVO people = null; people =
+		 * ticketService.selectedPPL(ticket.getRes_mem_total());
+		 * 
+		 * TicketVO price = null; price =
+		 * ticketService.selectedPrice(ticket.getRes_pay());
+		 */
+		 
 		
+		model.addAttribute("movie",movie);
+		model.addAttribute("screen",screen);
+		model.addAttribute("show",show);
+		
+		/*
+		 * model.addAttribute("people",people); model.addAttribute("price",price);
+		 */
+		 
 		model.addAttribute("ticketPay", ticket);
 		
 	 return "payConfirm"; 
