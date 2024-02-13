@@ -152,6 +152,9 @@ public class EmailController {
 						 HttpSession session, HttpServletRequest request, Model model) throws IllegalStateException, IOException {
 		log.debug("<<이메일 문의 작성>> : " + emailVO);
 		
+		if(emailVO.getScr_num()!=null && emailVO.getScr_num()==0) {
+			emailVO.setScr_num(null);
+		}
 		
 		List<ScreenVO> list = emailService.getAllScreens();
 		

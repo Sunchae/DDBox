@@ -35,16 +35,10 @@
 				<form:radiobutton path="qna_type" value="5"/>분실물
 				<form:errors path="qna_type" cssClass="error-color"/>
 			</li><br>
-	 		<li>
-				<form:label path="qna_scr">영화관 선택</form:label>
-				<form:radiobutton path="qna_scr" value="0"/>선택하지않음
-				<form:radiobutton path="qna_scr" value="1"/>선택함 <!-- 선택하면 영화관 정보 드롭박스 -->
-				<form:errors path="qna_scr" cssClass="error-color"/>
-			</li><br>
 			<li>
 				<form:label path="scr_num">해당 영화관</form:label>
 				<form:select path="scr_num">
-		            <form:option value="scr_num">영화관 선택</form:option>
+		            <form:option value="0">영화관 선택</form:option>
 		            <c:forEach var="screen" items="${list}">
       				  <form:option value="${screen.scr_num}">${screen.scr_name}</form:option>
     				</c:forEach>

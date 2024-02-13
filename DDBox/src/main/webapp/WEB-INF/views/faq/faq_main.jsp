@@ -44,7 +44,7 @@
 				<input type="button" onclick="location.href='${pageContext.request.contextPath}/member/myPage'" value="문의내역 조회">
 			</div>
 		<!-- 하단 표시 -->
-		<hr style="border-width:1px 0 0 0; border-color:#ccc;">
+		<hr style="border-width:1px 0 0 0; border-color:#ccc;clear:both;">
 		<div class="search_order">
 			<span>
 				<a onclick="location.href='${pageContext.request.contextPath}/faq/email'" style="cursor:pointer;"><img src="${pageContext.request.contextPath}/images/faq/자주묻는질문.png"></a>
