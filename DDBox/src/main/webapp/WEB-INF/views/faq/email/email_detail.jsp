@@ -22,7 +22,7 @@
 		${email.qna_title}</li>
 		<li>
 			작성일 ${email.question_regdate}
-			<c:if test="${!empty email.scr_num}">해당 영화관 ${email.scr_name}</c:if>
+			<c:if test="${email.scr_num>0}">해당 영화관 ${email.scr_name}</c:if>
 		</li>
 	</ul>
 		<br>

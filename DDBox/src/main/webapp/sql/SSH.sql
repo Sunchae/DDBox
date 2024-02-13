@@ -4,7 +4,6 @@ create table email_faq(
  mem_num number not null,
  qna_title varchar2(90) not null,
  qna_type number not null, --문의유형
- qna_scr number not null, --문의 대상 영화관 (0:선택하지않음,1:선택함)
  scr_num number, --해당되는 영화관
  question_content clob not null,
  question_file varchar2(200),
