@@ -15,9 +15,9 @@
 			</div>
 		</div>
 		<div class="event-list">
-		<c:forEach var="list" items="${list}">
+		<c:forEach var="list" items="${list}" varStatus="loop">
 		<c:if test="${list.event_type == 1}">
-		
+		<c:if test="${loop.index < 4}">
 			<ul>
 				<li class="list-card">
 					<a href="detail?event_num=${list.event_num}">
@@ -29,7 +29,7 @@
 					</a>
 				</li>
 			</ul>
-		
+		</c:if>
 		</c:if>
 		</c:forEach>
 		</div>
@@ -40,9 +40,9 @@
 			</div>
 		</div>
 		<div class="event-list">
-		<c:forEach var="list" items="${list}">
+		<c:forEach var="list" items="${list}" varStatus="loop">
 		<c:if test="${list.event_type == 2}">
-		
+		<c:if test="${loop.index < 4}">
 			<ul>
 				<li>
 					<a href="detail?event_num=${list.event_num}">
@@ -54,7 +54,7 @@
 					</a>
 				</li>
 			</ul>
-		
+		</c:if>
 		</c:if>
 		</c:forEach>
 		</div>
@@ -65,9 +65,9 @@
 			</div>
 		</div>
 		<div class="event-list">
-		<c:forEach var="list" items="${list}">
+		<c:forEach var="list" items="${list}" varStatus="loop">
 		<c:if test="${list.event_type == 3}">
-		
+		<c:if test="${loop.index < 4}">
 			<ul>
 				<li class="list-card">
 					<a href="detail?event_num=${list.event_num}">
@@ -79,7 +79,7 @@
 					</a>
 				</li>
 			</ul>
-		
+		</c:if>
 		</c:if>
 		</c:forEach>
 		</div>
@@ -90,9 +90,9 @@
 			</div>
 		</div>
 		<div class="event-list">
-		<c:forEach var="list" items="${list}">
+		<c:forEach var="list" items="${list}" varStatus="loop">
 		<c:if test="${list.event_type == 4}">
-		
+		<c:if test="${loop.index < 4}">
 			<ul>
 				<li class="list-card">
 					<a href="detail?event_num=${list.event_num}">
@@ -104,7 +104,7 @@
 					</a>
 				</li>
 			</ul>
-		
+		</c:if>
 		</c:if>
 		</c:forEach>
 		</div>
@@ -115,9 +115,9 @@
 			</div>
 		</div>
 		<div class="event-list">
-		<c:forEach var="list" items="${list}">
+		<c:forEach var="list" items="${list}" varStatus="loop">
 		<c:if test="${list.event_type == 5}">
-		
+		<c:if test="${loop.index < 4}">
 			<ul>
 				<li class="list-card">
 					<a href="detail?event_num=${list.event_num}">
@@ -129,7 +129,7 @@
 					</a>
 				</li>
 			</ul>
-		
+		</c:if>
 		</c:if>
 		</c:forEach>
 		</div>

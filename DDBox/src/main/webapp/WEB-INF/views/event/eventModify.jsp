@@ -29,8 +29,8 @@
  			 		<option value="1" <c:if test="${event_type==1}">selected</c:if>>스페셜 이벤트</option>
 		  			<option value="2" <c:if test="${event_type==2}">selected</c:if>>응모권 이벤트</option>
 		  			<option value="3" <c:if test="${event_type==3}">selected</c:if>>멤버쉽</option>
-		  			<option value="5" <c:if test="${event_type==4}">selected</c:if>>극장별</option>
-		  			<option value="6" <c:if test="${event_type==5}">selected</c:if>>제휴/할인</option>
+		  			<option value="4" <c:if test="${event_type==4}">selected</c:if>>극장별</option>
+		  			<option value="5" <c:if test="${event_type==5}">selected</c:if>>제휴/할인</option>
 				</select>
 			</li>
 			
