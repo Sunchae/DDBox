@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>결제확인</title>
+<title>결제확인</title> 
 </head>
 <body>
 	<h2 style="border-bottom: 1px solid black; padding-bottom: 20px;">결제 확인</h2>
