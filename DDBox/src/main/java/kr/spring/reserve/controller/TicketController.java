@@ -154,24 +154,14 @@ public class TicketController {
 		MovieVO movie = null;
 		movie = ticketService.selectedMoive(ticket.getMovie_num());
 		
+		
 		ticketService.insertTicket(ticket);
 		
-		/*
-		 * TicketVO people = null; people =
-		 * ticketService.selectedPPL(ticket.getRes_mem_total());
-		 * 
-		 * TicketVO price = null; price =
-		 * ticketService.selectedPrice(ticket.getRes_pay());
-		 */
-		 
 		
 		model.addAttribute("movie",movie);
 		model.addAttribute("screen",screen);
 		model.addAttribute("show",show);
-		
-		/*
-		 * model.addAttribute("people",people); model.addAttribute("price",price);
-		 */
+
 		 
 		model.addAttribute("ticketPay", ticket);
 		
