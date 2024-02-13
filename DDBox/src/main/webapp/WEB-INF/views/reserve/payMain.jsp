@@ -87,7 +87,7 @@ s               <p class="screen-location">상영관 이름 : ${screen.scr_name}
                     <p class="way-pay-content">카카오페이결제</p>
                 </div>
                 <div class="btn-final">
-                    <a class="btn-pre" href="javascript:history.back();">이전</a>
+                    <a class="btn-pre" href="javascript:history.back();" style="color:white;">이전</a>
                     <c:choose>
                     <c:when test="${user.mem_auth == 1}">
                     	 <button id="check_module" class="btn-pay" type="button">구매</button>
