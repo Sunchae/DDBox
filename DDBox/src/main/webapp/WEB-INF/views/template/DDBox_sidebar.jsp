@@ -62,7 +62,7 @@
       </li>
       <li>
         <a href="/member/myPageGiftshop" class="nav-link link-dark">
-          기프트샵
+          스토어 구매 내역
         </a>
       </li>
       <li>

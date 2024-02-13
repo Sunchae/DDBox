@@ -4,7 +4,7 @@
 <!-- 내용 시작 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/KJY.css">
 <div class="page-main">
-<h2>마이페이지 기프트샵</h2>
+<h2>스토어 구매 내역</h2>
 <div>
 	<table class="board-list">
 		<colgroup>

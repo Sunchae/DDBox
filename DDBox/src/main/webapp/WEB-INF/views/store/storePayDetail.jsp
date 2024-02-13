@@ -29,6 +29,7 @@
 		</table>
 		<div class="align-center">
 				<input type="button" value="홈으로" onclick="location.href='${pageContext.request.contextPath}/main/main'">
+				<input type="button" value="주문내역으로 이동" onclick="location.href='${pageContext.request.contextPath}/member/myPageGiftshop'">
 			</div>
 		</div>
 </body>
