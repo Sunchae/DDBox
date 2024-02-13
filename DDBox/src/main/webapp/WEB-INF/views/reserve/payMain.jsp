@@ -140,7 +140,7 @@ s               <p class="screen-location">상영관 이름 : ${screen.scr_name}
 										console.log(rsp);
 										if (rsp.success) {
 											var msg = '결제가 완료되었습니다.';
-											msg += '결제 금액 : ' + rsp.paid_amount + '원';
+											msg += ' 결제 금액 : ' + rsp.paid_amount + '원';
 											
 											
 											//success.submit();
