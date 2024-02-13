@@ -11,6 +11,7 @@
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/shop.cart.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/store.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/KJY.css">
 
 	<div class="main-title" id="store_form">
 		<div class="align-right">

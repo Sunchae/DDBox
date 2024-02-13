@@ -9,7 +9,7 @@
 		<div class="align-right">
 			<c:if test="${user.mem_auth ==9}">
 				<%-- 관리자 로그인 되어있을 때 만 보임 --%>
-				<input type="button" value="상품등록" onclick="location.href='write'">
+				<input type="button" value="상품등록" onclick="location.href='write'" class="gblue">
 			</c:if>
 		</div>
 	</div>

@@ -6,6 +6,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/KJY.css">
 <div class="page-main">
 	<h2>상품수정</h2>
 	<form:form action="update" modelAttribute="storeVO" id="register_form" enctype="multipart/form-data">

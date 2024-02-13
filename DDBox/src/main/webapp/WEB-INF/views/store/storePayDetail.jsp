@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/KJY.css">
 <title>상품구매내역</title>
 </head>
 <body>

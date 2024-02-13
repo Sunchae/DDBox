@@ -6,6 +6,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/KJY.css">
 <div class="page-main">
 	<h2>상품등록</h2>
 	<form:form action="write" modelAttribute="storeVO" id="register_form1" enctype="multipart/form-data">
@@ -50,7 +51,7 @@
 		</ul>
 		<div class="align-center">
 			<form:button>등록</form:button>
-			<input type="button" value="목록" onclick="location.href='storeMainTest'">
+			<input type="button" value="목록" onclick="location.href='storeMainTest'" class="gpurple">
 		</div>
 	</form:form>
 </div>

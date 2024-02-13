@@ -8,6 +8,7 @@
 		<meta charset="UTF-8">
 		<title>상품구매</title>
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/KJY.css">
 		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/js/shop.cart.js"></script>
 		<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
