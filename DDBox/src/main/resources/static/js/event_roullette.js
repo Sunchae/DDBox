@@ -86,6 +86,7 @@ $(function(){//로그인 확인...
 		
 		
 		
+		
 	    // 결과 알림창 표시
 		setTimeout(() => {
 		  if (point[ran] == "0point") {

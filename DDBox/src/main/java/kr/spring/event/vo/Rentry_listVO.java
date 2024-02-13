@@ -14,5 +14,5 @@ public class Rentry_listVO {
 	private int mem_num;
 	private Date rentry_date;
 	private int event_point;
-	//private int point_num;
+	private int point_num;
 }

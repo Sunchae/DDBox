@@ -50,11 +50,9 @@ create sequence entrylist_seq;
 create table rentry_list(
 rentry_num number not null,
 mem_num number not null,
-point_num number not null,
 event_point number(5),
 rentry_date date default sysdate not null,
 constraint rentry_list_pk primary key (rentry_num),
-constraint rentry_list_fk1 foreign key (mem_num) references member(mem_num),
-constraint win_list_fk2 foreign key (point_num) references point(point_num)
+constraint rentry_list_fk1 foreign key (mem_num) references member(mem_num)
 );
 create sequence rentrylist_seq;

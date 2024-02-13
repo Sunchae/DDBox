@@ -405,8 +405,6 @@ public class EventController {
 			if(rentry_list == null) {
 				eventService.insertRentry(rentry_listVO);
 				mapJson.put("result", "success");
-			}else {
-				mapJson.put("result", "already");
 			}
 			
 			
