@@ -26,8 +26,9 @@
 							<img src="${pageContext.request.contextPath}/upload/${list.event_photo1}" class="list-img">
 						</p>
 						<p class="tit">${list.event_title}</p>
-						<p class="date">${list.event_start}~${list.event_end}</p>
-						<p>${event.hit}</p>
+						<p class="date">${list.event_start}~${list.event_end}
+						<br>조회 : ${list.hit}</p>
+						
 					</a>
 				</li>
 			</ul>
@@ -52,7 +53,8 @@
 							<img src="${pageContext.request.contextPath}/upload/${list.event_photo1}" class="list-img">
 						</p>
 						<p class="tit">${list.event_title}</p>
-						<p class="date">${list.event_start}~${list.event_end}</p>
+						<p class="date">${list.event_start}~${list.event_end}
+						<br>조회 : ${list.hit}</p>
 					</a>
 				</li>
 			</ul>
@@ -77,7 +79,8 @@
 							<img src="${pageContext.request.contextPath}/upload/${list.event_photo1}" class="list-img">
 						</p>
 						<p class="tit">${list.event_title}</p>
-						<p class="date">${list.event_start}~${list.event_end}</p>
+						<p class="date">${list.event_start}~${list.event_end}
+						<br>조회 : ${list.hit}</p>
 					</a>
 				</li>
 			</ul>
@@ -102,7 +105,8 @@
 							<img src="${pageContext.request.contextPath}/upload/${list.event_photo1}" class="list-img">
 						</p>
 						<p class="tit">${list.event_title}</p>
-						<p class="date">${list.event_start}~${list.event_end}</p>
+						<p class="date">${list.event_start}~${list.event_end}
+						<br>조회 : ${list.hit}</p>
 					</a>
 				</li>
 			</ul>
@@ -127,7 +131,8 @@
 							<img src="${pageContext.request.contextPath}/upload/${list.event_photo1}" class="list-img">
 						</p>
 						<p class="tit">${list.event_title}</p>
-						<p class="date">${list.event_start}~${list.event_end}</p>
+						<p class="date">${list.event_start}~${list.event_end}
+						<br>조회 : ${list.hit}</p>
 					</a>
 				</li>
 			</ul>

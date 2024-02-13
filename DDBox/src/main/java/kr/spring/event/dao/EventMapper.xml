@@ -50,6 +50,8 @@
 					event_end,
 					event_type,
 					event_photo1,
+					hit,
+					event_status,
 					mem_num
 				FROM event_list
 				

@@ -27,7 +27,8 @@
 				<td class="align-center" id="entryNum">${list.entry_num}</td>
 				<td class="align-center" id="memId">${list.mem_id}</td>
 				<td class="align-center" id="entryDate">${list.entry_date}</td>
-				<td class="align-center" id="winnerType">${list.win_type}</td>
+				<td class="align-center" id="winnerType">${list.win_type == 1 ? '당첨' : '미당첨'}</td>
+				
 				<td class="align-center" id="winDate">${list.win_date}</td>
 			</tr>
 			</c:forEach>
