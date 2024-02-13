@@ -31,6 +31,8 @@ import kr.spring.member.vo.MemberVO;
 import kr.spring.payment.service.PayService;
 import kr.spring.payment.vo.PayVO;
 import kr.spring.question.service.EmailService;
+import kr.spring.reserve.service.TicketService;
+import kr.spring.reserve.vo.TicketVO;
 import kr.spring.store.vo.StoreVO;
 import kr.spring.util.AuthCheckException;
 import kr.spring.util.FileUtil;
@@ -44,6 +46,8 @@ public class MemberController {
 	private MemberService memberService;
 	@Autowired
 	private PayService payService;
+	@Autowired
+	private TicketService ticketService;
 
 	/*==============================
 	 * 자바빈(VO) 초기화
@@ -518,9 +522,25 @@ public class MemberController {
 
 
 	@RequestMapping("/member/myPageTicket")
-	public String process1() {
-
-
+	public String process1(@RequestParam(value="pageNum",defaultValue = "1") int currentPage, HttpSession session, Model model) {
+		MemberVO vo = (MemberVO)session.getAttribute("user");
+		Map<String, Object> map = new HashMap<String, Object>();
+		int count = payService.selectRowCount(map);
+		
+		PageUtil page = new PageUtil(currentPage, count, 10,10,"myPageTicket");
+		
+		List<TicketVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			map.put("mem_num", vo.getMem_num());
+			
+			list = ticketService.selectList(map);
+		}
+		model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
+		
 		return "myPageTicket";
 	}
 	@RequestMapping("/member/myPageCoupon")

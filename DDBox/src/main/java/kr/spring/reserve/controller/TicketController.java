@@ -141,30 +141,32 @@ public class TicketController {
 	}
 	
 	@PostMapping("reserve/insertPay")
-	public String insertPay(TicketVO ticket,Model model, HttpSession session) {
-		log.debug("<<티켓 구매>> : " + ticket);
-		
-		
-		ShowVO show = null;
-		show = ticketService.selectedShow(ticket.getShw_num());
-		
-		ScreenVO screen = null;
-		screen = ticketService.selectedScreen(ticket.getScr_num());
-		
-		MovieVO movie = null;
-		movie = ticketService.selectedMoive(ticket.getMovie_num());
-		
-		
-		ticketService.insertTicket(ticket);
-		
-		
-		model.addAttribute("movie",movie);
-		model.addAttribute("screen",screen);
-		model.addAttribute("show",show);
+	   public String insertPay(TicketVO ticket,Model model, HttpSession session) {
+	      // 세션에서 MemberVO 객체를 가져옵니다.
+	       MemberVO member = (MemberVO) session.getAttribute("user");
+	       if (member != null) {
+	           // TicketVO에 mem_num 설정
+	           ticket.setMem_num(member.getMem_num());
+	       } else {
+	           // member가 null일 경우, 적절한 오류 처리 필요
+	           return "redirect:/login"; // 예: 로그인 페이지로 리다이렉트
+	       }
 
-		 
-		model.addAttribute("ticketPay", ticket);
-		
-	 return "payConfirm"; 
-	}
+	       log.debug("<<티켓 구매>> : " + ticket);
+
+	       ShowVO show = ticketService.selectedShow(ticket.getShw_num());
+	       ScreenVO screen = ticketService.selectedScreen(ticket.getScr_num());
+	       MovieVO movie = ticketService.selectedMoive(ticket.getMovie_num());
+
+	       // 티켓 정보를 데이터베이스에 저장
+	       ticketService.insertTicket(ticket);
+
+	       // 모델에 영화, 상영관, 상영 정보 추가
+	       model.addAttribute("movie", movie);
+	       model.addAttribute("screen", screen);
+	       model.addAttribute("show", show);
+	       model.addAttribute("ticketPay", ticket);
+
+	       return "payConfirm"; // 결제 확인 페이지로 이동
+	   }
 }

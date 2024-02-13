@@ -13,9 +13,9 @@
 			</tr>
 			<c:forEach var="ticket" items="${list}">
 				<tr>
-					<td class="align-center"> ${ticket.movie_num}</td>
-					<td class="align-center">${ticket.scr_num}</td>
-					<td class="align-center">${ticket.shw_num}</td>
+					<td class="align-center"> ${ticket.movie_title}</td>
+					<td class="align-center">${ticket.scr_name}</td>
+					<td class="align-center">${ticket.shw_time}</td>
 				</tr>
 			</c:forEach>
 		</table>
