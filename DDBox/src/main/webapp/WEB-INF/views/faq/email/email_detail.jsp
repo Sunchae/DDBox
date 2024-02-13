@@ -21,13 +21,14 @@
 				<c:if test="${email.qna_type==5}">[분실물]</c:if>
 		${email.qna_title}</li>
 		<li>
-			작성일 ${email.question_regdate}
-			<c:if test="${email.scr_num>0}">해당 영화관 ${email.scr_name}</c:if>
+			작성일: ${email.question_regdate}
+			<c:if test="${email.scr_num>0}">${email.scr_name}</c:if>
 		</li>
 	</ul>
 		<br>
-	
+		<hr style="border-width:1px 0 0 0; border-color:#ccc;">
 
+	<div class="detail-content">
 	<!-- 사진 -->
 	<c:if test="${fn:endsWith(email.question_file, '.jpg') ||
 				  fn:endsWith(email.question_file, '.JPG') ||
@@ -46,32 +47,28 @@
 	</c:if>		
 	
 	<!-- 질문글 -->
-	<div class="detail-content">
-		${email.question_content}
+		<br>${email.question_content}
 	</div>
 	<br>
 	<hr style="border-width:1px 0 0 0; border-color:#ccc;">
 	
 	<!-- 답글 -->
 	<c:if test="${email.ask_content!=null}">
-	
-	<div class="page-main">
-	<br>
-	<ul class="detail-info">
-		<li>
-			${email.mem_id} 님, 답변 드립니다.
-		</li>
-		<br><li>
-			답변 등록일 ${email.ask_regdate}
-		</li>
-	</ul>
-	<br>
+		<ul class="detail-info">
+			<li>
+				[답변] ${email.mem_id} 님, 답변 드립니다.
+			</li>
+			<li>
+				답변일: ${email.ask_regdate}
+			</li>
+		</ul>
+		<br>
+		<hr style="border-width:1px 0 0 0; border-color:#ccc;">
 	 
-	<div class="detail-content">
-		${email.ask_content}
-	</div>
-	</div>
-	<hr size="1" width="100%">	
+		<div class="detail-content">
+			<br>${email.ask_content}
+		</div>
+		<hr style="border-width:1px 0 0 0; border-color:#ccc;">	
 	</c:if>
 	
 	<div class="align-right">

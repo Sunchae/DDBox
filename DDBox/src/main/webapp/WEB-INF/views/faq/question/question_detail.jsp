@@ -30,9 +30,9 @@
 		</li>
 	</ul>
 		<br>
-		
+		<hr style="border-width:1px 0 0 0; border-color:#ccc;">
 		<div class="detail-content">
-			${question.board_content}
+			<br>${question.board_content}
 		</div>
 		
 		<hr style="border-width:1px 0 0 0; border-color:#ccc;">

@@ -14,18 +14,28 @@
 	<hr style="border-width:1px 0 0 0; border-color:#ccc;">
 	<ul class="detail-info">
 		<li>
-			희망 영화관: ${rental.scr_name} (<c:set var="dateString" value="${rental.rental_date}" />${fn:substring(dateString, 0, 10)})
+			[${rental.scr_name}] 단체 및 대관 예약 문의 
 		</li>
-		<br><li>
-			문의자명: ${rental.rental_name} (${rental.rental_email})<br>
-		</li>
-		<br><li>
-			연락처: ${rental.rental_phone}<br>
-		</li>
-		<br><li>
-			내용: ${rental.rental_content}
+		<li>
+			<c:set var="dateString" value="${rental.rental_date}" /> 예약 희망일 : ${fn:substring(dateString, 0, 10)}
 		</li>
 	</ul>
+	<br>
+	<hr style="border-width:1px 0 0 0; border-color:#ccc;">
+	
+	<div class="detail-content">
+		<ul>
+			<li>
+				문의자명: ${rental.rental_name} (${rental.rental_email})<br>
+			</li>
+			<li>
+				연락처: ${rental.rental_phone}<br>
+			</li>
+			<li>
+				<br>${rental.rental_content}
+			</li>
+		</ul>
+	</div>
 	<hr style="border-width:1px 0 0 0; border-color:#ccc;">
 	
 	<div class="align-right">

@@ -14,6 +14,10 @@
 			<li>
 				<input type="search" name="keyword" id="keyword" value="${param.keyword}" placeholder="검색어를 입력하세요">
 			</li>
+			<li>
+				<input type="submit" value="검색">
+				<input type="button" value="목록" onclick="location.href='question'">
+			</li>
 		</ul>
 		<div class="align-right">
 			<select id="order" name="order">
@@ -47,7 +51,7 @@
 			<li class="on"><a href="question?board_category=8">기프트샵</a></li>
 			<li class="on"><a href="question?board_category=9">홈페이지/모바일</a></li>
 		</ul>
-	</div><br>
+	</div>
 	
 	<hr style="border-width:1px 0 0 0; border-color:#ccc;">
 	<div>
@@ -58,9 +62,9 @@
 	<!-- 컬럼 -->
 	<table>
 		<tr>
-			<th class="align-center" width="40">번호</th>
-			<th class="align-center" width="110">구분</th>
-			<th width="480" class="align-center">제목</th>
+			<th class="align-center" width="65">번호</th>
+			<th class="align-center" width="150">구분</th>
+			<th  width="500" class="align-center">제목</th>
 			<th class="align-center">조회수</th>
 		</tr>
 	</table>
@@ -70,8 +74,8 @@
 	<table>
 	<c:forEach var="question" items="${list}"> <!-- 여기 다시 한번 확인 -->
 	<tr>
-		<td class="align-center" width="40"><a href="question/detail?board_num=${question.board_num}">${question.board_num}</a></td>
-		<td class="align-center">
+		<td class="align-center" width="65"><a href="question/detail?board_num=${question.board_num}">${question.board_num}</a></td>
+		<td class="align-center" width="150">
 			<c:if test="${question.board_category==1}">[예매]</c:if>
 			<c:if test="${question.board_category==2}">[관람/결제수단]</c:if>
 			<c:if test="${question.board_category==3}">[멤버십]</c:if>

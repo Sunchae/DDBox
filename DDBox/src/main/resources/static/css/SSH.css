@@ -19,6 +19,9 @@
     background-size: 50px;
     border-right: none;
 }
+.box.qna_search input[type="search"] {
+    margin-left: 28px;
+}
 
 .check_warp .box {
     float: left;
@@ -203,7 +206,24 @@ table th, table td {
     align-items: center;
 }
 
+/* rental write 칸 2개씩 (쌤이 짜줌) */
 .hope{
 	width:50%;
 	float:left;
+}
+
+/* detail 제목 왼쪽 조회수/ 날짜 오른쪽 배치 */
+.detail-info {
+  list-style: none; /* 리스트 스타일 제거 */
+  padding: 0; /* 내부 여백 제거 */
+  align-items: center; /* 요소들을 수직으로 중앙 정렬 */
+}
+.detail-info li:first-child {
+  float: left; /* 맨 왼쪽으로 배치 */
+  font-weight: bold;
+  font-size: 1.2em; /* 폰트 크기를 1.2em으로 설정 */
+  align-items: center; /* 요소들을 수직으로 중앙 정렬 */
+}
+.detail-info li:last-child {
+  float: right; /* 맨 오른쪽으로 배치 */
 }

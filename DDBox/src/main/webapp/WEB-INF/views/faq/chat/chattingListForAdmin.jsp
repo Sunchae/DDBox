@@ -8,6 +8,19 @@
 <div class="page-main">
 	<h5>상담톡 문의확인</h5>
 	<span>등록된 상담톡 문의입니다</span>
+	
+	<!-- 검색 기능 -->
+	<form action="chattingListForAdmin" id="search_form" method="get">
+		<ul class="search">
+			<li>
+				<input type="search" name="keyword" id="keyword" value="${param.keyword}" placeholder="검색어를 입력하세요">
+			</li>
+			<li>
+				<input type="submit" value="검색">
+				<input type="button" value="목록" onclick="location.href='chattingListForAdmin'">
+			</li>
+		</ul>
+	</form>
 
 	<div>
 	<c:if test="${count == 0}">

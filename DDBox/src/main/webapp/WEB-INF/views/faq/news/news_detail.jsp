@@ -25,9 +25,9 @@
 		</li>
 	</ul>
 		<br>
-		
+		<hr style="border-width:1px 0 0 0; border-color:#ccc;">
 		<div class="detail-content">
-			${news.news_content}
+			<br>${news.news_content}
 		</div>
 		
 		<hr style="border-width:1px 0 0 0; border-color:#ccc;">

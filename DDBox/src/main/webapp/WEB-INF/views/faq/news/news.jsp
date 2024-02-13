@@ -13,6 +13,10 @@
 			<li>
 				<input type="search" name="keyword" id="keyword" value="${param.keyword}" placeholder="검색어를 입력하세요">
 			</li>
+			<li>
+				<input type="submit" value="검색">
+				<input type="button" value="목록" onclick="location.href='news'">
+			</li>
 		</ul>
 		<div class="align-right">
 			<select id="order" name="order">
@@ -42,7 +46,7 @@
 			<li class="on"><a href="news?news_category=3">행사/이벤트</a></li>
 			<li class="on"><a href="news?news_category=4">기타</a></li>
 		</ul>
-	</div><br>
+	</div>
 	<hr style="border-width:1px 0 0 0; border-color:#ccc;">
 	<div>
 	<span>총 ${count}건이 검색되었습니다.</span>
@@ -52,9 +56,9 @@
 	<!-- 컬럼 -->
 	<table>
 		<tr>
-			<th class="align-center" width="40">번호</th>
-			<th class="align-center" width="110">구분</th>
-			<th class="align-center" width="450">제목</th>
+			<th class="align-center" width="65">번호</th>
+			<th class="align-center" width="150">구분</th>
+			<th class="align-center" width="500">제목</th>
 			<th class="align-center">조회수</th>
 		</tr>
 	</table>
@@ -64,8 +68,8 @@
 		<table>
 		<c:forEach var="news" items="${list}"> <!-- 여기 다시 한번 확인 -->
 		<tr>
-			<td class="align-center" width="40"><a href="news/detail?news_num=${news.news_num}">${news.news_num}</a></td>
-			<td class="align-center">
+			<td class="align-center" width="65"><a href="news/detail?news_num=${news.news_num}">${news.news_num}</a></td>
+			<td class="align-center" width="150">
 				<c:if test="${news.news_category==1}">[시스템점검]</c:if>
 				<c:if test="${news.news_category==2}">[극장]</c:if>
 				<c:if test="${news.news_category==3}">[행사/이벤트]</c:if>
