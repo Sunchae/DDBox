@@ -93,6 +93,18 @@
     font-weight: 700;
     color: #222
 }
+form#register_form1, form#update_form{
+	/* padding:0 0 10px 0;
+	width:800px; */
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	flex-direction: row;
+	margin-top: 5rem;
+}
+form#register_form1 ul, form#update_form ul{
+	/* padding:20px; */
+}
 
 
 /*

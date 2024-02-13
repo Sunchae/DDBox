@@ -133,7 +133,7 @@ public class StoreController {
 		
 		int count = storeService.selectRowCount(map,0);
 		
-		PageUtil page = new PageUtil(currentPage, count, 4,10,"ticketList");
+		PageUtil page = new PageUtil(currentPage, count, 12,10,"ticketList");
 		
 		List<StoreVO> list = null;
 		
@@ -159,7 +159,7 @@ public class StoreController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		int count = storeService.selectRowCount(map,1);
 
-		PageUtil page = new PageUtil(currentPage, count, 4,10,"storePopcorn");
+		PageUtil page = new PageUtil(currentPage, count, 12,10,"storePopcorn");
 		
 		List<StoreVO> list = null;
 		if(count > 0) {

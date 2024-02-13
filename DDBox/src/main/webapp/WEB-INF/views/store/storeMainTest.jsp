@@ -59,7 +59,7 @@
 											<p class="bundle">${ticket.store_content}</p>
 										</div>
 										<div class="price">
-											<p class="original">${ticket.store_price}</p>
+											<p class="original">${ticket.store_price}<span>원</span></p>
 										</div>
 									</div>
 							</a></li>
@@ -87,7 +87,7 @@
 											<p class="bundle">${popcorn.store_content}</p>
 										</div>
 										<div class="price">
-											<p class="original">${popcorn.store_price}</p>
+											<p class="original">${popcorn.store_price}<span>원</span></p>
 										</div>
 									</div>
 							</a></li>

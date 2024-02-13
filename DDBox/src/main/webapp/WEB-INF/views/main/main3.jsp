@@ -5,7 +5,7 @@
 <!-- Main3 내용 시작 -->
 <div class="page-main">
 	<div>
-	 <h2> 상품 몇 개 나열</h2>
+	 <h2><a href="${pageContext.request.contextPath}/store/storeMainTest">스토어</a></h2>
 	 <div id="divNewPrdArea">
 				<div class="store-list mt30">
 					<ul class="list">

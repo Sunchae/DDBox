@@ -8,7 +8,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <div class="page-main">
 	<h2>상품등록</h2>
-	<form:form action="write" modelAttribute="storeVO" id="register_form" enctype="multipart/form-data">
+	<form:form action="write" modelAttribute="storeVO" id="register_form1" enctype="multipart/form-data">
 		<form:errors element="div" cssClass="error-color" />		<%-- 오류가 날 수 있기때문에 맨 위쪽에 표시 --%>
 		<ul>
 			<li>
