@@ -49,7 +49,7 @@ public class QuestionController {
 	@RequestMapping("/faq/question")
 	public ModelAndView questionprocess(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
 										@RequestParam(value="order",defaultValue="1") int order,
-										@RequestParam(value="board_category",defaultValue="") Integer board_category,
+										 Integer board_category,
 										String keyword) {
 		
 		Map<String,Object> map = new HashMap<>();
@@ -60,9 +60,15 @@ public class QuestionController {
 		//전체,검색 레코드 수
 		int count = questionService.selectRowCount(map);
 		log.debug("<<글목록 count>> : " + count);
-		
+
+		PageUtil page;
 		//페이지처리
-		PageUtil page = new PageUtil(null, keyword, currentPage, count, 10, 5, "list","&order="+order+"&board_category="+board_category);
+		if(board_category != null) {
+			page = new PageUtil(null, keyword, currentPage, count, 10, 5, "question","&order="+order+"&board_category="+board_category);
+			
+		} else {
+			page =  new PageUtil(null, keyword, currentPage, count, 10, 5, "question","&order="+order);
+		}
 		
 		List<QuestionVO> list = null;
 		
