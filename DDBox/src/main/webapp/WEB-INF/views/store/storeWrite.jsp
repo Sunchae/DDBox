@@ -16,8 +16,8 @@
 				<form:input path="store_title"/>
 				<form:errors path="store_title" cssClass="error-color" />
 			</li>
-			<li><b>내용</b></li>
 			<li>
+				<form:label path="store_content">상품내용</form:label>
 				<form:textarea path="store_content"/>
 				<form:errors path="store_content" cssClass="error-color" />
 			</li>
