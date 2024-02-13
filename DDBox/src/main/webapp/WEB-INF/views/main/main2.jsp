@@ -4,23 +4,24 @@
 <!-- Main2 내용 시작 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/SSY.css">
 <body>
+	<div id="page-main">
 		<h2>이벤트 몇 가지</h2>
 		<!-- 이벤트 목록 -->
 		<div class="row mt-5">
 			<!-- 이벤트 목록 반복 출력 -->
 			
-				<div class="event_list">
+				<div class="event-list">
 				<c:forEach var="event" items="${eventList}">
 					<ul>
 						<li class="list-card">
-						<a href="detail?event_num=${event.event_num}">
-								<p>
+						<a href="${pageContext.request.contextPath}/event/detail?event_num=${event.event_num}">
+								<p class="img">
 									<img src="${pageContext.request.contextPath}/upload/${event.event_photo1}"
 										class="list-img">
 								</p>
 								<p class="tit">${event.event_title}</p>
-								<p class="date">${event.event_start}~${event.event_end}</p>
-								<p>${event.hit}</p>
+								<p class="date">${event.event_start}~${event.event_end}<br>조회수 : ${event.hit}</p>
+								
 						</a>
 						</li>
 					</ul>
@@ -29,6 +30,6 @@
 			
 		</div>
 
-
+	</div>
 <!-- Main2 내용 끝 -->
 </body>

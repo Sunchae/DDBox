@@ -25,7 +25,7 @@ public interface EventMapper {
 	public void updateHit(int event_num);//조회수
 	
 	//메인페이지
-	@Select("SELECT * FROM (SELECT * FROM event_list ORDER BY hit DESC) WHERE ROWNUM<=3")
+	@Select("SELECT * FROM (SELECT * FROM event_list ORDER BY hit DESC) WHERE ROWNUM<=4")
 	public List<Event_listVO> selectMainEvent();//MainPage 이벤트
 	
 	//룰렛 참여자 리스트

@@ -32,6 +32,17 @@
     box-sizing: border-box; /* 패딩과 테두리를 요소의 너비에 포함시킴 */
     list-style: none; /* ul 태그의 기본 목록 스타일 제거 */
 }
+.list-img{
+	height: 243px;
+    font-size: 0;
+    line-height: 243px;
+    text-align: center;
+    background: #eee;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+    vertical-align: middle;
+    border-style: none;
+}
 
 /*---------------------
 * 메인 타이틀

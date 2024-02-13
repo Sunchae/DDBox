@@ -27,6 +27,7 @@
 						</p>
 						<p class="tit">${list.event_title}</p>
 						<p class="date">${list.event_start}~${list.event_end}</p>
+						<p>${event.hit}</p>
 					</a>
 				</li>
 			</ul>
