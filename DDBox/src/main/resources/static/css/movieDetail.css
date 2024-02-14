@@ -53,14 +53,14 @@
 .movie-content-area {
     position: relative;
     height: 500px;
-     width: 100%;
-    z-index: 1; /* 내용을 배경 위로 보내기 */
+    width: 100%;
+    z-index: 1;
     display: flex;
     justify-content: space-between;
-    padding: 20px; /* 적절한 패딩으로 내용 정렬 */
-    color: white; /* 텍스트 색상 */
-    background-color: rgba(0, 0, 0, 0.5); /* 배경에 어두운 오버레이 추가 */
-	margin-bottom: 40px;
+    padding: 20px;
+    color: white;
+    background: rgba(51, 51, 51, 0.85); /* 짙은 회색 배경에 투명도 적용 */
+    margin-bottom: 40px;
 }
 
 

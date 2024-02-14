@@ -45,7 +45,7 @@ public class MovieController {
 	    	log.debug("<<시작페이지 이벤트 목록 반환 >> : " + eventList);
 	    	List<StoreVO> storeList = storeService.selectMainList();
 	    
-	    	
+	    	  
 	    	ModelAndView mav = new ModelAndView();
 	    	mav.setViewName("mainpage");
 	    	mav.addObject("movieList", movieList); // 영화 목록 추가

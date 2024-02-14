@@ -51,10 +51,7 @@
 									<input class="form-control" type="search" name="keyword"
 										placeholder="영화를 검색하세요!" aria-label="Search"
 										id="movieSearchInput">
-									<button class="btn btn-sm" type="button">
-										<img
-											src="${pageContext.request.contextPath}/images/nav/ico-search.png">
-									</button>
+									
 								</form>
 								<ul id="searchResults" class="list-group"></ul>
 								<!-- 검색 결과를 동적으로 추가할 리스트 -->

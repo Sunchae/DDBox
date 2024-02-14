@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kr.spring.member.service.CaptchaService;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.payment.service.PayService;
@@ -48,7 +49,8 @@ public class MemberController {
 	private PayService payService;
 	@Autowired
 	private TicketService ticketService;
-
+	@Autowired
+	private CaptchaService captchaService;
 	/*==============================
 	 * 자바빈(VO) 초기화
 	 *==============================*/
@@ -386,66 +388,44 @@ public class MemberController {
 		return "withdrawForm"; 
 	}
 
-	// 회원 탈퇴 처리
 	@PostMapping("/member/withdraw")
 	public String withdraw(HttpSession session, Model model, HttpServletRequest request,
-			@RequestParam("mem_pw") String password,
-			@RequestParam("verification") String verification){
+	                       @RequestParam("mem_pw") String password,
+	                       @RequestParam("captchaKey") String captchaKey,
+	                       @RequestParam("captchaValue") String captchaValue) {
 
-		MemberVO member = (MemberVO)session.getAttribute("user");
+	    MemberVO member = (MemberVO) session.getAttribute("user");
 
-		if(member != null) { //로그인 되어 있는 상태 
-			//회원 정보에서 비밀번호 가져오기
-			String storedPassword = member.getMem_pw();
-			Integer randomNumber = (Integer) session.getAttribute("randomNumber");
+	    if (member != null) { // 로그인 되어 있는 상태
+	        // 회원 정보에서 비밀번호 가져오기
+	        String storedPassword = member.getMem_pw();
 
-			log.debug("입력한 비밀번호 :" + password);
-			log.debug("디비 비밀번호 :" + storedPassword);
-			log.debug("전달된 인증번호 : " + verification);
-			log.debug("생성 인증번호 : " + randomNumber);
+	        // 캡차 검증 로직 추가
+	        boolean isCaptchaValid = captchaService.validateCaptcha(captchaKey, captchaValue);
+	        
+	        if (!isCaptchaValid) {
+	            model.addAttribute("accessTitle", "탈퇴 절차 실패");
+	            model.addAttribute("accessMsg", "캡차 입력이 올바르지 않습니다.");
+	            model.addAttribute("accessUrl", request.getContextPath() + "/member/withdraw");
+	            return "common/resultView";
+	        }
 
-			//비밀번호가 일치하고 난수 입력이 유효한지 확인
-			if(password.equals(storedPassword) && verification.equals(String.valueOf(randomNumber))) {
-				//비밀번호 일치 + 난수 정상 입력 -> 회원 탈퇴처리
-
-				int mem_num = member.getMem_num();
-
-				log.debug("<<mem_num>> : " + mem_num);
-				log.debug("<<입력한? 난수 verification>> : " + verification);
-				log.debug("<<storedPassword>> : " + storedPassword);
-
-				//회원 탈퇴 처리
-				memberService.withdrawMember(mem_num);
-
-				//세션에서 사용자 정보 삭제 
-				session.removeAttribute("user");
-				//난수 정보 삭제
-				session.removeAttribute("verification");
-
-				//세션 무효화
-				session.invalidate();
-
-
-				model.addAttribute("accessTitle","탈퇴 절차 성공");
-				model.addAttribute("accessMsg","탈퇴 처리가 완료되었습니다..");
-				model.addAttribute("accessUrl",request.getContextPath()+"/main/main");
-				return "common/resultView";
-			}else {
-				//비밀번호나 난수 입력이 유효하지 않은 경우 에러메시지 출력
-
-				model.addAttribute("accessTitle","탈퇴 절차 실패");
-				model.addAttribute("accessMsg","비밀번호 또는 난수 입력이 올바르지 않습니다.");
-				model.addAttribute("accessUrl",request.getContextPath()+"/member/withdraw");
-				return "common/resultView";
-
-			}
-		}else{ //로그인 되지 않은 상태 
-
-			return "redirect:/member/login"; 
-		}
-
-	}	  
-
+	        // 비밀번호 일치 검증
+	        if (password.equals(storedPassword)) {
+	            // 회원 탈퇴 처리 로직
+	            memberService.withdrawMember(member.getMem_num());
+	            return "common/resultView"; // 탈퇴 성공 시 결과 페이지 반환
+	        } else {
+	            // 비밀번호 불일치 시 에러 메시지 출력
+	            model.addAttribute("accessTitle", "탈퇴 절차 실패");
+	            model.addAttribute("accessMsg", "비밀번호가 올바르지 않습니다.");
+	            model.addAttribute("accessUrl", request.getContextPath() + "/member/withdraw");
+	            return "common/resultView";
+	        }
+	    } else { // 로그인 되지 않은 상태
+	        return "redirect:/member/login";
+	    }
+	}
 
 
 

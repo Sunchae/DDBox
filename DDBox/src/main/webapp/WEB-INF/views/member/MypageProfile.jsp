@@ -3,27 +3,22 @@
 <!-- 내용 시작 -->
 <div class="page-main">
 <h2>마이페이지 프로필관리</h2>
-	<ul>
-		<li>
-			<img src="${pageContext.request.contextPath}/member/photoView"
-			             width="200" height="200" class="my-photo">             
-			<div class="camera" id="photo_btn">
-				<img src="${pageContext.request.contextPath}/images/camera.png"
-				                                                   width="35">
-			</div>             
-		</li>
-		<li>
-			<div id="photo_choice" style="display:none;">
-				<input type="file" id="upload" 
-				                         accept="image/gif,image/png,image/jpeg">
-				<input type="button" value="전송" id="photo_submit">
-				<input type="button" value="취소" id="photo_reset">                         
-			</div>
-		</li>
-	</ul>
+<ul class="photo-upload-container">
+    <li class="photo-display">
+        <img src="${pageContext.request.contextPath}/member/photoView" alt="My Photo" class="my-photo">
+        <label for="upload" class="camera-icon" id="photo_btn">
+            <img src="${pageContext.request.contextPath}/images/insta1.jpg" alt="Change Photo" width="35">
+        </label>
+    </li>
+    <li class="photo-options" style="display: none;" id="photo_choice">
+        <input type="file" id="upload" accept="image/gif, image/png, image/jpeg" style="display: none;">
+        <button id="photo_submit" class="btn photo-btn">Upload</button>
+        <button id="photo_reset" class="btn photo-btn">Cancel</button>
+    </li>
+</ul>
 	
 	<div>
-		닉네임 변경 : 버튼 누르면 ajax처리로 input창 나와서 닉네임 입력 하는 칸 나오고 member_detail테이블 업데이트
+		※개인정보가 포함된 이미지 등록은 자제하여 주시기 바랍니다.
 	</div>
 	
 	
