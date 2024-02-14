@@ -6,10 +6,17 @@
 <style>
 	 form {
             border: none;
+            width: 800px;
+    margin: 0 auto;
+    padding: 10px 10px 30px 10px;
         }
         .page-main{
 	width:20%;
 	margin:0 auto;/*중앙 정렬*/
+}
+#page_body {
+	    width: 50%;
+	    float: left;
 }
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
@@ -40,7 +47,7 @@
 		<img src="${pageContext.request.contextPath}/upload/${event_list.event_photo2}" class="detail-img">
 	</div>
 	</c:if>
-	<div>
+	<div style="text-align:center;">
 	<c:if test="${event_list.event_type == 2}">
     	<input type="button" class="entry_btn" value="응모하기" onclick='entryButtonClick("${event_list.event_num}")' data-event_num="${event_list.event_num}">
 	</c:if>		
