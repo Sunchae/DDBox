@@ -22,7 +22,7 @@
 											<p class="bundle">${store.store_content}</p>
 										</div>
 										<div class="price">
-											<p class="original">${store.store_price}</p>
+											<p class="original">${store.store_price}원</p>
 										</div>
 									</div>
 								</a>
